@@ -20,7 +20,13 @@ const { hasFinishLoading, progress } = await useProgress();
       :maxPolarAngle="Math.PI / 2"
       :minPolarAngle="Math.PI / 2"
     />
-    <TresSpotLight cast-shadow :position="[-20, 50, 10]" />
+    <TresSpotLight
+      castShadow
+      :position="[-20, 50, 10]"
+      :intensity="1"
+      :penumbra="1"
+      :angle="0.12"
+    />
     <TresHemisphereLight :ground-color="'black'" intensity="0.2" />
     <!-- <TresAmbientLight ntensity="0.000002" /> -->
     <Suspense>

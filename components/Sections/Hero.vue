@@ -20,7 +20,7 @@
     </div>
 
     <div
-      class="absolute z-30 h-72 top-72 xs:h-96 xs:top-52 w-full md:top-44 md:h-[600px] lg:top-32 lg:h-[800px] xl:h-[1000px] lg:right-24"
+      class="absolute z-30 h-72 top-72 xs:h-96 xs:top-52 w-full md:top-44 md:h-[600px] lg:top-32 lg:h-[800px] xl:h-[900px] lg:right-24"
     >
       <ClientOnly>
         <CanvasDesktop />
