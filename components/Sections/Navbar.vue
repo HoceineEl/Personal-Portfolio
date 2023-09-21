@@ -12,8 +12,8 @@ const setToggle = () => {
 };
 </script>
 <template>
-  <nav class="px-6 sm:px-16 py-3">
-    <div class="flex justify-between w-full items-center mx-auto max-w-7xl">
+  <nav class="px-6 sm:px-16 py-3 mx-auto max-w-7xl">
+    <div class="flex justify-between w-full items-center">
       <a
         href="/"
         class="flex items-center gap-3 font-bold text-[18px] text-white"
@@ -30,12 +30,13 @@ const setToggle = () => {
       <ul class="justify-between gap-10 hidden sm:flex">
         <li
           :class="[active == link.title ? 'text-white' : 'text-secondary']"
+          class="hover:text-white"
           v-for="link in navLinks"
           :key="link.title"
           @click="setActive(link.title)"
         >
           <a
-            ref="'#' + link.id"
+            :href="`#${link.id}`"
             class="flex items-center gap-3 font-semibold text-[18px]"
             >{{ link.title }}</a
           >
@@ -51,11 +52,12 @@ const setToggle = () => {
             <li
               :class="[active == link.title ? 'text-white' : 'text-secondary']"
               v-for="link in navLinks"
+              class="hover:text-white"
               :key="link.title"
               @click="setActive(link.title)"
             >
               <a
-                :href="'#' + link.id"
+                :href="`#${link.id}`"
                 class="flex items-center gap-3 font-semibold text-[18px]"
                 >{{ link.title }}</a
               >

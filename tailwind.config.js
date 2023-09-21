@@ -32,7 +32,16 @@ export default {
       backgroundImage: {
         "hero-pattern": "url('/assets/herobg.png')",
       },
+      keyframes: {
+        bounce2x: {
+          '0%,100%': { transform: 'translateY(-60%)' },
+          '50%': { transform: 'none' },
+        },
+      },
+      animation: {
+        Gargarya: 'bounce2x 1s ease-in-out infinite',
+      }
     },
-  },
-  plugins: [],
+    plugins: [],
+  }
 }

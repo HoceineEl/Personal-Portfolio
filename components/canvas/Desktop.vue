@@ -16,7 +16,7 @@ const { hasFinishLoading, progress } = await useProgress();
     <TresPerspectiveCamera :position="[0, -4, 14]" />
     <OrbitControls
       :enableZoom="false"
-      :enableDamping="true"
+      :enableDamping="false"
       :maxPolarAngle="Math.PI / 2"
       :minPolarAngle="Math.PI / 2"
     />
@@ -28,7 +28,7 @@ const { hasFinishLoading, progress } = await useProgress();
       :angle="0.12"
     />
     <TresHemisphereLight :ground-color="'black'" intensity="0.2" />
-    <!-- <TresAmbientLight ntensity="0.000002" /> -->
+    <TresAmbientLight :intensity="1" />
     <Suspense>
       <GLTFModel
         path="/pc/scene.gltf"
@@ -39,7 +39,8 @@ const { hasFinishLoading, progress } = await useProgress();
       />
     </Suspense>
 
-    <TresDirectionalLight :position="[-80, -10, 120]" :intensity="0.5" cast-shadow />
+    <!-- <TresDirectionalLight :position="[-80, -10, 120]" :intensity="0.5" cast-shadow /> -->
+    <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" cast-shadow />
   </TresCanvas>
 </template>
 
