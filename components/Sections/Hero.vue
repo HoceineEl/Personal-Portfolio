@@ -34,7 +34,7 @@ const handleMouseUp = () => {
       class="absolute z-30 h-[600px] bottom-20 xs:h-[600px] xs:bottom-40 w-full md:bottom-16 md:h-[600px] lg:bottom-10 lg:h-[600px] 2xl:h-[900px] flex justify-center items-center"
     >
       <ClientOnly>
-        <CanvasDesktop />
+        <!-- <CanvasDesktop /> -->
       </ClientOnly>
     </div>
     <div class="absolute bottom-40 w-full flex justify-center z-[80]">

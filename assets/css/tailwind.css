@@ -203,3 +203,21 @@
             -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
     }
 }
+
+@layer components {
+    .header {
+        @apply text-xl text-secondary uppercase;
+    }
+
+    .header-secondary {
+        @apply text-7xl font-bold text-white mt-3;
+    }
+
+    .description {
+        @apply text-secondary text-[17px] max-w-3xl leading-8 mt-7;
+    }
+
+    .section {
+        @apply max-w-7xl mx-auto pt-6;
+    }
+}

@@ -12,7 +12,7 @@ const setToggle = () => {
 };
 </script>
 <template>
-  <nav class="px-6 sm:px-16 py-3 mx-auto max-w-7xl">
+  <nav class="px-6 sm:px-16 py-3 mx-auto max-w-7xl sticky top-2">
     <div class="flex justify-between w-full items-center">
       <a
         href="/"
@@ -21,8 +21,7 @@ const setToggle = () => {
           () => {
             setActive('');
             window.scrollTo(0, 0);
-          }
-        "
+          }"
       >
         <img :src="logo" alt="Hoceine" width="60" />
         <p>Hoceine EL IDRISSI</p>
