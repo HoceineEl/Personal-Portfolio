@@ -1,9 +1,9 @@
 <template>
-  <div class="relative z-0 bg-primary">
-    <div class="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+  <main class="relative z-0 bg-primary">
+    <header class="bg-hero-pattern bg-cover bg-no-repeat bg-center">
       <SectionsNavbar />
       <SectionsHero />
-    </div>
+    </header>
     <SectionsAbout />
     <SectionsExperience />
     <SectionsTech />
@@ -13,7 +13,7 @@
       <SectionsContact />
       <SectionsStarsCanvas />
     </div>
-  </div>
+  </main>
 </template>
 
 <script lang="ts" setup></script>

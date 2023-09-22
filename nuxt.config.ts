@@ -14,6 +14,11 @@ export default defineNuxtConfig({
      } 
    },
 
-  modules: ['@nuxtjs/tailwindcss', '@tresjs/nuxt', '@vueuse/motion/nuxt'],
+  modules: [
+    '@nuxtjs/tailwindcss',
+    '@tresjs/nuxt',
+    '@vueuse/motion/nuxt',
+    '@vueuse/nuxt',
+  ],
   css:['~/assets/css/tailwind.css'],
 })

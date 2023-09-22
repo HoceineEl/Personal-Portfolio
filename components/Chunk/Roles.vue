@@ -1,34 +1,15 @@
 <script setup>
 import { services } from "~/assets/constants";
-import { useMouseInElement } from "@vueuse/core";
-const target = ref(null);
-const { elementX, elementY, isOutside, elementHeight, elementWidth } = useMouseInElement(
-  target
-);
-const cardTransform = computed(() => {
-  const MAX_ROTATION = 6;
-  const rX = (
-    MAX_ROTATION / 2 -
-    (elementY.value / elementHeight.value) * MAX_ROTATION
-  ).toFixed(2);
-  const rY = (
-    (elementY.value / elementWidth.value) * MAX_ROTATION -
-    MAX_ROTATION / 2
-  ).toFixed(2);
-  return isOutside.value ? "" : `rotateX(${rX}deg) rotateY(${rY}deg)`;
-});
 </script>
 <template>
-  <div class="w-full flex gap-10 flex-wrap my-16 justify-center items-center">
+  <div class="w-full flex gap-10 flex-wrap my-16 justify-center items-center px-4">
     <div
-      class="xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px]"
+      class="card xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px] transition-all duration-200 w-full"
       v-for="service in services"
       :key="service.title"
-      ref="target"
-      :style="{
-        transform: cardTransform,
-        transition: 'transform 0.5s ease-out',
-      }"
+      $VanillaTilt
+      data-tilt
+      data-tilt-scale="1.05"
     >
       <div
         class="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col text-center"
@@ -39,5 +20,9 @@ const cardTransform = computed(() => {
     </div>
   </div>
 </template>
-
-<style></style>
+<style scoped>
+[data-tilt]:hover {
+  transform-style: preserve-3d;
+  transform: translateZ(50px);
+}
+</style>

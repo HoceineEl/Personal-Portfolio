@@ -8,7 +8,7 @@ const handleMouseUp = () => {
 };
 </script>
 <template>
-  <section class="relative w-full h-screen mx-auto max-w-7xl mt-16">
+  <section class="relative w-full h-screen mx-auto max-w-7xl pt-32">
     <div class="flex gap-5 px-6">
       <div class="flex flex-col items-center justify-center">
         <div class="w-4 h-4 rounded-full bg-main-violet" />

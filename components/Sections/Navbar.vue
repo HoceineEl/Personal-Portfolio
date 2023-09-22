@@ -10,10 +10,24 @@ const setActive = (link) => {
 const setToggle = () => {
   toggle.value = !toggle.value;
 };
+const onScroll = ref(false);
+const handleScroll = () => {
+  if (window.scrollY != 0) {
+    onScroll.value = true;
+  } else {
+    onScroll.value = false;
+  }
+};
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
 </script>
 <template>
-  <nav class="px-6 sm:px-16 py-3 mx-auto max-w-7xl sticky top-2">
-    <div class="flex justify-between w-full items-center">
+  <nav
+    class="w-full flex items-center py-5 fixed top-0 z-[1000]"
+    :class="[onScroll ? 'bg-primary' : 'bg-transparent']"
+  >
+    <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
       <a
         href="/"
         class="flex items-center gap-3 font-bold text-[18px] text-white"
@@ -21,7 +35,8 @@ const setToggle = () => {
           () => {
             setActive('');
             window.scrollTo(0, 0);
-          }"
+          }
+        "
       >
         <img :src="logo" alt="Hoceine" width="60" />
         <p>Hoceine EL IDRISSI</p>

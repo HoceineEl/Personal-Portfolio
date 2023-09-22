@@ -13,6 +13,7 @@
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^20.6.3",
+    "@vueuse/nuxt": "^10.4.1",
     "nuxt": "^3.7.3"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "@tresjs/nuxt": "^1.1.7",
     "@vueuse/motion": "^2.0.0",
     "three": "^0.156.1",
+    "v-smooth-scroll": "^2.0.0-beta.2",
     "vanilla-tilt": "^1.8.1"
   }
 }

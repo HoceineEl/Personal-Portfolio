@@ -210,14 +210,28 @@
     }
 
     .header-secondary {
-        @apply text-7xl font-bold text-white mt-3;
+        @apply text-5xl sm:text-7xl font-bold text-white mt-3;
     }
 
     .description {
-        @apply text-secondary text-[17px] max-w-3xl leading-8 mt-7;
+        @apply text-secondary text-[14px] xs:text-[17px] max-w-3xl leading-8 mt-7;
     }
 
     .section {
-        @apply max-w-7xl mx-auto pt-6;
+        @apply 2xl:max-w-7xl xl:max-w-6xl lg:max-w-4xl md:max-w-3xl xs:max-w-xl mx-auto pt-6;
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(160%);
+        animation-timing-function: cubic-bezier(0, 0, 0, 1);
+    }
+
+    50% {
+        transform: translateY(0);
+        animation-timing-function: cubic-bezier(0, 0, 0, 2);
     }
 }
