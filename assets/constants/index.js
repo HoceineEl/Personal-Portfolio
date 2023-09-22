@@ -15,10 +15,9 @@ import {
     git,
     figma,
     docker,
-    meta,
-    starbucks,
-    tesla,
-    shopify,
+    devosoft,
+    sosipo,
+    a2st,
     carrent,
     jobit,
     tripguide,
@@ -116,9 +115,37 @@ const technologies = [
 
 const experiences = [
     {
+        title: "Full Stack Web Developer",
+        company_name: "Devosoft",
+        icon: devosoft,
+        iconBg: "#383E56",
+        date: "November 2022 - September 2023     (5M By Night & 5M Full Time)",
+        points: [
+            "Balancing full-time studies at the Superior School of Technology with night-time internship as a Full Stack Web Developer at Devosoft startup.",
+            " Explored diverse technologies, including Laravel, Figma, Vue.js, GitHub, and even ventured into WordPress.",
+            "Successfully contributed to a variety of projects, from ecommerce management to LMSs, with a passion for tackling new challenges.",
+            "Developed strong client communication skills and honed project planning abilities.",
+            " Shared the love for learning by teaching others about technology."
+        ],
+    },
+
+    {
+        title: "Full Stack Laravel Developer",
+        company_name: "SOSIPO(Ministry of Agriculture)",
+        icon: sosipo,
+        iconBg: "#E6DEDD",
+        date: "Jan 2023 - March 2023",
+        points: [
+            "Developed a web app for the \"Ministry of Agriculture\" affiliated company as a year-end project, with a strong focus on learning how to secure applications by studying all possible security cases.",
+            "Led a comprehensive project for the SOSIPO Amical Income Association, covering financial operations and more.",
+            "Used Laravel, JavaScript, and Bootstrap for web development.",
+            "Gained teamwork and client communication skills.",
+        ],
+    },
+    {
         title: "Windows Forms .NET Developer",
         company_name: "A2 Services Et Technologies",
-        icon: starbucks,
+        icon: a2st,
         iconBg: "#383E56",
         date: "July 2022 - September 2022",
         points: [
@@ -129,45 +156,7 @@ const experiences = [
             "Contributed to my skill set as a developer.",
         ],
     },
-    {
-        title: "React Native Developer",
-        company_name: "Tesla",
-        icon: tesla,
-        iconBg: "#E6DEDD",
-        date: "Jan 2021 - Feb 2022",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Web Developer",
-        company_name: "Shopify",
-        icon: shopify,
-        iconBg: "#383E56",
-        date: "Jan 2022 - Jan 2023",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Full stack Developer",
-        company_name: "Meta",
-        icon: meta,
-        iconBg: "#E6DEDD",
-        date: "Jan 2023 - Present",
-        points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
+
 ];
 
 const testimonials = [

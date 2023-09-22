@@ -1,5 +1,6 @@
 <script setup>
-import { meta, tesla, shopify } from "../../assets";
+import { devosoft, a2st, sosipo } from "../../assets";
+import { experiences } from "~/assets/constants";
 </script>
 <template>
   <div class="relative section">
@@ -7,39 +8,58 @@ import { meta, tesla, shopify } from "../../assets";
       <p class="header">What I have done so far</p>
       <h3 class="header-secondary">Work Experience.</h3>
     </div>
-    <div>
+    <div class="flex lg:block gap-20 px-4">
       <div class="timeline">
-        <div
-          class="w-10 h-10 rounded-full translate-y-20 border-4 bg-[#17132b] border-[#17132b] p-1"
-        >
-          <img loading="lazy" :src="meta" alt="Arcade" />
+        <div class="timeline-img translate-y-[10rem] p-3">
+          <img loading="lazy" :src="devosoft" alt="devosoft" class="mt-1" />
         </div>
-        <div
-          class="w-10 h-10 rounded-full translate-y-[25rem] border-4 bg-[#17132b] border-[#17132b] p-1"
-        >
-          <img loading="lazy" :src="shopify" alt="GoogleCloud" />
+        <div class="timeline-img translate-y-[37rem]">
+          <img loading="lazy" :src="sosipo" alt="sosipo" class="mt-1" />
+        </div>
+        <div class="timeline-img translate-y-[61rem]">
+          <img loading="lazy" :src="a2st" alt="a2st" class="rounded-sm mt-1" />
         </div>
       </div>
-      <div class="lg:w-[900px] flex justify-end mx-auto">
-        <div class="w-96 bg-gray-800 mt-24 py-4 rounded-lg relative">
-          <div class="px-8 w-full">
-            <h3 class="font-bold text-xl">Windows Forms .NET Developer</h3>
-            <p class="text-secondary">A2 Services Et Technologies</p>
+      <div>
+        <div
+          class="lg:w-[900px] flex mx-auto justify-between"
+          v-for="(exp, index) in experiences"
+          :key="exp.title"
+          v-motion-slide-visible-once-left
+        >
+          <div
+            class="relative p-[1px] bg-white rounded-lg exp-gradient mt-10"
+            :class="[index % 2 ? 'order-3' : '-order-1']"
+          >
+            <div class="lg:w-96 w-full bg-tertiary py-4 rounded-lg">
+              <div class="w-full flex justify-center items-center mb-3 sm:hidden">
+                <div
+                  class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
+                >
+                  <img
+                    loading="lazy"
+                    :src="exp.icon"
+                    :alt="exp.company_name"
+                    class="p-1"
+                  />
+                </div>
+              </div>
+              <div class="px-8 w-full">
+                <h3 class="font-bold text-xl">{{ exp.title }}</h3>
+                <p class="text-secondary">{{ exp.company_name }}</p>
+              </div>
+              <ul
+                class="mt-5 text-[13px] text-gray-200 flex flex-col gap-2 list-disc ms-8 px-8 mb-6"
+              >
+                <li v-for="point in exp.points">{{ point }}</li>
+              </ul>
+              <p class="text-secondary mt-2 px-8 lg:hidden">{{ exp.date }}</p>
+            </div>
           </div>
-          <ul class="mt-5 text-[13px] flex flex-col gap-2 list-disc ms-8 px-8 mb-6">
-            <li>
-              Created a library management system using Windows Forms, SQL Server, and C#
-              during my internship.
-            </li>
-            <li>Gained valuable hands-on experience in application programming.</li>
-            <li>Collaborated with the CEO to understand project requirements.</li>
-            <li>Contributed to my skill set as a developer.</li>
-          </ul>
-          <span class="absolute bottom-0 w-full h-2 bg-slate-50 rounded-b-lg"></span>
+          <div class="mt-40 max-w-[300px] text-center text-secondary hidden lg:block">
+            <p>{{ exp.date }}</p>
+          </div>
         </div>
-      </div>
-      <div class="lg:w-[900px] flex justify-start mx-auto">
-        <div class="w-96 h-[400px] bg-gray-800"></div>
       </div>
     </div>
   </div>
@@ -47,6 +67,9 @@ import { meta, tesla, shopify } from "../../assets";
 
 <style scoped>
 .timeline {
-  @apply z-30 w-1 bg-secondary sm:mx-auto sm:h-[57rem] lg:flex flex-col justify-start items-center mt-0 absolute left-1/2 transform -translate-x-1/2;
+  @apply z-30 w-1 bg-secondary  lg:mx-auto h-[1300px] sm:flex flex-col lg:justify-start  items-center mt-0 lg:absolute relative lg:left-1/2 left-5 transform lg:-translate-x-1/2 hidden;
+}
+.timeline-img {
+  @apply w-12 h-12 rounded-full border bg-primary border-white-100 flex items-center justify-center p-2;
 }
 </style>

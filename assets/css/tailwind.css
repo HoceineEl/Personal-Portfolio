@@ -40,6 +40,11 @@
             rgba(60, 51, 80, 0) 100%);
 }
 
+.exp-gradient {
+    background: rgb(63, 94, 251);
+    background: linear-gradient(90deg, rgba(63, 94, 251, 1) 0%, rgba(85, 198, 178, 1) 17%, rgba(101, 50, 204, 1) 56%, rgba(252, 70, 107, 1) 100%);
+}
+
 .green-pink-gradient {
     background: "#00cea8";
     background: linear-gradient(90.13deg, #00cea8 1.9%, #bf61ff 97.5%);
