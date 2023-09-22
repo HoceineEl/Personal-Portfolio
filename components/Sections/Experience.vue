@@ -21,7 +21,22 @@ import { meta, tesla, shopify } from "../../assets";
         </div>
       </div>
       <div class="lg:w-[900px] flex justify-end mx-auto">
-        <div class="w-96 h-[400px] bg-gray-800 mt-24"></div>
+        <div class="w-96 bg-gray-800 mt-24 py-4 rounded-lg relative">
+          <div class="px-8 w-full">
+            <h3 class="font-bold text-xl">Windows Forms .NET Developer</h3>
+            <p class="text-secondary">A2 Services Et Technologies</p>
+          </div>
+          <ul class="mt-5 text-[13px] flex flex-col gap-2 list-disc ms-8 px-8 mb-6">
+            <li>
+              Created a library management system using Windows Forms, SQL Server, and C#
+              during my internship.
+            </li>
+            <li>Gained valuable hands-on experience in application programming.</li>
+            <li>Collaborated with the CEO to understand project requirements.</li>
+            <li>Contributed to my skill set as a developer.</li>
+          </ul>
+          <span class="absolute bottom-0 w-full h-2 bg-slate-50 rounded-b-lg"></span>
+        </div>
       </div>
       <div class="lg:w-[900px] flex justify-start mx-auto">
         <div class="w-96 h-[400px] bg-gray-800"></div>

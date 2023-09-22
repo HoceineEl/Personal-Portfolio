@@ -116,16 +116,17 @@ const technologies = [
 
 const experiences = [
     {
-        title: "React.js Developer",
-        company_name: "Starbucks",
+        title: "Windows Forms .NET Developer",
+        company_name: "A2 Services Et Technologies",
         icon: starbucks,
         iconBg: "#383E56",
-        date: "March 2020 - April 2021",
+        date: "July 2022 - September 2022",
         points: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
+            `Created a library management system using Windows Forms, SQL Server, and C#
+              during my internship.`,
+            "Gained valuable hands-on experience in application programming.",
+            "Collaborated with the CEO to understand project requirements.",
+            "Contributed to my skill set as a developer.",
         ],
     },
     {
