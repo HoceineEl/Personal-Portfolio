@@ -10,7 +10,7 @@ import { experiences } from "~/assets/constants";
     </div>
     <div class="flex lg:block gap-20 px-4">
       <div class="timeline">
-        <div class="timeline-img translate-y-[10rem] p-3">
+        <div class="timeline-img translate-y-[10rem]">
           <img loading="lazy" :src="devosoft" alt="devosoft" class="mt-1" />
         </div>
         <div class="timeline-img translate-y-[37rem]">
@@ -20,18 +20,18 @@ import { experiences } from "~/assets/constants";
           <img loading="lazy" :src="a2st" alt="a2st" class="rounded-sm mt-1" />
         </div>
       </div>
-      <div>
+      <div class="">
         <div
-          class="lg:w-[900px] flex mx-auto justify-between"
+          class="lg:w-[900px] flex mx-auto justify-between mb-6"
           v-for="(exp, index) in experiences"
           :key="exp.title"
           v-motion-slide-visible-once-left
         >
           <div
-            class="relative p-[1px] bg-white rounded-lg exp-gradient mt-10"
+            class="relative p-[1px] bg-white rounded-lg green-pink-gradient"
             :class="[index % 2 ? 'order-3' : '-order-1']"
           >
-            <div class="lg:w-96 w-full bg-tertiary py-4 rounded-lg">
+            <div class="lg:w-96 w-full bg-tertiary py-4 rounded-lg min-h-[20rem]">
               <div class="w-full flex justify-center items-center mb-3 sm:hidden">
                 <div
                   class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
@@ -56,8 +56,11 @@ import { experiences } from "~/assets/constants";
               <p class="text-secondary mt-2 px-8 lg:hidden">{{ exp.date }}</p>
             </div>
           </div>
-          <div class="mt-40 max-w-[300px] text-center text-secondary hidden lg:block">
-            <p>{{ exp.date }}</p>
+          <div
+            class="mt-40 w-96 text-center text-secondary hidden lg:flex"
+            :class="[index % 2 ? 'justify-end' : 'justify-start']"
+          >
+            <p class="max-w-[300px]">{{ exp.date }}</p>
           </div>
         </div>
       </div>

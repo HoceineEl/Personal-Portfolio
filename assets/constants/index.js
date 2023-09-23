@@ -3,27 +3,25 @@ import {
     backend,
     creator,
     web,
-    javascript,
-    typescript,
-    html,
-    css,
-    reactjs,
-    redux,
-    tailwind,
-    nodejs,
-    mongodb,
-    git,
-    figma,
-    docker,
+
     devosoft,
     sosipo,
     a2st,
     carrent,
     jobit,
     tripguide,
-    threejs,
 } from "../assets";
-
+import css from '/Tech/Css/scene.gltf?url'
+import html from '/Tech/Html/scene.gltf?url'
+import js from '/Tech/Js/scene.gltf?url'
+import figma from '/Tech/figma/scene.gltf?url'
+import github from '/Tech/github/scene.gltf?url'
+import laravel from '/Tech/laravel/scene.gltf?url'
+import MySql from '/Tech/MySql/scene.gltf?url'
+import nuxt from '/Tech/nuxt/scene.gltf?url'
+import vue from '/Tech/vue/scene.gltf?url'
+import php from '/Tech/php/scene.gltf?url'
+import tailwind from '/Tech/tailwind/scene.gltf?url'
 export const navLinks = [
     {
         id: "about",
@@ -61,7 +59,7 @@ const services = [
 const technologies = [
     {
         name: "HTML 5",
-        icon: html,
+        icon: html
     },
     {
         name: "CSS 3",
@@ -69,47 +67,41 @@ const technologies = [
     },
     {
         name: "JavaScript",
-        icon: javascript,
+        icon: js,
+    },
+
+    {
+        name: "Vue JS",
+        icon: vue,
     },
     {
-        name: "TypeScript",
-        icon: typescript,
-    },
-    {
-        name: "React JS",
-        icon: reactjs,
-    },
-    {
-        name: "Redux Toolkit",
-        icon: redux,
+        name: "Nuxt Js",
+        icon: nuxt,
     },
     {
         name: "Tailwind CSS",
         icon: tailwind,
     },
     {
-        name: "Node JS",
-        icon: nodejs,
+        name: "MySql",
+        icon: MySql,
     },
     {
-        name: "MongoDB",
-        icon: mongodb,
+        name: "Laravel",
+        icon: laravel,
     },
     {
-        name: "Three JS",
-        icon: threejs,
+        name: "Github",
+        icon: github,
     },
-    {
-        name: "git",
-        icon: git,
-    },
+
     {
         name: "figma",
         icon: figma,
     },
     {
-        name: "docker",
-        icon: docker,
+        name: "Php",
+        icon: php,
     },
 ];
 
