@@ -1,11 +1,11 @@
 Model Information:
-* title:	Gaming Desktop PC
-* source:	https://sketchfab.com/3d-models/gaming-desktop-pc-d1d8282c9916438091f11aeb28787b66
-* author:	Yolala1232 (https://sketchfab.com/Yolala1232)
+* title:	Wildstar Picture Frame
+* source:	https://sketchfab.com/3d-models/wildstar-picture-frame-dca8428e617f466b9486fa79389ab25e
+* author:	m4ty1k4 (https://sketchfab.com/m4ty1k4)
 
 Model License:
 * license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
 * requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Gaming Desktop PC" (https://sketchfab.com/3d-models/gaming-desktop-pc-d1d8282c9916438091f11aeb28787b66) by Yolala1232 (https://sketchfab.com/Yolala1232) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+This work is based on "Wildstar Picture Frame" (https://sketchfab.com/3d-models/wildstar-picture-frame-dca8428e617f466b9486fa79389ab25e) by m4ty1k4 (https://sketchfab.com/m4ty1k4) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
