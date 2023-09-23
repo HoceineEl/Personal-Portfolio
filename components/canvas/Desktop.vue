@@ -1,47 +1,29 @@
 <script setup>
-const { hasFinishLoading, progress } = await useProgress();
+import { pc } from "~/assets/constants";
+const hadFinishLoading = ref(null);
+onMounted(() => {
+  hadFinishLoading = false;
+});
+function resolve() {
+  hadFinishLoading = true;
+}
 </script>
 
 <template>
-  <Transition
-    name="fade-overlay"
-    enter-active-class="enterClass"
-    leave-active-class="leaveClass"
-  >
-    <div v-show="!hasFinishLoading" class="loadCon">
-      <span class="loader">{{ progress }} %</span>
-    </div>
-  </Transition>
-  <TresCanvas shadows alpha>
-    <TresPerspectiveCamera :position="[0, -4, 14]" />
-    <OrbitControls
-      :enableZoom="false"
-      :enableDamping="false"
-      :maxPolarAngle="Math.PI / 2"
-      :minPolarAngle="Math.PI / 2"
-    />
-    <TresSpotLight
-      castShadow
-      :position="[-20, 50, 10]"
-      :intensity="1"
-      :penumbra="1"
-      :angle="0.12"
-    />
-    <TresHemisphereLight :ground-color="'black'" intensity="0.2" />
-    <TresAmbientLight :intensity="1" />
-    <Suspense>
-      <GLTFModel
-        path="/pc/scene.gltf"
-        :position="[2.1, -2.8, 0]"
-        :rotation-x="Math.PI * 0.03"
-        :rotation-y="Math.PI * 1.5"
-        darco="true"
+  <div class="w-full h-full" v-show="hadFinishLoading">
+    <TresCanvas alpha>
+      <OrbitControls
+        :enableZoom="false"
+        :maxPolarAngle="Math.PI / 2"
+        :minPolarAngle="Math.PI / 2"
       />
-    </Suspense>
-
-    <!-- <TresDirectionalLight :position="[-80, -10, 120]" :intensity="0.5" cast-shadow /> -->
-    <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" cast-shadow />
-  </TresCanvas>
+      <TresAmbientLight :intensity="2" />
+      <Suspense @fallback="fallback" @pending="pending" @resolve="resolve">
+        <GLTFModel :path="pc" :position="[0, 0, 0]" />
+      </Suspense>
+      <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" />
+    </TresCanvas>
+  </div>
 </template>
 
 <style scoped>

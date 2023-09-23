@@ -1,0 +1,11 @@
+Model Information:
+* title:	Screen Box
+* source:	https://sketchfab.com/3d-models/screen-box-ab923d1a09f44ba7ba0c4aa0d55d97fd
+* author:	Jakob Henerey (https://sketchfab.com/hellonintendo8)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Screen Box" (https://sketchfab.com/3d-models/screen-box-ab923d1a09f44ba7ba0c4aa0d55d97fd) by Jakob Henerey (https://sketchfab.com/hellonintendo8) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

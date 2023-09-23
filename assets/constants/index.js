@@ -11,17 +11,18 @@ import {
     jobit,
     tripguide,
 } from "../assets";
-import css from '/Tech/Css/scene.gltf?url'
-import html from '/Tech/Html/scene.gltf?url'
-import js from '/Tech/Js/scene.gltf?url'
-import figma from '/Tech/figma/scene.gltf?url'
-import github from '/Tech/github/scene.gltf?url'
-import laravel from '/Tech/laravel/scene.gltf?url'
-import MySql from '/Tech/MySql/scene.gltf?url'
-import nuxt from '/Tech/nuxt/scene.gltf?url'
-import vue from '/Tech/vue/scene.gltf?url'
-import php from '/Tech/php/scene.gltf?url'
-import tailwind from '/Tech/tailwind/scene.gltf?url'
+import css from '../models/Tech/Css/scene.gltf?url'
+import html from '../models/Tech/Html/scene.gltf?url'
+import js from '../models/Tech/Js/scene.gltf?url'
+import figma from '../models/Tech/figma/scene.gltf?url'
+import github from '../models/Tech/github/scene.gltf?url'
+import laravel from '../models/Tech/laravel/scene.gltf?url'
+import MySql from '../models/Tech/MySql/scene.gltf?url'
+import nuxt from '../models/Tech/nuxt/scene.gltf?url'
+import vue from '../models/Tech/vue/scene.gltf?url'
+import php from '../models/Tech/php/scene.gltf?url'
+import tailwind from '../models/Tech/tailwind/scene.gltf?url'
+import pc from '../models/pc/scene.gltf?url'
 export const navLinks = [
     {
         id: "about",
@@ -244,4 +245,4 @@ const projects = [
     },
 ];
 
-export { services, technologies, experiences, testimonials, projects };
+export { services, technologies, experiences, testimonials, projects, pc };
