@@ -23,6 +23,7 @@ import vue from '../models/Tech/vue/scene.gltf?url'
 import php from '../models/Tech/php/scene.gltf?url'
 import tailwind from '../models/Tech/tailwind/scene.gltf?url'
 import pc from '../models/pc/scene.gltf?url'
+import Earth from '../models/planet/scene.gltf?url'
 export const navLinks = [
     {
         id: "about",
@@ -245,4 +246,4 @@ const projects = [
     },
 ];
 
-export { services, technologies, experiences, testimonials, projects, pc };
+export { services, technologies, experiences, testimonials, projects, pc, Earth };

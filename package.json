@@ -17,6 +17,7 @@
     "nuxt": "^3.7.3"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.11.0",
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/nuxt": "^1.1.7",
     "@vueuse/motion": "^2.0.0",

@@ -1,18 +1,22 @@
 <script setup>
-import { pc } from "~/assets/constants";
+import { Earth } from "~/assets/constants";
 
 const hadFinishLoading = ref(false);
 
 function resolve() {
   hadFinishLoading.value = true;
+  console.log("resolved");
+  console.log(hadFinishLoading.value);
 }
 
 function fallback() {
   console.log("fallback");
+  console.log(hadFinishLoading.value);
 }
 
 function pending() {
   console.log("pending");
+  console.log(hadFinishLoading.value);
 }
 const getStat = () => hadFinishLoading.value;
 </script>
@@ -27,9 +31,9 @@ const getStat = () => hadFinishLoading.value;
       />
       <TresAmbientLight :intensity="2" />
       <Suspense @fallback="fallback" @pending="pending" @resolve="resolve">
-        <GLTFModel :path="pc" :position="[0, 0, 0]" />
+        <GLTFModel :path="Earth" :position="[0, 0, 0]" />
       </Suspense>
-      <TresDirectionalLight :position="[10, 0, 10]" :intensity="1" />
+      <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" />
     </TresCanvas>
   </div>
   <div class="flex justify-center items-center" v-if="!hadFinishLoading">

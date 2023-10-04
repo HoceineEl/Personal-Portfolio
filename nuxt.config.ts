@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   app: {
-     head: {
+    head: {
+       title:"Hoceine EL IDRISSI's Portfolio",
       link: [
         {
           rel: 'icon',

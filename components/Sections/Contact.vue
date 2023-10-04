@@ -1,11 +1,59 @@
 <template>
-    <div>
-contact
+  <section id="contact" class="section flex flex-wrap gap-10 justify-around w-full">
+    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10">
+      <p class="uppercase text-secondary">Get In Touch</p>
+      <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
+
+      <form @submit.prevent="sendMail" class="flex flex-col gap-5">
+        <label for="name" class="font-medium">Your Name</label>
+        <input
+          class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
+          type="text"
+          name="user_name"
+          placeholder="What's your good name?"
+        />
+        <label for="email" class="font-medium">Your Email</label>
+        <input
+          class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
+          type="email"
+          name="user_email"
+          placeholder="What's your Email?"
+        />
+        <label for="Message" class="font-medium">Your Message</label>
+        <textarea
+          name="message"
+          cols="30"
+          rows="10"
+          class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
+          placeholder="What you want to say?"
+        ></textarea>
+        <button
+          type="submit"
+          class="bg-tertiary rounded-lg w-fit py-3 px-6 font-semibold"
+        >
+          Send
+        </button>
+      </form>
     </div>
+    <div
+      @mousedown="handleMouseDown"
+      @mouseup="handleMouseUp"
+      :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
+      class="flex justify-center items-center w-[500px]"
+    >
+      <CanvasEarth />
+    </div>
+  </section>
 </template>
 
 <script setup>
-
+const isPressed = ref(false);
+const handleMouseDown = () => {
+  isPressed.value = true;
+};
+const handleMouseUp = () => {
+  isPressed.value = false;
+};
 </script>
 
 <style lang="scss" scoped></style>
