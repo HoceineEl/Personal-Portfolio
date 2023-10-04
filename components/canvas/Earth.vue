@@ -1,3 +1,4 @@
+<style></style>
 <script setup>
 const boxRef = shallowRef(null);
 const { onLoop } = useRenderLoop();
@@ -23,7 +24,7 @@ const transformState = shallowReactive({
 });
 </script>
 <template>
-  <TresCanvas>
+  <TresCanvas alpha>
     <!--  <OrbitControls /> -->
     <TresPerspectiveCamera ref="camera" :position="[3, 3, 3]" />
     <OrbitControls make-default />
