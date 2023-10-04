@@ -1,16 +1,28 @@
 <script setup>
 import { pc } from "~/assets/constants";
-const hadFinishLoading = ref(null);
-onMounted(() => {
-  hadFinishLoading = false;
-});
+
+const hadFinishLoading = ref(false);
+
 function resolve() {
-  hadFinishLoading = true;
+  hadFinishLoading.value = true;
+  console.log("resolved");
+  console.log(hadFinishLoading.value);
 }
+
+function fallback() {
+  console.log("fallback");
+  console.log(hadFinishLoading.value);
+}
+
+function pending() {
+  console.log("pending");
+  console.log(hadFinishLoading.value);
+}
+const getStat = () => hadFinishLoading.value;
 </script>
 
 <template>
-  <div class="w-full h-full" v-show="hadFinishLoading">
+  <div class="h-full" :class="[hadFinishLoading ? 'w-full' : 'w-0']">
     <TresCanvas alpha>
       <OrbitControls
         :enableZoom="false"
@@ -23,6 +35,9 @@ function resolve() {
       </Suspense>
       <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" />
     </TresCanvas>
+  </div>
+  <div class="flex justify-center items-center" v-if="!hadFinishLoading">
+    <p>Please Wait ...</p>
   </div>
 </template>
 

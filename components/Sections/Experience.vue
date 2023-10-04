@@ -3,7 +3,7 @@ import { devosoft, a2st, sosipo } from "../../assets";
 import { experiences } from "~/assets/constants";
 </script>
 <template>
-  <div class="relative section">
+  <section id="work" class="relative section">
     <div class="text-center mb-16">
       <p class="header">What I have done so far</p>
       <h3 class="header-secondary">Work Experience.</h3>
@@ -60,7 +60,7 @@ import { experiences } from "~/assets/constants";
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style scoped>
