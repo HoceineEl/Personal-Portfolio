@@ -16,12 +16,13 @@ import { github } from "~/assets";
     <div class="flex flex-wrap gap-7 mt-20 justify-center px-2 sm:px-0">
       <div
         v-for="project in projects"
-        class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl"
+        class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl main-card"
         $VanillaTilt
         data-tilt
         data-tilt-scale="1.05"
+        data-tilt-glare="true"
       >
-        <div class="w-full h-[230px] overflow-hidden relative">
+        <div class="w-full h-[230px] overflow-hidden relative inner-card">
           <img
             :src="project.image"
             :alt="project.name"
@@ -46,4 +47,12 @@ import { github } from "~/assets";
   </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.inner-card {
+  transform: translateZ(30px);
+}
+.main-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+</style>

@@ -22,12 +22,15 @@ const getStat = () => hadFinishLoading.value;
     <TresCanvas alpha>
       <OrbitControls
         :enableZoom="false"
+        :enableDamping="true"
+        :autoRotate="true"
+        :autoRotateSpeed="4"
         :maxPolarAngle="Math.PI / 2"
         :minPolarAngle="Math.PI / 2"
       />
       <TresAmbientLight :intensity="2" />
       <Suspense @fallback="fallback" @pending="pending" @resolve="resolve">
-        <GLTFModel :path="pc" :position="[0, 0, 0]" />
+        <GLTFModel :path="pc" :position="[0, 0, 0]" :draco="true" />
       </Suspense>
       <TresDirectionalLight :position="[10, 0, 10]" :intensity="1" />
     </TresCanvas>

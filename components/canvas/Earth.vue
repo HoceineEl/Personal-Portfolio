@@ -1,27 +1,21 @@
 <script setup>
-import { html } from "~/assets";
-
-const boxRef = shallowRef(null);
-const { onLoop } = useRenderLoop();
-onLoop(({ delta, elapsed }) => {
-  if (boxRef.value) {
-    boxRef.value.rotation.x += delta;
-  }
-});
-const pbrTexture = await useTexture({
-  map: html,
-});
+import { Earth } from "~/assets/constants";
 </script>
 <template>
   <TresCanvas alpha>
-    <TresPerspectiveCamera ref="camera" :position="[3, 3, 3]" />
-    <OrbitControls make-default />
-    <TresMesh>
-      <TresSphereGeometry :args="[1, 32, 32]" />
-      <TresMeshStandardMaterial :map="pbrTexture.map" />
-    </TresMesh>
-
-    <TresAmbientLight :intensity="1" />
-    <TresDirectionalLight :position="[0, 2, 4]" :intensity="2" />
+    <TresPerspectiveCamera :position="[0, 0, 4]" />
+    <OrbitControls
+      :enableZoom="false"
+      :enableDamping="true"
+      :autoRotate="true"
+      :autoRotateSpeed="10"
+      :maxPolarAngle="Math.PI / 2"
+      :minPolarAngle="Math.PI / 2"
+    />
+    <TresAmbientLight :intensity="100" />
+    <Suspense>
+      <GLTFModel :path="Earth" :scale="1.3" darco="true" />
+    </Suspense>
+    <TresDirectionalLight :position="[0, 0, 10]" :intensity="60" cast-shadow />
   </TresCanvas>
 </template>
