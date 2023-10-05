@@ -9,9 +9,8 @@
     <SectionsTech />
     <SectionsWorks />
     <SectionsFeedbacks />
-    <div class="relative z-0">
+    <div class="relative">
       <SectionsContact />
-      <SectionsStarsCanvas />
     </div>
   </main>
 </template>

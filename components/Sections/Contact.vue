@@ -1,5 +1,11 @@
 <template>
   <section id="contact" class="section flex flex-wrap gap-10 justify-around w-full">
+    <div class="absolute -z-10">
+      <ClientOnly>
+        <LazySectionsStarsCanvas />
+      </ClientOnly>
+    </div>
+
     <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10">
       <p class="uppercase text-secondary">Get In Touch</p>
       <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
