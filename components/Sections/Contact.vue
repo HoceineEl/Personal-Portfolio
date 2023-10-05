@@ -1,5 +1,8 @@
 <template>
-  <section id="contact" class="section flex flex-wrap gap-10 justify-around w-full">
+  <section
+    id="contact"
+    class="section flex flex-wrap gap-10 justify-around w-full relative"
+  >
     <div class="absolute -z-10">
       <ClientOnly>
         <LazySectionsStarsCanvas />

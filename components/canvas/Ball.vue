@@ -7,17 +7,13 @@ import { technologies } from "~/assets/constants";
     v-for="(tech, index) in technologies"
     :key="tech.name"
     class="flex justify-center items-center w-44 h-44 relative group"
-    $VanillaTilt
-    data-tilt
-    data-tilt-scale="1.05"
-   
   >
     <TresCanvas alpha>
       <OrbitControls
         :enableZoom="false"
         :enableDamping="true"
         :autoRotate="true"
-        :autoRotateSpeed="index * 0.3 + 1"
+        :autoRotateSpeed="index * 1.3 + 1"
         :maxPolarAngle="Math.PI / 2"
         :minPolarAngle="Math.PI / 2"
       />

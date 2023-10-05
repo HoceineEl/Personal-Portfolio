@@ -26,7 +26,7 @@ onLoop(({ delta }) => {
     // @ts-ignore
     starRef.value.value.rotation.x += delta * 0.02;
     // @ts-ignore
-    // starRef.value.value.rotation.z += delta * 0.02
+    starRef.value.value.rotation.z += delta * 0.02;
   }
 });
 
@@ -51,7 +51,7 @@ loadingScroll();
       html-scroll
     />
     <Suspense>
-      <Stars :size="0.5" :depth="30" :count="12000" ref="starRef" />
+      <Stars :size="0.5" :depth="30" :count="8000" ref="starRef" />
     </Suspense>
   </TresCanvas>
 </template>

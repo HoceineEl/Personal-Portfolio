@@ -1,6 +1,6 @@
 <template>
   <main class="relative z-0 bg-primary">
-    <header class="bg-hero-pattern bg-cover bg-no-repeat bg-center">
+    <header class="bg-cover bg-no-repeat bg-center">
       <SectionsNavbar />
       <SectionsHero />
     </header>

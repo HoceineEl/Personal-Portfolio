@@ -1,0 +1,11 @@
+Model Information:
+* title:	Of Planes and Satellites
+* source:	https://sketchfab.com/3d-models/of-planes-and-satellites-db8f1c8cba3b464993e216acbf4a69b9
+* author:	Loïc Norgeot (https://sketchfab.com/norgeotloic)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Of Planes and Satellites" (https://sketchfab.com/3d-models/of-planes-and-satellites-db8f1c8cba3b464993e216acbf4a69b9) by Loïc Norgeot (https://sketchfab.com/norgeotloic) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
