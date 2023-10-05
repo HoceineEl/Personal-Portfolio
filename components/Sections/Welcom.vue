@@ -1,9 +1,6 @@
 <template>
-  <div
-    class="w-full h-screen flex justify-center items-center fixed backdrop-blur-lg z-20"
-  >
-    <p class="text-xl font-semibold">the Page is Loading Now Wait Please...</p>
-    <div class="w-[500px] absolute bottom-0 left-0 z-10" ref="astr">
+  <div class="w-full h-screen flex fixed backdrop-blur-lg z-20 items-center">
+    <div class="w-[500px] moving-astronaut" ref="astr">
       <img :src="astro" alt="astronaut" />
     </div>
   </div>
@@ -11,6 +8,11 @@
 
 <script setup>
 import { astro } from "~/assets";
+const astr = ref();
+const counter = useInterval(50);
+onMounted(() => {
+  astr.value.style.transform = `translateX(${counter * 5}px)`;
+});
 </script>
 
-<style></style>
+<style scoped></style>
