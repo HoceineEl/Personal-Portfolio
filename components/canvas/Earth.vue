@@ -1,37 +1,26 @@
-<style></style>
 <script setup>
+import { html } from "~/assets";
+
 const boxRef = shallowRef(null);
 const { onLoop } = useRenderLoop();
 onLoop(({ delta, elapsed }) => {
   if (boxRef.value) {
-    boxRef.value.rotation.y += delta;
-    boxRef.value.rotation.z = elapsed * 0.2;
+    boxRef.value.rotation.x += delta;
   }
 });
-const camera = ref(null);
-watchEffect(() => {
-  if (camera.value) {
-    camera.value.lookAt(0, 0, 0);
-  }
-});
-const transformState = shallowReactive({
-  mode: "translate",
-  size: 1,
-  axis: "XY",
-  showX: true,
-  showY: true,
-  showZ: true,
+const pbrTexture = await useTexture({
+  map: html,
 });
 </script>
 <template>
   <TresCanvas alpha>
-    <!--  <OrbitControls /> -->
     <TresPerspectiveCamera ref="camera" :position="[3, 3, 3]" />
     <OrbitControls make-default />
-    <TresMesh ref="boxRef" :scale="1">
-      <TresBoxGeometry :args="[1, 1, 1]" />
-      <TresMeshNormalMaterial />
+    <TresMesh>
+      <TresSphereGeometry :args="[1, 32, 32]" />
+      <TresMeshStandardMaterial :map="pbrTexture.map" />
     </TresMesh>
+
     <TresAmbientLight :intensity="1" />
     <TresDirectionalLight :position="[0, 2, 4]" :intensity="2" />
   </TresCanvas>

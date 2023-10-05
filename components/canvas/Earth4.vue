@@ -2,6 +2,7 @@
 import { Earth } from "~/assets/constants";
 
 const hadFinishLoading = ref(false);
+// const { scene } = await useGLTF(Earth);
 
 function resolve() {
   hadFinishLoading.value = true;
@@ -19,6 +20,13 @@ function pending() {
   console.log(hadFinishLoading.value);
 }
 const getStat = () => hadFinishLoading.value;
+const earthRef = shallowRef(null);
+const { onLoop } = useRenderLoop();
+onLoop((delta, elapsed) => {
+  if (earthRef.value) {
+    earthRef.value.rotation.x += 2;
+  }
+});
 </script>
 
 <template>
@@ -32,7 +40,9 @@ const getStat = () => hadFinishLoading.value;
       />
       <TresAmbientLight :intensity="2" />
       <Suspense @fallback="fallback" @pending="pending" @resolve="resolve">
-        <GLTFModel :path="Earth" :position="[0, 0, 0]" />
+        <TresGroup ref="earthRef">
+          <GLTFModel :path="Earth" :position="[0, 0, 0]"
+        /></TresGroup>
       </Suspense>
       <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" />
     </TresCanvas>
