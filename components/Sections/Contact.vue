@@ -39,9 +39,9 @@
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-      class="flex justify-center items-center w-[500px]"
+      class="flex justify-center items-center w-[500px] -order-1 md:order-2"
     >
-      <CanvasEarth />
+      <LazyCanvasEarth />
     </div>
   </section>
 </template>

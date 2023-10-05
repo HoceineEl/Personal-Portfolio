@@ -20,9 +20,4 @@ import { services } from "~/assets/constants";
     </div>
   </div>
 </template>
-<style scoped>
-[data-tilt]:hover {
-  transform-style: preserve-3d;
-  transform: translateZ(50px);
-}
-</style>
+<style scoped></style>
