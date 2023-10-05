@@ -13,7 +13,7 @@ import { technologies } from "~/assets/constants";
         :enableZoom="false"
         :enableDamping="true"
         :autoRotate="true"
-        :autoRotateSpeed="index * 1.3 + 1"
+        :autoRotateSpeed="6"
         :maxPolarAngle="Math.PI / 2"
         :minPolarAngle="Math.PI / 2"
       />

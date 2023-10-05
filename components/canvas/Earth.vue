@@ -14,7 +14,7 @@ import { Earth } from "~/assets/constants";
     />
     <TresAmbientLight :intensity="100" />
     <Suspense>
-      <GLTFModel :path="Earth" :scale="1.3" darco="true" />
+      <GLTFModel :path="Earth" :scale="1.5" darco="true" />
     </Suspense>
     <TresDirectionalLight :position="[0, 0, 10]" :intensity="60" cast-shadow />
   </TresCanvas>

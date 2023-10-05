@@ -4,17 +4,17 @@
       <SectionsNavbar />
       <SectionsHero />
     </header>
-    <SectionsAbout />
-    <SectionsExperience />
-    <SectionsTech />
-    <SectionsWorks />
-    <SectionsFeedbacks />
+    <LazySectionsAbout />
+    <LazySectionsExperience />
+    <LazySectionsTech />
+    <LazySectionsWorks />
+    <LazySectionsFeedbacks />
     <div class="relative">
-      <SectionsContact />
+      <LazySectionsContact />
     </div>
   </main>
 </template>
 
-<script lang="ts" setup></script>
+<script setup></script>
 
 <style></style>

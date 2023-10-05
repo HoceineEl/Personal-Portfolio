@@ -1,8 +1,5 @@
 <template>
-  <section
-    id="contact"
-    class="section flex flex-wrap gap-10 justify-around w-full relative"
-  >
+  <section id="contact" class="section flex flex-wrap gap-10 justify-around relative">
     <div class="absolute -z-10">
       <ClientOnly>
         <LazySectionsStarsCanvas />
@@ -48,7 +45,7 @@
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-      class="flex justify-center items-center w-[500px] -order-1 md:order-2"
+      class="flex justify-center items-center w-[700px] -order-1 md:order-2"
     >
       <LazyCanvasEarth />
     </div>
