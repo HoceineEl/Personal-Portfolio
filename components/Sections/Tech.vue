@@ -1,10 +1,9 @@
 <template>
   <div class="relative section flex flex-wrap justify-center gap-4">
-    <LazyCanvasBall/>
+    <LazyCanvasBall />
   </div>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style lang="scss" scoped></style>

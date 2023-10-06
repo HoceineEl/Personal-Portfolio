@@ -1,12 +1,13 @@
 <script setup>
-import { technologies } from "~/assets/constants";
+// import { technologies } from "~/assets/constants";
 </script>
 
 <template>
-  <div
+  <!-- <div
     v-for="(tech, index) in technologies"
     :key="tech.name"
     class="flex justify-center items-center w-44 h-44 relative group"
+    v-once
   >
     <TresCanvas alpha>
       <OrbitControls
@@ -26,7 +27,7 @@ import { technologies } from "~/assets/constants";
       />
       <TresAmbientLight :intensity="1" />
       <Suspense>
-        <GLTFModel :path="tech.icon" :position="[0, 0, 0]" />
+        <GLTFModel :path="tech.icon" :position="[0, 0, 0]" :draco="true" s />
       </Suspense>
       <TresDirectionalLight :position="[4, 0, 10]" :intensity="1" cast-shadow />
     </TresCanvas>
@@ -34,7 +35,7 @@ import { technologies } from "~/assets/constants";
       class="absolute text-[6px] group-hover:text-lg top-3 group-hover:-top-3 text-secondary opacity-0 group-hover:opacity-100 transition duration-1000 bg-tertiary px-3 py-2 rounded-lg"
       >{{ tech.name }}</span
     >
-  </div>
+  </div> -->
 </template>
 
 <style scoped></style>

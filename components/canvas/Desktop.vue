@@ -1,6 +1,5 @@
 <script setup>
 import { pc } from "~/assets/constants";
-
 const hadFinishLoading = ref(false);
 
 function resolve() {
@@ -30,8 +29,11 @@ function pending() {}
       <TresDirectionalLight :position="[10, 0, 10]" :intensity="1" />
     </TresCanvas>
   </div>
-  <div class="flex justify-center items-center" v-if="!hadFinishLoading">
-    <p>Please Wait ...</p>
+  <div class="flex justify-center items-center flex-col" v-if="!hadFinishLoading">
+    <p class="font-bold text-[20px]">Loading 3D masterpieces...</p>
+    <span class="text-main-violet"
+      >They say patience is a virtue. Virtuosity awaits!</span
+    >
   </div>
 </template>
 

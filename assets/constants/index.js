@@ -62,12 +62,12 @@ const technologies = [
     {
         name: "HTML 5",
         icon: html,
-        progress: 95
+        progress: 110
     },
     {
         name: "CSS 3",
         icon: css,
-        progress: 80
+        progress: 110
     },
     {
         name: "JavaScript",
@@ -78,17 +78,17 @@ const technologies = [
     {
         name: "Vue JS",
         icon: vue,
-        progress: 80
+        progress: 90
     },
     {
         name: "Nuxt Js",
         icon: nuxt,
-        progress: 80
+        progress: 95
     },
     {
         name: "Tailwind CSS",
         icon: tailwind,
-        progress: 90
+        progress: 105
     },
     {
         name: "MySql",
@@ -98,7 +98,7 @@ const technologies = [
     {
         name: "Laravel",
         icon: laravel,
-        progress: 75
+        progress: 80
     },
     {
         name: "Github",

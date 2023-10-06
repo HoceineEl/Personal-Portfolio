@@ -36,7 +36,7 @@ const handleMouseUp = () => {
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
         class="flex justify-center items-center w-full h-full"
       >
-        <CanvasDesktop />
+        <LazyCanvasDesktop/>
       </div>
     </div>
     <div class="absolute bottom-40 w-full flex justify-center z-[80]">

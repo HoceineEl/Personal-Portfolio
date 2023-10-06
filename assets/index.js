@@ -28,7 +28,6 @@ import devosoft from "./company/devosoft.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
-
 export {
   astro,
   logo,

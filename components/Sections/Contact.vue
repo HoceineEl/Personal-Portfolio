@@ -6,7 +6,7 @@
       </ClientOnly>
     </div>
 
-    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10">
+    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg">
       <p class="uppercase text-secondary">Get In Touch</p>
       <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
 

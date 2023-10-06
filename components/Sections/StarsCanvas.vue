@@ -22,9 +22,7 @@ onLoop(({ delta }) => {
   }
   if (starRef.value) {
     // @ts-ignore
-    starRef.value.value.rotation.y += progress.value * 0.005 + 0.003;
-    // @ts-ignore
-    starRef.value.value.rotation.x += progress.value * 0.006 + 0.003;
+    starRef.value.value.rotation.y += delta * 0.1;
   }
 });
 
