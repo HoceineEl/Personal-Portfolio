@@ -61,49 +61,60 @@ const services = [
 const technologies = [
     {
         name: "HTML 5",
-        icon: html
+        icon: html,
+        progress: 95
     },
     {
         name: "CSS 3",
         icon: css,
+        progress: 80
     },
     {
         name: "JavaScript",
         icon: js,
+        progress: 75
     },
 
     {
         name: "Vue JS",
         icon: vue,
+        progress: 80
     },
     {
         name: "Nuxt Js",
         icon: nuxt,
+        progress: 80
     },
     {
         name: "Tailwind CSS",
         icon: tailwind,
+        progress: 90
     },
     {
         name: "MySql",
         icon: MySql,
+        progress: 70
     },
     {
         name: "Laravel",
         icon: laravel,
+        progress: 75
     },
     {
         name: "Github",
         icon: github,
+        progress: 75
     },
 
     {
         name: "figma",
         icon: figma,
+        progress: 60
     },
     {
         name: "Php",
         icon: php,
+        progress: 70
     },
 ];
 

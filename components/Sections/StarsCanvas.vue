@@ -14,19 +14,17 @@ function lerp(start, end, t) {
 onLoop(({ delta }) => {
   if (cameraRef.value) {
     if (progress.value <= 0.1) {
-      cameraRef.value.position.z = -progress.value * 2 + 6;
+      cameraRef.value.position.z = -progress.value * 10 + 6;
     } else {
-      const t = (progress.value - 0.1) * 4;
+      const t = (progress.value - 0.1) * 30;
       cameraRef.value.position.z = lerp(-0.1, 1, t * t);
     }
   }
   if (starRef.value) {
     // @ts-ignore
-    starRef.value.value.rotation.y += delta * 0.01;
+    starRef.value.value.rotation.y += progress.value * 0.005 + 0.003;
     // @ts-ignore
-    starRef.value.value.rotation.x += delta * 0.02;
-    // @ts-ignore
-    starRef.value.value.rotation.z += delta * 0.02;
+    starRef.value.value.rotation.x += progress.value * 0.006 + 0.003;
   }
 });
 
@@ -46,12 +44,13 @@ loadingScroll();
       v-if="loadScroll"
       ref="scRef"
       v-model="progress"
-      :smooth-scroll="0.1"
-      :distance="10"
+      :pages="20"
+      :distance="20"
+      :smooth-scroll="0.05"
       html-scroll
     />
     <Suspense>
-      <Stars :size="0.5" :depth="30" :count="8000" ref="starRef" />
+      <Stars :size="0.6" :depth="30" :count="6000" ref="starRef" />
     </Suspense>
   </TresCanvas>
 </template>

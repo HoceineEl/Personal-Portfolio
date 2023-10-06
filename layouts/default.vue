@@ -4,7 +4,7 @@ const showWelcomeScreen = ref(true);
 function welcomeScreen() {
   setTimeout(() => {
     showWelcomeScreen.value = false;
-  }, 3000);
+  }, 1000);
 }
 welcomeScreen();
 </script>

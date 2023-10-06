@@ -1,16 +1,34 @@
 <template>
-  <div class="w-full h-screen flex fixed backdrop-blur-lg z-20 items-center">
-    <div class="w-[500px] moving-astronaut" ref="astr">
-      <img :src="astro" alt="astronaut" />
-    </div>
+  <div
+    class="w-full h-screen flex fixed backdrop-blur-lg z-20 items-center justify-center"
+  >
+    <TresCanvas window-size alpha>
+      <TresPerspectiveCamera ref="cameraRef" :position="[0, 2, 5]" />
+      <Stars :size="0.6" :depth="3" :count="500" ref="starRef" />
+    </TresCanvas>
   </div>
 </template>
 
-<script setup>
-import { astro } from "~/assets";
-const astr = ref();
-const counter = useInterval(50);
-if (astr.value) astr.value.style.transform = `translateX(${counter * 5}px)`;
-</script>
+<script setup lang="ts">
+const starRef = shallowRef<THREE.Mesh>();
+const { onLoop } = useRenderLoop();
+const scRef = ref();
+const cameraRef = ref();
 
-<style scoped></style>
+//@ts-ignore
+function lerp(start, end, t) {
+  return -1 * (start * (1 - t) + end * t);
+}
+
+onLoop(({ delta }) => {
+  if (cameraRef.value) {
+    cameraRef.value.position.z = lerp(-0.1, 1, 500);
+  }
+  if (starRef.value) {
+    // @ts-ignore
+    starRef.value.value.rotation.y += delta;
+    // @ts-ignore
+    starRef.value.value.rotation.x += delta;
+  }
+});
+</script>
