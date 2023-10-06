@@ -30,10 +30,10 @@ function pending() {}
     </TresCanvas>
   </div>
   <div class="flex justify-center items-center flex-col" v-if="!hadFinishLoading">
-    <p class="font-bold text-[20px]">Loading 3D masterpieces...</p>
-    <span class="text-main-violet"
-      >They say patience is a virtue. Virtuosity awaits!</span
-    >
+    <p class="font-bold text-[20px]">Patience, friend!...</p>
+    <span class="text-main-violet">
+      Our 3D team is sipping on 'nus-nus' coffee and sharing tales to pass the time.
+    </span>
   </div>
 </template>
 
