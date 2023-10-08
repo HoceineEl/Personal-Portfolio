@@ -23,6 +23,7 @@ import vue from '../models/Tech/vue/scene.gltf?url'
 import php from '../models/Tech/php/scene.gltf?url'
 import tailwind from '../models/Tech/tailwind/scene.gltf?url'
 import bootstrap from '../models/Tech/Bootstrap/scene.gltf?url'
+import vite from '../models/Tech/vite/scene.gltf?url'
 import pc from '../models/pc/scene.gltf?url'
 import Earth from '../models/planet/scene.gltf?url'
 export const navLinks = [
@@ -85,6 +86,11 @@ const technologies = [
         name: "Nuxt Js",
         icon: nuxt,
         progress: 95
+    },
+    {
+        name: "Vite",
+        icon: vite,
+        progress: 70
     },
     {
         name: "Tailwind CSS",

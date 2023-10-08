@@ -1,5 +1,5 @@
 <script setup>
-import { devosoft, a2st, sosipo } from "../../assets";
+import { devosoft, a2st, sosipo } from "~/assets";
 import { experiences } from "~/assets/constants";
 </script>
 <template>
@@ -25,7 +25,6 @@ import { experiences } from "~/assets/constants";
           class="lg:w-[900px] flex mx-auto justify-between mb-6"
           v-for="(exp, index) in experiences"
           :key="exp.title"
-          v-motion-slide-visible-once-left
         >
           <div
             class="relative p-[1px] bg-white rounded-lg green-pink-gradient"

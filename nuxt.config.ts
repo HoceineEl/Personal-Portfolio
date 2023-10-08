@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+   buildModules: [
+    'nuxt-vite'
+  ],
+  vite: {
+    build: true
+  },
   devtools: { enabled: false },
 
   app: {
@@ -18,8 +24,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',
-    '@vueuse/motion/nuxt',
-    '@vueuse/nuxt',
   ],
-  css:['~/assets/css/tailwind.css'],
+  css: ['~/assets/css/tailwind.css'],
+
 })
