@@ -22,6 +22,7 @@ import nuxt from '../models/Tech/nuxt/scene.gltf?url'
 import vue from '../models/Tech/vue/scene.gltf?url'
 import php from '../models/Tech/php/scene.gltf?url'
 import tailwind from '../models/Tech/tailwind/scene.gltf?url'
+import bootstrap from '../models/Tech/Bootstrap/scene.gltf?url'
 import pc from '../models/pc/scene.gltf?url'
 import Earth from '../models/planet/scene.gltf?url'
 export const navLinks = [
@@ -115,6 +116,11 @@ const technologies = [
         name: "Php",
         icon: php,
         progress: 70
+    },
+    {
+        name: "Bootstrap 5",
+        icon: bootstrap,
+        progress: 80
     },
 ];
 
