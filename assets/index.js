@@ -8,7 +8,7 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 
 
-import a2st from "./company/A2ST.png";
+import a2st from "./company/a2st.png";
 import sosipo from "./company/sosipo.png";
 import devosoft from "./company/devosoft.png";
 
