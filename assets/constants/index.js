@@ -114,12 +114,12 @@ const technologies = [
     },
 
     {
-        name: "figma",
+        name: "Figma",
         icon: figma,
         progress: 60
     },
     {
-        name: "Php",
+        name: "PHP",
         icon: php,
         progress: 70
     },

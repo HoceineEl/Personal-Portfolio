@@ -9,10 +9,11 @@ const handleMouseUp = () => {
 </script>
 <template>
   <section
-    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center items-center"
+    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center overflow-hidden"
   >
-    <div class="w-full h-full flex lg:flex-row flex-col md:justify-between items-center">
-      <div class="flex gap-5 px-6">
+    
+    <div class="w-full h-full flex lg:flex-row flex-col md:justify-between">
+      <div class="flex gap-5 px-6 w-full">
         <div class="flex flex-col items-center justify-center">
           <div class="w-4 h-4 rounded-full bg-main-violet" />
           <div class="w-1 h-40 sm:h-80 bg-gradient-to-b from-main-violet" />
@@ -34,9 +35,9 @@ const handleMouseUp = () => {
         @mousedown="handleMouseDown"
         @mouseup="handleMouseUp"
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-        class="flex justify-center items-center w-full h-full"
+        class="flex justify-center w-full h-full"
       >
-        <LazyCanvasDesktop/>
+        <LazyCanvasDesktop />
       </div>
     </div>
     <div class="absolute bottom-40 w-full flex justify-center z-[80]">

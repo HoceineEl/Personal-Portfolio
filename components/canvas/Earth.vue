@@ -3,26 +3,11 @@ import { Earth } from "~/assets/constants";
 const hadFinishLoading = ref(false);
 function resolve() {
   hadFinishLoading.value = true;
-  console.log("resolved");
-  console.log(hadFinishLoading.value);
 }
 
-function fallback() {
-  console.log("fallback");
-  console.log(hadFinishLoading.value);
-}
+function fallback() {}
 
-function pending() {
-  console.log("pending");
-  console.log(hadFinishLoading.value);
-}
-const earthRef = shallowRef(null);
-const { onLoop } = useRenderLoop();
-onLoop(() => {
-  if (earthRef.value) {
-    earthRef.value.rotation.x += 2;
-  }
-});
+function pending() {}
 </script>
 
 <template>
@@ -42,6 +27,15 @@ onLoop(() => {
     </Suspense>
     <TresDirectionalLight :position="[0, 0, 10]" :intensity="60" cast-shadow />
   </TresCanvas>
+  <!-- <div
+    class="w-full h-full flex justify-center items-center flex-col"
+    v-if="!hadFinishLoading"
+  >
+    <p class="font-bold text-[20px]">Patience, friend!...</p>
+    <p class="text-main-violet text-center">
+      Our 3D team is sipping on 'nus-nus' coffee and sharing tales to pass the time.
+    </p>
+  </div> -->
 </template>
 
 <style scoped></style>

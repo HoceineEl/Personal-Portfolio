@@ -36,8 +36,8 @@ loadingScroll();
 </script>
 
 <template>
-  <TresCanvas window-size alpha>
-    <TresPerspectiveCamera ref="cameraRef" :position="[0, 2, 5]" />
+  <TresCanvas alpha window-size>
+    <TresPerspectiveCamera ref="cameraRef" :position="[0, 0, 0]" />
     <ScrollControls
       v-if="loadScroll"
       ref="scRef"

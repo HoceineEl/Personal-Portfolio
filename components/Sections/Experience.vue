@@ -25,6 +25,8 @@ import { experiences } from "~/assets/constants";
           class="lg:w-[900px] flex mx-auto justify-between mb-6"
           v-for="(exp, index) in experiences"
           :key="exp.title"
+          v-motion-slide-visible-once-left="index % 2 === 0"
+          v-motion-slide-visible-once-right="index % 2 !== 0"
         >
           <div
             class="relative p-[1px] bg-white rounded-lg green-pink-gradient"

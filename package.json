@@ -20,6 +20,7 @@
     "@emailjs/browser": "^3.11.0",
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/nuxt": "^1.1.7",
+    "@vueuse/motion": "^2.0.0",
     "three": "^0.156.1",
     "v-smooth-scroll": "^2.0.0-beta.2",
     "vanilla-tilt": "^1.8.1"
