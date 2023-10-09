@@ -1,5 +1,5 @@
 <script setup>
-import { Earth } from "~/assets/constants";
+const { object, scale, speed } = defineProps(["object", "scale", "speed"]);
 </script>
 <template>
   <TresCanvas alpha>
@@ -8,14 +8,14 @@ import { Earth } from "~/assets/constants";
       :enableZoom="false"
       :enableDamping="true"
       :autoRotate="true"
-      :autoRotateSpeed="10"
+      :autoRotateSpeed="speed"
       :maxPolarAngle="Math.PI / 2"
       :minPolarAngle="Math.PI / 2"
     />
-    <TresAmbientLight :intensity="100" />
+    <TresAmbientLight :intensity="2" />
     <Suspense>
-      <GLTFModel :path="Earth" :scale="1.5" darco="true" />
+      <GLTFModel :path="object" :scale="scale" darco="true" />
     </Suspense>
-    <TresDirectionalLight :position="[0, 0, 10]" :intensity="60" cast-shadow />
+    <TresDirectionalLight :position="[10, 0, 10]" :intensity="1" />
   </TresCanvas>
 </template>

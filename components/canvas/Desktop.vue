@@ -21,7 +21,6 @@ function pending() {}
       <TresCanvas alpha>
         <OrbitControls
           :enableZoom="false"
-          :enableDamping="true"
           :autoRotate="true"
           :autoRotateSpeed="4"
           :maxPolarAngle="Math.PI / 2"

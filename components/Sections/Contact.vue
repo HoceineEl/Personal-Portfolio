@@ -50,12 +50,14 @@
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
       class="flex justify-center items-center w-[700px] -order-1 md:order-2"
     >
-      <LazyCanvasEarth />
+      <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" />
     </div>
   </section>
 </template>
 
 <script setup>
+import { Earth } from "~/assets/constants";
+
 const isPressed = ref(false);
 const handleMouseDown = () => {
   isPressed.value = true;

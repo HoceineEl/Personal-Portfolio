@@ -6,6 +6,7 @@ const handleMouseDown = () => {
 const handleMouseUp = () => {
   isPressed.value = false;
 };
+import { pc } from "~/assets/constants";
 </script>
 <template>
   <section
@@ -36,7 +37,7 @@ const handleMouseUp = () => {
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
         class="flex justify-center w-full h-full"
       >
-        <LazyCanvasDesktop />
+        <LazyCanvasObject :object="pc" :scale="1" :speed="4" />
       </div>
     </div>
     <div class="absolute bottom-40 w-full flex justify-center z-[80]">
