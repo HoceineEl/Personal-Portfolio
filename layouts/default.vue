@@ -10,9 +10,9 @@ welcomeScreen();
 </script>
 
 <template>
-  <Transition name="slide">
+  <!-- <Transition name="slide">
     <SectionsWelcom v-show="showWelcomeScreen" />
-  </Transition>
+  </Transition> -->
   <div>
     <slot />
   </div>

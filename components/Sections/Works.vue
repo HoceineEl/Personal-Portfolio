@@ -3,7 +3,7 @@ import { projects } from "~/assets/constants";
 import { github } from "~/assets";
 </script>
 <template>
-  <section id="projects" class="section">
+  <section id="projects" class="section px-10">
     <h2 class="header">My Work</h2>
     <h3 class="header-secondary">Projects.</h3>
     <p class="description">

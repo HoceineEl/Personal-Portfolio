@@ -9,10 +9,9 @@ const handleMouseUp = () => {
 </script>
 <template>
   <section
-    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center overflow-hidden"
+    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center items-center overflow-hidden"
   >
-    
-    <div class="w-full h-full flex lg:flex-row flex-col md:justify-between">
+    <div class="w-full h-full flex lg:flex-row flex-col md:justify-between items-center">
       <div class="flex gap-5 px-6 w-full">
         <div class="flex flex-col items-center justify-center">
           <div class="w-4 h-4 rounded-full bg-main-violet" />

@@ -32,9 +32,6 @@ function pending() {}
     v-if="!hadFinishLoading"
   >
     <p class="font-bold text-[20px]">Patience, friend!...</p>
-    <p class="text-main-violet text-center">
-      Our 3D team is sipping on 'nus-nus' coffee and sharing tales to pass the time.
-    </p>
   </div> -->
 </template>
 

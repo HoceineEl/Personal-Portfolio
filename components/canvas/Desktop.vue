@@ -19,7 +19,6 @@ function pending() {}
       v-show="hadFinishLoading"
     >
       <TresCanvas alpha>
-        <TresPerspectiveCamera :position="[0, 0, 4]" />
         <OrbitControls
           :enableZoom="false"
           :enableDamping="true"

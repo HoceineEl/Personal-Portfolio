@@ -14,9 +14,9 @@ function lerp(start, end, t) {
 onLoop(({ delta }) => {
   if (cameraRef.value) {
     if (progress.value <= 0.1) {
-      cameraRef.value.position.z = -progress.value * 10 + 6;
+      cameraRef.value.position.z = progress.value * 10 + 6;
     } else {
-      const t = (progress.value - 0.1) * 30;
+      const t = (progress.value - 0.1) * 20;
       cameraRef.value.position.z = lerp(-0.1, 1, t * t);
     }
   }
@@ -48,7 +48,7 @@ loadingScroll();
       html-scroll
     />
     <Suspense>
-      <Stars :size="0.6" :depth="30" :count="6000" ref="starRef" />
+      <Stars :size="0.6" :depth="30" :count="2000" ref="starRef" />
     </Suspense>
   </TresCanvas>
 </template>
