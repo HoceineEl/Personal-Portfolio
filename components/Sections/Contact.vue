@@ -50,7 +50,7 @@
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
       class="flex justify-center items-center w-[700px] -order-1 md:order-2"
     >
-      <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" />
+      <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="planet" />
     </div>
   </section>
 </template>

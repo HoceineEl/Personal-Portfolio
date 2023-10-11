@@ -26,12 +26,13 @@ import { github } from "~/assets";
             :src="project.image"
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
+            fetchpriority="low"
           />
           <a
             class="absolute w-10 h-10 top-2 right-2 z-50 bg-tertiary rounded-full p-2"
             :href="project.source_code_link"
             target="_blank"
-            ><img :src="github" alt="project link on github "
+            ><img :src="github" fetchpriority="low" alt="project link on github "
           /></a>
         </div>
         <div class="my-5">

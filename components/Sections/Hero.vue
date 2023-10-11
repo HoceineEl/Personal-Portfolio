@@ -6,7 +6,7 @@ const handleMouseDown = () => {
 const handleMouseUp = () => {
   isPressed.value = false;
 };
-import { pc } from "~/assets/constants";
+import { portrait } from "~/assets/constants";
 </script>
 <template>
   <section
@@ -37,11 +37,11 @@ import { pc } from "~/assets/constants";
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
         class="flex justify-center w-full h-full"
       >
-        <LazyCanvasObject :object="pc" :scale="1" :speed="4" />
+        <LazyCanvasObject :object="portrait" :scale="1" :speed="4" :type="portrait" />
       </div>
     </div>
     <div class="absolute bottom-40 w-full flex justify-center z-[80]">
-      <ChunkDown />
+      <LazyChunkDown />
     </div>
   </section>
 </template>

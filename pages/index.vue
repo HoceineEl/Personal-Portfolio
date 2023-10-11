@@ -1,8 +1,8 @@
 <template>
   <main class="relative z-0 bg-primary">
     <header>
-      <SectionsNavbar />
-      <SectionsHero />
+      <LazySectionsNavbar />
+      <LazySectionsHero />
     </header>
     <LazySectionsAbout />
     <LazySectionsExperience />

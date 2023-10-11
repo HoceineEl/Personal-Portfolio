@@ -1,10 +1,10 @@
 <template>
   <div class="relative section flex flex-wrap justify-center gap-4">
     <div
+      v-memo
       v-for="(tech, index) in technologies"
       :key="tech.name"
       class="flex justify-center items-center w-44 h-44 relative group"
-      v-once
     >
       <LazyCanvasObject :object="tech.icon" :scale="1" :speed="10" />
       <span

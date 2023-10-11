@@ -48,7 +48,7 @@ loadingScroll();
       html-scroll
     />
     <Suspense>
-      <Stars :size="0.6" :depth="30" :count="2000" ref="starRef" />
+      <Stars :size="0.6" :depth="30" :count="3000" ref="starRef" />
     </Suspense>
   </TresCanvas>
 </template>
