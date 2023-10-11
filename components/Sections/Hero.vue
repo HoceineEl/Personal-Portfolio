@@ -24,9 +24,11 @@ import { portrait } from "~/assets/constants";
           >
             Hi ,I'm <span class="text-main-violet">Hoceine</span>
           </h1>
-          <p class="text-md sm:text-lg lg:text-2xl mt-2 font-semibold text-white-100">
-            Passionate coder crafting digital<br class="hidden sm:block" />
-            solutions with creativity and precision. Explore more!
+          <p
+            class="text-md sm:text-lg lg:text-2xl mt-2 font-semibold text-white-100 text-w"
+          >
+            Passionate coder crafting digital solutions with creativity and precision.
+            Explore more!
           </p>
         </div>
       </div>
@@ -46,4 +48,9 @@ import { portrait } from "~/assets/constants";
   </section>
 </template>
 
-<style lang="scss" scoped></style>
+<style scoped>
+p,
+h1 {
+  text-wrap: balance;
+}
+</style>

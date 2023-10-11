@@ -47,4 +47,8 @@ import { github } from "~/assets";
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+p {
+  text-wrap: balance;
+}
+</style>

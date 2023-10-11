@@ -66,6 +66,10 @@
     -webkit-text-fill-color: transparent;
 }
 
+.text-wrap-balance {
+    text-wrap: balance;
+}
+
 .green-text-gradient {
     background: #11998e;
     /* fallback for old browsers */
