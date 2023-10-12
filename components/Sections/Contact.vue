@@ -12,7 +12,7 @@
       <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
 
       <form @submit.prevent="sendMail" class="flex flex-col gap-5">
-        <label for="name" class="font-medium">Your Name</label>
+        <label for="user_name" class="font-medium">Your Name</label>
         <input
           class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
           type="text"
@@ -23,14 +23,16 @@
         <input
           class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
           type="email"
+          id=""
           name="user_email"
           placeholder="What's your Email?"
         />
-        <label for="Message" class="font-medium">Your Message</label>
+        <label for="message" class="font-medium">Your Message</label>
         <textarea
           name="message"
           cols="30"
           rows="10"
+          id=""
           class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
           placeholder="What you want to say?"
         ></textarea>
