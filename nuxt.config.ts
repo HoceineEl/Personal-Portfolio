@@ -3,9 +3,6 @@ export default defineNuxtConfig({
    buildModules: [
     'nuxt-vite'
   ],
-  vite: {
-    build:true,
-  },
   devtools: { enabled: false },
 
   app: {
