@@ -3,11 +3,9 @@
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
   >
-    <!-- <div class="absolute -z-10">
-      <ClientOnly>
-        <LazySectionsStarsCanvas />
-      </ClientOnly>
-    </div> -->
+    <div class="absolute -z-10">
+      <LazySectionsStarsCanvas />
+    </div>
 
     <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg">
       <p class="uppercase text-secondary">Get In Touch</p>
@@ -50,7 +48,7 @@
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
       class="flex justify-center items-center w-[700px] xs:w-[300] -order-1 md:order-2"
     >
-      <LazyCanvasObject :object="Earth" :scale="1" :speed="10" :type="'planet'" />
+      <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="'planet'" />
     </div>
   </section>
 </template>
