@@ -9,7 +9,7 @@
 
     <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-3">
       <p class="uppercase text-secondary">Get In Touch</p>
-      <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
+      <h2 class="text-3xl md:text-5xl font-bold mt-4 mb-8">Contact Us</h2>
 
       <form @submit.prevent="sendMail" class="flex flex-col gap-5">
         <label for="user_name" class="font-medium">Your Name</label>

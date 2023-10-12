@@ -8,15 +8,19 @@ import { experiences } from "~/assets/constants";
       <p class="header">What I have done so far</p>
       <h3 class="header-secondary">Work Experience.</h3>
     </div>
-    <div class="flex lg:block gap-20 px-4">
+    <div class="flex lg:block gap-20 px-1">
       <div class="timeline">
         <div class="timeline-img translate-y-[10rem]">
           <img :src="devosoft" alt="devosoft" class="mt-1" fetchpriority="low" />
         </div>
-        <div class="timeline-img translate-y-[37rem]">
+        <div
+          class="timeline-img translate-y-[36rem] sm:translate-y-[35rem] md:translate-y-[30rem]"
+        >
           <img :src="sosipo" alt="sosipo" class="mt-1" fetchpriority="low" />
         </div>
-        <div class="timeline-img translate-y-[61rem]">
+        <div
+          class="timeline-img translate-y-[59rem] sm:translate-y-[54rem] md:translate-y-[48rem]"
+        >
           <img :src="a2st" alt="a2st" class="rounded-sm mt-1" fetchpriority="low" />
         </div>
       </div>

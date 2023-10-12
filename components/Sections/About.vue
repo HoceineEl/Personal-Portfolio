@@ -1,6 +1,6 @@
 <template>
   <section class="section" id="about">
-    <div class="w-full px-10">
+    <div class="w-full px-2 sm:px-0">
       <h2 class="header">Introduction</h2>
       <h3 class="header-secondary">Overview.</h3>
       <p class="description">
@@ -13,7 +13,7 @@
         collaborate and turn your ideas into exceptional web experiences!
       </p>
     </div>
-    <LazyChunkRoles/>
+    <LazyChunkRoles />
   </section>
 </template>
 

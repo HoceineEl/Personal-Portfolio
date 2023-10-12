@@ -3,10 +3,10 @@ import { projects } from "~/assets/constants";
 import { github } from "~/assets";
 </script>
 <template>
-  <section id="projects" class="section px-10">
+  <section id="projects" class="section px-2">
     <h2 class="header">My Work</h2>
     <h3 class="header-secondary">Projects.</h3>
-    <p class="description">
+    <p class="description px-2 text-wrap-balance">
       These projects serve as concrete demonstrations of my expertise and experience. They
       offer a glimpse into my ability to tackle intricate challenges, work with diverse
       technologies, and successfully oversee project development. While I have provided
@@ -27,12 +27,17 @@ import { github } from "~/assets";
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
             fetchpriority="low"
+            width="200"
           />
           <a
             class="absolute w-10 h-10 top-2 right-2 z-50 bg-tertiary rounded-full p-2"
             :href="project.source_code_link"
             target="_blank"
-            ><img :src="github" fetchpriority="low" alt="project link on github "
+            ><img
+              :src="github"
+              fetchpriority="low"
+              alt="project link on github "
+              width="50"
           /></a>
         </div>
         <div class="my-5">

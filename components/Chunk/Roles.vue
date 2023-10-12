@@ -2,7 +2,7 @@
 import { services } from "~/assets/constants";
 </script>
 <template>
-  <div class="w-full flex gap-10 flex-wrap my-16 justify-center items-center px-4">
+  <div class="w-full flex gap-10 flex-wrap my-16 justify-center items-center">
     <div
       class="card xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px] transition-all duration-200 w-full"
       v-for="service in services"
@@ -14,7 +14,7 @@ import { services } from "~/assets/constants";
       <div
         class="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col text-center"
       >
-        <img :src="service.icon" alt="service.title" class="w-16" />
+        <img :src="service.icon" alt="service.title" width="64" />
         <p class="font-bold text-[20px] max-w-[150px]">{{ service.title }}</p>
       </div>
     </div>

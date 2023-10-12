@@ -4,7 +4,7 @@
       v-memo
       v-for="(tech, index) in technologies"
       :key="tech.name"
-      class="flex justify-center items-center w-44 h-44 relative group"
+      class="flex justify-center items-center w-36 h-36 relative group"
     >
       <LazyCanvasObject :object="tech.icon" :scale="1" :speed="10" />
       <span
