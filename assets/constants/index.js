@@ -11,21 +11,21 @@ import {
     jobit,
     tripguide,
 } from "../assets";
-import css from '../models/Tech/Css/scene.gltf?url'
-import html from '../models/Tech/Html/scene.gltf?url'
-import js from '../models/Tech/Js/scene.gltf?url'
-import figma from '../models/Tech/figma/scene.gltf?url'
-import github from '../models/Tech/github/scene.gltf?url'
-import laravel from '../models/Tech/laravel/scene.gltf?url'
-import MySql from '../models/Tech/MySql/scene.gltf?url'
-import nuxt from '../models/Tech/nuxt/scene.gltf?url'
-import vue from '../models/Tech/vue/scene.gltf?url'
-import php from '../models/Tech/php/scene.gltf?url'
-import tailwind from '../models/Tech/tailwind/scene.gltf?url'
-import bootstrap from '../models/Tech/Bootstrap/scene.gltf?url'
-import vite from '../models/Tech/vite/scene.gltf?url'
-import portrait from '../models/portrait/scene.gltf?url'
-import Earth from '../models/planet/scene.gltf?url'
+import css from '/models/Tech/Css/scene.gltf?url'
+import html from '/models/Tech/Html/scene.gltf?url'
+import js from '/models/Tech/Js/scene.gltf?url'
+import figma from '/models/Tech/figma/scene.gltf?url'
+import github from '/models/Tech/github/scene.gltf?url'
+import laravel from '/models/Tech/laravel/scene.gltf?url'
+import MySql from '/models/Tech/MySql/scene.gltf?url'
+import nuxt from '/models/Tech/nuxt/scene.gltf?url'
+import vue from '/models/Tech/vue/scene.gltf?url'
+import php from '/models/Tech/php/scene.gltf?url'
+import tailwind from '/models/Tech/tailwind/scene.gltf?url'
+import bootstrap from '/models/Tech/Bootstrap/scene.gltf?url'
+import vite from '/models/Tech/vite/scene.gltf?url'
+import portrait from '/models/portrait/scene.gltf?url'
+import Earth from '/models/planet/scene.gltf?url'
 export const navLinks = [
     {
         id: "about",

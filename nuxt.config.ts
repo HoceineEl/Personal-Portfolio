@@ -20,8 +20,5 @@ export default defineNuxtConfig({
     '@tresjs/nuxt',
     '@vueuse/motion/nuxt'
   ],
-  css: ['~/assets/css/tailwind.css'],
-  build: {
-    analyze: true,
-  }
+  css: ['~/assets/css/tailwind.css']
 })
