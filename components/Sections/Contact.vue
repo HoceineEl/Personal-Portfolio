@@ -7,7 +7,7 @@
       <LazySectionsStarsCanvas />
     </div>
 
-    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg">
+    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-3">
       <p class="uppercase text-secondary">Get In Touch</p>
       <h2 class="text-5xl font-bold mt-4 mb-8">Contact Us</h2>
 
@@ -48,7 +48,7 @@
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-      class="flex justify-center items-center w-[700px] xs:w-[300] -order-1 md:order-2"
+      class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] order-1 lg:order-2"
     >
       <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="'planet'" />
     </div>
