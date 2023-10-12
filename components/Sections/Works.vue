@@ -17,7 +17,7 @@ import { github } from "~/assets";
       <div
         v-for="project in projects"
         class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl"
-        $VanillaTilt
+        $VanillaTiltF
         data-tilt
         data-tilt-scale="1.05"
       >
@@ -26,18 +26,13 @@ import { github } from "~/assets";
             :src="project.image"
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
-            fetchpriority="low"
             width="200"
           />
           <a
             class="absolute w-10 h-10 top-2 right-2 z-50 bg-tertiary rounded-full p-2"
             :href="project.source_code_link"
             target="_blank"
-            ><img
-              :src="github"
-              fetchpriority="low"
-              alt="project link on github "
-              width="50"
+            ><img :src="github" alt="project link on github " width="50"
           /></a>
         </div>
         <div class="my-5">
