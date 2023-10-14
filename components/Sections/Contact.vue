@@ -3,9 +3,9 @@
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
   >
-    <!-- <div class="absolute -z-10">
+    <div class="absolute -z-10">
       <LazySectionsStarsCanvas />
-    </div> -->
+    </div>
 
     <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-0">
       <p class="uppercase text-secondary">Get In Touch</p>
