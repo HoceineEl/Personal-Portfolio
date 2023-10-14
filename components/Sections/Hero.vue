@@ -37,7 +37,7 @@ import { portrait } from "~/assets/constants";
         @mousedown="handleMouseDown"
         @mouseup="handleMouseUp"
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-        class="flex justify-center w-full h-full"
+        class="flex justify-center items-start w-full h-full"
       >
         <LazyCanvasObject :object="portrait" :scale="1" :speed="4" :type="portrait" />
       </div>

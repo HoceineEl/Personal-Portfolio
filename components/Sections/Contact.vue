@@ -48,7 +48,7 @@
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-      class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] order-1 lg:-order-2"
+      class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] order-1 lg:order-2"
     >
       <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="'planet'" />
     </div>
