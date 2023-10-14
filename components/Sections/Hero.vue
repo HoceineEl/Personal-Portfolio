@@ -42,7 +42,7 @@ import { portrait } from "~/assets/constants";
         <LazyCanvasObject :object="portrait" :scale="1" :speed="4" :type="portrait" />
       </div>
     </div>
-    <div class="absolute bottom-40 w-full flex justify-center z-[80]">
+    <div class="absolute bottom-3 lg:bottom-32 w-full flex justify-center z-[80]">
       <LazyChunkDown />
     </div>
   </section>

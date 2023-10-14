@@ -2,9 +2,9 @@
 <template>
   <a
     href="#about"
-    class="w-[35px] h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start p-2"
+    class="w-[20px] h-[30px] md:w-[35px] md:h-[64px] rounded-3xl border-4 border-secondary flex justify-center items-start pt-1"
   >
-    <span class="w-3 h-3 rounded-full bg-secondary mb-1 animate-bounce"></span>
+    <span class="w-1 h-1 md:w-3 md:h-3 rounded-full bg-secondary animate-bounce"></span>
   </a>
 </template>
 
