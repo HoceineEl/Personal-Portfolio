@@ -38,7 +38,7 @@ onMounted(() => {
           }
         "
       >
-        <img :src="logo" alt="Hoceine" width="60" />
+        <img :src="logo" alt="Hoceine" width="60" loading="lazy" />
         <p>Hoceine EL IDRISSI</p>
       </a>
       <ul class="justify-between gap-10 hidden sm:flex">
@@ -57,7 +57,13 @@ onMounted(() => {
         </li>
       </ul>
       <div @click="setToggle" class="sm:hidden">
-        <img :src="!toggle ? menu : close" alt="menu" class="cursor-pointer w-7 h-7" />
+        <img
+          :src="!toggle ? menu : close"
+          alt="menu"
+          class="cursor-pointer w-7 h-7"
+          width="100"
+          loading="lazy"
+        />
         <div
           class="mt-10 sm:hidden absolute top-10 right-10 black-gradient p-6 rounded-xl transition-all duration-500"
           :class="{ hidden: !toggle }"

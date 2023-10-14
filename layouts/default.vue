@@ -7,6 +7,7 @@ function welcomeScreen() {
   }, 1000);
 }
 welcomeScreen();
+// import { CursorFx } from "@luxdamore/vue-cursor-fx";
 </script>
 
 <template>
@@ -16,6 +17,7 @@ welcomeScreen();
   <div>
     <slot />
   </div>
+  <!-- <cursor-fx /> -->
 </template>
 <style scoped>
 .spbg {

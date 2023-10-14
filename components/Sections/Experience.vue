@@ -11,17 +11,17 @@ import { experiences } from "~/assets/constants";
     <div class="flex lg:block gap-20 px-1">
       <div class="timeline">
         <div class="timeline-img translate-y-[10rem]">
-          <img :src="devosoft" alt="devosoft" class="mt-1" />
+          <img :src="devosoft" alt="devosoft" class="mt-1" loading="lazy" />
         </div>
         <div
           class="timeline-img translate-y-[36rem] sm:translate-y-[35rem] md:translate-y-[30rem]"
         >
-          <img :src="sosipo" alt="sosipo" class="mt-1" />
+          <img :src="sosipo" alt="sosipo" class="mt-1" loading="lazy" />
         </div>
         <div
           class="timeline-img translate-y-[59rem] sm:translate-y-[54rem] md:translate-y-[48rem]"
         >
-          <img :src="a2st" alt="a2st" class="rounded-sm mt-1" />
+          <img :src="a2st" alt="a2st" class="rounded-sm mt-1" loading="lazy" />
         </div>
       </div>
       <div class="">
@@ -41,7 +41,12 @@ import { experiences } from "~/assets/constants";
                 <div
                   class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
                 >
-                  <img :src="exp.icon" :alt="exp.company_name" class="p-1" />
+                  <img
+                    :src="exp.icon"
+                    :alt="exp.company_name"
+                    class="p-1"
+                    loading="lazy"
+                  />
                 </div>
               </div>
               <div class="px-8 w-full">

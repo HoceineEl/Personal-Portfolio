@@ -18,7 +18,12 @@ export default defineNuxtConfig({
   modules: [
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',
-    '@vueuse/motion/nuxt'
+    '@vueuse/motion/nuxt',
+    'nuxt-delay-hydration'
   ],
-  css: ['~/assets/css/tailwind.css']
+  css: ['~/assets/css/tailwind.css'],
+   delayHydration: {
+    // enables nuxt-delay-hydration in dev mode for testing
+    debug: process.env.NODE_ENV === 'development'
+  }
 })
