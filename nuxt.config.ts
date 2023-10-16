@@ -25,5 +25,8 @@ export default defineNuxtConfig({
    delayHydration: {
     // enables nuxt-delay-hydration in dev mode for testing
     debug: process.env.NODE_ENV === 'development'
-  }
+  },
+  nitro: {
+    compressPublicAssets: true,
+  },
 })

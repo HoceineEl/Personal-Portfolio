@@ -7,7 +7,7 @@ import {
     devosoft,
     sosipo,
     a2st,
-    carrent,
+    sosipo_dashboard,
     jobit,
     tripguide,
 } from "../assets";
@@ -205,25 +205,37 @@ const testimonials = [
 
 const projects = [
     {
-        name: "Car Rent",
+        name: "Financial Management Web App for SOSIPO Association",
         description:
-            "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+            "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",
         tags: [
             {
-                name: "react",
+                name: "Laravel",
+                color: "red-text-gradient",
+            },
+            {
+                name: "MySql",
                 color: "blue-text-gradient",
             },
             {
-                name: "mongodb",
-                color: "green-text-gradient",
+                name: "Bootstrap",
+                color: "purple-text-gradient",
             },
             {
-                name: "tailwind",
+                name: "JavaScript",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "ChartJs",
                 color: "pink-text-gradient",
             },
+            {
+                name: "Ajax",
+                color: "green-text-gradient",
+            },
         ],
-        image: carrent,
-        source_code_link: "https://github.com/",
+        image: sosipo_dashboard,
+        source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
         name: "Job IT",
