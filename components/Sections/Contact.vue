@@ -7,7 +7,10 @@
       <LazySectionsStarsCanvas />
     </div>
 
-    <div class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-0">
+    <div
+      class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-0"
+      v-motion-slide-visible-once-left
+    >
       <p class="uppercase text-secondary">Get In Touch</p>
       <h2 class="text-3xl md:text-5xl font-bold mt-4 mb-8">Contact Us</h2>
 
@@ -22,7 +25,7 @@
         />
         <label for="email" class="font-medium">Your Email</label>
         <input
-          class="py-2 px-4 rounded-md focus:outline-none bg-tertiary "
+          class="py-2 px-4 rounded-md focus:outline-none bg-tertiary"
           type="email"
           name="email"
           v-model="email"
@@ -50,6 +53,7 @@
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
       class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] -order-1 lg:order-2"
+      v-motion-slide-visible-once-right
     >
       <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="'planet'" />
     </div>
