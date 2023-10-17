@@ -6,7 +6,13 @@ import { github, visit } from "~/assets";
   <section id="projects" class="section px-2">
     <h2 class="header">My Work</h2>
     <h3 class="header-secondary">Projects.</h3>
-    <p class="description px-2 text-wrap-balance"></p>
+    <p class="description px-2 text-wrap-balance">
+      These projects serve as concrete demonstrations of my expertise and experience. They
+      offer a glimpse into my ability to tackle intricate challenges, work with diverse
+      technologies, and successfully oversee project development. While I have provided
+      code repositories for each project, please note that not all of them have live demos
+      available.
+    </p>
     <div class="flex flex-wrap gap-7 mt-20 justify-center px-2 sm:px-0">
       <div
         v-for="(project, index) in projects"
