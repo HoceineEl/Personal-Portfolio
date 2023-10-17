@@ -1,6 +1,6 @@
 <script setup>
 import { projects } from "~/assets/constants";
-import { github } from "~/assets";
+import { github, visit } from "~/assets";
 </script>
 <template>
   <section id="projects" class="section px-2">
@@ -29,18 +29,32 @@ import { github } from "~/assets";
             width="200"
             loading="lazy"
           />
-          <a
-            class="absolute w-10 h-10 top-2 right-2 z-50 bg-tertiary rounded-full p-2"
-            :href="project.source_code_link"
-            target="_blank"
-            ><img :src="github" alt="project link on github " width="50" loading="lazy"
-          /></a>
+          <div class="absolute top-2 right-2 z-50 flex gap-2">
+            <a
+              class="w-10 h-10 bg-tertiary rounded-full p-2"
+              :href="project.source_code_link"
+              target="_blank"
+              ><img
+                :src="github"
+                alt="project link on github "
+                width="50"
+                loading="lazy"
+              />
+            </a>
+            <a
+              v-if="project.demo"
+              class="w-10 h-10 bg-tertiary rounded-full p-2"
+              :href="project.demo"
+              target="_blank"
+              ><img :src="visit" alt="project link  " width="40" loading="lazy" />
+            </a>
+          </div>
         </div>
         <div class="my-5">
           <h3 class="text-[21px] font-semibold">{{ project.name }}</h3>
           <p class="text-[15px] leading-6 text-slate-400">{{ project.description }}</p>
         </div>
-        <div class="flex flex-wrap gap-2">
+        <div class="mt-3 flex flex-wrap gap-2">
           <p v-for="tag in project.tags" :class="tag.color">#{{ tag.name }}</p>
         </div>
       </div>

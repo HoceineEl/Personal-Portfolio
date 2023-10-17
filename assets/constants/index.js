@@ -8,7 +8,7 @@ import {
     sosipo,
     a2st,
     sosipo_dashboard,
-    jobit,
+    nike_hero,
     tripguide,
 } from "../assets";
 import css from '/models/Tech/Css/scene.gltf?url'
@@ -205,7 +205,7 @@ const testimonials = [
 
 const projects = [
     {
-        name: "Financial Management Web App for SOSIPO Association",
+        name: "SOSIPO Association",
         description:
             "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",
         tags: [
@@ -238,25 +238,22 @@ const projects = [
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
-        name: "Job IT",
+        name: "Nikee",
         description:
-            "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+            "Revamped Nike's website with a contemporary design, optimized UI/UX, and dynamic sliders for a captivating user experience, enhancing brand engagement and online shopping satisfaction.",
         tags: [
             {
-                name: "react",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "restapi",
+                name: "VueJs",
                 color: "green-text-gradient",
             },
             {
-                name: "scss",
-                color: "pink-text-gradient",
+                name: "TailwindCss",
+                color: "blue-text-gradient",
             },
         ],
-        image: jobit,
-        source_code_link: "https://github.com/",
+        image: nike_hero,
+        source_code_link: "https://github.com/HoceineEl/nike-website",
+        demo: "https://nikee.pages.dev"
     },
     {
         name: "Trip Guide",

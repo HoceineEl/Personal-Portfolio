@@ -13,10 +13,11 @@ import sosipo from "./company/sosipo.png";
 import devosoft from "./company/devosoft.png";
 
 import sosipo_dashboard from "./Projects/sosipo/dashboard-dark.jpg";
-import sosipo_video from "./Projects/sosipo/video.mp4";
-import jobit from "./jobit.png";
+import nike_hero from "./Projects/nike/hero.jpg";
 import tripguide from "./tripguide.png";
+import visit from "./visit.png";
 export {
+  visit,
   logo,
   backend,
   creator,
@@ -29,7 +30,6 @@ export {
   a2st,
   sosipo,
   sosipo_dashboard,
-  sosipo_video,
-  jobit,
+  nike_hero,
   tripguide,
 };
