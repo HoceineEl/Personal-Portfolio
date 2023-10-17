@@ -7,14 +7,16 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
-
 import a2st from "./company/a2st.png";
 import sosipo from "./company/sosipo.png";
 import devosoft from "./company/devosoft.png";
 
 import sosipo_dashboard from "./Projects/sosipo/dashboard-dark.jpg";
 import nike_hero from "./Projects/nike/hero.jpg";
-import tripguide from "./tripguide.png";
+import islamic_home from "./Projects/quiz/home.jpg";
+import stock_home from "./Projects/stock/home.png";
+import hangman_home from "./Projects/hangman/home.png";
+import portfolio_hero from "./Projects/portfolio/hero.png";
 import visit from "./visit.png";
 export {
   visit,
@@ -31,5 +33,8 @@ export {
   sosipo,
   sosipo_dashboard,
   nike_hero,
-  tripguide,
+  islamic_home,
+  stock_home,
+  hangman_home,
+  portfolio_hero,
 };

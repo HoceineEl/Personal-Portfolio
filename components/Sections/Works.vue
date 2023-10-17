@@ -15,11 +15,13 @@ import { github, visit } from "~/assets";
     </p>
     <div class="flex flex-wrap gap-7 mt-20 justify-center px-2 sm:px-0">
       <div
-        v-for="project in projects"
-        class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl"
+        v-for="(project, index) in projects"
+        class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl flex flex-col relative pointer-events-none sm:pointer-events-auto"
         $VanillaTiltF
         data-tilt
         data-tilt-scale="1.05"
+        v-motion-slide-visible-once-left="index % 2 === 0"
+        v-motion-slide-visible-once-right="index % 2 !== 0"
       >
         <div class="w-full h-[230px] overflow-hidden relative">
           <img
@@ -54,7 +56,8 @@ import { github, visit } from "~/assets";
           <h3 class="text-[21px] font-semibold">{{ project.name }}</h3>
           <p class="text-[15px] leading-6 text-slate-400">{{ project.description }}</p>
         </div>
-        <div class="mt-3 flex flex-wrap gap-2">
+        <div class="flex-grow"></div>
+        <div class="mt-1 flex flex-wrap gap-2">
           <p v-for="tag in project.tags" :class="tag.color">#{{ tag.name }}</p>
         </div>
       </div>

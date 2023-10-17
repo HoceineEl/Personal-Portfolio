@@ -9,7 +9,10 @@ import {
     a2st,
     sosipo_dashboard,
     nike_hero,
-    tripguide,
+    islamic_home,
+    stock_home,
+    hangman_home,
+    portfolio_hero,
 } from "../assets";
 import css from '/models/Tech/Css/scene.gltf?url'
 import html from '/models/Tech/Html/scene.gltf?url'
@@ -238,6 +241,37 @@ const projects = [
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
+        name: "Personal Portfolio",
+        description:
+            "In my portfolio project, I have showcased my expertise in Vue and Nuxt, integrating 3D models, and tackling complex challenges. I've delved into performance optimization techniques, demonstrating my commitment to creating efficient, interactive web experiences.",
+        tags: [
+            {
+                name: "VueJs",
+                color: "green-text-gradient",
+            },
+            {
+                name: "TailwindcsCss",
+                color: "blue-text-gradient",
+            },
+            {
+                name: "NuxtJs",
+                color: "green-text-gradient",
+            },
+            {
+                name: "ThreeJs",
+                color: "pink-text-gradient",
+            },
+            {
+                name: "TresJs",
+                color: "purple-text-gradient",
+            },
+
+        ],
+        image: portfolio_hero,
+        demo: "https://hoceine.vercel.app",
+        source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
+    },
+    {
         name: "Nikee",
         description:
             "Revamped Nike's website with a contemporary design, optimized UI/UX, and dynamic sliders for a captivating user experience, enhancing brand engagement and online shopping satisfaction.",
@@ -256,25 +290,78 @@ const projects = [
         demo: "https://nikee.pages.dev"
     },
     {
-        name: "Trip Guide",
+        name: "Stock Management",
         description:
-            "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
+            "The stock management project led to a comprehensive web app, enhancing business efficiency by handling products, orders, clients, suppliers, and more. Our teamwork boosted web development skills, and we're proud of our tailored solution. Thanks to Professor D. Jamal BAKKAS for the support.",
         tags: [
             {
-                name: "nextjs",
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "PHP",
                 color: "blue-text-gradient",
             },
             {
-                name: "supabase",
+                name: "Bootstrap",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "Css",
+                color: "pink-text-gradient",
+            },
+            {
+                name: "MySql",
+                color: "red-text-gradient",
+            },
+            {
+                name: "Ajax",
+                color: "green-text-gradient",
+            },
+        ],
+        image: stock_home,
+        source_code_link: "https://github.com/HoceineEl/StockManagment",
+    },
+    {
+        name: "Islamic Trivia",
+        description:
+            "Developed an engaging Islamic quiz, testing knowledge with 50 questions. Tailored individual results with descriptions, offering a unique insight into each participant's understanding of Islam.",
+        tags: [
+            {
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "JSON",
                 color: "green-text-gradient",
             },
             {
-                name: "css",
-                color: "pink-text-gradient",
+                name: "TailwindCss",
+                color: "blue-text-gradient",
             },
         ],
-        image: tripguide,
-        source_code_link: "https://github.com/",
+        image: islamic_home,
+        demo: "https://islamictrivia.vercel.app/",
+        source_code_link: "https://github.com/HoceineEl/Islamic_Quiz",
+    },
+    {
+        name: "Hagman Game",
+        description:
+            "When I began my journey in learning JavaScript, I honed my logical thinking by creating a Hangman game, elevating it with complex features. This project showcases my growth and problem-solving skills in web development, highlighting the fun side of programming.",
+        tags: [
+            {
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Css",
+                color: "blue-text-gradient",
+            },
+
+        ],
+        image: hangman_home,
+        demo: "https://hangman-ane.pages.dev/",
+        source_code_link: "https://github.com/HoceineEl/hangman",
     },
 ];
 
