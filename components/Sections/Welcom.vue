@@ -12,25 +12,43 @@
   width: 90px;
   height: 14px;
   box-shadow: 0 3px 0 #fff;
+  position: relative;
   display: grid;
+  clip-path: inset(-60px 0 -5px);
 }
-.loader:before,
 .loader:after {
   content: "";
-  grid-area: 1/1;
-  background: radial-gradient(circle closest-side, var(--c, rgb(134, 7, 184)) 92%, #0000)
-    0 0 / calc(100% / 4) 100%;
-  animation: l4 1s infinite linear;
+  position: relative;
+  background: repeating-linear-gradient(
+      90deg,
+      #0000 0 calc(50% - 8px),
+      #ccc 0 calc(50% + 8px),
+      #0000 0 100%
+    )
+    0 0 / calc(100% / 3) 100%;
+  animation: l6-1 1s infinite;
 }
-.loader:after {
-  --c: #000;
-  background-color: #fff;
-  box-shadow: 0 -2px 0 0 #fff;
-  clip-path: inset(-2px calc(50% - 10px));
+.loader:before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  aspect-ratio: 1;
+  left: calc(50% - 7px);
+  bottom: 0;
+  border-radius: 50%;
+  background: rgb(77, 6, 220);
+  animation: l6-2 1s infinite;
 }
-@keyframes l4 {
+@keyframes l6-1 {
+  50%,
   100% {
-    background-position: calc(100% / 3) 0;
+    background-position: calc(100% / 2) 0;
+  }
+}
+@keyframes l6-2 {
+  0%,
+  50% {
+    transform: translateY(-80px);
   }
 }
 </style>
