@@ -1,11 +1,11 @@
 <script setup>
 const showWelcomeScreen = ref(true);
 
-// function welcomeScreen() {
-//   setTimeout(() => {
-//     showWelcomeScreen.value = false;
-//   }, 1000);
-// }
+function welcomeScreen() {
+  setTimeout(() => {
+    showWelcomeScreen.value = false;
+  }, 500);
+}
 useHead({
   meta: [
     {
@@ -18,11 +18,11 @@ useHead({
 </script>
 
 <template>
-  <!-- <Transition name="slide">
+  <Transition name="slide">
     <SectionsWelcom v-show="showWelcomeScreen" />
-  </Transition> -->
+  </Transition>
   <div>
-    <slot />
+    <Transition name="slide"> <slot /></Transition>
   </div>
   <!-- <cursor-fx /> -->
 </template>

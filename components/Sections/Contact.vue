@@ -4,7 +4,7 @@
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
   >
     <div class="absolute -z-10">
-      <LazySectionsStarsCanvas />
+      <SectionsStarsCanvas />
     </div>
 
     <div

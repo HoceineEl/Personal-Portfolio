@@ -65,22 +65,6 @@ const services = [
 
 const technologies = [
     {
-        name: "HTML 5",
-        icon: html,
-        progress: 110
-    },
-    {
-        name: "CSS 3",
-        icon: css,
-        progress: 110
-    },
-    {
-        name: "JavaScript",
-        icon: js,
-        progress: 75
-    },
-
-    {
         name: "Vue JS",
         icon: vue,
         progress: 90
@@ -91,40 +75,60 @@ const technologies = [
         progress: 95
     },
     {
-        name: "Vite",
-        icon: vite,
-        progress: 70
+        name: "Laravel",
+        icon: laravel,
+        progress: 80
     },
     {
         name: "Tailwind CSS",
         icon: tailwind,
         progress: 105
     },
+];
+const sub_technologies = [
+
+    {
+        name: "JavaScript",
+        icon: js,
+        progress: 75
+    },
+    {
+        name: "HTML 5",
+        icon: html,
+        progress: 110
+    },
+    {
+        name: "CSS 3",
+        icon: css,
+        progress: 110
+    },
+
+    {
+        name: "PHP",
+        icon: php,
+        progress: 70
+    },
     {
         name: "MySql",
         icon: MySql,
         progress: 70
     },
-    {
-        name: "Laravel",
-        icon: laravel,
-        progress: 80
-    },
+]
+const other_technologies = [
     {
         name: "Github",
         icon: github,
         progress: 75
     },
-
+    {
+        name: "Vite",
+        icon: vite,
+        progress: 70
+    },
     {
         name: "Figma",
         icon: figma,
         progress: 60
-    },
-    {
-        name: "PHP",
-        icon: php,
-        progress: 70
     },
     {
         name: "Bootstrap 5",
@@ -365,4 +369,4 @@ const projects = [
     },
 ];
 
-export { services, technologies, experiences, testimonials, projects, portrait, Earth };
+export { services, technologies, experiences, testimonials, projects, portrait, Earth, other_technologies, sub_technologies };

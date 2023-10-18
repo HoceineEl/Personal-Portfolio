@@ -51,6 +51,5 @@ function pending() {}
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
-  transform: translateY(-500px);
 }
 </style>
