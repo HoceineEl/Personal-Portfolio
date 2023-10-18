@@ -262,11 +262,11 @@
 
 @layer components {
     .header {
-        @apply text-xl text-secondary uppercase;
+        @apply text-[16px] sm:text-xl text-secondary uppercase text-wrap-balance;
     }
 
     .header-secondary {
-        @apply text-5xl sm:text-7xl font-bold text-white mt-3;
+        @apply text-4xl sm:text-7xl font-bold text-white mt-3 text-wrap-balance;
     }
 
     .description {
