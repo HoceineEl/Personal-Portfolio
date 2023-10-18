@@ -8,7 +8,7 @@
     </div>
 
     <div
-      class="sm:w-[500px] w-full bg-black-100 py-8 px-10 rounded-lg order-0"
+      class="sm:w-[500px] w-full bg-tertiary py-8 px-10 rounded-lg order-0"
       v-motion-slide-visible-once-left
     >
       <p class="uppercase text-secondary">Get In Touch</p>

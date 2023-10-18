@@ -11,6 +11,40 @@ export default defineNuxtConfig({
           type: 'image/x-icon',
           href: '/logo.svg'
         }
+      ], meta: [
+        { name: 'description', content: 'Hoceine EL IDRISSI Personal Portfolio ' },
+        { name: "author", content: "Hoceine EL IDRISSI" },
+        
+        //Open Graph/Facebook
+        { property: "og:url", content: "https://hoceine.vercel.app" },
+        { property: "og:title", content: "Hoceine EL IDRISSI" },
+        {
+          property: "og:description",
+          content: "Hoceine's Personal Portfolio",
+        },
+        {
+          property: "og:image",
+          content: "https://hoceine.vercel.app/images/hero.jpeg",
+        },
+        //Twitter
+        { property: "twitter:url", content: "https://hoceine.vercel.app" },
+        { property: "twitter:title", content: "Hoceine EL IDRISSI" },
+        {
+          property: "twitter:description",
+          content: "Hoceine's Personal Portfolio",
+        },
+        {
+          property: "twitter:image",
+          content: "https://hoceine.vercel.app/images/hero.jpeg",
+        },
+        {
+          property: "twitter:card",
+          content: "summary_large_image",
+        },
+        {
+          property: "twitter:creator",
+          content: "Hoceine EL IDRISSI",
+        },
       ],
     }
   },
