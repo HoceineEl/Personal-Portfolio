@@ -2,7 +2,7 @@
   <main
     class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
   >
-    <header class="bg-hero-pattern bg-fixed bg-cover">
+    <header class="">
       <SectionsNavbar />
       <SectionsHero />
     </header>

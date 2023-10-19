@@ -30,7 +30,7 @@ export default {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/assets/hero-1.svg')",
+        "hero-pattern": "url('/assets/herobg.png')",
       },
       keyframes: {
         bounce2x: {
