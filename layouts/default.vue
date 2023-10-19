@@ -4,7 +4,7 @@ const showWelcomeScreen = ref(true);
 function welcomeScreen() {
   setTimeout(() => {
     showWelcomeScreen.value = false;
-  }, 600000);
+  }, 2000);
 }
 useHead({
   meta: [

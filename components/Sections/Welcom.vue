@@ -25,8 +25,10 @@
       <div class="spoke"></div>
     </div>
     <div class="mt-5 text-center">
-      <p class="font-bold text-main-violet">3D magic in progress!</p>
-      <p>Our hamster's on a power-generating marathon to impress you!</p>
+      <p class="font-bold text-main-violet text-xl">3D magic in progress...</p>
+      <p class="font-medium mt-2">
+        Our hamster's on a power-generating marathon to impress you!
+      </p>
     </div>
   </div>
 </template>
@@ -79,7 +81,7 @@
 
 .hamster__head {
   animation: hamsterHead var(--dur) ease-in-out infinite;
-  background: hsl(30, 90%, 55%);
+  background: hsl(258, 95%, 39%);
   border-radius: 70% 30% 0 100% / 40% 25% 25% 60%;
   box-shadow: 0 -0.25em 0 hsl(30, 90%, 80%) inset,
     0.75em -1.55em 0 hsl(30, 90%, 90%) inset;
@@ -125,8 +127,8 @@
   animation: hamsterBody var(--dur) ease-in-out infinite;
   background: hsl(30, 90%, 90%);
   border-radius: 50% 30% 50% 30% / 15% 60% 40% 40%;
-  box-shadow: 0.1em 0.75em 0 hsl(30, 90%, 55%) inset,
-    0.15em -0.5em 0 hsl(30, 90%, 80%) inset;
+  box-shadow: 0.1em 0.75em 0 hsl(268, 93%, 23%) inset,
+    0.15em -0.5em 0 hsl(283, 69%, 29%) inset;
   top: 0.25em;
   left: 2em;
   width: 4.5em;

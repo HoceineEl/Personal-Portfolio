@@ -53,7 +53,7 @@ import { github, visit } from "~/assets";
           </div>
         </div>
         <div class="my-5">
-          <h3 class="sm:text-[21px] text-[16px]  font-semibold">{{ project.name }}</h3>
+          <h3 class="sm:text-[21px] text-[16px] font-semibold">{{ project.name }}</h3>
           <p class="sm:text-[15px] text-[12px] leading-6 text-slate-400">
             {{ project.description }}
           </p>

@@ -1,5 +1,5 @@
 <template>
-  <main class="relative z-0">
+  <main class="relative z-0 selection:bg-tertiary selection:text-main-violet">
     <header>
       <LazySectionsNavbar />
       <LazySectionsHero />
