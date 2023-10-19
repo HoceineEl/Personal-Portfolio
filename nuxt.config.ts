@@ -53,7 +53,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',
     '@vueuse/motion/nuxt',
-    'nuxt-delay-hydration'
+    'nuxt-delay-hydration',
+    '@nuxt/content',
   ],
   css: ['~/assets/css/tailwind.css'],
    delayHydration: {
