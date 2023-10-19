@@ -1,5 +1,28 @@
 <template>
   <div class="relative section flex flex-wrap justify-center gap-4">
+    <div>
+      <div class="text-center">
+        <p class="header">Technologies I'm Using</p>
+        <h2 class="header-secondary">Tech Stack.</h2>
+      </div>
+      <div class="flex flex-wrap gap-16 mt-14 justify-center items-center max-w-5xl">
+        <div
+          v-for="tech in technologies"
+          class="grayscale-0 hover:grayscale transition-all duration-500 group"
+        >
+          <img :src="tech.icon" :alt="tech.name" loading="lazy" width="80" />
+          <div
+            class="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100"
+          >
+            <span
+              class="absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-tertiary"
+            ></span>
+            {{ tech.name }}
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- <div
       v-memo
       v-for="(tech, index) in technologies"
@@ -33,6 +56,7 @@
 </template>
 
 <script setup>
+import { technologies } from "~/assets/constants";
 // const loadMore = ref(false);
 // const LoadMoreTechs = () => {
 //   loadMore.value = !loadMore.value;

@@ -1,12 +1,14 @@
 <template>
-  <main class="relative z-0 selection:bg-tertiary selection:text-main-violet">
-    <header>
-      <LazySectionsNavbar />
-      <LazySectionsHero />
+  <main
+    class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
+  >
+    <header class="bg-hero-pattern bg-fixed bg-cover">
+      <SectionsNavbar />
+      <SectionsHero />
     </header>
     <LazySectionsAbout />
-    <LazySectionsExperience />
     <LazySectionsTech />
+    <LazySectionsExperience />
     <LazySectionsWorks />
     <LazySectionsFeedbacks />
     <div class="relative">

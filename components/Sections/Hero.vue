@@ -10,7 +10,7 @@ import { portrait } from "~/assets/constants";
 </script>
 <template>
   <section
-    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center items-center overflow-hidden"
+    class="relative w-full h-screen mx-auto max-w-7xl pt-32 flex justify-center items-center overflow-hidden "
   >
     <div class="w-full h-full flex lg:flex-row flex-col md:justify-between items-center">
       <div class="flex gap-5 px-6 w-full">
@@ -30,6 +30,9 @@ import { portrait } from "~/assets/constants";
             Passionate coder crafting digital solutions with creativity and precision.
             Explore more!
           </p>
+          <button class="px-6 py-3 bg-main-violet font-bold mt-5 ms-5 rounded-xl">
+            Hire Me!
+          </button>
         </div>
       </div>
 

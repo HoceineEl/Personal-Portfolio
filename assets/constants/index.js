@@ -14,19 +14,36 @@ import {
     hangman_home,
     portfolio_hero,
 } from "../assets";
-import css from '/models/Tech/Css/scene.gltf?url'
-import html from '/models/Tech/Html/scene.gltf?url'
-import js from '/models/Tech/Js/scene.gltf?url'
-import figma from '/models/Tech/figma/scene.gltf?url'
-import github from '/models/Tech/github/scene.gltf?url'
-import laravel from '/models/Tech/laravel/scene.gltf?url'
-import MySql from '/models/Tech/MySql/scene.gltf?url'
-import nuxt from '/models/Tech/nuxt/scene.gltf?url'
-import vue from '/models/Tech/vue/scene.gltf?url'
-import php from '/models/Tech/php/scene.gltf?url'
-import tailwind from '/models/Tech/tailwind/scene.gltf?url'
-import bootstrap from '/models/Tech/Bootstrap/scene.gltf?url'
-import vite from '/models/Tech/vite/scene.gltf?url'
+
+import vue from "../tech/vue.svg"
+import github from "../tech/github.svg"
+import js from "../tech/js.svg"
+import nuxt from "../tech/nuxt.svg"
+import tailwind from "../tech/tailwind.svg"
+import bootstrap from "../tech/bootstrap.svg"
+import mysql from "../tech/mysql.svg"
+import php from "../tech/php.svg"
+import vite from "../tech/vite.svg"
+import figma from "../tech/figma.svg"
+import laravel from "../tech/laravel.svg"
+import wordpress from "../tech/wordpress.svg"
+import html from "../tech/html.svg"
+import css from "../tech/css.svg"
+import vscode from "../tech/vscode.svg"
+
+// import css_3d from '/models/Tech/Css/scene.gltf?url'
+// import html_3d from '/models/Tech/Html/scene.gltf?url'
+// import js_3d from '/models/Tech/Js/scene.gltf?url'
+// import figma_3d from '/models/Tech/figma/scene.gltf?url'
+// import github_3d from '/models/Tech/github/scene.gltf?url'
+// import laravel_3d from '/models/Tech/laravel/scene.gltf?url'
+// import MySql_3d from '/models/Tech/MySql/scene.gltf?url'
+// import nuxt_3d from '/models/Tech/nuxt/scene.gltf?url'
+// import vue_3d from '/models/Tech/vue/scene.gltf?url'
+// import php_3d from '/models/Tech/php/scene.gltf?url'
+// import tailwind_3d from '/models/Tech/tailwind/scene.gltf?url'
+// import bootstrap_3d from '/models/Tech/Bootstrap/scene.gltf?url'
+// import vite_3d from '/models/Tech/vite/scene.gltf?url'
 import portrait from '/models/portrait/scene.gltf?url'
 import Earth from '/models/planet/scene.gltf?url'
 export const navLinks = [
@@ -84,9 +101,6 @@ const technologies = [
         icon: tailwind,
         progress: 105
     },
-];
-const sub_technologies = [
-
     {
         name: "JavaScript",
         icon: js,
@@ -110,11 +124,9 @@ const sub_technologies = [
     },
     {
         name: "MySql",
-        icon: MySql,
+        icon: mysql,
         progress: 70
     },
-]
-const other_technologies = [
     {
         name: "Github",
         icon: github,
@@ -135,7 +147,90 @@ const other_technologies = [
         icon: bootstrap,
         progress: 80
     },
+    {
+        name: "Wordpress",
+        icon: wordpress,
+        progress: 50
+    },
+    {
+        name: "Vs Code",
+        icon: vscode,
+        progress: 90
+    },
 ];
+// const technologies_3d = [
+//     {
+//         name: "Vue JS",
+//         icon: vue_3d,
+//         progress: 90
+//     },
+//     {
+//         name: "Nuxt Js",
+//         icon: nuxt_3d,
+//         progress: 95
+//     },
+//     {
+//         name: "Laravel",
+//         icon: laravel_3d,
+//         progress: 80
+//     },
+//     {
+//         name: "Tailwind CSS",
+//         icon: tailwind_3d,
+//         progress: 105
+//     },
+//     {
+//         name: "JavaScript",
+//         icon: js_3d,
+//         progress: 75
+//     },
+//     {
+//         name: "HTML 5",
+//         icon: html_3d,
+//         progress: 110
+//     },
+//     {
+//         name: "CSS 3",
+//         icon: css_3d,
+//         progress: 110
+//     },
+
+//     {
+//         name: "PHP",
+//         icon: php_3d,
+//         progress: 70
+//     },
+//     {
+//         name: "MySql",
+//         icon: MySql_3d,
+//         progress: 70
+//     },
+//     {
+//         name: "Github",
+//         icon: github_3d,
+//         progress: 75
+//     },
+//     {
+//         name: "Vite",
+//         icon: vite_3d,
+//         progress: 70
+//     },
+//     {
+//         name: "Figma",
+//         icon: figma_3d,
+//         progress: 60
+//     },
+//     {
+//         name: "Bootstrap 5",
+//         icon: bootstrap_3d,
+//         progress: 80
+//     },
+//     {
+//         name: "Wordpress",
+//         icon: wordpress_3d,
+//         progress: 50
+//     },
+// ];
 
 const experiences = [
     {
@@ -369,4 +464,4 @@ const projects = [
     },
 ];
 
-export { services, technologies, experiences, testimonials, projects, portrait, Earth, other_technologies, sub_technologies };
+export { services, technologies, experiences, testimonials, projects, portrait, Earth, };
