@@ -1,5 +1,4 @@
 <script setup>
-
 useHead({
   meta: [
     {
@@ -12,9 +11,8 @@ useHead({
 </script>
 
 <template>
-
   <div>
-    <slot />
+    <Transition name="slide"><slot /></Transition>
   </div>
   <!-- <cursor-fx /> -->
 </template>

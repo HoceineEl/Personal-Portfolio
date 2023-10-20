@@ -13,6 +13,7 @@
     "@nuxt/content": "^2.8.5",
     "@nuxt/devtools": "latest",
     "@nuxtjs/tailwindcss": "^6.8.0",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.6.3",
     "nuxt": "^3.7.3",
     "nuxt-vite": "^0.0.27"
@@ -23,6 +24,7 @@
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/nuxt": "^1.1.7",
     "@vueuse/motion": "^2.0.0",
+    "nuxt-content-git": "^3.0.32",
     "nuxt-delay-hydration": "^1.2.3",
     "three": "^0.156.1",
     "v-smooth-scroll": "^2.0.0-beta.2",

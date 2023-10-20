@@ -6,7 +6,7 @@
     class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
   >
     <header class="">
-      <SectionsNavbar />
+      <ChunkHomeNavbar />
       <SectionsHero />
     </header>
     <LazySectionsAbout />
@@ -26,7 +26,7 @@ const showWelcomeScreen = ref(true);
 function welcomeScreen() {
   setTimeout(() => {
     showWelcomeScreen.value = false;
-  }, 900);
+  }, 20);
 }
 
 welcomeScreen();

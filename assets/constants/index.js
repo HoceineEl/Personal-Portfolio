@@ -48,16 +48,20 @@ import portrait from '/models/portrait/scene.gltf?url'
 import Earth from '/models/planet/scene.gltf?url'
 export const navLinks = [
     {
-        id: "about",
+        id: "#about",
         title: "About",
     },
     {
-        id: "work",
+        id: "#work",
         title: "Work",
     },
     {
-        id: "contact",
+        id: "#contact",
         title: "Contact",
+    },
+    {
+        id: "/blog",
+        title: "Blog",
     },
 ];
 

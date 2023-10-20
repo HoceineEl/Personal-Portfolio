@@ -4,6 +4,7 @@ import creator from "./creator.png";
 import mobile from "./mobile.png";
 import web from "./web.png";
 import github from "./github.png";
+import linkedin from "./tech/linkedin.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
@@ -19,6 +20,7 @@ import hangman_home from "./Projects/hangman/home.png";
 import portfolio_hero from "./Projects/portfolio/hero.png";
 import visit from "./visit.png";
 export {
+  linkedin,
   visit,
   logo,
   backend,
