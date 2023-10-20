@@ -1,11 +1,5 @@
 <script setup>
-const showWelcomeScreen = ref(true);
 
-function welcomeScreen() {
-  setTimeout(() => {
-    showWelcomeScreen.value = false;
-  }, 2000);
-}
 useHead({
   meta: [
     {
@@ -14,14 +8,11 @@ useHead({
     },
   ],
 });
-welcomeScreen();
 // import { CursorFx } from "@luxdamore/vue-cursor-fx";
 </script>
 
 <template>
-  <Transition name="slide">
-    <SectionsWelcom v-if="showWelcomeScreen" />
-  </Transition>
+
   <div>
     <slot />
   </div>

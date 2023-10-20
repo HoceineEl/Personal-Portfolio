@@ -48,7 +48,11 @@ export default defineNuxtConfig({
       ],
     }
   },
-
+  content: {
+    highlight: {
+      theme: 'github-dark'
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',

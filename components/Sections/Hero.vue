@@ -18,7 +18,7 @@ import { portrait } from "~/assets/constants";
           <div class="w-4 h-4 rounded-full bg-main-violet" />
           <div class="w-1 h-40 sm:h-80 bg-gradient-to-b from-main-violet" />
         </div>
-        <div>
+        <div class="flex flex-col gap-5">
           <h1
             class="lg:text-7xl sm:text-6xl xs:text-5xl text-4xl font-black lg:leading-[96px] mt-4 text-white-100"
           >
@@ -30,11 +30,15 @@ import { portrait } from "~/assets/constants";
             Passionate coder crafting digital solutions with creativity and precision.
             Explore more!
           </p>
-          <a
-            href="#contact"
-            class="px-6 py-3 bg-main-violet font-bold mt-5 ms-5 rounded-xl"
-          >
-            Hire Me!
+          <a href="#contact">
+            <div
+              class="px-6 py-3 text-main-violet font-bold border-2 rounded-xl w-fit group relative hover:text-white-100 overflow-hidden"
+            >
+              Hire Me!
+              <span
+                class="w-0 h-0 group-hover:w-52 group-hover:h-52 bg-main-violet transition-all duration-500 absolute inset-0 rounded-full -z-20"
+              ></span>
+            </div>
           </a>
         </div>
       </div>

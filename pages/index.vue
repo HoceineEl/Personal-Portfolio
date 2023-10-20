@@ -1,4 +1,7 @@
 <template>
+  <Transition name="slide">
+    <SectionsWelcom v-if="showWelcomeScreen" />
+  </Transition>
   <main
     class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
   >
@@ -17,6 +20,16 @@
   </main>
 </template>
 
-<script setup></script>
+<script setup>
+const showWelcomeScreen = ref(true);
+
+function welcomeScreen() {
+  setTimeout(() => {
+    showWelcomeScreen.value = false;
+  }, 900);
+}
+
+welcomeScreen();
+</script>
 
 <style scoped></style>
