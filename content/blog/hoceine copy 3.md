@@ -1,10 +1,9 @@
 ---
 title: "SSR vs. CSR: Unraveling the Mystery of Rendering in Web Development"
 description: "In the world of web development, rendering plays a crucial role in how your web pages are delivered to users. Two common methods for rendering web pages are **Server-Side Rendering (SSR)** and **Client-Side Rendering (CSR)**. Each approach has its own set of advantages and trade-offs. In this blog post, we'll explore the differences between SSR and CSR and when to use each."
-image: https://panel.scythe-studio.com/wp-content/uploads/2022/07/ssrVscsr-1.png
+image: https://i.ytimg.com/vi/SzJ46YA_RaA/maxresdefault.jpg
 createdAt: DateTime
 updatedAt: DateTime
-createdBy: "Hoceine EL IDRISSI"
 ---
 
 # SSR vs. CSR: Unraveling the Mystery of Rendering in Web Development

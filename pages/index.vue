@@ -1,7 +1,7 @@
 <template>
-  <Transition name="slide">
+  <!-- <Transition name="slide">
     <SectionsWelcom v-if="showWelcomeScreen" />
-  </Transition>
+  </Transition> -->
   <main
     class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
   >

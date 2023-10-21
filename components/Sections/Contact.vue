@@ -3,9 +3,9 @@
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
   >
-    <div class="absolute -z-10">
+    <!-- <div class="absolute -z-10">
       <SectionsStarsCanvas />
-    </div>
+    </div> -->
 
     <div
       class="sm:w-[500px] w-full bg-tertiary py-8 px-10 rounded-lg order-0"

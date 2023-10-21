@@ -15,16 +15,11 @@ onMounted(() => {
 });
 </script>
 <template>
-  <nav class="w-full flex items-center py-5 fixed top-0 z-20 bg-primary">
+  <nav class="w-full flex items-center py-5 fixed top-0 z-20 backdrop-blur-md mx-20">
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
       <a
         href="/"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
-        @click="
-          () => {
-            window.scrollTo(0, 0);
-          }
-        "
       >
         <img :src="logo" alt="Hoceine" width="60" loading="lazy" />
         <p>Hoceine EL IDRISSI</p>

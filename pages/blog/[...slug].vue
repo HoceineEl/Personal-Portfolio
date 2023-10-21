@@ -10,7 +10,7 @@ definePageMeta({
       <ContentDoc v-slot="{ doc }">
         <article>
           <h1 class="text-[30px]">{{ doc.title }}</h1>
-          <img :src="doc.image" alt="" class="w-full object-cover max-h-80" />
+          <img :src="doc.image" alt="" class="w-full object-cover max-h-80 rounded-xl" />
           <ContentRenderer :value="doc" />
         </article>
       </ContentDoc>
