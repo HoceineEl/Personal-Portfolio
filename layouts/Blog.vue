@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-onMounted(() => {
+onBeforeMount(() => {
   document.body.classList.add("bg-tertiary");
 });
 </script>

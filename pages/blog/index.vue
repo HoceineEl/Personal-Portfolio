@@ -24,6 +24,7 @@ const formatDate = (dateString) => {
           developer.
         </p>
       </div>
+     
       <ContentList path="/blog" v-slot="{ list }">
         <article
           v-for="(article, index) in list"

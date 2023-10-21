@@ -2,6 +2,7 @@
 definePageMeta({
   layout: "blog",
 });
+const { prev, next, toc } = useContent();
 </script>
 <template>
   <main class="">
@@ -12,7 +13,12 @@ definePageMeta({
             class="w-full h-[300px] bg-cover rounded-3xl mb-8 bg-center"
             :style="{ backgroundImage: `url(${doc.image})` }"
           ></div>
+          <!-- <p>{{ article.readingStats.text }}</p> -->
           <ContentRenderer :value="doc" class="max-w-4xl w-full" />
+          <div class="w-full flex justify-between items-center mt-5">
+            <ChunkNeighbor :path="prev._path" :title="prev.title" :dir="prev" />
+            <ChunkNeighbor :path="next._path" :title="next.title" :dir="next" />
+          </div>
         </article>
       </ContentDoc>
     </div>
@@ -30,11 +36,10 @@ definePageMeta({
   @apply font-semibold text-[16px] my-3;
 }
 ::v-deep .content p,
-::v-deep .content ul,
-::v-deep .content pre {
+::v-deep .content ul {
   @apply ms-5;
 }
 ::v-deep .content pre {
-  @apply px-7 py-5 border border-slate-400 rounded-lg bg-gray-800 overflow-auto text-sm  sm:text-lg;
+  @apply px-7 py-5  font-mono   rounded-lg bg-gray-950 overflow-auto text-sm  sm:text-[16px];
 }
 </style>

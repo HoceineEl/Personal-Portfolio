@@ -26,6 +26,7 @@
     "@vueuse/motion": "^2.0.0",
     "nuxt-content-git": "^3.0.32",
     "nuxt-delay-hydration": "^1.2.3",
+    "reading-time": "^1.5.0",
     "three": "^0.156.1",
     "v-smooth-scroll": "^2.0.0-beta.2",
     "vanilla-tilt": "^1.8.1"

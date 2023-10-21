@@ -54,8 +54,12 @@ export default defineNuxtConfig({
         default: 'monokai',
         dark: 'github-dark',
       }
-    }
+    },
+    documentDriven: true
+
   },
+
+
   modules: [
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',
