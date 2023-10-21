@@ -4,6 +4,7 @@ description: "In the world of web development, rendering plays a crucial role in
 image: https://i.ytimg.com/vi/SzJ46YA_RaA/maxresdefault.jpg
 createdAt: DateTime
 updatedAt: DateTime
+tags: ["SSR", "CSR", "Server", "Javascript"]
 ---
 
 # SSR vs. CSR: Unraveling the Mystery of Rendering in Web Development

@@ -1,9 +1,16 @@
 <template>
-  <div class="bg-primary h-screen ">
+  <div>
+    <header>
+      <ChunkBlogNavbar />
+    </header>
     <slot />
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+onMounted(() => {
+  document.body.classList.add("bg-tertiary");
+});
+</script>
 
 <style scoped></style>

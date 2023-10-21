@@ -4,7 +4,7 @@ description: "In the world of web development, rendering plays a crucial role in
 image: https://panel.scythe-studio.com/wp-content/uploads/2022/07/ssrVscsr-1.png
 createdAt: DateTime
 updatedAt: DateTime
-tags:["SSR","CSR","Server","Javascript"]
+tags: ["SSR", "CSR", "Server", "Javascript"]
 createdBy: "Hoceine EL IDRISSI"
 ---
 

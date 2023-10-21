@@ -4,8 +4,7 @@ definePageMeta({
 });
 </script>
 <template>
-  <main class="bg-primary">
-    <ChunkBlogNavbar />
+  <main class="">
     <div class="section max-w-4xl content mt-20 prose md:prose-lg lg:prose-lg">
       <ContentDoc v-slot="{ doc }">
         <article>
