@@ -5,6 +5,7 @@
     </header>
     <slot />
   </div>
+  <!-- <p class="bg-indigo-950"></p> -->
 </template>
 
 <script setup>

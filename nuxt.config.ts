@@ -51,9 +51,7 @@ export default defineNuxtConfig({
   content: {
     highlight: {
        theme: {
-        // Default theme (same as single string)
-        default: 'material-palenight',
-        // Theme used if `html.dark`
+        default: 'monokai',
         dark: 'github-dark',
       }
     }
@@ -65,7 +63,7 @@ export default defineNuxtConfig({
     'nuxt-delay-hydration',
     '@nuxt/content',
     '@tailwindcss/typography',
-     ['nuxt-content-git'],
+     'nuxt-content-git',
   ],
   css: ['~/assets/css/tailwind.css'],
    delayHydration: {

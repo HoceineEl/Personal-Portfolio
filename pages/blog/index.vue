@@ -28,15 +28,15 @@ const formatDate = (dateString) => {
         <article
           v-for="(article, index) in list"
           :key="article._path"
-          class="max-w-3xl rounded-xl hover:bg-gray-600 group"
+          class="max-w-3xl rounded-xl hover:bg-[#1E1E3B] hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 group"
         >
           <nuxt-link :href="article._path" class="flex flex-col sm:flex-row">
             <div
-              class="h-48 sm:w-48 bg-cover text-center overflow-hidden group-hover:opacity-50 sm:rounded-bl-lg rounded-ss-lg rounded-tr-lg sm:rounded-tr-none mb-3 sm:mb-0"
+              class="h-56 sm:w-56 bg-cover text-center overflow-hidden group-hover:opacity-50 sm:rounded-bl-lg rounded-ss-lg rounded-tr-lg sm:rounded-tr-none mb-3 sm:mb-0"
               :style="{ backgroundImage: `url(${article.image})` }"
             ></div>
-            <div class="mx-4 flex flex-col justify-center gap-4">
-              <h2 class="article-title font-bold font-serif">{{ article.title }}</h2>
+            <div class="mx-4 flex flex-col justify-center gap-4 py-4">
+              <h2 class="text-lg font-bold font-serif">{{ article.title }}</h2>
               <p class="line-clamp-2 max-w-2xl text-sm">{{ article.description }}</p>
               <div class="flex flex-wrap gap-2">
                 <span
@@ -54,6 +54,7 @@ const formatDate = (dateString) => {
                 <time class="flex gap-1 items-center" :datetime="article.createdAt">
                   <IconsDate /> {{ formatDate(article.createdAt) }}
                 </time>
+                <p v-if="article.minutes">{{ article.minutes }} minutes</p>
               </div>
             </div>
           </nuxt-link>
