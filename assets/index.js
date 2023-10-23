@@ -7,6 +7,7 @@ import github from "./github.png";
 import linkedin from "./tech/linkedin.svg";
 import menu from "./menu.svg";
 import close from "./close.svg";
+import hoceine from "./hoceine.jpeg";
 
 import a2st from "./company/a2st.png";
 import sosipo from "./company/sosipo.png";
@@ -20,6 +21,7 @@ import hangman_home from "./Projects/hangman/home.png";
 import portfolio_hero from "./Projects/portfolio/hero.png";
 import visit from "./visit.png";
 export {
+  hoceine,
   linkedin,
   visit,
   logo,

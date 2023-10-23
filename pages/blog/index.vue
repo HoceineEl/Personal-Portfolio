@@ -24,12 +24,12 @@ const formatDate = (dateString) => {
           developer.
         </p>
       </div>
-     
+
       <ContentList path="/blog" v-slot="{ list }">
         <article
           v-for="(article, index) in list"
           :key="article._path"
-          class="max-w-3xl rounded-xl hover:bg-[#1E1E3B] hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 group"
+          class="max-w-3xl rounded-xl hover:bg-[#1E1E3B] hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 group hover:shadow-lg hover:shadow-gray-800"
         >
           <nuxt-link :href="article._path" class="flex flex-col sm:flex-row">
             <div
@@ -42,7 +42,7 @@ const formatDate = (dateString) => {
               <div class="flex flex-wrap gap-2">
                 <span
                   v-for="tag in article.tags"
-                  class="px-2 bg-indigo-600 rounded-lg text-sm"
+                  class="px-2 bg-teal-600 rounded-lg text-sm"
                 >
                   {{ tag }}
                 </span>
@@ -53,9 +53,11 @@ const formatDate = (dateString) => {
                 <p class="article-author">Hoceine EL IDRISSI</p>
 
                 <time class="flex gap-1 items-center" :datetime="article.createdAt">
-                  <IconsDate /> {{ formatDate(article.createdAt) }}
+                  <IconsDate class="w-4 h-4" /> {{ formatDate(article.createdAt) }}
                 </time>
-                <p v-if="article.minutes">{{ article.minutes }} minutes</p>
+                <p v-if="article.minutes" class="flex gap-1 items-center">
+                  <IconsTime class="w-4 h-4" /> {{ article.minutes }} min read
+                </p>
               </div>
             </div>
           </nuxt-link>
