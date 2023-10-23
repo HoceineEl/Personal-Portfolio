@@ -1,5 +1,6 @@
 <script setup>
 import { hoceine } from "~/assets";
+
 definePageMeta({
   layout: "blog",
 });
@@ -11,8 +12,10 @@ const formatDate = (dateString) => {
 };
 </script>
 <template>
-  <main class="relative">
-    <div class="section max-w-7xl mt-20 prose md:prose-lg lg:prose-lg">
+  <main class="">
+    <div
+      class="2xl:max-w-7xl xl:max-w-6xl lg:max-w-4xl md:max-w-3xl xs:max-w-xl mx-auto py-6 px-2 xs:px-0 mt-20 prose md:prose-lg lg:prose-lg"
+    >
       <ContentDoc v-slot="{ doc }">
         <article class="flex flex-col justify-center items-center">
           <div
@@ -56,11 +59,11 @@ const formatDate = (dateString) => {
             </div>
           </div>
           <span class="article-hr"></span>
-          <div class="max-w-6xl px-1 sm:px-0 content lg:grid lg:grid-cols-4">
-            <aside class="aside md:col-span-1 pt-14 mx-3 order-2">
-              <ChunkToc :toc="toc" />
+          <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-5">
+            <aside class="-order-2 lg:order-2">
+              <ChunkToc :toc="toc" class=" " />
             </aside>
-            <ContentRenderer :value="doc" class="col-span-3" />
+            <ContentRenderer :value="doc" class="col-span-full lg:col-span-4" />
           </div>
 
           <ChunkNeighbor :next="next" :prev="prev" />
@@ -89,12 +92,15 @@ const formatDate = (dateString) => {
   @apply text-slate-300;
 }
 .content pre {
-  @apply px-7 py-5  font-mono   rounded-lg bg-gray-950 overflow-auto text-sm  sm:text-[16px];
+  @apply px-7 py-5  font-mono   rounded-lg bg-gray-950  text-sm  sm:text-[16px];
 }
 .article-hr {
   @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
 }
-.aside .toc {
-  @apply lg:sticky top-24;
+.content aside {
+  @apply sticky col-span-full lg:col-span-1 ms-3   w-full  pt-14;
+}
+.content aside .toc {
+  @apply sticky top-24 w-full;
 }
 </style>

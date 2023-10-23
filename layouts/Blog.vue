@@ -5,7 +5,7 @@
     </header>
     <slot />
   </div>
-  <!-- <p class="bg-indigo-950"></p> -->
+  <ChunkScrollToggler />
 </template>
 
 <script setup>
