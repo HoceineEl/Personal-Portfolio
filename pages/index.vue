@@ -13,7 +13,7 @@
     <LazySectionsTech />
     <LazySectionsExperience />
     <LazySectionsWorks />
-    <LazySectionsFeedbacks />
+    <LazySectionsBlog />
     <div class="relative">
       <LazySectionsContact />
     </div>
