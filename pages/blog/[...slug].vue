@@ -11,7 +11,7 @@ const formatDate = (dateString) => {
 };
 </script>
 <template>
-  <main>
+  <main class="relative">
     <div class="section max-w-7xl mt-20 prose md:prose-lg lg:prose-lg">
       <ContentDoc v-slot="{ doc }">
         <article class="flex flex-col justify-center items-center">
