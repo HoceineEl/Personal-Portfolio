@@ -24,7 +24,7 @@ onMounted(() => {
 </script>
 <template>
   <nav
-    class="w-full flex items-center py-5 fixed top-0 z-[1000]"
+    class="w-full flex items-center py-5 fixed top-0 z-[10]"
     :class="[onScroll ? 'bg-primary' : 'bg-transparent']"
   >
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">

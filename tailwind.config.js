@@ -41,7 +41,12 @@ export default {
       },
       animation: {
         Gargarya: 'bounce2x 1s ease-in-out infinite',
-      }
+      },
+      fontFamily: {
+        'hepta-sans': 'Hepta Slab, Arial, sans-serif',
+        'hepta-serif': 'Hepta Slab, Arial, serif',
+        'Montserrat': 'Montserrat, Arial, sans-serif'
+      },
     },
   },
   plugins: [require('@tailwindcss/typography')]

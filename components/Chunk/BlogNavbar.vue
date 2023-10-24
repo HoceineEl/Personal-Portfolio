@@ -2,7 +2,7 @@
 import { logo, linkedin, github } from "../assets";
 </script>
 <template>
-  <nav class="w-full flex items-center fixed top-3 z-20">
+  <nav class="w-full flex items-center fixed top-2 z-10">
     <div
       class="w-full flex justify-between items-center max-w-7xl mx-auto px-4 xs:px-10 py-2 xs:py-5 mx-30 rounded-full bg-gray-800"
     >

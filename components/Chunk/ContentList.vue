@@ -14,7 +14,10 @@
           <h2 class="text-lg font-bold font-serif">{{ article.title }}</h2>
           <p class="line-clamp-2 max-w-2xl text-sm">{{ article.description }}</p>
           <div class="flex flex-wrap gap-2">
-            <span v-for="tag in article.tags" class="px-2 bg-teal-600 rounded-lg text-sm">
+            <span
+              v-for="tag in article.tags"
+              class="px-2 py-1 bg-gradient-to-r from-violet-400 to-purple-950 rounded-full text-sm"
+            >
               {{ tag }}
             </span>
           </div>
