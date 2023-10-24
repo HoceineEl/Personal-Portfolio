@@ -10,7 +10,7 @@
 
 <script setup>
 onBeforeMount(() => {
-  document.body.classList.add("bg-tertiary");
+  document.body.classList.add("bg-gradient");
 });
 </script>
 

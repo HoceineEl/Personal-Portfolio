@@ -36,10 +36,7 @@ function pending() {}
     </div>
   </Transition>
   <div class="flex justify-center items-center flex-col" v-if="!hadFinishLoading && type">
-    <p class="font-bold text-[20px]">Patience, friend!...</p>
-    <span class="text-main-violet mt-2">
-      Our 3D team is sipping on 'nus-nus' coffee.
-    </span>
+    <LazyChunkWait />
   </div>
 </template>
 <style scoped>

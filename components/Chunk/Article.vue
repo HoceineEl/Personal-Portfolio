@@ -10,7 +10,9 @@ const { prev, next, toc } = useContent();
         :style="{ backgroundImage: `url(${doc.image})` }"
       ></div>
       <div class="mx-4 flex flex-col justify-center gap-4 py-4">
-        <h1 class="lg:text-6xl font-extrabold sm:text-3xl mt-10 mb-4 text-2xl">
+        <h1
+          class="lg:text-6xl font-extrabold sm:text-3xl mt-10 mb-4 text-2xl text-gradient hover:bg-gradient-to-l transition-all duration-400 py-5"
+        >
           {{ doc.title }}
         </h1>
         <p class="sm:text-lg text-sm text-gray-400 px-0 sm:px-10">
@@ -50,7 +52,10 @@ const { prev, next, toc } = useContent();
         <aside class="-order-2 lg:order-2">
           <ChunkToc :toc="toc" />
         </aside>
-        <ContentRenderer :value="doc" class="col-span-full lg:col-span-4" />
+        <ContentRenderer
+          :value="doc"
+          class="col-span-full lg:col-span-4 prose lg:prose-xl prose-stone"
+        />
       </div>
 
       <ChunkNeighbor :next="next" :prev="prev" />
@@ -58,4 +63,42 @@ const { prev, next, toc } = useContent();
   </ContentDoc>
 </template>
 
-<style></style>
+<style>
+.content h1 {
+  @apply font-bold lg:text-2xl sm:text-xl my-5 font-serif text-xl;
+}
+
+.content h2 {
+  @apply font-bold text-lg sm:text-xl my-3;
+}
+
+.content h3 {
+  @apply font-semibold text-[16px] my-3;
+}
+
+.content p,
+.content ul {
+  @apply ms-1 md:ms-5;
+}
+
+.content p,
+.content li {
+  @apply text-slate-300;
+}
+
+.content pre {
+  @apply px-7 py-5 font-mono rounded-lg bg-gray-950 text-sm sm:text-[16px];
+}
+
+.article-hr {
+  @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
+}
+
+.content aside {
+  @apply sticky col-span-full lg:col-span-1 ms-3 w-full pt-14;
+}
+
+.content aside .toc {
+  @apply sticky top-24 w-full;
+}
+</style>

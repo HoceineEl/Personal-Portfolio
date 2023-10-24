@@ -33,7 +33,7 @@ onBeforeMount(() => {
     </button>
     <nav class="transition-all duration-300 toc-nav" v-if="active || showAside">
       <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
-        <h3>Table of Contents</h3>
+        <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
       </header>
 
       <ul>
@@ -57,14 +57,14 @@ onBeforeMount(() => {
 
 <style>
 .toc-nav {
-  @apply border border-slate-700  px-3 py-4 rounded-lg mt-5 bg-[#1E1E3B] overscroll-auto;
+  @apply border border-slate-700  w-72 px-3 py-4 rounded-lg mt-5 bg-[#0d0d3fd0] overscroll-auto;
 }
 
 .toc .toc-link a {
-  @apply line-clamp-1 hover:underline;
+  @apply hover:underline;
 }
 
 .toc .toc-link .child-link {
-  @apply text-sm ms-2;
+  @apply text-[12px] ms-2;
 }
 </style>

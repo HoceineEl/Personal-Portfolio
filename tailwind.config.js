@@ -43,6 +43,6 @@ export default {
         Gargarya: 'bounce2x 1s ease-in-out infinite',
       }
     },
-    plugins: [require('@tailwindcss/typography'),],
-  }
+  },
+  plugins: [require('@tailwindcss/typography')]
 }

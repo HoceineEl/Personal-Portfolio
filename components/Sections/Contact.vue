@@ -96,6 +96,6 @@ const clearFields = () => {};
   @apply font-normal text-[14px] xs:font-medium xs:text-[16px];
 }
 .form-input {
-  @apply py-1 px-2 sm:py-2 text-[12px] sm:text-[16px] sm:px-4  rounded-md focus:outline-none bg-tertiary;
+  @apply py-1 px-2 sm:py-2 text-[12px] sm:text-[16px] sm:px-4  rounded-md focus:outline-none bg-[#1E1E3B];
 }
 </style>

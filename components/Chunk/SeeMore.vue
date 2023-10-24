@@ -1,0 +1,38 @@
+<script setup>
+const otherArticles = await queryContent("blog")
+  .limit(10)
+  .only(["title", "_path", "image", "createdAt"])
+  .find();
+</script>
+<template>
+  <section class="flex flex-col justify-center items-center gap-14 mt-10">
+    <h4
+      class="uppercase font-serif text-2xl text-gradient border-b-2 border-slate-400 pb-3 px-5"
+    >
+      You may also like
+    </h4>
+
+    <div class="flex flex-wrap gap-5 justify-between">
+      <article
+        v-for="otherArticle in otherArticles"
+        :key="otherArticle._path"
+        class="w-52 border rounded-lg border-slate-500 p-2"
+      >
+        <div
+          class="bg-cover w-full h-40 rounded-ss-lg rounded-tr-lg"
+          :style="{ backgroundImage: `url(${otherArticle.image})` }"
+        ></div>
+        <div class="mx-1 flex flex-col justify-center gap-2 py-4">
+          <h1 class="text-[16px] font-bold">
+            {{ otherArticle.title }}
+          </h1>
+          <time class="flex gap-1 items-center" :datetime="otherArticle.createdAt">
+            <IconsDate class="w-4 h-4" /> {{ useFormatDate(otherArticle.createdAt) }}
+          </time>
+        </div>
+      </article>
+    </div>
+  </section>
+</template>
+
+<style></style>

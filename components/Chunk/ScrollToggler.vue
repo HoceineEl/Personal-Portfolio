@@ -9,7 +9,7 @@
 
 <script setup>
 const to = ref(false);
-const classRotate = ref("rotate-90");
+const classRotate = ref("");
 
 const scrollToBottom = () => {
   window.scrollTo({

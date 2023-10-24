@@ -7,6 +7,9 @@ useHead({
     },
   ],
 });
+onBeforeMount(() => {
+  document.body.classList.add("bg-gradient");
+});
 // import { CursorFx } from "@luxdamore/vue-cursor-fx";
 </script>
 
