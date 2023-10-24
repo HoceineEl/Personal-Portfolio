@@ -2,12 +2,6 @@
 definePageMeta({
   layout: "blog",
 });
-//date format i like this dd-mm-yyyy
-const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
-  const date = new Date(dateString);
-  return date.toLocaleDateString(undefined, options);
-};
 </script>
 <template>
   <main>
@@ -53,7 +47,7 @@ const formatDate = (dateString) => {
                 <p class="article-author">Hoceine EL IDRISSI</p>
 
                 <time class="flex gap-1 items-center" :datetime="article.createdAt">
-                  <IconsDate class="w-4 h-4" /> {{ formatDate(article.createdAt) }}
+                  <IconsDate class="w-4 h-4" /> {{ useFormatDate(article.createdAt) }}
                 </time>
                 <p v-if="article.minutes" class="flex gap-1 items-center">
                   <IconsTime class="w-4 h-4" /> {{ article.minutes }} min read

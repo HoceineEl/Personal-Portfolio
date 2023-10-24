@@ -16,11 +16,12 @@ const formatDate = (dateString) => {
       class="w-full flex flex-wrap justify-center items-center gap-10 px-2 sm:px-0"
     >
       <article
-        v-for="article in articles"
+        v-for="(article, index) in articles"
         :key="article._path"
         $VanillaTiltF
         data-tilt
         data-tilt-scale="1.03"
+        v-motion-slide-visible-once-right
         class="w-full sm:w-80 rounded-xl bg-tertiary hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 pointer-events-none sm:pointer-events-auto"
       >
         <nuxt-link :href="article._path" class="flex flex-col">

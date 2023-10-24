@@ -15,5 +15,6 @@ useHead({
     <slot />
   </div>
   <!-- <cursor-fx /> -->
+  <ChunkScrollToggler />
 </template>
 <style scoped></style>

@@ -1,6 +1,6 @@
 import { visit } from 'unist-util-visit'
 
-const wpm = 225
+const wpm = 200
 
 export default defineNitroPlugin((nitroApp) => {
   nitroApp.hooks.hook('content:file:afterParse', (file) => {
