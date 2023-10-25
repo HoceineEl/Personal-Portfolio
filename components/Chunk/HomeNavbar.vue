@@ -34,7 +34,9 @@ onMounted(() => {
         @click="
           () => {
             setActive('');
-            window.scrollTo(0, 0);
+            onBeforeMount(()=>{
+              window.scrollTo(0, 0);
+            })
           }
         "
       >

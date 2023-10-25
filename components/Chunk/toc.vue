@@ -36,7 +36,7 @@ onBeforeMount(() => {
         <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
       </header>
 
-      <ul>
+      <ul class="overflow-y-auto">
         <li v-for="link in toc.links" :key="link.text" class="toc-link">
           <a :href="`#${link.id}`"> {{ link.text }} </a>
           <ul class="toc-child">
@@ -65,6 +65,6 @@ onBeforeMount(() => {
 }
 
 .toc .toc-link .child-link {
-  @apply text-[12px] ms-2;
+  @apply text-[12px] ms-2 text-slate-500;
 }
 </style>

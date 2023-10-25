@@ -84,7 +84,7 @@ const { prev, next, toc } = useContent();
 }
 
 .content pre {
-  @apply px-7 py-5 font-mono rounded-lg bg-gray-950 text-sm sm:text-[16px];
+  @apply px-7 py-5 font-mono rounded-lg overflow-auto bg-gray-950 text-sm sm:text-[16px];
 }
 
 .article-hr {
@@ -97,5 +97,8 @@ const { prev, next, toc } = useContent();
 
 .content aside .toc {
   @apply sticky top-24 w-full;
+}
+.content li a {
+  @apply font-semibold text-teal-600 text-[13px];
 }
 </style>

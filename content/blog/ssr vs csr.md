@@ -14,6 +14,9 @@ In the world of web development, rendering plays a crucial role in how your web 
 
 ## What Is Server-Side Rendering (SSR)?
 
+::image{imgSrc="hoceine.jpeg"}
+::
+
 Server-Side Rendering, as the name suggests, involves rendering web pages on the server before sending them to the client's browser. This means that the server generates the complete HTML document that is then displayed to the user.
 
 ### Advantages of SSR:

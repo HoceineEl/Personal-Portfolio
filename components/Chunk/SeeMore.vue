@@ -4,21 +4,21 @@ const otherArticles = ref([]); // Define the otherArticles array
 
 console.log("otherArticles.value");
 onBeforeMount(() => {
-  if (!showSeeMore.value) {
-    window.onscroll = async () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
-        document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (scrolled > 90) {
-        showSeeMore.value = true;
-        const newArticles = await queryContent("blog")
-          .limit(10)
-          .only(["title", "_path", "image", "createdAt"])
-          .find();
-        otherArticles.value = newArticles;
-      }
-    };
+  window.addEventListener("scroll", handleScroll);
+  async function handleScroll() {
+    const wind = document.body.scrollTop || document.documentElement.scrollTop;
+    const windHeight =
+      document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolledUntil = (wind / windHeight) * 100;
+    if (scrolledUntil > 90) {
+      showSeeMore.value = true;
+      const newArticles = await queryContent("blog")
+        .limit(10)
+        .only(["title", "_path", "image", "createdAt"])
+        .find();
+      otherArticles.value = newArticles;
+      window.removeEventListener("scroll", handleScroll);
+    }
   }
 });
 const scrollToTop = () => {

@@ -1,14 +1,3 @@
-<template>
-  <div>
-    <ChunkScrollIndicator />
-    <NuxtLayout>
-      <div>
-        <NuxtLoadingIndicator class="z-[300] bg-gr-scroll" :height="8" />
-        <NuxtPage />
-      </div>
-    </NuxtLayout>
-  </div>
-</template>
 <script setup>
 useHead({
   meta: [
@@ -19,6 +8,16 @@ useHead({
   ],
 });
 </script>
-<style scoped>
-/* The progress bar (scroll indicator) */
-</style>
+<template>
+  <div class="">
+    <ChunkScrollIndicator />
+
+    <NuxtLayout>
+      <div>
+        <NuxtLoadingIndicator class="z-[300] bg-gr-scroll" :height="8" />
+        <NuxtPage />
+      </div>
+    </NuxtLayout>
+  </div>
+</template>
+<style scoped></style>

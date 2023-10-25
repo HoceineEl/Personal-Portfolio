@@ -21,6 +21,7 @@
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@luxdamore/vue-cursor-fx": "^1.6.2",
+    "@nuxt/image": "npm:@nuxt/image-edge@latest",
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/nuxt": "^1.1.7",
     "@vueuse/motion": "^2.0.0",

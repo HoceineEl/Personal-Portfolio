@@ -12,6 +12,7 @@ export default {
     'error.{js,ts,vue}',
     'content/**/*.md'
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

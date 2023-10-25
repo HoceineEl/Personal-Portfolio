@@ -16,7 +16,7 @@
           <div class="flex flex-wrap gap-2">
             <span
               v-for="tag in article.tags"
-              class="px-2 py-1 bg-gradient-to-r from-violet-400 to-purple-950 rounded-full text-sm"
+              class="px-2 py-1 group-hover: transition-all duration-500 shadow-sm shadow-white-100 rounded-full text-sm"
             >
               {{ tag }}
             </span>
