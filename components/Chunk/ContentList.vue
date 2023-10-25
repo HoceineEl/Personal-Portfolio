@@ -14,12 +14,12 @@
           <h2 class="text-lg font-bold font-serif">{{ article.title }}</h2>
           <p class="line-clamp-2 max-w-2xl text-sm">{{ article.description }}</p>
           <div class="flex flex-wrap gap-2">
-            <span
+            <div
               v-for="tag in article.tags"
-              class="px-2 py-1 group-hover: transition-all duration-500 shadow-sm shadow-white-100 rounded-full text-sm"
+              class="px-2 py-1 transition-all duration-500 shadow-sm shadow-white-100 rounded-full text-sm flex justify-center items-center"
             >
               {{ tag }}
-            </span>
+            </div>
           </div>
           <div class="metadata flex gap-3 text-sm font-light text-slate-400 flex-wrap">
             <p class="article-author">Hoceine EL IDRISSI</p>

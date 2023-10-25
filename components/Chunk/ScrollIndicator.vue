@@ -25,7 +25,7 @@ onBeforeMount(() => {
   position: fixed;
   top: 0;
   background: transparent;
-  z-index: 60;
+  z-index: 400;
 }
 #myBar {
   width: 0;
