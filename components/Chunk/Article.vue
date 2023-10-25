@@ -52,10 +52,7 @@ const { prev, next, toc } = useContent();
         <aside class="-order-2 lg:order-2">
           <ChunkToc :toc="toc" />
         </aside>
-        <ContentRenderer
-          :value="doc"
-          class="col-span-full lg:col-span-4 prose lg:prose-xl prose-stone"
-        />
+        <ContentRenderer :value="doc" class="col-span-full lg:col-span-4" />
       </div>
 
       <ChunkNeighbor :next="next" :prev="prev" />

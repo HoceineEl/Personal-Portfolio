@@ -28,8 +28,8 @@ onMounted(() => {
     :class="[onScroll ? 'bg-primary' : 'bg-transparent']"
   >
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
-      <NuxtLink
-        to="/"
+      <a
+        href="/"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
         @click="
           () => {
@@ -40,7 +40,7 @@ onMounted(() => {
       >
         <img :src="logo" alt="Hoceine" width="60" loading="lazy" />
         <p>Hoceine EL IDRISSI</p>
-      </NuxtLink>
+      </a>
       <ul class="justify-between gap-10 hidden md:flex">
         <li
           :class="[active == link.title ? 'text-white' : 'text-secondary']"

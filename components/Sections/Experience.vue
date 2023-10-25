@@ -14,12 +14,12 @@ import { experiences } from "~/assets/constants";
           <img :src="devosoft" alt="devosoft" class="mt-1" loading="lazy" />
         </div>
         <div
-          class="timeline-img translate-y-[36rem] sm:translate-y-[35rem] md:translate-y-[30rem]"
+          class="timeline-img translate-y-[36rem] sm:translate-y-[35rem] md:translate-y-[36rem]"
         >
           <img :src="sosipo" alt="sosipo" class="mt-1" loading="lazy" />
         </div>
         <div
-          class="timeline-img translate-y-[59rem] sm:translate-y-[54rem] md:translate-y-[48rem]"
+          class="timeline-img translate-y-[59rem] sm:translate-y-[54rem] md:translate-y-[59rem]"
         >
           <img :src="a2st" alt="a2st" class="rounded-sm mt-1" loading="lazy" />
         </div>

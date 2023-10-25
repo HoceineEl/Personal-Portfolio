@@ -1,10 +1,30 @@
 <script setup>
-const articles = await queryContent("blog").limit(3).find();
 const formatDate = (dateString) => {
   const options = { year: "numeric", month: "long", day: "numeric" };
   const date = new Date(dateString);
   return date.toLocaleDateString(undefined, options);
 };
+const fetched = ref(false);
+const articles = ref([]); // Define the otherArticles array
+
+onBeforeMount(() => {
+  if (!fetched.value) {
+    window.onscroll = async () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height =
+        document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      if (scrolled > 60) {
+        fetched.value = true;
+        const newArticles = await queryContent("blog")
+          .only(["title", "_path", "image", "createdAt", "description", "tags"])
+          .limit(3)
+          .find();
+        articles.value = newArticles;
+      }
+    };
+  }
+});
 </script>
 <template>
   <section class="section flex flex-col items-center">
@@ -12,16 +32,14 @@ const formatDate = (dateString) => {
       <p class="header">What I've Shared</p>
       <h3 class="header-secondary">My Blog.</h3>
     </div>
+
     <section
+      v-if="fetched"
       class="w-full flex flex-wrap justify-center items-center gap-10 px-2 sm:px-0"
     >
       <article
-        v-for="(article, index) in articles"
+        v-for="article in articles"
         :key="article._path"
-        $VanillaTiltF
-        data-tilt
-        data-tilt-scale="1.03"
-        v-motion-slide-visible-once-right
         class="w-full sm:w-80 rounded-xl bg-tertiary hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 pointer-events-none sm:pointer-events-auto"
       >
         <nuxt-link :href="article._path" class="flex flex-col">
@@ -53,6 +71,7 @@ const formatDate = (dateString) => {
         </nuxt-link>
       </article>
     </section>
+    <IconsCube v-show="!fetched" />
     <NuxtLink
       to="/blog"
       class="px-6 py-3 flex gap-2 items-center bg-main-violet font-semibold rounded-full text-lg w-fit mt-10 group"
