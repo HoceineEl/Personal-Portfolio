@@ -57,7 +57,7 @@ onBeforeMount(() => {
 
 <style>
 .toc-nav {
-  @apply border border-slate-700  w-72 px-3 py-4 rounded-lg mt-5 bg-[#0d0d3fd0] overscroll-auto;
+  @apply border border-slate-700  max-w-sm px-1 sm:px-3 py-4 rounded-lg mt-5 bg-[#0d0d3fd0] overscroll-auto;
 }
 
 .toc .toc-link a {
