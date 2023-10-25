@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      title: "Hoceine EL IDRISSI's Portfolio",
+      title: "Hoceine EL IDRISSI",
       link: [
         {
           rel: 'icon',
