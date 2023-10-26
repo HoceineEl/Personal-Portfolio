@@ -2,7 +2,7 @@
 definePageMeta({
   layout: "blog",
 });
-
+console.log("entered");
 </script>
 <template>
   <main>
@@ -10,7 +10,7 @@ definePageMeta({
       class="2xl:max-w-7xl xl:max-w-6xl lg:max-w-4xl md:max-w-3xl xs:max-w-xl mx-auto py-6 px-2 xs:px-0 mt-20"
     >
       <LazyChunkArticle />
-      <LazyChunkSeeMore  />
+      
     </div>
   </main>
 </template>

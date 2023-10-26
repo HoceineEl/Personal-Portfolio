@@ -45,6 +45,7 @@ onBeforeMount(() => {
           <a
             :href="`#${link.id}`"
             :key="link.id + link.text"
+            :alt="link.text"
             :class="{ '!text-emerald-500 !font-semibold': active == link.id }"
           >
             {{ link.text }}
@@ -57,14 +58,14 @@ onBeforeMount(() => {
 
 <style>
 .toc-nav {
-  @apply border border-slate-700   w-full px-1 sm:px-3 py-4 rounded-lg mt-2 md:mt-5 bg-[#0d0d3fd0] overscroll-auto;
+  @apply w-full ps-1 sm:ps-3 py-4 rounded-lg mt-2 md:mt-5 overscroll-auto;
 }
 
 .toc .toc-link a {
   @apply hover:underline;
 }
 
-.toc .toc-link .child-link > a {
-  @apply text-[12px] ms-1 !text-slate-500 line-clamp-1;
+.toc .toc-link a {
+  @apply text-[14px] ms-1 !text-slate-500 line-clamp-1;
 }
 </style>

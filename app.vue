@@ -10,7 +10,7 @@ useHead({
 </script>
 <template>
   <div class="">
-    <ChunkScrollIndicator />
+    <!-- <ChunkScrollIndicator /> -->
 
     <NuxtLayout>
       <div>

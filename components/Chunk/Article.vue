@@ -7,8 +7,9 @@ const obeserver = ref(null);
 const content = ref(null);
 const observerOptions = ref({
   root: content.value,
-  threshold: 0.3,
+  threshold: 0,
 });
+
 onMounted(() => {
   obeserver.value = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -23,11 +24,10 @@ onMounted(() => {
     obeserver.value.observe(section);
     console.log(section);
   });
+  window.addEventListener("resize", handelWindowSize);
+  handelWindowSize();
 });
 
-onBeforeUnmount(() => {
-  obeserver.value.disconnect();
-});
 const { prev, next, toc } = useContent();
 const handelWindowSize = () => {
   if (window.innerWidth < 1024) {
@@ -38,10 +38,8 @@ const handelWindowSize = () => {
     active.value = false;
   }
 };
-onBeforeMount(() => {
-  window.addEventListener("resize", handelWindowSize);
-  handelWindowSize();
-});
+
+console.log("article entered");
 </script>
 <template>
   <ContentDoc v-slot="{ doc }">
@@ -138,6 +136,7 @@ onBeforeMount(() => {
 
       <ChunkNeighbor :next="next" :prev="prev" />
     </article>
+    <LazyChunkSeeMore :title="doc.title" />
   </ContentDoc>
 </template>
 
@@ -154,10 +153,10 @@ onBeforeMount(() => {
   @apply font-semibold text-[16px] my-3;
 }
 
-.content p,
+/* .content p,
 .content ul {
-  @apply ms-1 md:ms-5;
-}
+  @apply;
+} */
 
 .content p,
 .content li {
@@ -165,7 +164,7 @@ onBeforeMount(() => {
 }
 
 .content pre {
-  @apply px-7 py-5 font-mono rounded-lg overflow-auto bg-gray-950 text-sm sm:text-[16px];
+  @apply px-7 py-5 font-mono rounded-xl overflow-auto bg-gray-950 text-sm sm:text-[16px] my-5;
 }
 
 .article-hr {

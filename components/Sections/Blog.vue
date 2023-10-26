@@ -42,7 +42,7 @@ onBeforeMount(() => {
         :key="article._path"
         class="w-full sm:w-80 rounded-xl bg-tertiary hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 pointer-events-none sm:pointer-events-auto"
       >
-        <nuxt-link :href="article._path" class="flex flex-col">
+        <a :href="article._path" class="flex flex-col" :alt="article.title">
           <div
             class="w-full h-60 bg-cover overflow-hidden rounded-ss-lg rounded-tr-lg mb-3"
             :style="{ backgroundImage: `url(${article.image})` }"
@@ -68,7 +68,7 @@ onBeforeMount(() => {
               </p>
             </div>
           </div>
-        </nuxt-link>
+        </a>
       </article>
     </section>
     <IconsCube v-show="!fetched" />

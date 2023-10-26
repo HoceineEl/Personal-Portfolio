@@ -1,26 +1,26 @@
 <template>
   <div class="w-full flex justify-between items-center gap-3 flex-col md:flex-row mt-10">
-    <NuxtLink
+    <a
       v-if="prev"
-      :to="prev._path"
+      :href="prev._path"
       class="text-[12px] sm:text-sm flex items-center gap-2 border border-gray-600 rounded-lg px-6 py-4 group flex-col hover:bg-[#1E1E3B]"
     >
       <IconsPrev
         class="w-10 h-10 group-hover:-translate-x-2 self-start transition-transform duration-300"
       />
       <p class="font-semibold">{{ prev.title }}</p>
-    </NuxtLink>
+    </a>
     <div></div>
-    <NuxtLink
+    <a
       v-if="next"
-      :to="next._path"
+      :href="next._path"
       class="text-[12px] sm:text-sm flex items-center gap-2 border border-gray-600 rounded-lg px-6 py-4 group flex-col hover:bg-[#1E1E3B]"
     >
       <IconsNext
         class="w-10 h-10 group-hover:translate-x-2 self-end transition-transform duration-300"
       />
       <p class="font-semibold">{{ next.title }}</p>
-    </NuxtLink>
+    </a>
   </div>
 </template>
 

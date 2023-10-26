@@ -1,7 +1,7 @@
 <script setup>
 const showSeeMore = ref(false);
 const otherArticles = ref([]); // Define the otherArticles array
-
+const { title } = defineProps(["title"]);
 console.log("otherArticles.value");
 onBeforeMount(() => {
   window.addEventListener("scroll", handleScroll);
@@ -14,6 +14,7 @@ onBeforeMount(() => {
       showSeeMore.value = true;
       const newArticles = await queryContent("blog")
         .limit(10)
+        .where({ title: { $ne: title } })
         .only(["title", "_path", "image", "createdAt"])
         .find();
       otherArticles.value = newArticles;
@@ -40,7 +41,7 @@ const scrollToTop = () => {
         :key="otherArticle._path"
         class="w-52 border rounded-lg border-slate-500 p-2"
       >
-        <nuxt-link :to="otherArticle._path" @click="scrollToTop">
+        <a :href="otherArticle._path" @click="scrollToTop" :alt="article.title">
           <div
             class="bg-cover w-full h-40 rounded-ss-lg rounded-tr-lg"
             :style="{ backgroundImage: `url(${otherArticle.image})` }"
@@ -53,7 +54,7 @@ const scrollToTop = () => {
               <IconsDate class="w-4 h-4" /> {{ useFormatDate(otherArticle.createdAt) }}
             </time>
           </div>
-        </nuxt-link>
+        </a>
       </article>
       <LazyIconsCube v-if="false == showSeeMore" :class="{ 'opacity-0': showSeeMore }" />
     </div>

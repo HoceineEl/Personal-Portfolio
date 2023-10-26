@@ -12,6 +12,8 @@ export default defineNuxtConfig({
           href: '/logo.svg'
         }
       ], meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Hoceine EL IDRISSI Personal Portfolio ' },
         { name: "author", content: "Hoceine EL IDRISSI" },
         
@@ -50,10 +52,7 @@ export default defineNuxtConfig({
   },
   content: {
     highlight: {
-       theme: {
-        default: 'monokai',
-        dark: 'github-dark',
-      }
+       theme:"rose-pine-moon",
     },
     documentDriven: true
 
