@@ -1,12 +1,8 @@
 <script setup>
 const showAside = ref(true);
 const active = ref(true);
-defineProps({
-  toc: {
-    type: Array,
-    required: true,
-  },
-});
+const showChildern = ref(false);
+defineProps(["toc", "active"]);
 const handelWindowSize = () => {
   if (window.innerWidth < 1024) {
     active.value = true;
@@ -37,18 +33,22 @@ onBeforeMount(() => {
       </header>
 
       <ul class="overflow-y-auto">
-        <li v-for="link in toc.links" :key="link.text" class="toc-link">
-          <a :href="`#${link.id}`"> {{ link.text }} </a>
-          <ul class="toc-child">
-            <li
-              v-if="link.children"
-              v-for="child in link.children"
-              class="child-link"
-              :key="child"
-            >
-              <a :href="`#${child.id}`"> {{ child.text }} </a>
-            </li>
-          </ul>
+        <li
+          v-for="link in toc.links"
+          :key="link.text"
+          data-link-{{
+          link.id
+          }}
+          class="toc-link"
+          @click="show"
+        >
+          <a
+            :href="`#${link.id}`"
+            :key="link.id + link.text"
+            :class="{ '!text-emerald-500 !font-semibold': active == link.id }"
+          >
+            {{ link.text }}
+          </a>
         </li>
       </ul>
     </nav>
@@ -57,14 +57,14 @@ onBeforeMount(() => {
 
 <style>
 .toc-nav {
-  @apply border border-slate-700  max-w-sm px-1 sm:px-3 py-4 rounded-lg mt-5 bg-[#0d0d3fd0] overscroll-auto;
+  @apply border border-slate-700   w-full px-1 sm:px-3 py-4 rounded-lg mt-2 md:mt-5 bg-[#0d0d3fd0] overscroll-auto;
 }
 
 .toc .toc-link a {
   @apply hover:underline;
 }
 
-.toc .toc-link .child-link {
-  @apply text-[12px] ms-2 text-slate-500;
+.toc .toc-link .child-link > a {
+  @apply text-[12px] ms-1 !text-slate-500 line-clamp-1;
 }
 </style>

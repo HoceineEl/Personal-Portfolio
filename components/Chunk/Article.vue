@@ -1,6 +1,47 @@
 <script setup>
 import { hoceine } from "~/assets";
+const showAside = ref(true);
+const active = ref(true);
+const currentActiveLink = ref("");
+const obeserver = ref(null);
+const content = ref(null);
+const observerOptions = ref({
+  root: content.value,
+  threshold: 0.3,
+});
+onMounted(() => {
+  obeserver.value = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute("id");
+      if (entry.isIntersecting) {
+        currentActiveLink.value = id;
+        console.log("id=" + id);
+      }
+    });
+  }, observerOptions.value);
+  document.querySelectorAll(".nuxt-content h2[id]").forEach((section) => {
+    obeserver.value.observe(section);
+    console.log(section);
+  });
+});
+
+onBeforeUnmount(() => {
+  obeserver.value.disconnect();
+});
 const { prev, next, toc } = useContent();
+const handelWindowSize = () => {
+  if (window.innerWidth < 1024) {
+    active.value = true;
+    showAside.value = false;
+  } else {
+    showAside.value = true;
+    active.value = false;
+  }
+};
+onBeforeMount(() => {
+  window.addEventListener("resize", handelWindowSize);
+  handelWindowSize();
+});
 </script>
 <template>
   <ContentDoc v-slot="{ doc }">
@@ -48,11 +89,51 @@ const { prev, next, toc } = useContent();
         </div>
       </div>
       <span class="article-hr"></span>
-      <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-5">
+      <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7">
         <aside class="-order-2 lg:order-2">
-          <ChunkToc :toc="toc" />
+          <div class="toc" v-if="toc && toc.links">
+            <button
+              class="p-1 bg-[#1E1E3B] rounded-lg"
+              @click="active = !active"
+              v-if="!showAside"
+            >
+              <IconsBurger class="w-8 h-8" v-if="!active" />
+              <IconsClose class="w-8 h-8" v-if="active" />
+            </button>
+            <nav class="transition-all duration-300 toc-nav" v-if="active || showAside">
+              <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
+                <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
+              </header>
+
+              <ul class="overflow-y-auto">
+                <li
+                  v-for="link in toc.links"
+                  :key="link.text"
+                  data-link-{{
+                  link.id
+                  }}
+                  class="toc-link"
+                  @click="show"
+                >
+                  <a
+                    :href="`#${link.id}`"
+                    :key="link.id + link.text"
+                    :class="{
+                      '!text-teal-600 !font-semibold': link.id == currentActiveLink,
+                    }"
+                  >
+                    {{ link.text }}
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </aside>
-        <ContentRenderer :value="doc" class="col-span-full lg:col-span-4" />
+        <ContentRenderer
+          ref="content"
+          :value="doc"
+          class="col-span-full lg:col-span-5 nuxt-content"
+        />
       </div>
 
       <ChunkNeighbor :next="next" :prev="prev" />
@@ -92,13 +173,13 @@ const { prev, next, toc } = useContent();
 }
 
 .content aside {
-  @apply sticky col-span-full lg:col-span-1 ms-3 w-full pt-14;
+  @apply sticky col-span-full lg:col-span-2 lg:ms-3 w-full pt-14;
 }
 
 .content aside .toc {
-  @apply sticky top-24 w-full;
+  @apply sticky top-10 lg:top-24 w-full;
 }
 .content li a {
-  @apply font-semibold text-teal-600 text-[13px];
+  @apply text-slate-400 text-[12px] transition-all duration-300;
 }
 </style>
