@@ -80,6 +80,6 @@ export default defineNuxtConfig({
   image: {
     quality: 80,
     screens: { 'xs': 420, 'sm': 640, 'md': 768, 'lg': 1024, 'xl': 1280, },
-    dir: 'assets/blog'
+    dir: 'assets/'
   }
 })

@@ -17,6 +17,7 @@
     <div class="relative">
       <LazySectionsContact />
     </div>
+    <LazySectionsFooter />
   </main>
 </template>
 

@@ -5,6 +5,7 @@
     </header>
     <slot />
   </div>
+  <LazySectionsFooter />
   <ChunkScrollToggler />
 </template>
 
