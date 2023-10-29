@@ -160,7 +160,7 @@ console.log("article entered");
 
 .content p,
 .content li {
-  @apply text-slate-300;
+  @apply text-slate-300 break-words;
 }
 
 .content pre {
