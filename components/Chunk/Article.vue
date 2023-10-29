@@ -98,7 +98,7 @@ console.log("article entered");
               <IconsBurger class="w-8 h-8" v-if="!active" />
               <IconsClose class="w-8 h-8" v-if="active" />
             </button>
-            <nav class="transition-all duration-300 toc-nav" v-if="active || showAside">
+            <nav class="transition-all duration-300 toc-nav" v-show="active">
               <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
                 <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
               </header>
@@ -172,7 +172,10 @@ console.log("article entered");
 }
 
 .content aside {
-  @apply sticky col-span-full lg:col-span-2 lg:ms-3 w-full pt-14;
+  @apply sticky col-span-1 lg:col-span-2 lg:ms-3 w-full pt-14;
+}
+.content code {
+  @apply w-full;
 }
 
 .content aside .toc {

@@ -39,19 +39,13 @@ npx create-nuxt-app <project-name>
 
 Choose _Content - Git-based Headless CMS_ option from Nuxt.js modules
 
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-create-nuxt-app-install-content-Annotation 2021-07-11 014841.png" alt="create-nuxt-app installation options"></img-cont>
-
 Proceed to select other options, here's my preset:
 
 <!-- ![blog-with-nuxt-content-create-nuxt-app-installation-Annotation 2021-07-11 015118.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625966762066/IvOhoXl96.png) -->
 
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-create-nuxt-app-installation-Annotation 2021-07-11 015118.png" alt="create-nuxt-app-installation"></img-cont>
-
 Installation complete! 🎉
 
 <!-- ![blog-with-nuxt-content-create-nuxt-app-installation-complete-Annotation 2021-07-11 021302.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625966789225/4LY2jIog5.png) -->
-
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-create-nuxt-app-installation-complete-Annotation 2021-07-11 021302.png" alt="Nuxt app installation complete"></img-cont>
 
 ### Install nuxt content separately
 
@@ -200,8 +194,6 @@ While going through these steps, I ran into an **issue of mismatched packages** 
 
 <!-- ![blog-with-nuxt-content-version-mismatch-error-Annotation 2021-07-11 031752.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975242485/YCqCkt50g.png) -->
 
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-version-mismatch-error-Annotation 2021-07-11 031752.png" alt="Vue version mismatch error"></img-cont>
-
 **Here's how I fixed it:**
 
 update the mismatched package(s), which in my case was the `vue-server-renderer`
@@ -210,19 +202,16 @@ update the mismatched package(s), which in my case was the `vue-server-renderer`
 npm i vue-server-renderer@latest --save
 ```
 
-<!-- ![blog-with-nuxt-content-update-vue-renderer-version-Annotation 2021-07-11 032705.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975276642/JYoReAgk2.png) -->
-
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-update-vue-renderer-version-Annotation 2021-07-11 032705.png" alt="Update vue-renderer-version"></img-cont>
+![blog-with-nuxt-content-update-vue-renderer-version-Annotation 2021-07-11 032705.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975276642/JYoReAgk2.png)
 
 That fixed it for me, when I ran `npm run dev`
 
 <!-- ![blog-with-nuxt-content-run-dev-succesfull-Annotation 2021-07-11 032953.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975289781/wtKSJLTIf.png) -->
 
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-run-dev-succesfull-Annotation 2021-07-11 032953.png" alt="`run dev` succesfull"></img-cont>
-
+<!--
 <!-- ![blog-with-nuxt-content-site-preview-Annotation 2021-07-11 032953.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975335704/mi9b73FR9.png) -->
 
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-site-preview-Annotation 2021-07-11 032953.png" alt="Initial site preview"></img-cont>
+-->
 
 _Sweet! 🎉, now we can move into the interesting stuff_
 
@@ -254,8 +243,6 @@ This is my first blog post learning nuxt content.
 ```
 
 <!-- ![blog-with-nuxt-content-create-content-md-file-Annotation 2021-07-11 034837.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1625975435117/_58aEjwEA.png) -->
-
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-create-content-md-file-Annotation 2021-07-11 034837.png" alt="Create  markdown file in `content/` directory"></img-cont>
 
 <info-box>
   <template #info-box>
@@ -298,9 +285,7 @@ To display our content we are using the &lt;nuxt-content /&gt; component by pass
 
 Go to your site and you should see something like this
 
-<!-- ![blog-with-nuxt-content-render-first-article-Annotation 2021-07-11 123202.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1626008969368/_V0QIMEyB.png) -->
-
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-render-first-article-Annotation 2021-07-11 123202.png" alt="Previe of first article"></img-cont>
+![blog-with-nuxt-content-render-first-article-Annotation 2021-07-11 123202.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1626008969368/_V0QIMEyB.png)
 
 ## Accessing default injected variables
 
@@ -389,8 +374,6 @@ Notice the `formatDate` function which we use to convert the `article.updatedAt`
 We should have something like this:
 
 <!-- ![blog-with-nuxt-content-article-with-injected-variables-Annotation 2021-07-11 135032.png](https://cdn.hashnode.com/res/hashnode/image/upload/v1626009001772/l5eXbp4f5.png) -->
-
-<img-cont src="Creating-a-blog-using-Nuxt-and-Nuxt-Content---with-TailwindCSS/blog-with-nuxt-content-article-with-injected-variables-Annotation 2021-07-11 135032.png" alt="Article with injected variables"></img-cont>
 
 Now, we have two heading `<h1>` elements. One from the YAML front matter and the main markdown. We can remove the one in the main markdown.
 We can also add more content for the styles:

@@ -1,15 +1,12 @@
 <script setup>
 const showAside = ref(true);
 const active = ref(true);
-const showChildern = ref(false);
 defineProps(["toc", "active"]);
 const handelWindowSize = () => {
   if (window.innerWidth < 1024) {
-    active.value = true;
     showAside.value = false;
   } else {
     showAside.value = true;
-    active.value = false;
   }
 };
 onBeforeMount(() => {
@@ -27,7 +24,7 @@ onBeforeMount(() => {
       <IconsBurger class="w-8 h-8" v-if="!active" />
       <IconsClose class="w-8 h-8" v-if="active" />
     </button>
-    <nav class="transition-all duration-300 toc-nav" v-if="active || showAside">
+    <nav class="transition-all duration-300 toc-nav" v-if="active">
       <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
         <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
       </header>
