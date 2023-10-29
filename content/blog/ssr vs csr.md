@@ -5,7 +5,7 @@ image: https://panel.scythe-studio.com/wp-content/uploads/2022/07/ssrVscsr-1.png
 createdAt: DateTime
 updatedAt: DateTime
 createdBy: "Hoceine EL IDRISSI"
-tags: ["SSR", "CSR", "Server", "Javascript"]
+tags: ["SSR", "CSR", "Javascript"]
 ---
 
 # SSR vs. CSR: Unraveling the Mystery of Rendering in Web Development
