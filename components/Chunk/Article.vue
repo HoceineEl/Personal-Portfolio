@@ -172,7 +172,7 @@ console.log("article entered");
 }
 
 .content aside {
-  @apply sticky col-span-1 lg:col-span-2 lg:ms-3 w-full pt-14;
+  @apply sticky col-span-full lg:col-span-2 lg:ms-3 w-full pt-14;
 }
 .content code {
   @apply w-full;
