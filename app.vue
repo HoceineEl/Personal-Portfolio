@@ -14,7 +14,7 @@ useHead({
 
     <NuxtLayout>
       <div>
-        <NuxtLoadingIndicator class="z-[300] bg-gr-scroll" :height="8" />
+        <NuxtLoadingIndicator class="z-[100] bg-gr-scroll" :height="8" />
         <NuxtPage />
       </div>
     </NuxtLayout>

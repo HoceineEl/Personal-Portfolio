@@ -7,17 +7,19 @@
 <script setup>
 onBeforeMount(() => {
   window.onscroll = function () {
-    myFunction();
+    updateScrollIndicator();
   };
-  function myFunction() {
-    var scrollToTop = document.body.scrollTop || document.documentElement.scrollTop;
-    var windowHeight =
+
+  function updateScrollIndicator() {
+    let scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
+    let pageHeight =
       document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (scrollToTop / windowHeight) * 100;
-    document.getElementById("myBar").style.width = scrolled + "%";
+    let scrollPercentage = (scrollPosition / pageHeight) * 100;
+    document.getElementById("myBar").style.width = scrollPercentage + "%";
   }
 });
 </script>
+
 <style>
 .scroll {
   width: 100%;
@@ -25,8 +27,9 @@ onBeforeMount(() => {
   position: fixed;
   top: 0;
   background: transparent;
-  z-index: 800;
+  z-index: 200;
 }
+
 #myBar {
   width: 0;
   height: 8px;

@@ -1,9 +1,7 @@
 <script setup>
 import { hoceine } from "~/assets";
 
-
 const { prev, next, toc } = useContent();
-
 
 console.log("article entered");
 </script>

@@ -4,17 +4,18 @@ const formatDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleDateString(undefined, options);
 };
-const fetched = ref(false);
-const articles = ref([]); // Define the otherArticles array
+
+let fetched = ref(false);
+let articles = ref([]); // Define the articles array
 
 onBeforeMount(() => {
   if (!fetched.value) {
     window.onscroll = async () => {
-      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-      const height =
+      const wScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const windHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (scrolled > 60) {
+      const scrolledUntil = (wScroll / windHeight) * 100;
+      if (scrolledUntil > 60) {
         fetched.value = true;
         const newArticles = await queryContent("blog")
           .only(["title", "_path", "image", "createdAt", "description", "tags"])
@@ -26,6 +27,7 @@ onBeforeMount(() => {
   }
 });
 </script>
+
 <template>
   <section class="section flex flex-col items-center">
     <div class="text-center mb-16">
@@ -78,7 +80,8 @@ onBeforeMount(() => {
       >See Inside
       <IconsArrow
         class="-rotate-90 group-hover:translate-x-2 transition-all duration-300"
-    /></NuxtLink>
+      />
+    </NuxtLink>
   </section>
 </template>
 
