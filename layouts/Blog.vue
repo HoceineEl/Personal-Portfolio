@@ -1,7 +1,7 @@
 <template>
   <div>
     <header>
-      <ChunkBlogNavbar />
+      <LazyBlogNavbar />
     </header>
     <slot />
   </div>

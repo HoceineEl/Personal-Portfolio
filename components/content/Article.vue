@@ -1,43 +1,9 @@
 <script setup>
 import { hoceine } from "~/assets";
-const showAside = ref(true);
-const active = ref(true);
-const currentActiveLink = ref("");
-const obeserver = ref(null);
-const content = ref(null);
-const observerOptions = ref({
-  root: content.value,
-  threshold: 0,
-});
 
-onMounted(() => {
-  obeserver.value = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const id = entry.target.getAttribute("id");
-      if (entry.isIntersecting) {
-        currentActiveLink.value = id;
-        console.log("id=" + id);
-      }
-    });
-  }, observerOptions.value);
-  document.querySelectorAll(".nuxt-content h2[id]").forEach((section) => {
-    obeserver.value.observe(section);
-    console.log(section);
-  });
-  window.addEventListener("resize", handelWindowSize);
-  handelWindowSize();
-});
 
 const { prev, next, toc } = useContent();
-const handelWindowSize = () => {
-  if (window.innerWidth < 1024) {
-    active.value = true;
-    showAside.value = false;
-  } else {
-    showAside.value = true;
-    active.value = false;
-  }
-};
+
 
 console.log("article entered");
 </script>
@@ -89,43 +55,7 @@ console.log("article entered");
       <span class="article-hr"></span>
       <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7">
         <aside class="-order-2 lg:order-2">
-          <div class="toc" v-if="toc && toc.links">
-            <button
-              class="p-1 bg-[#1E1E3B] rounded-lg"
-              @click="active = !active"
-              v-if="!showAside"
-            >
-              <IconsBurger class="w-8 h-8" v-if="!active" />
-              <IconsClose class="w-8 h-8" v-if="active" />
-            </button>
-            <nav class="transition-all duration-300 toc-nav" v-show="active">
-              <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
-                <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
-              </header>
-
-              <ul class="overflow-y-auto">
-                <li
-                  v-for="link in toc.links"
-                  :key="link.text"
-                  data-link-{{
-                  link.id
-                  }}
-                  class="toc-link"
-                  @click="show"
-                >
-                  <a
-                    :href="`#${link.id}`"
-                    :key="link.id + link.text"
-                    :class="{
-                      '!text-teal-600 !font-semibold': link.id == currentActiveLink,
-                    }"
-                  >
-                    {{ link.text }}
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <LazyToc :toc="toc" />
         </aside>
         <ContentRenderer
           ref="content"
@@ -134,9 +64,9 @@ console.log("article entered");
         />
       </div>
 
-      <ChunkNeighbor :next="next" :prev="prev" />
+      <LazyNeighbor :text="next" :prev="prev" />
     </article>
-    <LazyChunkSeeMore :title="doc.title" />
+    <SeeMore :title="doc.title" />
   </ContentDoc>
 </template>
 

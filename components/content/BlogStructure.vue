@@ -1,6 +1,6 @@
 <template>
   <main class="bg-tertiary">
-    <ChunkBlogNavbar />
+    <BlogNavbar />
 
     <div class="section content mt-20">
       <slot />

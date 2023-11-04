@@ -8,7 +8,6 @@ definePageMeta({
 <template>
   <main>
     <section class="section pt-32 flex flex-col items-center gap-10">
-  
       <div>
         <h1 class="font-bold font-serif text-3xl sm:text-5xl md:text-7xl mb-7">
           Hey there , <br class="hidden sm:block" />Step into my blog.
@@ -20,7 +19,7 @@ definePageMeta({
         </p>
       </div>
 
-      <LazyChunkContentList />
+      <LazyCustomContentList />
     </section>
   </main>
 </template>

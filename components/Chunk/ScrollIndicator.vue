@@ -10,10 +10,10 @@ onBeforeMount(() => {
     myFunction();
   };
   function myFunction() {
-    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-    var winHeight =
+    var scrollToTop = document.body.scrollTop || document.documentElement.scrollTop;
+    var windowHeight =
       document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    var scrolled = (scrollTop / winHeight) * 100;
+    var scrolled = (scrollToTop / windowHeight) * 100;
     document.getElementById("myBar").style.width = scrolled + "%";
   }
 });
@@ -25,7 +25,7 @@ onBeforeMount(() => {
   position: fixed;
   top: 0;
   background: transparent;
-  z-index: 400;
+  z-index: 800;
 }
 #myBar {
   width: 0;
