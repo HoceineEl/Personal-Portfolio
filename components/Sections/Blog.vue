@@ -8,9 +8,9 @@ const formatDate = (dateString) => {
 let fetched = ref(false);
 let articles = ref([]); // Define the articles array
 
-onBeforeMount(() => {
+onMounted(() => {
   if (!fetched.value) {
-    window.onscroll = async () => {
+    window.addEventListener("scroll", async () => {
       const wScroll = document.body.scrollTop || document.documentElement.scrollTop;
       const windHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -23,7 +23,7 @@ onBeforeMount(() => {
           .find();
         articles.value = newArticles;
       }
-    };
+    });
   }
 });
 </script>

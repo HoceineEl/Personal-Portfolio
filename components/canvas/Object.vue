@@ -21,7 +21,7 @@ function pending() {}
         <TresPerspectiveCamera :position="[0, 0, 4]" />
         <OrbitControls
           :enableZoom="false"
-          :enableDamping="false"
+          :enableDamping="true"
           :autoRotate="true"
           :autoRotateSpeed="speed"
           :maxPolarAngle="Math.PI / 2"
