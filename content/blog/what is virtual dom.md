@@ -30,4 +30,4 @@ After identifying the diffs, only the necessary updates are made to the real DOM
 
 In the end, the VDOM can be represented as a JavaScript object, simplifying web development and enhancing performance.
 
-<MdImage text="/blog/vdom/vdom1.png"></MdImage>
+<MdImage text="blog/vdom/vdom1.png"></MdImage>

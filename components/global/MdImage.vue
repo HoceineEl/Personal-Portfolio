@@ -5,11 +5,13 @@
       loading="lazy"
       format="webp"
       fit="cover"
+      densities="x1 x2"
       :quality="60"
       :modifiers="{ roundCorner: '100' }"
     />
   </div>
 </template>
+
 <script setup>
-defineProps(["text"]);
+const { text } = defineProps(["text"]);
 </script>

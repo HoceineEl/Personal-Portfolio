@@ -110,4 +110,7 @@ console.log("article entered");
 .content li a {
   @apply text-slate-400 text-[12px] transition-all duration-300;
 }
+.content img {
+  @apply mx-auto px-2;
+}
 </style>

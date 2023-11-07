@@ -80,8 +80,8 @@ export default defineNuxtConfig({
     components: true,
   image: {
     quality: 80,
-    screens: { 'xs': 420, 'sm': 640, 'md': 768, 'lg': 1200, 'xl': 1280, },
+    screens: { 'xs': 420, 'sm': 640, 'md': 768, 'lg': 1200, 'xl': 1380, },
+    format: "webp",
     dir: 'assets',
-    format:"webp"
   }
 })
