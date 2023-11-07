@@ -1,26 +1,15 @@
 <template>
-  <img :src="imgSrc()" :alt="alt" />
+  <div class="img-cont">
+    <NuxtImg
+      :src="text"
+      loading="lazy"
+      format="webp"
+      fit="cover"
+      :quality="60"
+      :modifiers="{ roundCorner: '100' }"
+    />
+  </div>
 </template>
-<script>
-export default {
-  props: {
-    src: {
-      type: String,
-      required: true,
-    },
-    alt: {
-      type: String,
-      required: false,
-    },
-  },
-  methods: {
-    imgSrc() {
-      try {
-        return require(`~/assets/blog/${this.src}`);
-      } catch (error) {
-        return null;
-      }
-    },
-  },
-};
+<script setup>
+defineProps(["text"]);
 </script>

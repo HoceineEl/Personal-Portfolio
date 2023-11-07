@@ -81,11 +81,9 @@ console.log("article entered");
   @apply font-semibold text-[16px] my-3;
 }
 
-/* .content p,
-.content ul {
-  @apply;
-} */
-
+.content {
+  @apply text-[18px];
+}
 .content p,
 .content li {
   @apply text-slate-300 break-words;
