@@ -62,7 +62,7 @@ onMounted(() => {
             :href="`#${link.id}`"
             :key="link.id + link.text"
             :class="{
-              '!text-teal-600 !font-semibold': link.id == currentActiveLink,
+              '!text-teal-300 !font-semibold': link.id == currentActiveLink,
             }"
           >
             {{ link.text }}

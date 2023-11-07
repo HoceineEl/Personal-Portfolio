@@ -69,7 +69,10 @@ console.log("article entered");
 </template>
 
 <style>
-.content h1 {
+.nuxt-content {
+  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins prose-headings:text-teal-300 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800;
+}
+/* .content h1 {
   @apply font-bold lg:text-2xl sm:text-xl my-5 font-serif text-xl;
 }
 
@@ -86,31 +89,31 @@ console.log("article entered");
 }
 .content p,
 .content li {
-  @apply text-slate-300 break-words;
+  @apply text-slate-100 break-words;
 }
 
 .content pre {
   @apply px-7 py-5 font-mono rounded-xl overflow-auto bg-gray-950 text-sm sm:text-[16px] my-5;
 }
 
-.article-hr {
-  @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
-}
 
-.content aside {
-  @apply sticky col-span-full lg:col-span-2 lg:ms-3 w-full pt-14;
-}
 .content code {
   @apply w-full;
 }
 
-.content aside .toc {
-  @apply sticky top-10 lg:top-24 w-full;
-}
 .content li a {
   @apply text-slate-400 text-[12px] transition-all duration-300;
 }
 .content img {
   @apply mx-auto px-2;
+} */
+.article-hr {
+  @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
+}
+.content aside {
+  @apply sticky col-span-full lg:col-span-2 lg:ms-3 w-full pt-14;
+}
+.content aside .toc {
+  @apply sticky top-10 lg:top-24 w-full;
 }
 </style>
