@@ -41,6 +41,11 @@ import { experiences } from "~/assets/constants";
                 <div
                   class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
                 >
+
+                
+
+
+                
                   <img
                     :src="exp.icon"
                     :alt="exp.company_name"
