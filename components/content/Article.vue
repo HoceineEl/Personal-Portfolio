@@ -57,7 +57,7 @@ console.log("article entered");
           :value="doc"
           class="col-span-full lg:col-span-5 nuxt-content"
         />
-        <aside class="">
+        <aside class="-order-2 lg:order-2">
           <LazyToc :toc="toc" />
         </aside>
       </div>
