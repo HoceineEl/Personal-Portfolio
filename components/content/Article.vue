@@ -52,14 +52,14 @@ console.log("article entered");
       </div>
       <span class="article-hr"></span>
       <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7">
-        <aside class="-order-2 lg:order-2">
-          <LazyToc :toc="toc" />
-        </aside>
         <ContentRenderer
           ref="content"
           :value="doc"
           class="col-span-full lg:col-span-5 nuxt-content"
         />
+        <aside class="">
+          <LazyToc :toc="toc" />
+        </aside>
       </div>
 
       <LazyNeighbor :text="next" :prev="prev" />
@@ -70,7 +70,7 @@ console.log("article entered");
 
 <style>
 .nuxt-content {
-  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins prose-headings:text-teal-300 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800;
+  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins prose-headings:text-teal-300 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
 }
 /* .content h1 {
   @apply font-bold lg:text-2xl sm:text-xl my-5 font-serif text-xl;
@@ -101,12 +101,12 @@ console.log("article entered");
   @apply w-full;
 }
 
-.content li a {
-  @apply text-slate-400 text-[12px] transition-all duration-300;
-}
 .content img {
   @apply mx-auto px-2;
 } */
+.content li a {
+  @apply text-slate-400 text-[12px] transition-all duration-300;
+}
 .article-hr {
   @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
 }

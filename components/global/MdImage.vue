@@ -2,12 +2,11 @@
   <div class="img-cont">
     <NuxtImg
       :src="text"
+      sizes="400px md:700px lg:900px xl:900px"
       loading="lazy"
       format="webp"
-      fit="cover"
       densities="x1 x2"
       :quality="60"
-      :modifiers="{ roundCorner: '100' }"
     />
   </div>
 </template>
