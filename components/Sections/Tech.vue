@@ -8,7 +8,7 @@
       <div class="flex flex-wrap gap-16 mt-14 justify-center items-center max-w-5xl">
         <div
           v-for="tech in technologies"
-          class="grayscale-0 hover:grayscale transition-all duration-500 group"
+          class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3 transition-all duration-300 group"
         >
           <img :src="tech.icon" :alt="tech.name" loading="lazy" width="80" />
           <div
