@@ -8,9 +8,13 @@
       <div class="flex flex-wrap gap-16 mt-14 justify-center items-center max-w-5xl">
         <div
           v-for="tech in technologies"
-          class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3 transition-all duration-300 group"
+          class="transition-all duration-300 group relative"
         >
-          <img :src="tech.icon" :alt="tech.name" loading="lazy" width="80" />
+          <div
+            class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3"
+          >
+            <img :src="tech.icon" :alt="tech.name" loading="lazy" width="80" />
+          </div>
           <div
             class="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100"
           >

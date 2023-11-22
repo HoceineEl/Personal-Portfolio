@@ -1,11 +1,21 @@
+<script setup>
+const query = {
+  path: "/blog",
+  sort: [{ createdAt: -1 }],
+};
+</script>
 <template>
-  <ContentList path="/blog" v-slot="{ list }">
+  <ContentList :query="query" v-slot="{ list }">
     <article
       v-for="article in list"
       :key="article._path"
       class="max-w-3xl rounded-xl hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 group hover:shadow-sm hover:shadow-white-100"
     >
-      <a :href="article._path" class="flex flex-col sm:flex-row">
+      <a
+        :href="article._path"
+        class="flex flex-col sm:flex-row"
+        v-motion-slide-visible-once-bottom
+      >
         <div
           class="h-56 sm:w-64 bg-cover text-center overflow-hidden sm:rounded-bl-lg rounded-ss-lg rounded-tr-lg sm:rounded-tr-none mb-3 sm:mb-0"
           :style="{ backgroundImage: `url(${article.image})` }"
@@ -36,7 +46,5 @@
     </article>
   </ContentList>
 </template>
-
-<script setup></script>
 
 <style></style>

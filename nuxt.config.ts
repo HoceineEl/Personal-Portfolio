@@ -52,10 +52,9 @@ export default defineNuxtConfig({
   },
   content: {
     highlight: {
-       theme:"rose-pine-moon",
+        theme:"rose-pine-moon",
     },
     documentDriven: true
-
   },
 
 
@@ -70,7 +69,7 @@ export default defineNuxtConfig({
     '@nuxt/image'
   ],
   css: ['~/assets/css/tailwind.css'],
-   delayHydration: {
+  delayHydration: {
     // enables nuxt-delay-hydration in dev mode for testing
     debug: process.env.NODE_ENV === 'development'
   },
@@ -80,8 +79,7 @@ export default defineNuxtConfig({
     components: true,
   image: {
     quality: 80,
-    screens: { 'xs': 420, 'sm': 640, 'md': 768, 'lg': 1200, 'xl': 1380, },
-    format: "webp",
-    dir: 'static',
+    screens: { 'xs': 420, 'sm': 640, 'md': 768, 'lg': 1200, 'xl': 1280, },
+    format:"webp"
   }
 })

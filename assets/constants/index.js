@@ -30,6 +30,8 @@ import wordpress from "../tech/wordpress.svg"
 import html from "../tech/html.svg"
 import css from "../tech/css.svg"
 import vscode from "../tech/vscode.svg"
+import extention from "../tech/browser-extention.svg"
+import ts from "../tech/ts.svg"
 
 // import css_3d from '/models/Tech/Css/scene.gltf?url'
 // import html_3d from '/models/Tech/Html/scene.gltf?url'
@@ -132,6 +134,16 @@ const technologies = [
         progress: 70
     },
     {
+        name: "Browser Extentions",
+        icon: extention,
+        progress: 80
+    },
+    {
+        name: "TypeScript",
+        icon: ts,
+        progress: 70
+    },
+    {
         name: "Github",
         icon: github,
         progress: 75
@@ -160,6 +172,16 @@ const technologies = [
         name: "Vs Code",
         icon: vscode,
         progress: 90
+    },
+    {
+        name: "Browser Extentions",
+        icon: extention,
+        progress: 80
+    },
+    {
+        name: "TypeScript",
+        icon: ts,
+        progress: 70
     },
 ];
 // const technologies_3d = [

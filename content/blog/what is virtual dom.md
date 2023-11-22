@@ -30,18 +30,4 @@ After identifying the diffs, only the necessary updates are made to the real DOM
 
 In the end, the VDOM can be represented as a JavaScript object, simplifying web development and enhancing performance.
 
-<MdImage text="blog/vdom/vdom1.png"></MdImage>
-
-### Props for Nuxt Image
-
-Then in your code you use the `<NuxtImg>` component with the various props.
-
-- src: The source of the image.
-- alt: The alt attribute of the image.
-- width: The width of the image.
-- height: The height of the image.
-- loading: The loading state of the image.
-- provider: The provider of the image if using Cloudinary/Unsplash etc.
-- sizes: The sizes of the image for different screen sizes
-- presets: The presets you want to add to the image
-- class: The styles for the image.
+<MdImage text="/blog/vdom/vdom1.png"></MdImage>
