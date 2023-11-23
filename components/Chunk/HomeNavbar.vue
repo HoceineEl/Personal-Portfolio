@@ -30,6 +30,7 @@ onMounted(() => {
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
       <a
         href="/"
+        aria-label="Logo"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
         @click="
           () => {
@@ -52,26 +53,29 @@ onMounted(() => {
           @click="setActive(link.title)"
         >
           <NuxtLink
+          :prefetch="false"
             :to="link.id"
             class="flex items-center gap-3 font-semibold text-[18px]"
             >{{ link.title }}</NuxtLink
           >
         </li>
         <li>
-          <a href="https://github.com/hoceineel" target="_blank"
+          <a href="https://github.com/hoceineel" target="_blank" aria-label="hoceine el idrissi github profile "
             ><img
               :src="github"
               alt="hoceine el idrissi github profile"
               width="30"
+              height="30"
               loading="lazy"
           /></a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/elidrissihoceine/" target="_blank">
+          <a href="https://www.linkedin.com/in/elidrissihoceine/" aria-label="hoceine el idrissi linkedin profile" target="_blank">
             <img
               :src="linkedin"
               alt="hoceine el idrissi linkedin profile"
               width="30"
+              height="30"
               loading="lazy"
           /></a>
         </li>
@@ -98,25 +102,28 @@ onMounted(() => {
             >
               <NuxtLink
                 :to="link.id"
+                :prefetch="false"
                 class="flex items-center gap-3 font-semibold text-[18px]"
                 >{{ link.title }}</NuxtLink
               >
             </li>
             <li>
-              <a href="https://github.com/hoceineel" target="_blank"
+              <a href="https://github.com/hoceineel" target="_blank"  aria-label="hoceine el idrissi github profile"
                 ><img
                   :src="github"
                   alt="hoceine el idrissi github profile"
                   width="30"
+                  height="30"
                   loading="lazy"
               /></a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/in/elidrissihoceine/" target="_blank">
+              <a href="https://www.linkedin.com/in/elidrissihoceine/" target="_blank" aria-label="hoceine el idrissi linkedin profile">
                 <img
                   :src="linkedin"
                   alt="hoceine el idrissi linkedin profile"
                   width="30"
+                  height="30"
                   loading="lazy"
               /></a>
             </li>

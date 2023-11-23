@@ -42,28 +42,48 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="toc" v-if="toc && toc.links">
+  <div
+    class="toc"
+    v-if="toc && toc.links"
+    role="navigation"
+    aria-labelledby="toc-heading"
+  >
     <button
       class="p-1 bg-[#1E1E3B] rounded-lg"
       @click="active = !active"
       v-if="!showAside"
+      aria-label="Toggle Table of Contents"
     >
       <IconsBurger class="w-8 h-8" v-if="!active" />
       <IconsClose class="w-8 h-8" v-if="active" />
     </button>
-    <nav class="transition-all duration-300 toc-nav" v-show="active || showAside">
+    <nav
+      class="transition-all duration-300 toc-nav"
+      v-show="active || showAside"
+      aria-hidden="false"
+    >
       <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
-        <h3 class="heading-gradient text-center font-bold">Table of Contents</h3>
+        <h3 id="toc-heading" class="heading-gradient text-center font-bold" tabindex="-1">
+          Table of Contents
+        </h3>
       </header>
 
       <ul class="overflow-y-auto">
-        <li v-for="link in toc.links" :key="link.text" class="toc-link" @click="show()">
+        <li
+          v-for="link in toc.links"
+          :key="link.text"
+          class="toc-link"
+          @click="show(link.id)"
+          role="menuitem"
+        >
           <a
             :href="`#${link.id}`"
             :key="link.id + link.text"
             :class="{
               '!text-teal-300 !font-semibold': link.id == currentActiveLink,
             }"
+            tabindex="0"
+            aria-label="Navigate to Section"
           >
             {{ link.text }}
           </a>

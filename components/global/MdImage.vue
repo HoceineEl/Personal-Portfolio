@@ -3,7 +3,7 @@
     <img
       :src="text"
       loading="lazy"
-      alt="Image"
+      alt="Image in the article"
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
     />
@@ -22,17 +22,16 @@ const toggleZoom = () => {
 };
 
 const handleResize = () => {
-  isMobile.value = window.innerWidth <= 768; // Adjust the threshold as needed
+  isMobile.value = window.innerWidth <= 768;
 };
 
 onMounted(() => {
-  handleResize(); // Set initial value on mount
+  handleResize();
   window.addEventListener("resize", handleResize);
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("resize", handleResize);
-  handleResize();
 });
 </script>
 

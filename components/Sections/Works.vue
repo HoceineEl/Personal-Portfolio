@@ -1,19 +1,22 @@
 <script setup>
 import { projects } from "~/assets/constants";
 const isMobile = ref(false);
+
 onMounted(() => {
   function checkIsMobile() {
     if (window.innerWidth < 480) isMobile.value = true;
   }
+
   checkIsMobile();
   window.addEventListener("resize", checkIsMobile);
 });
 </script>
+
 <template>
-  <section id="projects" class="section px-2">
+  <section id="projects" class="section px-2" role="article">
     <h2 class="header">My Work</h2>
     <h3 class="header-secondary">Projects.</h3>
-    <p class="description px-2 text-wrap-balance">
+    <p class="description px-2 text-wrap-balance" role="paragraph">
       These projects serve as concrete demonstrations of my expertise and experience. They
       offer a glimpse into my ability to tackle intricate challenges, work with diverse
       technologies, and successfully oversee project development. While I have provided
@@ -31,4 +34,6 @@ onMounted(() => {
 p {
   text-wrap: balance;
 }
+
+/* Add any additional styling if needed */
 </style>

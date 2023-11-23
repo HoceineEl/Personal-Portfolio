@@ -9,7 +9,7 @@ import { experiences } from "~/assets/constants";
       <h3 class="header-secondary">Work Experience.</h3>
     </div>
     <div class="flex lg:block gap-20 px-1">
-      <div class="timeline">
+      <div class="timeline" aria-hidden="true" role="presentation">
         <div class="timeline-img translate-y-[10rem]">
           <img :src="devosoft" alt="devosoft" class="mt-1" loading="lazy" />
         </div>
@@ -36,16 +36,14 @@ import { experiences } from "~/assets/constants";
             class="relative p-[1px] bg-white rounded-lg green-pink-gradient"
             :class="[index % 2 ? 'order-3' : '-order-1']"
           >
-            <div class="lg:w-96 w-full bg-tertiary py-4 rounded-lg min-h-[20rem]">
+            <div
+              class="lg:w-96 w-full bg-tertiary py-4 rounded-lg min-h-[20rem]"
+              role="article"
+            >
               <div class="w-full flex justify-center items-center mb-3 sm:hidden">
                 <div
                   class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
                 >
-
-                
-
-
-                
                   <img
                     :src="exp.icon"
                     :alt="exp.company_name"
@@ -61,7 +59,7 @@ import { experiences } from "~/assets/constants";
               <ul
                 class="mt-5 text-[13px] text-gray-200 flex flex-col gap-2 list-disc ms-8 px-8 mb-6"
               >
-                <li v-for="point in exp.points">{{ point }}</li>
+                <li v-for="point in exp.points" role="listitem">{{ point }}</li>
               </ul>
               <p class="text-secondary mt-2 px-8 lg:hidden">{{ exp.date }}</p>
             </div>
@@ -69,6 +67,7 @@ import { experiences } from "~/assets/constants";
           <div
             class="mt-40 w-96 text-center text-secondary hidden lg:flex"
             :class="[index % 2 ? 'justify-end' : 'justify-start']"
+            role="contentinfo"
           >
             <p class="max-w-[300px]">{{ exp.date }}</p>
           </div>
@@ -80,8 +79,9 @@ import { experiences } from "~/assets/constants";
 
 <style scoped>
 .timeline {
-  @apply z-30 w-1 bg-secondary  lg:mx-auto h-[1300px] sm:flex flex-col lg:justify-start  items-center mt-0 lg:absolute relative lg:left-1/2 left-5 transform lg:-translate-x-1/2 hidden;
+  @apply z-30 w-1 bg-secondary lg:mx-auto h-[1300px] sm:flex flex-col lg:justify-start items-center mt-0 lg:absolute relative lg:left-1/2 left-5 transform lg:-translate-x-1/2 hidden;
 }
+
 .timeline-img {
   @apply w-12 h-12 rounded-full border bg-primary border-white-100 flex items-center justify-center p-2;
 }

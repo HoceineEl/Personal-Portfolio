@@ -4,7 +4,7 @@ import { services } from "~/assets/constants";
 <template>
   <div class="w-full flex gap-10 flex-wrap my-16 justify-center items-center">
     <div
-      class="card xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px] transition-all duration-200 w-full pointer-events-none sm:pointer-events-auto "
+      class="card xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px] transition-all duration-200 w-full pointer-events-none sm:pointer-events-auto"
       v-for="service in services"
       :key="service.title"
       $VanillaTilt

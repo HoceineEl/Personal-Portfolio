@@ -8,6 +8,7 @@
       <div class="flex flex-wrap gap-16 mt-14 justify-center items-center max-w-5xl">
         <div
           v-for="tech in technologies"
+          :key="tech.name"
           class="transition-all duration-300 group relative"
         >
           <div
@@ -17,11 +18,12 @@
           </div>
           <div
             class="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100"
+            :aria-hidden="true"
           >
             <span
               class="absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-tertiary"
             ></span>
-            {{ tech.name }}
+            <span :aria-hidden="true">{{ tech.name }}</span>
           </div>
         </div>
       </div>
