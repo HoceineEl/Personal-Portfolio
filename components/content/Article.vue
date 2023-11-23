@@ -86,4 +86,7 @@ console.log("article entered");
 .content aside .toc {
   @apply sticky top-10 lg:top-24 w-full;
 }
+.content pre {
+  @apply overflow-scroll;
+}
 </style>
