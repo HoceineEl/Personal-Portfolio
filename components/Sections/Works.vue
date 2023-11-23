@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="projects" class="section px-2" role="section">
+  <section id="projects" class="section px-2" role="region">
     <h2 class="header">My Work</h2>
     <h3 class="header-secondary">Projects.</h3>
     <p class="description px-2 text-wrap-balance" role="paragraph">

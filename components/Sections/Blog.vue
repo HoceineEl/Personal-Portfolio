@@ -29,7 +29,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="blog" class="section flex flex-col items-center" role="section">
+  <section id="blog" class="section flex flex-col items-center" role="region">
     <div class="text-center mb-16">
       <h2 class="header">What I've Shared</h2>
       <h3 class="header-secondary">My Blog.</h3>

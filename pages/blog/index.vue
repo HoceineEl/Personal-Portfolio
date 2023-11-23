@@ -1,6 +1,4 @@
 <script setup>
-import { hoceine } from "~/assets";
-
 definePageMeta({
   layout: "blog",
 });

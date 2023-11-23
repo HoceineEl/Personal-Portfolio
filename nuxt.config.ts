@@ -6,53 +6,55 @@ export default defineNuxtConfig({
   app: {
     head: {
       htmlAttrs: {
-      lang: 'en'
-    },
-      title: "Hoceine EL IDRISSI",
-      link: [
-        {
-          rel: 'icon',
-          type: 'image/x-icon',
-          href: '/logo.svg'
-        }
-      ], meta: [
+        lang: 'en',
+      },
+      title: 'Hoceine EL IDRISSI - Full Stack Web Developer',
+      meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Hoceine EL IDRISSI Personal Portfolio ' },
-        { name: "author", content: "Hoceine EL IDRISSI" },
-        
-        //Open Graph/Facebook
-        { property: "og:url", content: "https://hoceine.vercel.app" },
-        { property: "og:title", content: "Hoceine EL IDRISSI" },
         {
-          property: "og:description",
-          content: "Hoceine's Personal Portfolio",
+          hid: 'description',
+          name: 'description',
+          content: 'Hoceine EL IDRISSI - Full Stack Web Developer | Building creative and elegant web experiences.',
+        },
+        { name: 'author', content: 'Hoceine EL IDRISSI' },
+        // Open Graph/Facebook
+        { property: 'og:url', content: 'https://hoceine.vercel.app' },
+        { property: 'og:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
+        {
+          property: 'og:description',
+          content: 'Building creative and elegant web experiences. Check out my portfolio!',
         },
         {
-          property: "og:image",
-          content: "https://hoceine.vercel.app/images/hero.jpeg",
+          property: 'og:image',
+          content: 'https://hoceine.vercel.app/images/hero.gif',
         },
-        //Twitter
-        { property: "twitter:url", content: "https://hoceine.vercel.app" },
-        { property: "twitter:title", content: "Hoceine EL IDRISSI" },
+        // Twitter
+        { property: 'twitter:url', content: 'https://hoceine.vercel.app' },
+        { property: 'twitter:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
         {
-          property: "twitter:description",
-          content: "Hoceine's Personal Portfolio",
-        },
-        {
-          property: "twitter:image",
-          content: "https://hoceine.vercel.app/images/hero.jpeg",
+          property: 'twitter:description',
+          content: 'Building creative and elegant web experiences. Check out my portfolio!',
         },
         {
-          property: "twitter:card",
-          content: "summary_large_image",
+          property: 'twitter:image',
+          content: 'https://hoceine.vercel.app/images/hero.gif',
         },
         {
-          property: "twitter:creator",
-          content: "Hoceine EL IDRISSI",
+          property: 'twitter:card',
+          content: 'summary_large_image',
+        },
+        {
+          property: 'twitter:creator',
+          content: '@HoceineElidrisi', // Replace with your Twitter handle
+        },
+        {
+          name: 'keywords',
+          content:
+            'hoceine el idrissi, web developer, full stack developer, Laravel expert, PHP developer, Nuxt.js specialist, Vue.js developer, Bootstrap, Tailwind CSS, creative web solutions, elegant web experiences, industry trends, Moroccan web developer, freelance developer',
         },
       ],
-    }
+    },
   },
   content: {
     highlight: {
@@ -76,7 +78,7 @@ vite: {
     },
     optimization: {
       splitChunks: {
-        maxSize: 30000
+        maxSize: 100000
       }
     },
     html: {
