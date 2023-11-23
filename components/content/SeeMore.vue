@@ -12,10 +12,10 @@ onBeforeMount(() => {
       document.documentElement.scrollHeight - document.documentElement.clientHeight;
     const scrolledUntil = (wind / windHeight) * 100;
 
-    if (scrolledUntil > 90) {
+    if (scrolledUntil > 90 && !showSeeMore.value) {
       showSeeMore.value = true;
       const newArticles = await queryContent("blog")
-        .limit(10)
+        .limit(3)
         .where({ title: { $ne: title } })
         .only(["title", "_path", "image", "createdAt"])
         .find();
@@ -67,7 +67,7 @@ const scrollToTop = () => {
           </div>
         </a>
       </article>
-      <LazyIconsCube
+      <IconsCube
         v-show="!showSeeMore"
         :class="{ 'opacity-0': showSeeMore }"
         aria-hidden="true"

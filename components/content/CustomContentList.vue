@@ -28,6 +28,8 @@ useSeoMeta({
   articlePublishedTime: articles.length > 0 ? articles[0].createdAt : "",
   articleModifiedTime: articles.length > 0 ? articles[0].updatedAt : "",
   articleAuthor: "Hoceine EL IDRISSI",
+  twitterImageHeight: 908,
+  twitterImageWidth: 1427,
 });
 </script>
 

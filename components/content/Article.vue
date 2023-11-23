@@ -7,6 +7,7 @@ console.log("article entered");
 </script>
 <template>
   <ContentDoc v-slot="{ doc }">
+    <LazyChunkSeoHead :article="doc" />
     <article class="flex flex-col justify-center items-center">
       <div
         class="w-full h-[400px] bg-cover rounded-3xl mb-8 bg-center"
@@ -64,7 +65,7 @@ console.log("article entered");
 
       <LazyNeighbor :text="next" :prev="prev" />
     </article>
-    <SeeMore :title="doc.title" />
+    <LazySeeMore :title="doc.title" />
   </ContentDoc>
 </template>
 
@@ -72,38 +73,7 @@ console.log("article entered");
 .nuxt-content {
   @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins prose-headings:text-teal-300 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
 }
-/* .content h1 {
-  @apply font-bold lg:text-2xl sm:text-xl my-5 font-serif text-xl;
-}
 
-.content h2 {
-  @apply font-bold text-lg sm:text-xl my-3;
-}
-
-.content h3 {
-  @apply font-semibold text-[16px] my-3;
-}
-
-.content {
-  @apply text-[18px];
-}
-.content p,
-.content li {
-  @apply text-slate-100 break-words;
-}
-
-.content pre {
-  @apply px-7 py-5 font-mono rounded-xl overflow-auto bg-gray-950 text-sm sm:text-[16px] my-5;
-}
-
-
-.content code {
-  @apply w-full;
-}
-
-.content img {
-  @apply mx-auto px-2;
-} */
 .content li a {
   @apply text-slate-400 text-[12px] transition-all duration-300;
 }

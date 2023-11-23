@@ -27,7 +27,9 @@ export default defineNuxtConfig({
         },
         {
           property: 'og:image',
-          content: 'https://hoceine.vercel.app/images/hero.gif',
+          content: 'https://hoceine.vercel.app/images/hero.webp',
+          width: 1200,
+          height: 630,
         },
         // Twitter
         { property: 'twitter:url', content: 'https://hoceine.vercel.app' },
@@ -38,7 +40,9 @@ export default defineNuxtConfig({
         },
         {
           property: 'twitter:image',
-          content: 'https://hoceine.vercel.app/images/hero.gif',
+          content: 'https://hoceine.vercel.app/images/hero.webp',
+          width: 1200,
+          height: 630,
         },
         {
           property: 'twitter:card',
@@ -104,7 +108,8 @@ vite: {
     'nuxt-delay-hydration',
     '@nuxt/content',
     '@tailwindcss/typography',
-    '@nuxt/image'
+    '@nuxt/image',
+    'nuxt-content-git'
   ],
   css: ['~/assets/css/tailwind.css'],
   delayHydration: {
