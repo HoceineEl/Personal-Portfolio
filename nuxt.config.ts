@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { html } from 'property-information';
 export default defineNuxtConfig({
   devtools: { enabled: false },
 
@@ -65,21 +66,34 @@ vite: {
     },
   },
   build: {
-      html: {
-        minify: {
-          collapseBooleanAttributes: true,
-          decodeEntities: true,
-          minifyCSS: true,
-          minifyJS: true,
-          processConditionalComments: true,
-          removeEmptyAttributes: true,
-          removeRedundantAttributes: true,
-          trimCustomFragments: true,
-          useShortDoctype: true,
-          preserveLineBreaks: false,
-          collapseWhitespace: true
-        }
-      },
+    extractCSS: true,
+    splitChunks: {
+      pages: true,
+      vendor: true,
+      commons: true,
+      runtime: true,
+      layouts: true
+    },
+    optimization: {
+      splitChunks: {
+        maxSize: 30000
+      }
+    },
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: true,
+        minifyJS: true,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+        preserveLineBreaks: false,
+        collapseWhitespace: true
+      }
+    },
   },
   modules: [
     '@nuxtjs/tailwindcss',
@@ -98,9 +112,11 @@ vite: {
   nitro: {
     compressPublicAssets: true,
   },
+  router: {
+    prefetchLinks: false
+  },
     components: true,
   image: {
-    quality: 80,
     screens: {
       'xs': 320,
       'sm': 640,
@@ -110,6 +126,6 @@ vite: {
       'xxl': 1536,
       '2xl': 1536
     },
-    format: "webp"
+    qulity:95
   }
 })

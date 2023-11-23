@@ -64,7 +64,7 @@ import { experiences } from "~/assets/constants";
           >
             <div
               class="lg:w-96 w-full bg-tertiary py-4 rounded-lg min-h-[20rem]"
-              role="article"
+              role="section"
             >
               <div class="w-full flex justify-center items-center mb-3 sm:hidden">
                 <div

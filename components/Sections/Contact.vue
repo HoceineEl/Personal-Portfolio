@@ -5,7 +5,7 @@
   <section
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
-    role="region"
+    role="section"
     aria-labelledby="contact-heading"
   >
     <div

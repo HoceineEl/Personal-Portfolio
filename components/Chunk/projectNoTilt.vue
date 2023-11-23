@@ -17,9 +17,7 @@
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
             width="200"
-            height="200"
-            format="webp"
-            quality="70"
+            format="jpeg"
             loading="lazy"
           />
           <div class="absolute top-2 right-2 z-50 flex gap-2">
@@ -77,6 +75,11 @@
 const { projects } = defineProps(["projects"]);
 
 import { github, visit } from "~/assets";
+onBeforeMount(() => {
+  function isMobile() {
+    return window.innerWidth <= 786 ? true : false;
+  }
+});
 </script>
 
 <style></style>

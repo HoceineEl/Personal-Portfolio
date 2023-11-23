@@ -30,7 +30,7 @@ onMounted(() => {
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
       <a
         href="/"
-        aria-label="Logo"
+        aria-label="Hoceine El idrissi"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
         @click="
           () => {
@@ -41,7 +41,15 @@ onMounted(() => {
           }
         "
       >
-        <img :src="logo" alt="Hoceine" width="60" loading="lazy" />
+        <NuxtImg
+          :src="logo"
+          alt="Hoceine el idrissi logo"
+          width="66"
+          height="41"
+          format="webp"
+          quality="90"
+          loading="lazy"
+        />
         <p>Hoceine EL IDRISSI</p>
       </a>
       <ul class="justify-between gap-10 hidden md:flex">
