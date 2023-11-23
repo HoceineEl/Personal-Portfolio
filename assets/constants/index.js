@@ -1,51 +1,4 @@
-import {
-    mobile,
-    backend,
-    creator,
-    web,
 
-    devosoft,
-    sosipo,
-    a2st,
-    sosipo_dashboard,
-    nike_hero,
-    islamic_home,
-    stock_home,
-    hangman_home,
-    portfolio_hero,
-} from "../assets";
-
-import vue from "../tech/vue.svg"
-import github from "../tech/github.svg"
-import js from "../tech/js.svg"
-import nuxt from "../tech/nuxt.svg"
-import tailwind from "../tech/tailwind.svg"
-import bootstrap from "../tech/bootstrap.svg"
-import mysql from "../tech/mysql.svg"
-import php from "../tech/php.svg"
-import vite from "../tech/vite.svg"
-import figma from "../tech/figma.svg"
-import laravel from "../tech/laravel.svg"
-import wordpress from "../tech/wordpress.svg"
-import html from "../tech/html.svg"
-import css from "../tech/css.svg"
-import vscode from "../tech/vscode.svg"
-import extention from "../tech/browser-extention.svg"
-import ts from "../tech/ts.svg"
-
-// import css_3d from '/models/Tech/Css/scene.gltf?url'
-// import html_3d from '/models/Tech/Html/scene.gltf?url'
-// import js_3d from '/models/Tech/Js/scene.gltf?url'
-// import figma_3d from '/models/Tech/figma/scene.gltf?url'
-// import github_3d from '/models/Tech/github/scene.gltf?url'
-// import laravel_3d from '/models/Tech/laravel/scene.gltf?url'
-// import MySql_3d from '/models/Tech/MySql/scene.gltf?url'
-// import nuxt_3d from '/models/Tech/nuxt/scene.gltf?url'
-// import vue_3d from '/models/Tech/vue/scene.gltf?url'
-// import php_3d from '/models/Tech/php/scene.gltf?url'
-// import tailwind_3d from '/models/Tech/tailwind/scene.gltf?url'
-// import bootstrap_3d from '/models/Tech/Bootstrap/scene.gltf?url'
-// import vite_3d from '/models/Tech/vite/scene.gltf?url'
 import portrait from '/models/portrait/scene.gltf?url'
 import Earth from '/models/planet/scene.gltf?url'
 export const navLinks = [
@@ -70,119 +23,109 @@ export const navLinks = [
 const services = [
     {
         title: "Web Developer",
-        icon: web,
+        icon: "/images/web.png",
     },
     {
         title: "Vue & Nuxt Developer",
-        icon: mobile,
+        icon: "/images/mobile.png",
     },
     {
         title: "Laravel Developer",
-        icon: backend,
+        icon: "/images/backend.png",
     },
     {
         title: "Passionate Learner",
-        icon: creator,
+        icon: "/images/creator.png",
     },
 ];
 
 const technologies = [
     {
         name: "Vue JS",
-        icon: vue,
+        icon: "/images/tech/vue.svg",
         progress: 90
     },
     {
         name: "Nuxt Js",
-        icon: nuxt,
+        icon: "/images/tech/nuxt.svg",
         progress: 95
     },
     {
         name: "Laravel",
-        icon: laravel,
+        icon: "/images/tech/laravel.svg",
         progress: 80
     },
     {
         name: "Tailwind CSS",
-        icon: tailwind,
+        icon: "/images/tech/tailwind.svg",
         progress: 105
     },
     {
         name: "JavaScript",
-        icon: js,
+        icon: "/images/tech/js.svg",
         progress: 75
     },
     {
         name: "HTML 5",
-        icon: html,
+        icon: "/images/tech/html.svg",
         progress: 110
     },
     {
         name: "CSS 3",
-        icon: css,
+        icon: "/images/tech/css.svg",
         progress: 110
     },
 
     {
         name: "PHP",
-        icon: php,
+        icon: "/images/tech/php.svg",
         progress: 70
     },
     {
         name: "MySql",
-        icon: mysql,
+        icon: "/images/tech/mysql.svg",
         progress: 70
     },
     {
         name: "Browser Extentions",
-        icon: extention,
+        icon: "/images/tech/browser-extention.svg",
         progress: 80
     },
     {
         name: "TypeScript",
-        icon: ts,
+        icon: "/images/tech/ts.svg",
         progress: 70
     },
     {
         name: "Github",
-        icon: github,
+        icon: "/images/tech/github.svg",
         progress: 75
     },
     {
         name: "Vite",
-        icon: vite,
+        icon: "/images/tech/vite.svg",
         progress: 70
     },
     {
         name: "Figma",
-        icon: figma,
+        icon: "/images/tech/figma.svg",
         progress: 60
     },
     {
         name: "Bootstrap 5",
-        icon: bootstrap,
+        icon: "/images/tech/bootstrap.svg",
         progress: 80
     },
     {
         name: "Wordpress",
-        icon: wordpress,
+        icon: "/images/tech/wordpress.svg",
         progress: 50
     },
     {
         name: "Vs Code",
-        icon: vscode,
+        icon: "/images/tech/vscode.svg",
         progress: 90
-    },
-    {
-        name: "Browser Extentions",
-        icon: extention,
-        progress: 80
-    },
-    {
-        name: "TypeScript",
-        icon: ts,
-        progress: 70
-    },
+    }
 ];
 // const technologies_3d = [
 //     {
@@ -262,7 +205,7 @@ const experiences = [
     {
         title: "Full Stack Web Developer",
         company_name: "Devosoft",
-        icon: devosoft,
+        icon: "/images/company/devosoft.png",
         iconBg: "#383E56",
         date: "November 2022 - September 2023     (5M By Night & 5M Full Time)",
         points: [
@@ -277,7 +220,7 @@ const experiences = [
     {
         title: "Full Stack Laravel Developer",
         company_name: "SOSIPO(Ministry of Agriculture)",
-        icon: sosipo,
+        icon: "/images/company/sosipo.png",
         iconBg: "#E6DEDD",
         date: "Jan 2023 - March 2023",
         points: [
@@ -290,12 +233,12 @@ const experiences = [
     {
         title: "Windows Forms .NET Developer",
         company_name: "A2 Services Et Technologies",
-        icon: a2st,
+        icon: "/images/company/a2st.png",
         iconBg: "#383E56",
         date: "July 2022 - September 2022",
         points: [
             `Created a library management system using Windows Forms, SQL Server, and C#
-              during my internship.`,
+            during my internship.`,
             "Gained valuable hands-on experience in application programming.",
             "Collaborated with the CEO to understand project requirements.",
             "Contributed to my skill set as a developer.",
@@ -362,7 +305,7 @@ const projects = [
                 color: "green-text-gradient",
             },
         ],
-        image: sosipo_dashboard,
+        image: "/images/Projects/sosipo/dashboard-dark.jpg",
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
@@ -392,7 +335,7 @@ const projects = [
             },
 
         ],
-        image: portfolio_hero,
+        image: "/images/Projects/portfolio/hero.png",
         demo: "https://hoceine.vercel.app",
         source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
     },
@@ -410,7 +353,7 @@ const projects = [
                 color: "blue-text-gradient",
             },
         ],
-        image: nike_hero,
+        image: "/images/Projects/nike/hero.jpg",
         source_code_link: "https://github.com/HoceineEl/nike-website",
         demo: "https://nikee.pages.dev"
     },
@@ -444,7 +387,7 @@ const projects = [
                 color: "green-text-gradient",
             },
         ],
-        image: stock_home,
+        image: "/images/Projects/stock/home.png",
         source_code_link: "https://github.com/HoceineEl/StockManagment",
     },
     {
@@ -465,7 +408,7 @@ const projects = [
                 color: "blue-text-gradient",
             },
         ],
-        image: islamic_home,
+        image: "/images/Projects/quiz/home.jpg",
         demo: "https://islamictrivia.vercel.app/",
         source_code_link: "https://github.com/HoceineEl/Islamic_Quiz",
     },
@@ -484,7 +427,7 @@ const projects = [
             },
 
         ],
-        image: hangman_home,
+        image: "/images/Projects/hangman/home.png",
         demo: "https://hangman-ane.pages.dev/",
         source_code_link: "https://github.com/HoceineEl/hangman",
     },

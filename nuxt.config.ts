@@ -59,8 +59,28 @@ export default defineNuxtConfig({
     },
     documentDriven: true
   },
-
-
+vite: {
+    build: {
+      minify: 'terser', 
+    },
+  },
+  build: {
+      html: {
+        minify: {
+          collapseBooleanAttributes: true,
+          decodeEntities: true,
+          minifyCSS: true,
+          minifyJS: true,
+          processConditionalComments: true,
+          removeEmptyAttributes: true,
+          removeRedundantAttributes: true,
+          trimCustomFragments: true,
+          useShortDoctype: true,
+          preserveLineBreaks: false,
+          collapseWhitespace: true
+        }
+      },
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@tresjs/nuxt',
@@ -68,7 +88,6 @@ export default defineNuxtConfig({
     'nuxt-delay-hydration',
     '@nuxt/content',
     '@tailwindcss/typography',
-    'nuxt-content-git',
     '@nuxt/image'
   ],
   css: ['~/assets/css/tailwind.css'],
@@ -91,6 +110,6 @@ export default defineNuxtConfig({
       'xxl': 1536,
       '2xl': 1536
     },
-    format:"webp"
+    format: "webp"
   }
 })

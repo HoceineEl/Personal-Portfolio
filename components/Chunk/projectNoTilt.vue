@@ -12,11 +12,14 @@
         v-motion-slide-visible-once-right="index % 2 !== 0"
       >
         <div class="w-full h-[230px] overflow-hidden relative">
-          <img
+          <NuxtImg
             :src="project.image"
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
             width="200"
+            height="200"
+            format="webp"
+            quality="70"
             loading="lazy"
           />
           <div class="absolute top-2 right-2 z-50 flex gap-2">
@@ -26,7 +29,15 @@
               target="_blank"
               :aria-label="`Visit project on GitHub: ${project.name}`"
             >
-              <img :src="github" alt="GitHub Logo" width="50" loading="lazy" />
+              <NuxtImg
+                :src="github"
+                alt="GitHub Logo"
+                width="50"
+                height="50"
+                format="webp"
+                quality="70"
+                loading="lazy"
+              />
             </a>
             <a
               v-if="project.demo"
@@ -35,7 +46,15 @@
               target="_blank"
               :aria-label="`Visit project demo: ${project.name}`"
             >
-              <img :src="visit" alt="Visit Logo" width="40" loading="lazy" />
+              <NuxtImg
+                :src="visit"
+                alt="Visit Logo"
+                width="40"
+                format="webp"
+                quality="70"
+                height="40"
+                loading="lazy"
+              />
             </a>
           </div>
         </div>

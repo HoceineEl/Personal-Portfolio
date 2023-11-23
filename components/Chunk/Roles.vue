@@ -14,7 +14,15 @@ import { services } from "~/assets/constants";
       <div
         class="bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col text-center"
       >
-        <img :src="service.icon" alt="service.title" width="64" loading="lazy" />
+        <NuxtImg
+          :src="service.icon"
+          alt="service.title"
+          width="64"
+          loading="lazy"
+          format="webp"
+          quality="70"
+          height="64"
+        />
         <p class="font-bold text-[20px] max-w-[150px]">{{ service.title }}</p>
       </div>
     </div>

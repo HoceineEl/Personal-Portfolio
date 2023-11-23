@@ -53,14 +53,17 @@ onMounted(() => {
           @click="setActive(link.title)"
         >
           <NuxtLink
-          :prefetch="false"
+            :prefetch="false"
             :to="link.id"
             class="flex items-center gap-3 font-semibold text-[18px]"
             >{{ link.title }}</NuxtLink
           >
         </li>
         <li>
-          <a href="https://github.com/hoceineel" target="_blank" aria-label="hoceine el idrissi github profile "
+          <a
+            href="https://github.com/hoceineel"
+            target="_blank"
+            aria-label="hoceine el idrissi github profile "
             ><img
               :src="github"
               alt="hoceine el idrissi github profile"
@@ -70,22 +73,31 @@ onMounted(() => {
           /></a>
         </li>
         <li>
-          <a href="https://www.linkedin.com/in/elidrissihoceine/" aria-label="hoceine el idrissi linkedin profile" target="_blank">
-            <img
+          <a
+            href="https://www.linkedin.com/in/elidrissihoceine/"
+            aria-label="hoceine el idrissi linkedin profile"
+            target="_blank"
+          >
+            <NuxtImg
               :src="linkedin"
               alt="hoceine el idrissi linkedin profile"
               width="30"
               height="30"
+              format="webp"
+              quality="70"
               loading="lazy"
           /></a>
         </li>
       </ul>
       <div @click="setToggle" class="md:hidden">
-        <img
+        <NuxtImg
           :src="!toggle ? menu : close"
           alt="menu"
-          class="cursor-pointer w-7 h-7"
-          width="100"
+          format="webp"
+          quality="70"
+          class="cursor-pointer"
+          width="24"
+          height="24"
           loading="lazy"
         />
         <div
@@ -108,22 +120,33 @@ onMounted(() => {
               >
             </li>
             <li>
-              <a href="https://github.com/hoceineel" target="_blank"  aria-label="hoceine el idrissi github profile"
-                ><img
+              <a
+                href="https://github.com/hoceineel"
+                target="_blank"
+                aria-label="hoceine el idrissi github profile"
+                ><NuxtImg
                   :src="github"
                   alt="hoceine el idrissi github profile"
                   width="30"
                   height="30"
+                  format="webp"
+                  quality="70"
                   loading="lazy"
               /></a>
             </li>
             <li>
-              <a href="https://www.linkedin.com/in/elidrissihoceine/" target="_blank" aria-label="hoceine el idrissi linkedin profile">
-                <img
+              <a
+                href="https://www.linkedin.com/in/elidrissihoceine/"
+                target="_blank"
+                aria-label="hoceine el idrissi linkedin profile"
+              >
+                <NuxtImg
                   :src="linkedin"
                   alt="hoceine el idrissi linkedin profile"
                   width="30"
                   height="30"
+                  format="webp"
+                  quality="70"
                   loading="lazy"
               /></a>
             </li>

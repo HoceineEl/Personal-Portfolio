@@ -12,6 +12,18 @@ export default {
     'error.{js,ts,vue}',
     'content/**/*.md'
   ],
+  purge: [
+    'components/**/*.{vue,js,ts}',
+    'layouts/**/*.vue',
+    'pages/**/*.vue',
+    'composables/**/*.{js,ts}',
+    'plugins/**/*.{js,ts}',
+    'App.{js,ts,vue}',
+    'app.{js,ts,vue}',
+    'Error.{js,ts,vue}',
+    'error.{js,ts,vue}',
+    'content/**/*.md'
+  ],
   theme: {
     extend: {
       colors: {
@@ -31,7 +43,7 @@ export default {
         xs: "450px",
       },
       backgroundImage: {
-        "hero-pattern": "url('/assets/herobg.png')",
+        "hero-pattern": "url('/assets/herobg.webp')",
       },
       keyframes: {
         bounce2x: {
