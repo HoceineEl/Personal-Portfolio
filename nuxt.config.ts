@@ -120,7 +120,7 @@ vite: {
     compressPublicAssets: true,
   },
   router: {
-    prefetchLinks: false
+    prefetchLinks: false,
   },
     components: true,
   image: {

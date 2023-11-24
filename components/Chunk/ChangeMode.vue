@@ -5,25 +5,33 @@ import { clear, stars } from "~/assets";
 
 <template>
   <div class="group flex justify-center fixed bottom-5 left-5">
-    <button class="bg-main-violet p-1 rounded-full" @click="changeMode = !changeMode">
+    <button
+      class="bg-main-violet p-1 rounded-full"
+      @click="changeMode = !changeMode"
+      aria-label="Toggle Mode"
+    >
       <Transition name="fade"
         ><NuxtImg
           :src="stars"
+          alt="Stars Image"
           class="transition duration-500"
           v-if="!changeMode"
           loading="lazy"
           height="30"
           width="30"
-      /></Transition>
+        />
+      </Transition>
       <Transition name="fade"
         ><NuxtImg
           :src="clear"
+          alt="Clear Image"
           class="transition duration-500"
           v-if="changeMode"
           loading="lazy"
           height="30"
           width="30"
-      /></Transition>
+        />
+      </Transition>
     </button>
     <div
       class="rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100 absolute left-2 bottom-20 overflow-hidden h-fit w-60"

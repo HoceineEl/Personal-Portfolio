@@ -30,7 +30,8 @@ onMounted(() => {
     <div class="w-full flex justify-between items-center max-w-7xl mx-auto px-2">
       <a
         href="/"
-        aria-label="Hoceine El idrissi"
+        alt="Logo"
+        aria-label="Hoceine El Idrissi's Logo"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
         @click="
           () => {
