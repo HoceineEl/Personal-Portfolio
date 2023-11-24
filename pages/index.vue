@@ -1,7 +1,4 @@
 <template>
-  <!-- <Transition name="slide">
-    <SectionsWelcom v-if="showWelcomeScreen" />
-  </Transition> -->
   <main
     class="relative z-0 selection:bg-tertiary selection:text-main-violet bg-hero-pattern bg-fixed bg-cover"
   >
@@ -18,19 +15,10 @@
       <LazySectionsContact />
     </div>
     <LazySectionsFooter />
+    <LazyChunkChangeMode />
   </main>
 </template>
 
-<script setup>
-const showWelcomeScreen = ref(true);
-
-function welcomeScreen() {
-  setTimeout(() => {
-    showWelcomeScreen.value = false;
-  }, 20);
-}
-
-welcomeScreen();
-</script>
+<script setup></script>
 
 <style scoped></style>

@@ -8,6 +8,8 @@ const visit = "/images/visit.png";
 const a2st = "/images/company/a2st.png";
 const sosipo = "/images/company/sosipo.png";
 const devosoft = "/images/company/devosoft.png";
+const clear = "/images/clear.png";
+const stars = "/images/stars.png";
 
 export {
   a2st,
@@ -19,5 +21,7 @@ export {
   logo,
   github,
   menu,
-  close
+  close,
+  stars,
+  clear
 };

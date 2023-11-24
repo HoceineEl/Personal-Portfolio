@@ -1,7 +1,6 @@
 <template>
-  <!-- <div class="absolute -z-10">
-      <SectionsStarsCanvas />
-    </div> -->
+
+
   <section
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
@@ -103,7 +102,6 @@ const sendMail = () => {
       }
     );
 };
-const clearFields = () => {};
 </script>
 
 <style scoped>

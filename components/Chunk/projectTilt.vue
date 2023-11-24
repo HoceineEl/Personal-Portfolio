@@ -19,7 +19,7 @@
             :src="project.image"
             :alt="project.name"
             class="w-full h-full object-cover rounded-2xl"
-            width="200"
+            format="webp"
             loading="lazy"
           />
           <div class="absolute top-2 right-2 z-50 flex gap-2">
