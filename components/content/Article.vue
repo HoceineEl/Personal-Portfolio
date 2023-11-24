@@ -8,14 +8,22 @@ console.log("article entered");
 <template>
   <ContentDoc v-slot="{ doc }">
     <LazyChunkSeoHead :article="doc" />
-    <article class="flex flex-col justify-center items-center">
+    <article
+      class="flex flex-col justify-center items-center"
+      role="article"
+      aria-label="Article"
+    >
       <div
         class="w-full h-[400px] bg-cover rounded-3xl mb-8 bg-center"
         :style="{ backgroundImage: `url(${doc.image})` }"
+        role="img"
+        aria-label="Article Image"
       ></div>
       <div class="mx-4 flex flex-col justify-center gap-4 py-4">
         <h1
           class="lg:text-6xl font-extrabold sm:text-3xl mt-10 mb-4 text-2xl text-gradient hover:bg-gradient-to-l transition-all duration-400 py-5"
+          role="heading"
+          aria-level="1"
         >
           {{ doc.title }}
         </h1>
@@ -26,12 +34,14 @@ console.log("article entered");
           <span
             v-for="tag in doc.tags"
             class="px-3 py-1 bg-teal-600 rounded-lg text-sm font-semibold"
+            role="tag"
           >
             {{ tag }}
           </span>
         </div>
         <div
           class="metadata px-0 sm:px-10 flex gap-5 font-semibold text-white text-[16px] flex-wrap"
+          role="contentinfo"
         >
           <div class="flex gap-2 items-center">
             <img
@@ -39,26 +49,38 @@ console.log("article entered");
               alt="Hoceine el idrissi picture"
               loading="lazy"
               class="w-10 h-10 rounded-full object-cover border-2 border-teal-700"
+              role="img"
+              aria-label="Author's Picture"
             />
             <p class="article-author">Hoceine El idrissi</p>
           </div>
 
-          <time class="flex gap-1 items-center" :datetime="doc.createdAt">
+          <time class="flex gap-1 items-center" :datetime="doc.createdAt" role="time">
             <IconsDate class="w-4 h-4" /> {{ useFormatDate(doc.createdAt) }}
           </time>
-          <p v-if="doc.minutes" class="flex gap-1 items-center">
+          <p v-if="doc.minutes" class="flex gap-1 items-center" role="status">
             <IconsTime class="w-4 h-4" /> {{ doc.minutes }} min read
           </p>
         </div>
       </div>
       <span class="article-hr"></span>
-      <div class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7">
+      <div
+        class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7"
+        role="group"
+        aria-label="Article Content Group"
+      >
         <ContentRenderer
           ref="content"
           :value="doc"
           class="col-span-full lg:col-span-5 nuxt-content"
+          role="article"
+          aria-label="Article Content"
         />
-        <aside class="-order-2 lg:order-2">
+        <aside
+          class="-order-2 lg:order-2"
+          role="complementary"
+          aria-label="Article Complementary Content"
+        >
           <LazyToc :toc="toc" />
         </aside>
       </div>

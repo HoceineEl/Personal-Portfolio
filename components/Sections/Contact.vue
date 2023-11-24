@@ -59,12 +59,18 @@
       @mousedown="handleMouseDown"
       @mouseup="handleMouseUp"
       :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
-      class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] -order-1 lg:order-2"
+      class="flex justify-center items-center w-[700px] h-[400px] xs:h-[500px] sm:h-[600] md:h-[800px] -order-1 lg:order-2 p-10 sm:p-4"
       v-motion-slide-visible-once-right
       role="img"
       aria-label="Visual representation of Earth"
     >
-      <LazyCanvasObject :object="Earth" :scale="1.5" :speed="10" :type="'planet'" />
+      <LazyCanvasObject
+        :object="Earth"
+        :scale="0.018"
+        :speed="10"
+        :type="'planet'"
+        class="absolute top-20"
+      />
     </div>
   </section>
 </template>
