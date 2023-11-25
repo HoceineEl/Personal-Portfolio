@@ -1,12 +1,14 @@
 <template>
-  <div>
-    <header>
-      <LazyBlogNavbar />
-    </header>
-    <slot />
-  </div>
-  <LazySectionsFooter />
-  <ChunkScrollToggler />
+  <main>
+    <div>
+      <header>
+        <LazyBlogNavbar />
+      </header>
+      <slot />
+    </div>
+    <LazySectionsFooter />
+    <ChunkScrollToggler />
+  </main>
 </template>
 
 <script setup>

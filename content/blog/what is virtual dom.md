@@ -3,8 +3,8 @@ title: What is the Virtual DOM in Vue.js, A Comprehensive Guide with Examples
 description: Exploring the concept of the Virtual DOM in Vue.js and providing practical examples for better understanding.
 tags: [Vue.js, Virtual DOM, Web Development, JavaScript]
 image: https://panel.scythe-studio.com/wp-content/uploads/2022/07/ssrVscsr-1.png
-createdAt: datetime
-updatedAt: datetime
+createdAt: 2023-11-24T15:15:53.000Z
+updatedAt: 2023-11-24T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
 ---
 

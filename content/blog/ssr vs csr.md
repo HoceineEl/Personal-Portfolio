@@ -2,8 +2,8 @@
 title: "SSR vs. CSR: Unraveling the Mystery of Rendering in Web Development"
 description: "In web development, rendering is key. Two methods, SSR and CSR, offer distinct advantages. This post explores their differences."
 image: https://panel.scythe-studio.com/wp-content/uploads/2022/07/ssrVscsr-1.png
-createdAt: DateTime
-updatedAt: DateTime
+createdAt: 2023-11-20T15:15:53.000Z
+updatedAt: 2023-11-20T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
 tags: ["SSR", "CSR", "Server", "Javascript"]
 ---

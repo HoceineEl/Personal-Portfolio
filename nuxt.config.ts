@@ -4,61 +4,61 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
 
   app: {
-    head: {
-      htmlAttrs: {
-        lang: 'en',
-      },
-      title: 'Hoceine EL IDRISSI - Full Stack Web Developer',
-      meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'Hoceine EL IDRISSI - Full Stack Web Developer | Building creative and elegant web experiences.',
-        },
-        { name: 'author', content: 'Hoceine EL IDRISSI' },
-        // Open Graph/Facebook
-        { property: 'og:url', content: 'https://hoceine.vercel.app' },
-        { property: 'og:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
-        {
-          property: 'og:description',
-          content: 'Building creative and elegant web experiences. Check out my portfolio!',
-        },
-        {
-          property: 'og:image',
-          content: 'https://hoceine.vercel.app/images/hero.webp',
-          width: 1200,
-          height: 630,
-        },
-        // Twitter
-        { property: 'twitter:url', content: 'https://hoceine.vercel.app' },
-        { property: 'twitter:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
-        {
-          property: 'twitter:description',
-          content: 'Building creative and elegant web experiences. Check out my portfolio!',
-        },
-        {
-          property: 'twitter:image',
-          content: 'https://hoceine.vercel.app/images/hero.webp',
-          width: 1200,
-          height: 630,
-        },
-        {
-          property: 'twitter:card',
-          content: 'summary_large_image',
-        },
-        {
-          property: 'twitter:creator',
-          content: '@HoceineElidrisi', // Replace with your Twitter handle
-        },
-        {
-          name: 'keywords',
-          content:
-            'hoceine el idrissi, web developer, full stack developer, Laravel expert, PHP developer, Nuxt.js specialist, Vue.js developer, Bootstrap, Tailwind CSS, creative web solutions, elegant web experiences, industry trends, Moroccan web developer, freelance developer',
-        },
-      ],
+  head: {
+    htmlAttrs: {
+      lang: 'en',
     },
+    title: 'Hoceine EL IDRISSI - Full Stack Web Developer',
+    meta: [
+      { charset: 'utf-8' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'Welcome to the world of Hoceine El Idrissi, a passionate and skilled Full Stack Web Developer. With expertise in Laravel, PHP, Nuxt.js, and Vue.js, I specialize in crafting creative and elegant web experiences. Explore my portfolio to witness innovative solutions, industry trends, and the seamless fusion of technology and design. As a freelance developer, I bring a unique perspective to every project, ensuring both functionality and aesthetics. Join me on this journey of building tomorrow\'s web today.',
+      },
+      { name: 'author', content: 'Hoceine EL IDRISSI' },
+      // Open Graph/Facebook
+      { property: 'og:url', content: 'https://hoceine.vercel.app' },
+      { property: 'og:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
+      {
+        property: 'og:description',
+        content: 'Welcome to the world of Hoceine El Idrissi, a passionate and skilled Full Stack Web Developer. With expertise in Laravel, PHP, Nuxt.js, and Vue.js, I specialize in crafting creative and elegant web experiences. Explore my portfolio to witness innovative solutions, industry trends, and the seamless fusion of technology and design. As a freelance developer, I bring a unique perspective to every project, ensuring both functionality and aesthetics. Join me on this journey of building tomorrow\'s web today.',
+      },
+      {
+        property: 'og:image',
+        content: 'https://hoceine.vercel.app/images/hero.webp',
+        width: 1200,
+        height: 630,
+      },
+      // Twitter
+      { property: 'twitter:url', content: 'https://hoceine.vercel.app' },
+      { property: 'twitter:title', content: 'Hoceine EL IDRISSI - Full Stack Web Developer' },
+      {
+        property: 'twitter:description',
+        content: 'Welcome to the world of Hoceine El Idrissi, a passionate and skilled Full Stack Web Developer. With expertise in Laravel, PHP, Nuxt.js, and Vue.js, I specialize in crafting creative and elegant web experiences. Explore my portfolio to witness innovative solutions, industry trends, and the seamless fusion of technology and design. As a freelance developer, I bring a unique perspective to every project, ensuring both functionality and aesthetics. Join me on this journey of building tomorrow\'s web today.',
+      },
+      {
+        property: 'twitter:image',
+        content: 'https://hoceine.vercel.app/images/hero.webp',
+        width: 1200,
+        height: 630,
+      },
+      {
+        property: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      {
+        property: 'twitter:creator',
+        content: '@HoceineElidrisi', // Replace with your Twitter handle
+      },
+      {
+        name: 'keywords',
+        content: 'Hoceine El Idrissi, Web Developer, Full Stack Developer, Laravel Expert, PHP Developer, Nuxt.js Specialist, Vue.js Developer, Bootstrap, Tailwind CSS, Creative Web Solutions, Elegant Web Experiences, Industry Trends, Moroccan Web Developer, Freelance Developer, Web Development Portfolio',
+      },
+    ],
+},
+
   },
   content: {
     highlight: {
@@ -108,8 +108,7 @@ vite: {
     'nuxt-delay-hydration',
     '@nuxt/content',
     '@tailwindcss/typography',
-    '@nuxt/image',
-    'nuxt-content-git'
+    '@nuxt/image'
   ],
   css: ['~/assets/css/tailwind.css'],
   delayHydration: {
