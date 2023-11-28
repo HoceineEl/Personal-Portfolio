@@ -8,7 +8,6 @@
         v-for="(project, index) in projects"
         :key="project.name"
         class="w-full sm:w-[350px] p-5 bg-tertiary rounded-2xl flex flex-col relative"
-        $VanillaTiltF
         data-tilt
         data-tilt-scale="1.05"
         v-motion-slide-visible-once-left="index % 2 === 0"
@@ -17,7 +16,7 @@
         <div class="w-full h-[230px] overflow-hidden relative">
           <NuxtImg
             :src="project.image"
-            :alt="project.name"
+            :alt="project.name + `hoceine el idrissi Project`"
             class="w-full h-full object-cover rounded-2xl"
             format="webp"
             loading="lazy"
@@ -75,8 +74,13 @@
 
 <script setup>
 const { projects } = defineProps(["projects"]);
-
 import { github, visit } from "~/assets";
+setTimeout(() => {
+  console.log("finished");
+}, 30000);
+setTimeout(() => {
+  console.log("not yet ");
+}, 30000);
 </script>
 
 <style></style>

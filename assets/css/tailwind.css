@@ -6,7 +6,7 @@
 
 html {
     font-size: 16px;
-
+    scroll-behavior: smooth;
 }
 
 * {
@@ -14,7 +14,6 @@ html {
     padding: 0;
     box-sizing: border-box;
     font-family: "Poppins", sans-serif;
-    scroll-behavior: smooth;
     color-scheme: dark;
 }
 

@@ -7,7 +7,7 @@ const obeserver = ref(null);
 const content = ref(null);
 const observerOptions = ref({
   root: content.value,
-  threshold: 0,
+  threshold: 0.6,
 });
 
 onMounted(() => {
@@ -19,15 +19,12 @@ onMounted(() => {
       }
     });
   }, observerOptions.value);
-  document.querySelectorAll(".nuxt-content h2[id]").forEach((section) => {
-    obeserver.value.observe(section);
-  });
-  const show = (link) => {
-    const section = document.querySelector(`#${link}`);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  document
+    .querySelectorAll(".nuxt-content h2[id],.nuxt-content h3[id]")
+    .forEach((section) => {
+      obeserver.value.observe(section);
+    });
+
   const handelWindowSize = () => {
     if (window.innerWidth < 1024) {
       active.value = true;
@@ -40,6 +37,15 @@ onMounted(() => {
   window.addEventListener("resize", handelWindowSize);
   handelWindowSize();
 });
+const show = (id) => {
+  const el = document.getElementById(id);
+
+  if (el) {
+    // router.push({ hash: `#${id}` });
+
+    el.scrollIntoView({ behavior: "smooth", block: "nearset", inline: "nearset" });
+  }
+};
 </script>
 <template>
   <div
@@ -68,25 +74,42 @@ onMounted(() => {
         </h3>
       </header>
 
-      <ul class="overflow-y-auto">
+      <ul class="ml-0 pl-4">
         <li
           v-for="link in toc.links"
-          :key="link.text"
-          class="toc-link"
+          :id="`#${link.id}`"
+          :key="link.id"
           @click="show(link.id)"
-          role="menuitem"
+          class="mb-2 ml-0 cursor-pointer list-none text-sm last:mb-0"
         >
           <a
             :href="`#${link.id}`"
-            :key="link.id + link.text"
             :class="{
-              '!text-teal-300 !font-semibold': link.id == currentActiveLink,
+              '!text-purple-300 !font-semibold': link.id == currentActiveLink,
             }"
-            tabindex="0"
-            aria-label="Navigate to Section"
+            >{{ link.text }}</a
           >
-            {{ link.text }}
-          </a>
+
+          <ul v-if="link.children" class="my-2 ml-3">
+            <li
+              v-for="child in link.children"
+              :id="`#${child.id}`"
+              :key="child.id"
+              @click="show(child.id)"
+              class="mb-2 ml-0 cursor-pointer list-none text-xs last:mb-0"
+              :class="{
+                '!text-teal-200 !font-semibold': child.id == currentActiveLink,
+              }"
+            >
+              <a
+                :href="`#${child.id}`"
+                :class="{
+                  '!text-teal-200 !font-semibold': child.id == currentActiveLink,
+                }"
+                >{{ child.text }}</a
+              >
+            </li>
+          </ul>
         </li>
       </ul>
     </nav>

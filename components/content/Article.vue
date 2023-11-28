@@ -65,7 +65,7 @@ console.log("article entered");
       </div>
       <span class="article-hr"></span>
       <div
-        class="max-w-6xl w-full px-1 sm:px-0 content grid grid-cols-7"
+        class="max-w-6xl px-1 sm:px-0 content grid grid-cols-7"
         role="group"
         aria-label="Article Content Group"
       >
@@ -93,7 +93,7 @@ console.log("article entered");
 
 <style>
 .nuxt-content {
-  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins prose-headings:text-teal-300 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
+  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins  prose-h1:text-teal-300 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h3:text-lg prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
 }
 
 .content li a {

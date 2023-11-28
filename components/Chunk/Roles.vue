@@ -7,7 +7,6 @@ import { services } from "~/assets/constants";
       class="card xs:w-[250px] p-[1px] green-pink-gradient rounded-[20px] transition-all duration-200 w-full pointer-events-none sm:pointer-events-auto"
       v-for="service in services"
       :key="service.title"
-      $VanillaTilt
       data-tilt
       data-tilt-scale="1.05"
     >

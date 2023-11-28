@@ -7,7 +7,6 @@
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
     />
-    <div v-if="isZoomed" class="close-icon" @click="toggleZoom">&#10006;</div>
   </div>
 </template>
 
@@ -44,7 +43,7 @@ img {
   transition: transform 0.3s ease-in-out;
 }
 .zoomed {
-  transform: scale(1.5);
+  transform: scale(1.3);
   cursor: zoom-out;
   position: absolute;
   z-index: 20;
@@ -59,6 +58,11 @@ img {
   cursor: pointer;
 }
 
+@media (max-width: 1200px) {
+  .zoomed {
+    transform: scale(1.1);
+  }
+}
 /* Apply styles only for screens with a minimum width of 768 pixels (adjust as needed) */
 @media (max-width: 768px) {
   .zoomed {
