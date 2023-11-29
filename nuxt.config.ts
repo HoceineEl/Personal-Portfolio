@@ -104,7 +104,9 @@ vite: {
     'nuxt-delay-hydration',
     '@nuxt/content',
     '@tailwindcss/typography',
-    '@nuxt/image'
+    '@nuxt/image',
+    'nuxt-anchorscroll'
+
   ],
   css: ['~/assets/css/tailwind.css'],
   delayHydration: {

@@ -54,10 +54,13 @@ const scrollToTop = () => {
           :alt="article.title"
           aria-label="Read more about {{ article.title }}"
         >
-          <div
+          <NuxtImg
             class="bg-cover w-full h-40 rounded-ss-lg rounded-tr-lg"
-            :style="{ backgroundImage: `url(${article.image})` }"
-          ></div>
+            :src="article.image"
+            :quality="80"
+            format="webp"
+            loading="lazy"
+          />
           <div class="mx-1 flex flex-col justify-center gap-2 py-4">
             <h1 class="text-[16px] font-bold">{{ article.title }}</h1>
             <time class="flex gap-1 items-center" :datetime="article.createdAt">

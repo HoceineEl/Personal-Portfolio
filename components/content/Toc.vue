@@ -7,7 +7,7 @@ const obeserver = ref(null);
 const content = ref(null);
 const observerOptions = ref({
   root: content.value,
-  threshold: 0.6,
+  threshold: 0.5,
 });
 
 onMounted(() => {
@@ -37,15 +37,6 @@ onMounted(() => {
   window.addEventListener("resize", handelWindowSize);
   handelWindowSize();
 });
-const show = (id) => {
-  const el = document.getElementById(id);
-
-  if (el) {
-    // router.push({ hash: `#${id}` });
-
-    el.scrollIntoView({ behavior: "smooth", block: "nearset", inline: "nearset" });
-  }
-};
 </script>
 <template>
   <div
@@ -79,7 +70,6 @@ const show = (id) => {
           v-for="link in toc.links"
           :id="`#${link.id}`"
           :key="link.id"
-          @click="show(link.id)"
           class="mb-2 ml-0 cursor-pointer list-none text-sm last:mb-0"
         >
           <a
@@ -95,7 +85,6 @@ const show = (id) => {
               v-for="child in link.children"
               :id="`#${child.id}`"
               :key="child.id"
-              @click="show(child.id)"
               class="mb-2 ml-0 cursor-pointer list-none text-xs last:mb-0"
               :class="{
                 '!text-teal-200 !font-semibold': child.id == currentActiveLink,
@@ -118,7 +107,7 @@ const show = (id) => {
 
 <style scoped>
 .toc {
-  @apply sticky top-16 lg:top-24 w-full;
+  @apply sticky top-16 lg:top-24 w-full ;
 }
 
 .toc-nav {

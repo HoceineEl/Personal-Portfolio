@@ -6,6 +6,7 @@
       alt="Image in the article"
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
+      format="webp"
     />
   </div>
 </template>

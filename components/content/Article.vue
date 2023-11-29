@@ -14,7 +14,7 @@ console.log("article entered");
       aria-label="Article"
     >
       <div
-        class="w-full h-[400px] bg-cover rounded-3xl mb-8 bg-center"
+        class="w-full mx-32 h-[600px] bg-cover rounded-3xl mb-8 bg-center"
         :style="{ backgroundImage: `url(${doc.image})` }"
         role="img"
         aria-label="Article Image"
@@ -81,7 +81,7 @@ console.log("article entered");
           role="complementary"
           aria-label="Article Complementary Content"
         >
-          <LazyToc :toc="toc" />
+          <LazyToc :toc="toc" class="h-[200px]" />
         </aside>
       </div>
 
@@ -93,7 +93,7 @@ console.log("article entered");
 
 <style>
 .nuxt-content {
-  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins  prose-h1:text-teal-300 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h3:text-lg prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
+  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins  prose-h1:text-teal-300 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h3:text-lg prose-h2:scroll-mt-56 prose-h3:scroll-mt-56 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
 }
 
 .content li a {

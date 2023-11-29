@@ -21,4 +21,8 @@
 
 <script setup></script>
 
-<style scoped></style>
+<style scoped>
+section {
+  @apply scroll-mt-56;
+}
+</style>

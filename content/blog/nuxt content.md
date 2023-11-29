@@ -2,7 +2,8 @@
 title: Creating a blog using Nuxt and Nuxt Content - with TailwindCSS
 description: In this tutorial you'll learn how to create a personal blog using a Git-based CMS - Nuxt Content
 tags: [Nuxt, Nuxt Content, Vue, TailwindCSS]
-image: https://mithicher.com/nuxt-content.webp
+image: /images/blog/nuxt-content/thumbnail.jpg
+banner: /images/blog/nuxt-content/banner.png
 createdAt: 2023-10-30T15:15:53.000Z
 updatedAt: 2023-10-30T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
