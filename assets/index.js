@@ -10,8 +10,12 @@ const sosipo = "/images/company/sosipo.png";
 const devosoft = "/images/company/devosoft.png";
 const clear = "/images/clear.png";
 const stars = "/images/stars.png";
+const play = "/images/play.png";
+const pause = "/images/pause.png";
 
 export {
+  play,
+  pause,
   a2st,
   sosipo,
   devosoft,

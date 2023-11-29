@@ -34,23 +34,28 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="w-full flex flex-wrap gap-10 justify-center items-center mt-20">
+  <main class="w-full flex flex-wrap gap-20 justify-center items-start mt-20">
     <article
       v-for="article in articles"
       :key="article._path"
-      class="max-w-sm rounded-xl hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 group hover:shadow-sm hover:shadow-white-100"
+      v-motion-slide-visible-once-bottom
+      class="max-w-sm rounded-xl transition-all duration-500 group hover:shadow-md hover:shadow-indigo-800"
+      :aria-label="`Read more about ${article.title}`"
     >
       <a
         :href="article._path"
         class="flex flex-col"
-        v-motion-slide-visible-once-bottom
         :aria-label="`Read more about ${article.title}`"
       >
-        <NuxtImg
-          class="w-full h-80 mx-auto object-cover text-center overflow-hidden rounded-tr-lg rounded-tl-lg mb-3 sm:mb-0"
+        <NuxtPicture
+          :img-attrs="{
+            class:
+              'w-full h-80 mx-auto object-cover text-center overflow-hidden rounded-tr-lg rounded-tl-lg mb-3 sm:mb-0',
+            alt: `${article.title}  cover image`,
+          }"
           :src="article.image"
-          format="webp"
-        ></NuxtImg>
+          format="avif,webp"
+        ></NuxtPicture>
         <div class="mx-4 flex flex-col justify-center gap-4 py-4">
           <h2 class="text-lg font-bold font-serif">{{ article.title }}</h2>
           <p class="line-clamp-2 max-w-2xl text-sm">{{ article.description }}</p>

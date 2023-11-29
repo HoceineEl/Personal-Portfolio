@@ -2,8 +2,6 @@
 import { hoceine } from "~/assets";
 
 const { prev, next, toc } = useContent();
-
-console.log("article entered");
 </script>
 <template>
   <ContentDoc v-slot="{ doc }">
@@ -13,12 +11,16 @@ console.log("article entered");
       role="article"
       aria-label="Article"
     >
-      <div
-        class="w-full mx-32 h-[600px] bg-cover rounded-3xl mb-8 bg-center"
-        :style="{ backgroundImage: `url(${doc.image})` }"
-        role="img"
-        aria-label="Article Image"
-      ></div>
+      <NuxtPicture
+        :imgAttrs="{
+          class: 'w-full  h-[600px] object-cover rounded-3xl mb-8 object-center',
+          alt: `${doc.title}  banner image`,
+          role: 'img',
+          ariaLabel: 'Article Image',
+        }"
+        :src="doc.banner"
+        format="avif,webp"
+      ></NuxtPicture>
       <div class="mx-4 flex flex-col justify-center gap-4 py-4">
         <h1
           class="lg:text-6xl font-extrabold sm:text-3xl mt-10 mb-4 text-2xl text-gradient hover:bg-gradient-to-l transition-all duration-400 py-5"
@@ -44,12 +46,14 @@ console.log("article entered");
           role="contentinfo"
         >
           <div class="flex gap-2 items-center">
-            <img
+            <NuxtImg
               :src="hoceine"
               alt="Hoceine el idrissi picture"
               loading="lazy"
               class="w-10 h-10 rounded-full object-cover border-2 border-teal-700"
               role="img"
+              format="webp"
+              quality="30"
               aria-label="Author's Picture"
             />
             <p class="article-author">Hoceine El idrissi</p>

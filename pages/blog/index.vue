@@ -17,7 +17,7 @@ definePageMeta({
         </p>
       </div>
 
-      <LazyCustomContentList />
+      <CustomContentList />
     </section>
   </main>
 </template>

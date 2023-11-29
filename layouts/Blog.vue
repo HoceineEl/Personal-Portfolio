@@ -8,6 +8,7 @@
     </div>
     <LazySectionsFooter />
     <ChunkScrollToggler />
+    <ChunkPlayWaves/>
   </main>
 </template>
 

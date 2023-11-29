@@ -37,7 +37,7 @@ onMounted(() => {
 
     <section
       v-if="fetched"
-      class="w-full flex flex-wrap justify-center items-center gap-10 px-2 sm:px-0"
+      class="w-full flex flex-wrap justify-center items-start gap-10 px-2 sm:px-0"
       role="list"
     >
       <article

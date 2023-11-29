@@ -9,7 +9,7 @@
         aria-label="Hoceine El Idrissi's Logo"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
       >
-        <img :src="logo" alt="Hoceine log" width="60" loading="lazy" />
+        <NuxtImg format="webp" :src="logo" alt="Hoceine log" width="60" loading="lazy" />
         <p class="hidden xs:block">Hoceine EL IDRISSI</p>
       </a>
       <ul class="justify-between gap-3 flex items-center">
@@ -24,11 +24,14 @@
               href="https://github.com/hoceineel"
               target="_blank"
               aria-label="Visit GitHub profile"
-              ><img
+            >
+              <NuxtImg
                 :src="github"
                 alt="hoceine EL IDRISSI github profile"
                 width="30"
                 loading="lazy"
+                format="webp"
+                quality="80"
             /></a>
           </div>
 
@@ -38,11 +41,13 @@
               target="_blank"
               aria-label="Visit LinkedIn profile"
             >
-              <img
+              <NuxtImg
                 :src="linkedin"
                 alt="hoceine EL IDRISSI linkedin profile"
                 width="30"
                 loading="lazy"
+                format="webp"
+                quality="80"
             /></a>
           </div>
         </li>

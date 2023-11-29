@@ -73,11 +73,12 @@ onMounted(() => {
             href="https://github.com/hoceineel"
             target="_blank"
             aria-label="hoceine el idrissi github profile "
-            ><img
+            ><NuxtImg
               :src="github"
               alt="hoceine el idrissi github profile"
               width="30"
               height="30"
+              format="webp"
               loading="lazy"
           /></a>
         </li>
@@ -103,7 +104,7 @@ onMounted(() => {
           :src="!toggle ? menu : close"
           alt="menu"
           format="webp"
-          quality="70"
+          quality="90"
           class="cursor-pointer"
           width="24"
           height="24"
