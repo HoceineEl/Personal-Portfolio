@@ -85,7 +85,7 @@ const { prev, next, toc } = useContent();
           role="complementary"
           aria-label="Article Complementary Content"
         >
-          <LazyToc :toc="toc" class="h-[200px]" />
+          <LazyToc :toc="toc" />
         </aside>
       </div>
 
@@ -113,6 +113,6 @@ const { prev, next, toc } = useContent();
   @apply sticky top-10 lg:top-24 w-full;
 }
 .content pre {
-  @apply overflow-scroll;
+  @apply overflow-x-auto;
 }
 </style>

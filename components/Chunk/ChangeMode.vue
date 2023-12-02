@@ -4,37 +4,34 @@ import { clear, stars } from "~/assets";
 </script>
 
 <template>
-  <div class="group flex justify-center fixed bottom-5 left-5">
+  <div class="group flex justify-center fixed bottom-16 left-5">
     <button
       class="bg-main-violet p-1 rounded-full"
       @click="changeMode = !changeMode"
       aria-label="Toggle Mode"
     >
-      <Transition name="fade"
-        ><NuxtImg
-          :src="stars"
-          alt="Stars Image"
-          class="transition duration-500"
-          v-if="!changeMode"
-          loading="lazy"
-          height="30"
-          width="30"
-        />
-      </Transition>
-      <Transition name="fade"
-        ><NuxtImg
-          :src="clear"
-          alt="Clear Image"
-          class="transition duration-500"
-          v-if="changeMode"
-          loading="lazy"
-          height="30"
-          width="30"
-        />
-      </Transition>
+      <NuxtImg
+        :src="stars"
+        alt="Stars Image"
+        class="transition duration-500"
+        v-if="!changeMode"
+        loading="lazy"
+        height="25"
+        width="25"
+      />
+
+      <NuxtImg
+        :src="clear"
+        alt="Clear Image"
+        class="transition duration-500"
+        v-if="changeMode"
+        loading="lazy"
+        height="25"
+        width="25"
+      />
     </button>
     <div
-      class="rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100 absolute left-2 bottom-20 overflow-hidden h-fit w-60"
+      class="rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100 absolute left-2 bottom-14 overflow-hidden h-fit w-60"
       :aria-hidden="true"
     >
       <span
@@ -52,15 +49,4 @@ import { clear, stars } from "~/assets";
   </div>
 </template>
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 0.5s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-  transform: translateX(50px);
-}
-</style>
+<style scoped></style>

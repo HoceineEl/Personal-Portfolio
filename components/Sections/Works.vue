@@ -23,7 +23,7 @@ onMounted(() => {
       code repositories for each project, please note that not all of them have live demos
       available.
     </p>
-    <div class="flex flex-wrap gap-7 mt-20 justify-center px-2 sm:px-0 mb-9">
+    <div class="flex flex-wrap gap-7 mt-5 justify-center px-2 sm:px-0 mb-9">
       <LazyChunkProjectTilt :projects="projects" v-if="!isMobile" />
       <LazyChunkProjectNoTilt :projects="projects" v-if="isMobile" />
     </div>

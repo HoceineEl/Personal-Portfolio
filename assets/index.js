@@ -12,8 +12,9 @@ const clear = "/images/clear.png";
 const stars = "/images/stars.png";
 const play = "/images/play.png";
 const pause = "/images/pause.png";
-
+const waves = "/audio/waves.mp3"
 export {
+  waves,
   play,
   pause,
   a2st,

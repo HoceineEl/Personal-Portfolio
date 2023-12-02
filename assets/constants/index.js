@@ -11,6 +11,10 @@ export const navLinks = [
         title: "Work",
     },
     {
+        id: "#projects",
+        title: "Projects",
+    },
+    {
         id: "#contact",
         title: "Contact",
     },
@@ -276,7 +280,7 @@ const testimonials = [
 
 const projects = [
     {
-        name: "SOSIPO Association",
+        name: "SOSIPO Financial Management App",
         description:
             "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",
         tags: [
@@ -306,10 +310,11 @@ const projects = [
             },
         ],
         image: "/images/Projects/sosipo/dashboard-dark.jpg",
+        demo: "https://youtu.be/P44KFiygTWo",
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
-        name: "Personal Portfolio",
+        name: "Personal Portfolio Showcase",
         description:
             "In my portfolio project, I have showcased my expertise in Vue and Nuxt, integrating 3D models, and tackling complex challenges. I've delved into performance optimization techniques, demonstrating my commitment to creating efficient, interactive web experiences.",
         tags: [
@@ -340,7 +345,50 @@ const projects = [
         source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
     },
     {
-        name: "Nikee",
+        name: "Streamlining Learning - Enhancing Video Delivery in LMS",
+        description:
+            "Integrate HLS into an LMS with ffmpeg, hls.js, and Plyr, enabling video lifecycle management, watermarking, demo extraction, bitrate encoding, segmentation, HLS formatting, MySQL storage, and multi-quality preview",
+        tags: [
+            {
+                name: "Laravel",
+                color: "red-text-gradient",
+            },
+            {
+                name: "Javascript",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "FFMPEG",
+                color: "green-text-gradient",
+            },
+            {
+                name: "Plyr",
+                color: "blue-text-gradient",
+            },
+            {
+                name: "MySql",
+                color: "pink-text-gradient",
+            },
+            {
+                name: "Bootstrap",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "HLS.js",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Ajax",
+                color: "purple-text-gradient",
+            },
+
+        ],
+        image: "/images/Projects/lms/home.jpg",
+        demo: "https://youtu.be/XZmX3QPkptQ",
+        source_code_link: "https://github.com/HoceineEl/LearningManagmentSystemeLaravel10",
+    },
+    {
+        name: "Nikee Website Revamp",
         description:
             "Revamped Nike's website with a contemporary design, optimized UI/UX, and dynamic sliders for a captivating user experience, enhancing brand engagement and online shopping satisfaction.",
         tags: [
@@ -358,37 +406,67 @@ const projects = [
         demo: "https://nikee.pages.dev"
     },
     {
-        name: "Stock Management",
+        name: "Youtube Ad Skipper  Extention",
         description:
-            "The stock management project led to a comprehensive web app, enhancing business efficiency by handling products, orders, clients, suppliers, and more. Our teamwork boosted web development skills, and we're proud of our tailored solution. Thanks to Professor D. Jamal BAKKAS for the support.",
+            "Innovated a Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience. Simplify content consumption with a sleek and efficient ad skipper.",
         tags: [
             {
                 name: "VanillaJs",
                 color: "yellow-text-gradient",
             },
             {
-                name: "PHP",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "Bootstrap",
+                name: "Chrome Extention",
                 color: "purple-text-gradient",
             },
             {
-                name: "Css",
-                color: "pink-text-gradient",
-            },
-            {
-                name: "MySql",
-                color: "red-text-gradient",
-            },
-            {
-                name: "Ajax",
-                color: "green-text-gradient",
+                name: "Firefox Extention",
+                color: "blue-text-gradient",
             },
         ],
-        image: "/images/Projects/stock/home.png",
-        source_code_link: "https://github.com/HoceineEl/StockManagment",
+        image: "/images/Projects/skipper/skipper.png",
+        source_code_link: "https://github.com/HoceineEl/Youtube-ad-skipper",
+    },
+    {
+        name: "Nur Net Browser Extention",
+        description:
+            "Nur Net shields against distractions by blocking intensive websites, redirecting users to meaningful content. Take control of your online experience, staying focused on what matters most.",
+        tags: [
+            {
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Chrome Extention",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "Firefox Extention",
+                color: "blue-text-gradient",
+            },
+        ],
+        image: "/images/Projects/nurnet/logo.png",
+        source_code_link: "https://github.com/HoceineEl/NurNet-chrome",
+    },
+    {
+        name: "Remind Me | ذكرني Extention",
+        description:
+            "Remind Me is your spiritual companion, sending customizable notifications with verses, Azkar, or Quranic recitations. Stay connected with Allah throughout your day.",
+        tags: [
+            {
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Chrome Extention",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "Firefox Extention",
+                color: "blue-text-gradient",
+            },
+        ],
+        image: "/images/Projects/dakkerni/home.JPG",
+        source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
     },
     {
         name: "Islamic Trivia",

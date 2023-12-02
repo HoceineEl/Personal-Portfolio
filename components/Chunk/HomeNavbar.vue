@@ -53,7 +53,7 @@ onMounted(() => {
         />
         <p>Hoceine EL IDRISSI</p>
       </a>
-      <ul class="justify-between gap-10 hidden md:flex">
+      <ul class="justify-between gap-10 hidden lg:flex">
         <li
           :class="[active == link.title ? 'text-white' : 'text-secondary']"
           class="hover:text-white"
@@ -99,7 +99,7 @@ onMounted(() => {
           /></a>
         </li>
       </ul>
-      <div @click="setToggle" class="md:hidden">
+      <div @click="setToggle" class="lg:hidden">
         <NuxtImg
           :src="!toggle ? menu : close"
           alt="menu"
@@ -111,7 +111,7 @@ onMounted(() => {
           loading="lazy"
         />
         <div
-          class="mt-10 sm:hidden absolute top-10 right-10 black-gradient p-6 rounded-xl transition-all duration-500"
+          class="mt-10 lg:hidden absolute top-10 right-10 black-gradient p-6 rounded-xl transition-all duration-500"
           :class="{ hidden: !toggle }"
         >
           <ul class="justify-start flex-col gap-3 flex">

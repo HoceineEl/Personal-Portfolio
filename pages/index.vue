@@ -15,7 +15,11 @@
       <LazySectionsContact />
     </div>
     <LazySectionsFooter />
+
     <LazyChunkChangeMode />
+    <div class="fixed bottom-5 left-5">
+      <LazyChunkPlayWaves />
+    </div>
   </main>
 </template>
 

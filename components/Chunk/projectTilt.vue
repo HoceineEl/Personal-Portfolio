@@ -1,8 +1,5 @@
 <template>
-  <section id="projects" class="section px-2">
-    <h2 class="header">My Work</h2>
-    <h3 class="header-secondary">Projects.</h3>
-
+  <div class="section px-2">
     <div class="flex flex-wrap gap-7 mt-20 justify-center px-2 sm:px-0 mb-9">
       <div
         v-for="(project, index) in projects"
@@ -14,11 +11,14 @@
         v-motion-slide-visible-once-right="index % 2 !== 0"
       >
         <div class="w-full h-[230px] overflow-hidden relative">
-          <NuxtImg
+          <NuxtPicture
             :src="project.image"
-            :alt="project.name + `hoceine el idrissi Project`"
-            class="w-full h-full object-cover rounded-2xl"
-            format="webp"
+            :img-attrs="{
+              alt: project.name + ' image',
+              class: 'w-full h-full object-cover rounded-2xl',
+              width: 200,
+            }"
+            format="avif,webp"
             loading="lazy"
           />
           <div class="absolute top-2 right-2 z-50 flex gap-2">
@@ -69,7 +69,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>

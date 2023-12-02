@@ -65,7 +65,7 @@ onMounted(() => {
         </h3>
       </header>
 
-      <ul class="ml-0 pl-4">
+      <ul class="ml-0 pl-4 max-h-[600px] overflow-y-auto">
         <li
           v-for="link in toc.links"
           :id="`#${link.id}`"
@@ -107,7 +107,7 @@ onMounted(() => {
 
 <style scoped>
 .toc {
-  @apply sticky top-16 lg:top-24 w-full ;
+  @apply sticky top-16 lg:top-24 w-full;
 }
 
 .toc-nav {

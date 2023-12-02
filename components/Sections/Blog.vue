@@ -47,12 +47,19 @@ onMounted(() => {
         role="listitem"
       >
         <a :href="article._path" class="flex flex-col" :alt="article.title">
-          <div
-            class="w-full h-60 bg-cover overflow-hidden rounded-ss-lg rounded-tr-lg mb-3"
-            :style="{ backgroundImage: `url(${article.image})` }"
-            role="img"
-            aria-label="Article Image"
-          ></div>
+       
+          <NuxtPicture
+            :src="article.image"
+            :img-attrs="{
+              alt: article.title + ' image',
+              class:
+                'w-full h-60 bg-cover overflow-hidden rounded-ss-lg rounded-tr-lg mb-3',
+              role: 'img',
+              ariaLabel: 'Article Image',
+            }"
+            format="avif,webp"
+            loading="lazy"
+          />
           <div class="mx-4 flex flex-col justify-center gap-4 py-4">
             <h2 class="text-lg font-bold font-serif" role="heading">
               {{ article.title }}
