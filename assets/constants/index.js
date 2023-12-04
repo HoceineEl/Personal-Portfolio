@@ -310,7 +310,8 @@ const projects = [
             },
         ],
         image: "/images/Projects/sosipo/dashboard-dark.jpg",
-        demo: "https://youtu.be/P44KFiygTWo",
+        demo: "https://youtu.be/LHKfUdVW8VA",
+        url: "/sosipo",
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
@@ -342,12 +343,13 @@ const projects = [
         ],
         image: "/images/Projects/portfolio/hero.png",
         demo: "https://hoceine.vercel.app",
+        url: "/personal-portfolio",
         source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
     },
     {
         name: "Streamlining Learning - Enhancing Video Delivery in LMS",
         description:
-            "Integrate HLS into an LMS with ffmpeg, hls.js, and Plyr, enabling video lifecycle management, watermarking, demo extraction, bitrate encoding, segmentation, HLS formatting, MySQL storage, and multi-quality preview",
+            "Integrate HLS into an LMS with ffmpeg, hls.js, and Plyr, enabling video lifecycle management, watermarking, demo extraction, bitrate encoding, segmentation, HLS formatting, MySQL storage, and multi-quality preview.",
         tags: [
             {
                 name: "Laravel",
@@ -364,6 +366,10 @@ const projects = [
             {
                 name: "Plyr",
                 color: "blue-text-gradient",
+            },
+            {
+                name: "Redis",
+                color: "red-text-gradient",
             },
             {
                 name: "MySql",
@@ -384,7 +390,8 @@ const projects = [
 
         ],
         image: "/images/Projects/lms/home.jpg",
-        demo: "https://youtu.be/XZmX3QPkptQ",
+        demo: "https://youtu.be/5erufn_t5cc",
+        url: "/enhancing-video-delivery-in-lms",
         source_code_link: "https://github.com/HoceineEl/LearningManagmentSystemeLaravel10",
     },
     {
@@ -403,28 +410,8 @@ const projects = [
         ],
         image: "/images/Projects/nike/hero.jpg",
         source_code_link: "https://github.com/HoceineEl/nike-website",
+        url: "/nikee",
         demo: "https://nikee.pages.dev"
-    },
-    {
-        name: "Youtube Ad Skipper  Extention",
-        description:
-            "Innovated a Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience. Simplify content consumption with a sleek and efficient ad skipper.",
-        tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Chrome Extention",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "Firefox Extention",
-                color: "blue-text-gradient",
-            },
-        ],
-        image: "/images/Projects/skipper/skipper.png",
-        source_code_link: "https://github.com/HoceineEl/Youtube-ad-skipper",
     },
     {
         name: "Nur Net Browser Extention",
@@ -445,6 +432,7 @@ const projects = [
             },
         ],
         image: "/images/Projects/nurnet/logo.png",
+        url: "/nur-net",
         source_code_link: "https://github.com/HoceineEl/NurNet-chrome",
     },
     {
@@ -466,7 +454,30 @@ const projects = [
             },
         ],
         image: "/images/Projects/dakkerni/home.JPG",
+        url: "/remind-me",
         source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
+    },
+    {
+        name: "Youtube Ad Skipper  Extention",
+        description:
+            "Innovated a Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience. Simplify content consumption with a sleek and efficient ad skipper.",
+        tags: [
+            {
+                name: "VanillaJs",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Chrome Extention",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "Firefox Extention",
+                color: "blue-text-gradient",
+            },
+        ],
+        image: "/images/Projects/skipper/skipper.png",
+        url: "/youtube-ad-skipper",
+        source_code_link: "https://github.com/HoceineEl/Youtube-ad-skipper",
     },
     {
         name: "Islamic Trivia",
@@ -488,6 +499,7 @@ const projects = [
         ],
         image: "/images/Projects/quiz/home.jpg",
         demo: "https://islamictrivia.vercel.app/",
+        url: "/islamic-trivia",
         source_code_link: "https://github.com/HoceineEl/Islamic_Quiz",
     },
     {
@@ -507,6 +519,7 @@ const projects = [
         ],
         image: "/images/Projects/hangman/home.png",
         demo: "https://hangman-ane.pages.dev/",
+        url: "/hangman",
         source_code_link: "https://github.com/HoceineEl/hangman",
     },
 ];

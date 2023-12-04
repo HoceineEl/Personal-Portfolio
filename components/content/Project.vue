@@ -1,24 +1,24 @@
 <script setup>
 import { hoceine } from "~/assets";
 
-const { prev, next, toc } = useContent();
+const { page: project, toc } = useContent();
 </script>
 <template>
-  <ContentDoc v-slot="{ doc }">
-    <LazyChunkSeoHead :page="doc" />
+  <div>
+    <LazyChunkSeoHead :page="project" />
     <article
       class="flex flex-col justify-center items-center"
-      role="article"
-      aria-label="Article"
+      role="Project"
+      aria-label="Project"
     >
       <NuxtPicture
         :imgAttrs="{
           class: 'w-full  h-[600px] object-cover rounded-3xl mb-8 object-center',
-          alt: `${doc.title}  banner image`,
+          alt: `${project.title}  banner image`,
           role: 'img',
-          ariaLabel: 'Article Image',
+          ariaLabel: 'Project Image',
         }"
-        :src="doc.banner"
+        :src="project.image"
         format="avif,webp"
       ></NuxtPicture>
       <div class="mx-4 flex flex-col justify-center gap-4 py-4">
@@ -27,20 +27,9 @@ const { prev, next, toc } = useContent();
           role="heading"
           aria-level="1"
         >
-          {{ doc.title }}
+          {{ project.title }}
         </h1>
-        <p class="sm:text-lg text-sm text-gray-400 px-0 sm:px-10">
-          {{ doc.description }}
-        </p>
-        <div class="flex flex-wrap gap-2 px-0 sm:px-10">
-          <span
-            v-for="tag in doc.tags"
-            class="px-3 py-1 bg-teal-600 rounded-lg text-sm font-semibold"
-            role="tag"
-          >
-            {{ tag }}
-          </span>
-        </div>
+
         <div
           class="metadata px-0 sm:px-10 flex gap-5 font-semibold text-white text-[16px] flex-wrap"
           role="contentinfo"
@@ -56,43 +45,41 @@ const { prev, next, toc } = useContent();
               quality="30"
               aria-label="Author's Picture"
             />
-            <p class="article-author">Hoceine El idrissi</p>
+            <p class="Project-author">Hoceine El idrissi</p>
           </div>
 
-          <time class="flex gap-1 items-center" :datetime="doc.createdAt" role="time">
-            <IconsDate class="w-4 h-4" /> {{ useFormatDate(doc.createdAt) }}
+          <time class="flex gap-1 items-center" :datetime="project.createdAt" role="time">
+            <IconsDate class="w-4 h-4" /> {{ useFormatDate(project.createdAt) }}
           </time>
-          <p v-if="doc.minutes" class="flex gap-1 items-center" role="status">
-            <IconsTime class="w-4 h-4" /> {{ doc.minutes }} min read
+          <p v-if="project.minutes" class="flex gap-1 items-center" role="status">
+            <IconsTime class="w-4 h-4" /> {{ project.minutes }} min read
           </p>
         </div>
       </div>
-      <span class="article-hr"></span>
+      <span class="Project-hr"></span>
       <div
         class="max-w-6xl px-1 sm:px-0 content grid grid-cols-7"
         role="group"
-        aria-label="Article Content Group"
+        aria-label="Project Content Group"
       >
         <ContentRenderer
+          :key="project._id"
           ref="content"
-          :value="doc"
+          :value="project"
           class="col-span-full lg:col-span-5 nuxt-content"
-          role="article"
-          aria-label="Article Content"
+          role="Project"
+          aria-label="Project Content"
         />
         <aside
           class="-order-2 lg:order-2"
           role="complementary"
-          aria-label="Article Complementary Content"
+          aria-label="Project Complementary Content"
         >
           <LazyToc :toc="toc" />
         </aside>
       </div>
-
-      <LazyNeighbor :text="next" :prev="prev" />
     </article>
-    <LazySeeMore :title="doc.title" />
-  </ContentDoc>
+  </div>
 </template>
 
 <style>
@@ -103,7 +90,7 @@ const { prev, next, toc } = useContent();
 .content li a {
   @apply text-slate-400 text-[12px] transition-all duration-300;
 }
-.article-hr {
+.Project-hr {
   @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
 }
 .content aside {

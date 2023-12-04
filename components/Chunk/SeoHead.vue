@@ -1,24 +1,23 @@
 <script setup>
-const { article } = defineProps(["article"]);
+const { page } = defineProps(["page"]);
 useSeoMeta({
-  title: article.title,
-  description: article.description,
-  ogTitle: article.title,
-  ogDescription: article.description,
-  ogType: "article",
-  ogImageAlt: article.title,
-  ogUrl: `https://hoceine.vercel.app${article._path}`,
-  ogImage: article.image,
+  title: page.title,
+  description: page.description,
+  ogTitle: page.title,
+  ogDescription: page.description,
+  ogType: "page",
+  ogImageAlt: page.title,
+  ogUrl: `https://hoceine.vercel.app${page._path}`,
+  ogImage: page.image,
   twitterCard: "summary_large_image",
   twitterCreator: "@HoceineElidrisi",
-  twitterDescription: article.description,
-  twitterTitle: article.title,
-  twitterImage: article.image,
-  keywords: article.tags,
-  articleSection: "Technology",
-  articlePublishedTime: article.createdAt,
-  articleAuthor: "Hoceine EL IDRISSI",
+  twitterDescription: page.description,
+  twitterTitle: page.title,
+  twitterImage: page.image,
+  keywords: page.tags,
+  pageSection: "Technology",
+  pagePublishedTime: page.createdAt,
+  pageAuthor: "Hoceine EL IDRISSI",
 });
-console.log(article.createdAt);
 </script>
 <template></template>
