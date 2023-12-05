@@ -11,7 +11,7 @@ tags:
     Performance Optimization,
     Portfolio Showcase,
   ]
-image: "/images/projects/tech/hero.png"
+image: "/images/tech/portfolio/hero.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
@@ -64,17 +64,17 @@ Explore the visual aesthetics of the portfolio through the following screenshots
 
 - **Homepage:** A captivating introduction to the portfolio.
 
-<MdImage text="/images/projects/tech/hero.png"></MdImage>
+<MdImage text="/images/tech/portfolio/hero.png"></MdImage>
 
 - **Project Details:** In-depth details about showcased projects.
 
-<MdImage text="/images/projects/tech/project.png"></MdImage>
+<MdImage text="/images/tech/portfolio/project.png"></MdImage>
 
 - **Blog Index Page:** Dynamic and responsive blog listing.
-  <MdImage text="/images/projects/tech/blog.png"></MdImage>
+  <MdImage text="/images/tech/portfolio/blog.png"></MdImage>
 
 - **Article Page:** A closer look at the thoughtfully crafted articles.
-  <MdImage text="/images/projects/tech/article.png"></MdImage>
+  <MdImage text="/images/tech/portfolio/article.png"></MdImage>
 
 ## Explore Further
 
