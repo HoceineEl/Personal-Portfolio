@@ -13,7 +13,7 @@ useSeoMeta({
   twitterCreator: "@HoceineElidrisi",
   twitterDescription: page.description,
   twitterTitle: page.title,
-  twitterImage: page.image,
+  twitterImage: "https://hoceine.vercel.app" + page.image,
   keywords: page.tags,
   pageSection: "Technology",
   pagePublishedTime: page.createdAt,
