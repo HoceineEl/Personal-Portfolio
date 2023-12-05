@@ -103,7 +103,4 @@ const { page: project, toc } = useContent();
 .content pre {
   @apply overflow-x-auto;
 }
-a:not(h2 a):not(li a):not(h3 a):not(h1 a):not(h4 a):not(h5 a):not(h6 a) {
-  @apply text-sky-400 font-semibold;
-}
 </style>
