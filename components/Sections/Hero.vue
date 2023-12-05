@@ -30,8 +30,7 @@ import { portrait } from "~/assets/constants";
             Passionate coder crafting digital solutions with creativity and precision.
             Explore more!
           </p>
-
-          <a href="mailto:hoceineelidrissi@gmail.com">
+          <a href="#contact">
             <div
               class="px-6 py-3 text-main-violet font-bold border-2 rounded-xl w-fit group relative hover:text-white-100 overflow-hidden"
             >
