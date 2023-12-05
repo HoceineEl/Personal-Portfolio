@@ -19,7 +19,7 @@ Revitalizing Nike's online presence, this project brings forth a contemporary de
 - **Contemporary Design:** A visually appealing and modern design that aligns with Nike's brand identity and ethos.
 
 - **Optimized UI/UX:** Carefully crafted user interfaces and experiences to ensure seamless navigation and interaction.
-  <MdImage text="/images/projects/nike/high.PNG"></MdImage>
+  <MdImage text="/images/projects/nike/high.png"></MdImage>
 
 - **Dynamic Sliders:** Implementing dynamic sliders to captivate users and showcase products in an engaging and interactive manner.
 

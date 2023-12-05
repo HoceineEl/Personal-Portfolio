@@ -64,18 +64,18 @@ Explore the visual aesthetics of the portfolio through the following screenshots
 
 - **Homepage:** A captivating introduction to the portfolio.
 
-<MdImage text="/images/projects/portfolio/hero.PNG"></MdImage>
-<MdImage text="/images/blog/vdom/vdom1.png"></MdImage>
+<MdImage text="/images/projects/portfolio/hero.png"></MdImage>
+<MdImage text="/images/hero.webp"></MdImage>
 
 - **Project Details:** In-depth details about showcased projects.
 
-<MdImage text="/images/projects/portfolio/project.PNG"></MdImage>
+<MdImage text="/images/projects/portfolio/project.png"></MdImage>
 
 - **Blog Index Page:** Dynamic and responsive blog listing.
-  <MdImage text="/images/projects/portfolio/blog.PNG"></MdImage>
+  <MdImage text="/images/projects/portfolio/blog.png"></MdImage>
 
 - **Article Page:** A closer look at the thoughtfully crafted articles.
-  <MdImage text="/images/projects/portfolio/article.PNG"></MdImage>
+  <MdImage text="/images/projects/portfolio/article.png"></MdImage>
 
 ## Explore Further
 
