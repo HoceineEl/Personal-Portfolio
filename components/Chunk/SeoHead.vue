@@ -8,7 +8,7 @@ useSeoMeta({
   ogType: "page",
   ogImageAlt: page.title,
   ogUrl: `https://hoceine.vercel.app${page._path}`,
-  ogImage: page.image,
+  ogImage: "https://hoceine.vercel.app/" + page.image,
   twitterCard: "summary_large_image",
   twitterCreator: "@HoceineElidrisi",
   twitterDescription: page.description,
