@@ -9,10 +9,10 @@
         <div
           v-for="tech in technologies"
           :key="tech.name"
-          class="transition-all duration-300 group relative"
+          class="transition-all duration-1000 group relative"
         >
           <div
-            class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3"
+            class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3 transition-all duration-500"
           >
             <NuxtImg
               format="webp"
@@ -36,14 +36,11 @@
         </div>
       </div>
     </div>
-
-
   </div>
 </template>
 
 <script setup>
 import { technologies } from "~/assets/constants";
-
 </script>
 
 <style lang="scss" scoped></style>
