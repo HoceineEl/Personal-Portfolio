@@ -2,7 +2,7 @@
 title: Nikee Website Revamp
 description: Embarking on a transformative journey, the Nikee Website Revamp project redefines online engagement with a fresh design, optimized UI/UX, and dynamic sliders. Elevating the user experience, this project contributes to enhanced brand engagement and satisfaction in the realm of online shopping.
 tags: [Hoceine el idrissi, Vue, Tailwind Css, Sliders, Nike Website recreate]
-image: "/images/projects/nike/high.png"
+image: "/images/my_projects/nike/high.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
@@ -19,7 +19,7 @@ Revitalizing Nike's online presence, this project brings forth a contemporary de
 - **Contemporary Design:** A visually appealing and modern design that aligns with Nike's brand identity and ethos.
 
 - **Optimized UI/UX:** Carefully crafted user interfaces and experiences to ensure seamless navigation and interaction.
-  <MdImage text="/images/projects/nike/high.png"></MdImage>
+  <MdImage text="/images/my_projects/nike/high.png"></MdImage>
 
 - **Dynamic Sliders:** Implementing dynamic sliders to captivate users and showcase products in an engaging and interactive manner.
 

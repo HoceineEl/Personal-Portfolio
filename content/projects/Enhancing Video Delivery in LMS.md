@@ -14,7 +14,7 @@ tags:
     HLS.js,
     Ajax,
   ]
-image: "/images/projects/lms/home.jpg"
+image: "/images/my_projects/lms/home.jpg"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
@@ -30,7 +30,7 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 
 - **HLS Integration:** Incorporating HLS (HTTP Live Streaming) for improved video streaming performance and adaptability.
 
-  <MdImage text="/images/projects/lms/hls.png"></MdImage>
+  <MdImage text="/images/my_projects/lms/hls.png"></MdImage>
 
 - **Watermarking:** Adding a watermark to the video content to protect intellectual property and enhance branding.
 
@@ -48,7 +48,7 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 
 **_Video Lifecycle :_**
 
-<MdImage text="/images/projects/lms/lifecycle.png"></MdImage>
+<MdImage text="/images/my_projects/lms/lifecycle.png"></MdImage>
 
 ## Technologies Used
 
@@ -76,19 +76,19 @@ This project utilizes a diverse range of technologies to achieve its objectives:
 
 The project harnesses the power of Laravel Jobs and Queues to efficiently handle tasks related to video processing and encoding. By offloading time-consuming operations to a background queue, the system ensures a smooth and responsive user experience.
 
-<MdImage text="/images/projects/lms/queue.png"></MdImage>
+<MdImage text="/images/my_projects/lms/queue.png"></MdImage>
 
 ### Redis for Video Encoding State
 
 To provide real-time feedback on video encoding progress, Redis is employed as a caching and data store. The current video encoding state, including the percentage completion, is stored in Redis. This allows for quick retrieval of data, enabling dynamic updates on the user interface.
 
-<MdImage text="/images/projects/lms/terminalFFmpeg.png"></MdImage>
+<MdImage text="/images/my_projects/lms/terminalFFmpeg.png"></MdImage>
 
 ### Ajax Integration
 
 Ajax plays a crucial role in establishing seamless communication between the frontend and backend. Through Ajax requests, the frontend can fetch and display real-time updates on the video encoding state stored in Redis. This asynchronous approach enhances the user experience by eliminating the need for manual page refreshes.
 
-<MdImage text="/images/projects/lms/uploadvideo.png"></MdImage>
+<MdImage text="/images/my_projects/lms/uploadvideo.png"></MdImage>
 
 ## Insights and Enhancements
 
@@ -107,39 +107,39 @@ Incorporating Laravel Jobs, Queues, Redis, and Ajax introduces several benefits 
 Explore the visual representation of the project through the following screenshots:
 
 - **Before Uploading the Video:** Prepare your video for an enhanced learning experience.
-  <MdImage text="/images/projects/lms/beforUploading.png"></MdImage>
+  <MdImage text="/images/my_projects/lms/beforUploading.png"></MdImage>
 
 - **Video Lifecycle Management:** Visualizing the lifecycle stages of a video within the system.
 
-  <MdImage text="/images/projects/lms/uploadvideo.png"></MdImage>
+  <MdImage text="/images/my_projects/lms/uploadvideo.png"></MdImage>
 
 - **Video Uploaded Successfully:** Your content is now ready for seamless delivery.
 
-<MdImage text="/images/projects/lms/uploadsuccess.png"></MdImage>
+<MdImage text="/images/my_projects/lms/uploadsuccess.png"></MdImage>
 
 - **You Can View the Course Here:** Dive into the course content to deepen your understanding.
 
-<MdImage text="/images/projects/lms/viewCourse.png"></MdImage>
+<MdImage text="/images/my_projects/lms/viewCourse.png"></MdImage>
 
 - **You Can View the Lesson Here:** Explore each lesson to grasp the concepts thoroughly.
 
-<MdImage text="/images/projects/lms/showlesson.png"></MdImage>
+<MdImage text="/images/my_projects/lms/showlesson.png"></MdImage>
 
 - **You Can See Different Qualities Displayed:** Choose the video quality that suits your preference.
 
-<MdImage text="/images/projects/lms/qualities.png"></MdImage>
+<MdImage text="/images/my_projects/lms/qualities.png"></MdImage>
 
 - **(144p):** Experience the video in lower resolution for optimized performance.
 
-<MdImage text="/images/projects/lms/144.png"></MdImage>
+<MdImage text="/images/my_projects/lms/144.png"></MdImage>
 
 - **(1080p):** Immerse yourself in high-definition video quality for a detailed learning experience.
 
-<MdImage text="/images/projects/lms/1080.png"></MdImage>
+<MdImage text="/images/my_projects/lms/1080.png"></MdImage>
 
 - **Network Progress during Video Timeline Progress:** Monitor the network progress as the video playback advances.
 
-<MdImage text="/images/projects/lms/networkprogress.png"></MdImage>
+<MdImage text="/images/my_projects/lms/networkprogress.png"></MdImage>
 
 ## Explore Further
 

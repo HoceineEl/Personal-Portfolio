@@ -10,7 +10,7 @@ tags:
     Explicit content Blocker,
     Nur Net,
   ]
-image: "/images/projects/nurnet/logo.png"
+image: "/images/my_projects/nurnet/logo.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"

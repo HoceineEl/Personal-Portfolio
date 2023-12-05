@@ -2,7 +2,7 @@
 title: Hangman Game
 description: Embark on a nostalgic journey into the early days of my JavaScript learning with the Hangman Game—a project that not only entertains but also reflects my growth and problem-solving skills. Dive into the fun side of programming as you explore the principles of this classic word-guessing game.
 tags: [Hoceine el Idrissi, JavaScript, Tailwind CSS, Hangman Game]
-image: "/images/projects/hangman/home.png"
+image: "/images/my_projects/hangman/home.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
