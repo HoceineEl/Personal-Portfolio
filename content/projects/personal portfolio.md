@@ -65,6 +65,7 @@ Explore the visual aesthetics of the portfolio through the following screenshots
 - **Homepage:** A captivating introduction to the portfolio.
 
 <MdImage text="/images/projects/portfolio/hero.PNG"></MdImage>
+<MdImage text="/images/blog/vdom/vdom1.png"></MdImage>
 
 - **Project Details:** In-depth details about showcased projects.
 
