@@ -115,4 +115,7 @@ const { prev, next, toc } = useContent();
 .content pre {
   @apply overflow-x-auto;
 }
+a:not(h a):not(li a) {
+  @apply text-teal-300 font-semibold;
+}
 </style>
