@@ -194,9 +194,9 @@ To achieve these objectives, we introduced innovative solutions:
 
 ### Scenario 3: Document Upload and Review
 
-1. **Secrétaire Login:**
+1. **Secretary Login:**
 
-   - The Secrétaire logs into the application using their credentials.
+   - The Secretary logs into the application using their credentials.
      <MdImage text="/images/projects/sosipo/secretary_dashboard.png"></MdImage>
 
 2. **Adding Document:**
