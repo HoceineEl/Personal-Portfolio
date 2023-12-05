@@ -11,7 +11,7 @@ tags:
     Performance Optimization,
     Portfolio Showcase,
   ]
-image: "/images/my_projects/portfolio/hero.png"
+image: "/images/my_projects/portfolio/mockup.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"

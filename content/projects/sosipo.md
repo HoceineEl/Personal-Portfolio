@@ -13,7 +13,7 @@ tags:
     ChartJs,
     Ajax,
   ]
-image: "/images/my_projects/sosipo/banner.png"
+image: "/images/my_projects/sosipo/mockup.png"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
