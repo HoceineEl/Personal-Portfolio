@@ -33,7 +33,9 @@ In this showcase, I've delved deep into the intricacies of web development, tack
 
 ## Performance Optimization
 
-Achieved an impressive 94 on Google Page Speed Insights for performance, 96 for accessibility, and a perfect 100 for both best practices and SEO. This success is attributed to various optimization strategies:
+<MdImage text="/images/my_projects/portfolio/lighthouse.png"></MdImage>
+
+Achieved an impressive 95 on Google Page Speed Insights for performance, 96 for accessibility, and a perfect 100 for both best practices and SEO. This success is attributed to various optimization strategies:
 
 - **Next-Generation Image Formats:** Utilizing AVIF and WebP formats with Nuxt Image to enhance image quality and reduce load times.
 - **Code Splitting:** Implementing code splitting techniques to optimize loading and rendering times, ensuring a smooth user experience.

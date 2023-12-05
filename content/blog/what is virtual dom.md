@@ -46,8 +46,6 @@ After identifying the diffs, only the necessary updates are made to the real DOM
 In the end, the VDOM can be represented as a JavaScript object, simplifying web development and enhancing performance.
 
 <MdImage text="/images/blog/vdom/vdom1.png"></MdImage>
-<MdImage text="/images/my_projects/portfolio/project.png"></MdImage>
-<MdImage text="/images/my_projects/portfolio/blog.png"></MdImage>
 
 ## How Does Vue.js Virtual DOM Work?
 
