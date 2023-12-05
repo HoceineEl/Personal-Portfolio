@@ -1,7 +1,7 @@
 ---
 title: Islamic Trivia
 description: Dive into the world of knowledge with the Islamic Trivia project—an engaging quiz that tests your understanding of Islam through 50 thoughtfully crafted questions. Tailoring individual results with detailed descriptions, this quiz offers a unique insight into each participant's knowledge of Islamic teachings.
-tags: [Hoceine el idrissi, Javascript, tailwind css, Islamic Quiz]
+tags: [Hoceine El Idrissi, JavaScript, Tailwind CSS, Islamic Quiz]
 image: "/images/projects/quiz/home.jpg"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
@@ -21,13 +21,25 @@ Embark on a journey of learning and self-discovery with Islamic Trivia. The proj
 
 ## Key Features
 
-- **VanillaJs:** Leveraging Vanilla JavaScript for dynamic and responsive quiz functionality.
+- **Vanilla JavaScript:** Leveraging Vanilla JavaScript for dynamic and responsive quiz functionality.
 - **JSON:** Utilizing JSON for efficient storage and retrieval of quiz questions and data.
 - **Tailwind CSS:** Ensuring a visually appealing and consistent design with the utility-first CSS framework.
 
 ## Demo and Exploration
 
 Put your knowledge to the test by participating in the Islamic Trivia quiz. Explore the demo to experience the engaging questions and receive personalized results.
+
+**_If the answer is correct:_**
+
+<MdImage text="/images/projects/quiz/correct.png"></MdImage>
+
+**_If the answer is false:_**
+
+<MdImage text="/images/projects/quiz/false.png"></MdImage>
+
+**_Result:_**
+
+<MdImage text="/images/projects/quiz/result.png"></MdImage>
 
 **Demo:** [Islamic Trivia Demo](https://islamictrivia.vercel.app/)
 

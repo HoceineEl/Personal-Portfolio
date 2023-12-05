@@ -19,7 +19,7 @@ createdBy: "Hoceine EL IDRISSI"
 
 ## Personal Portfolio Showcase
 
-Welcome to my Personal Portfolio Showcase, a comprehensive exploration of my skills and creativity in web development. This project serves as a testament to my proficiency in Vue.js, Nuxt.js, and Tres.js, bringing together interactive and visually appealing web experiences.
+Welcome to my Personal Portfolio Showcase, a comprehensive exploration of my skills and creativity in web development. This project serves as a testament to my proficiency in Vue.js, Nuxt.js, and Three.js, bringing together interactive and visually appealing web experiences.
 
 ## Project Overview
 
@@ -28,7 +28,7 @@ In this showcase, I've delved deep into the intricacies of web development, tack
 ## Technologies Used
 
 - **Vue.js and Nuxt.js:** Leveraging the power of Vue.js and Nuxt.js for seamless front-end development and efficient rendering of dynamic content.
-- **Tres.js:** Incorporating Three.js for 3D modeling, adding a captivating and interactive dimension to the user experience.
+- **Three.js:** Incorporating Three.js for 3D modeling, adding a captivating and interactive dimension to the user experience.
 - **Tailwind CSS:** Ensuring a responsive and visually consistent design with the utility-first CSS framework.
 
 ## Performance Optimization
@@ -37,18 +37,44 @@ Achieved an impressive 94 on Google Page Speed Insights for performance, 96 for 
 
 - **Next-Generation Image Formats:** Utilizing AVIF and WebP formats with Nuxt Image to enhance image quality and reduce load times.
 - **Code Splitting:** Implementing code splitting techniques to optimize loading and rendering times, ensuring a smooth user experience.
+- **Image Lazy Loading:** Employing image lazy loading to defer the loading of non-essential images, further enhancing performance.
 
 ## Content Management
 
 The project's content management is facilitated by **_Nuxt Content_**, allowing for easy creation and management of blog posts and articles. This ensures a dynamic and engaging platform for sharing insights and updates.
 
-## Screenshots
+## Advanced Features
+
+### Dynamic Blog Loading
+
+Integrating a dynamic blog loading mechanism based on user interaction:
+
+- **Home Page Blog List:** As you scroll past 60%, a request is made to dynamically fetch the list of blogs, providing a seamless and efficient user experience.
+
+### Interactive Reading Experience
+
+Enhancing the reading experience with interactive features:
+
+- **Scroll-Triggered Requests:** When scrolling through an article, requests for the next and previous articles are triggered at 90% scroll progress, ensuring a smooth transition between articles.
+- **Alpha Waves:** Enjoy a focused reading experience by playing alpha waves while perusing articles, promoting concentration and mindfulness.
+
+### Visual Showcases
 
 Explore the visual aesthetics of the portfolio through the following screenshots:
 
 - **Homepage:** A captivating introduction to the portfolio.
+
+<MdImage text="/images/projects/portfolio/hero.PNG"></MdImage>
+
 - **Project Details:** In-depth details about showcased projects.
-- **Blog:** A glimpse into the thoughtfully crafted blog section.
+
+<MdImage text="/images/projects/portfolio/project.PNG"></MdImage>
+
+- **Blog Index Page:** Dynamic and responsive blog listing.
+  <MdImage text="/images/projects/portfolio/blog.PNG"></MdImage>
+
+- **Article Page:** A closer look at the thoughtfully crafted articles.
+  <MdImage text="/images/projects/portfolio/article.PNG"></MdImage>
 
 ## Explore Further
 

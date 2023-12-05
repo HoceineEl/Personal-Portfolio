@@ -30,6 +30,8 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 
 - **HLS Integration:** Incorporating HLS (HTTP Live Streaming) for improved video streaming performance and adaptability.
 
+  <MdImage text="/images/projects/lms/hls.png"></MdImage>
+
 - **Watermarking:** Adding a watermark to the video content to protect intellectual property and enhance branding.
 
 - **Demo Extraction:** Extracting a brief segment from the video to create engaging demos for promotional purposes.
@@ -43,6 +45,10 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 - **MySQL Storage:** Storing essential video information in a MySQL database for seamless retrieval and management.
 
 - **Multi-Quality Preview:** Offering users the option to preview videos in multiple quality settings for a personalized viewing experience.
+
+**_Video Lifecycle :_**
+
+<MdImage text="/images/projects/lms/lifecycle.png"></MdImage>
 
 ## Technologies Used
 
@@ -70,13 +76,19 @@ This project utilizes a diverse range of technologies to achieve its objectives:
 
 The project harnesses the power of Laravel Jobs and Queues to efficiently handle tasks related to video processing and encoding. By offloading time-consuming operations to a background queue, the system ensures a smooth and responsive user experience.
 
+<MdImage text="/images/projects/lms/queue.png"></MdImage>
+
 ### Redis for Video Encoding State
 
 To provide real-time feedback on video encoding progress, Redis is employed as a caching and data store. The current video encoding state, including the percentage completion, is stored in Redis. This allows for quick retrieval of data, enabling dynamic updates on the user interface.
 
+<MdImage text="/images/projects/lms/terminalFFmpeg.PNG"></MdImage>
+
 ### Ajax Integration
 
 Ajax plays a crucial role in establishing seamless communication between the frontend and backend. Through Ajax requests, the frontend can fetch and display real-time updates on the video encoding state stored in Redis. This asynchronous approach enhances the user experience by eliminating the need for manual page refreshes.
+
+<MdImage text="/images/projects/lms/uploadvideo.PNG"></MdImage>
 
 ## Insights and Enhancements
 
@@ -94,8 +106,40 @@ Incorporating Laravel Jobs, Queues, Redis, and Ajax introduces several benefits 
 
 Explore the visual representation of the project through the following screenshots:
 
-- **Homepage:** An overview of the LMS showcasing video content.
+- **Before Uploading the Video:** Prepare your video for an enhanced learning experience.
+  <MdImage text="/images/projects/lms/beforUploading.PNG"></MdImage>
+
 - **Video Lifecycle Management:** Visualizing the lifecycle stages of a video within the system.
+
+  <MdImage text="/images/projects/lms/uploadvideo.PNG"></MdImage>
+
+- **Video Uploaded Successfully:** Your content is now ready for seamless delivery.
+
+<MdImage text="/images/projects/lms/uploadsuccess.PNG"></MdImage>
+
+- **You Can View the Course Here:** Dive into the course content to deepen your understanding.
+
+<MdImage text="/images/projects/lms/viewCourse.PNG"></MdImage>
+
+- **You Can View the Lesson Here:** Explore each lesson to grasp the concepts thoroughly.
+
+<MdImage text="/images/projects/lms/showlesson.PNG"></MdImage>
+
+- **You Can See Different Qualities Displayed:** Choose the video quality that suits your preference.
+
+<MdImage text="/images/projects/lms/qualities.PNG"></MdImage>
+
+- **(144p):** Experience the video in lower resolution for optimized performance.
+
+<MdImage text="/images/projects/lms/144.PNG"></MdImage>
+
+- **(1080p):** Immerse yourself in high-definition video quality for a detailed learning experience.
+
+<MdImage text="/images/projects/lms/1080.PNG"></MdImage>
+
+- **Network Progress during Video Timeline Progress:** Monitor the network progress as the video playback advances.
+
+<MdImage text="/images/projects/lms/networkprogress.PNG"></MdImage>
 
 ## Explore Further
 

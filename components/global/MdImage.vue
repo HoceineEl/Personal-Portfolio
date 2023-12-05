@@ -1,8 +1,9 @@
 <template>
   <div class="img-cont" ref="imageContainer">
-    <img
+    <NuxtImg
       :src="text"
       loading="lazy"
+      class="w-full"
       alt="Image in the article"
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
@@ -46,7 +47,7 @@ img {
 .zoomed {
   transform: scale(1.3);
   cursor: zoom-out;
-  position: absolute;
+  position: relative;
   z-index: 20;
 }
 

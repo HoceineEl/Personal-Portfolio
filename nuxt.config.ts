@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     htmlAttrs: {
       lang: 'en',
     },
+     link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/images/logo.svg' }
+    ],
     title: 'Hoceine EL IDRISSI - Full Stack Web Developer',
     meta: [
       { charset: 'utf-8' },

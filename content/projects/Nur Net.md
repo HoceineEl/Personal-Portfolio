@@ -32,6 +32,10 @@ Nur Net shields against distractions by blocking intensive websites and redirect
 
 - **Personalized Protection:** Specify websites you want to block, aligning Nur Net with your unique preferences and goals.
 
+**_Demo : _**
+
+<iframe width="800" height="600" src="https://www.youtube.com/embed/0HaLcNqbKCI?si=oRAVV9d28ylYOMs2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
 Embrace the power of Nur Net to break free from distractions, refocus on what truly matters, and enjoy a more mindful browsing journey.
 
 ## Chrome Developer's Preview

@@ -19,6 +19,7 @@ Revitalizing Nike's online presence, this project brings forth a contemporary de
 - **Contemporary Design:** A visually appealing and modern design that aligns with Nike's brand identity and ethos.
 
 - **Optimized UI/UX:** Carefully crafted user interfaces and experiences to ensure seamless navigation and interaction.
+  <MdImage text="/images/projects/nike/high.PNG"></MdImage>
 
 - **Dynamic Sliders:** Implementing dynamic sliders to captivate users and showcase products in an engaging and interactive manner.
 
@@ -29,5 +30,7 @@ This project incorporates great animations and other innovative features to elev
 ## Demo and Exploration
 
 Visit the live demo to explore the revamped Nikee website and witness firsthand the captivating user interface and dynamic elements. The source code is also available for those interested in delving into the implementation details.
+
+**Visit this Site to live the Exp:** [https://nikee.pages.dev](https://nikee.pages.dev)
 
 Experience the fusion of design, technology, and user-centric enhancements that make the Nikee Website Revamp a compelling online destination.

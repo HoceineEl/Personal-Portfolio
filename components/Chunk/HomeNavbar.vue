@@ -31,7 +31,7 @@ onMounted(() => {
       <a
         href="/"
         alt="Logo"
-        aria-label="Hoceine El Idrissi's Logo"
+        aria-label="Hoceine EL IDRISSI"
         class="flex items-center gap-1 font-semibold text-[16px] xs:gap-3 xs:font-bold xs:text-[18px] text-white"
         @click="
           () => {

@@ -13,7 +13,8 @@ const { page: project, toc } = useContent();
     >
       <NuxtPicture
         :imgAttrs="{
-          class: 'w-full  h-[600px] object-cover rounded-3xl mb-8 object-center',
+          class:
+            'w-full  h-[600px] object-cover rounded-3xl mb-8 object-center overflow-y-auto',
           alt: `${project.title}  banner image`,
           role: 'img',
           ariaLabel: 'Project Image',

@@ -10,7 +10,7 @@ tags:
     Zikr reminder,
     Remind Me | ذكرني Extension,
   ]
-image: "/images/projects/dakkerni/home.jpg"
+image: "/images/projects/dakkerni/marquee.jpg"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
@@ -19,6 +19,7 @@ createdBy: "Hoceine EL IDRISSI"
 ## Remind Me | ذكرني Extension
 
 Elevate your spiritual journey with Remind Me, a thoughtful Chrome and Firefox extension designed to infuse your day with moments of reflection and connection to Allah. Tailor your reminders with verses, Azkar for morning and evening, or soothing Quranic recitations.
+<MdImage text="/images/projects/dakkerni/home.jpg"></MdImage>
 
 ## Project Overview
 
@@ -29,10 +30,13 @@ Remind Me serves as your spiritual companion, sending customizable notifications
 This extension offers a variety of features to enhance your spiritual journey:
 
 - **Customizable Notifications:** Receive notifications delivering verses, Azkar, or Quranic recitations tailored to your preferences.
+  <MdImage text="/images/projects/dakkerni/popup.jpg"></MdImage>
 
 - **Spiritual Variety:** Choose from a selection of Adkar types, ensuring a personalized and meaningful reminder experience.
+  <MdImage text="/images/projects/dakkerni/customize.jpg"></MdImage>
 
 - **New Tab Experience:** Transform your new tab into a portal of spiritual inspiration with a random Quranic verse, ready to play or explore with a click.
+  <MdImage text="/images/projects/dakkerni/newtab.jpg"></MdImage>
 
 ## Chrome Developer's Preview
 
