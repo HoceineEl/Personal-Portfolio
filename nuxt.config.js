@@ -53,7 +53,7 @@ export default defineNuxtConfig({
         },
         {
           name: 'keywords',
-          content: 'Hoceine El Idrissi, Web Developer, Full Stack Developer, Laravel Expert, PHP Developer, Nuxt.js Specialist, Vue.js Developer, Bootstrap, Tailwind CSS, Creative Web Solutions, Elegant Web Experiences, Industry Trends, Moroccan Web Developer, Freelance Developer, Web Development Portfolio',
+          content: 'Hoceine El Idrissi, Web Developer, Full Stack Developer, Laravel , PHP Developer, Nuxt.js , Vue.js Developer, Bootstrap, Tailwind CSS,Web Solutions, Web, Moroccan Web Developer, Freelance Developer, Web Development Portfolio',
         },
       ],
     },
@@ -118,8 +118,13 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@tailwindcss/typography',
     '@nuxt/image',
-    'nuxt-simple-robots'
+    'nuxt-simple-robots',
+    '@stefanobartoletti/nuxt-social-share',
+    '@nuxthq/studio'
   ],
+  socialShare: {
+    // module options
+  },
   css: ['~/assets/css/tailwind.css'],
   delayHydration: {
     // enables nuxt-delay-hydration in dev mode for testing

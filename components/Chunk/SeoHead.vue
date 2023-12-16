@@ -1,5 +1,15 @@
 <script setup>
 const { page } = defineProps(["page"]);
+let keywords = "";
+
+for (let i = 0; i < page.tags.length; i++) {
+  keywords += page.tags[i];
+
+  // Add a comma between keywords, excluding the last one
+  if (i < page.tags.length - 1) {
+    keywords += ", ";
+  }
+}
 useSeoMeta({
   title: page.title,
   description: page.description,
@@ -14,7 +24,7 @@ useSeoMeta({
   twitterDescription: page.description,
   twitterTitle: page.title,
   twitterImage: "https://hoceine.com" + page.image,
-  keywords: page.tags,
+  keywords: keywords,
   pageSection: "Technology",
   pagePublishedTime: page.createdAt,
   pageAuthor: "Hoceine EL IDRISSI",

@@ -88,16 +88,17 @@ const { prev, next, toc } = useContent();
           <LazyToc :toc="toc" />
         </aside>
       </div>
-
+      <ShareSocial :article="doc" />
       <LazyNeighbor :text="next" :prev="prev" />
     </article>
+
     <LazySeeMore :title="doc.title" />
   </ContentDoc>
 </template>
 
 <style>
 .nuxt-content {
-  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins  prose-h1:text-teal-300 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h3:text-lg prose-h2:scroll-mt-56 prose-h3:scroll-mt-56 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
+  @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:font-poppins  prose-h1:text-teal-300 prose-h1:mt-5 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h2:scroll-mt-56 prose-h3:scroll-mt-56 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10 prose-p:ms-2 prose-li:ps-2;
 }
 
 .content li a {
