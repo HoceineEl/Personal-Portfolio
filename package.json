@@ -16,14 +16,18 @@
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20.6.3",
     "nuxt": "^3.7.3",
-    "nuxt-vite": "^0.0.27"
+    "nuxt-simple-robots": "^3.1.10",
+    "nuxt-vite": "^0.0.27",
+    "sitemap": "^7.1.1"
   },
   "dependencies": {
     "@emailjs/browser": "^3.11.0",
     "@luxdamore/vue-cursor-fx": "^1.6.2",
     "@nuxt/image": "npm:@nuxt/image-edge@latest",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@tresjs/cientos": "^3.3.0",
     "@tresjs/nuxt": "^1.1.7",
+    "@vercel/speed-insights": "^1.0.2",
     "@vueuse/motion": "^2.0.0",
     "nuxt-delay-hydration": "^1.2.3",
     "reading-time": "^1.5.0",

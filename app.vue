@@ -1,4 +1,6 @@
 <script setup>
+import { SpeedInsights } from "@vercel/speed-insights/nuxt";
+defineRobotMeta();
 useHead({
   meta: [
     {
@@ -11,7 +13,7 @@ useHead({
 <template>
   <div class="">
     <ChunkScrollIndicator />
-
+    <SpeedInsights />
     <NuxtLayout>
       <div>
         <NuxtLoadingIndicator class="z-[100] bg-gr-scroll" :height="8" />

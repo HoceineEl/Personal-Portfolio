@@ -342,7 +342,7 @@ const projects = [
 
         ],
         image: "/images/my_projects/portfolio/mockup.png",
-        demo: "https://hoceine.vercel.app",
+        demo: "https://hoceine.com",
         url: "/personal-portfolio",
         source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
     },

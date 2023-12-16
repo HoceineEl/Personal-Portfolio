@@ -47,7 +47,6 @@ onMounted(() => {
         role="listitem"
       >
         <a :href="article._path" class="flex flex-col" :alt="article.title">
-       
           <NuxtPicture
             :src="article.image"
             :img-attrs="{
@@ -61,7 +60,7 @@ onMounted(() => {
             loading="lazy"
           />
           <div class="mx-4 flex flex-col justify-center gap-4 py-4">
-            <h2 class="text-lg font-bold font-serif" role="heading">
+            <h2 class="text-lg font-bold font-serif" >
               {{ article.title }}
             </h2>
             <p class="line-clamp-2 max-w-2xl text-sm" role="article-description">
