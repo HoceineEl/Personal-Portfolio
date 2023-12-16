@@ -35,12 +35,20 @@ export default defineEventHandler(async (event) => {
   // Add static endpoint URLs with priority and lastmod
   const staticEndpoints = getStaticEndpoints();
   for (const staticEndpoint of staticEndpoints) {
-    sitemap.write({
+   const urlOptions = {
       url: staticEndpoint,
-      changefreq: CHANGE_FREQ_WEEKLY,
-      priority: 0.9,
-      lastmod: getLastModificationDate(staticEndpoint), // Implement a function to get the last modification date
-    });
+      changefreq: CHANGE_FREQ_MONTHLY,
+     priority: 0.9,
+      lastmod: getLastModificationDate(staticEndpoint)
+    };
+
+    if (staticEndpoint.endsWith("/projects")) {
+      urlOptions.priority = 0.8;
+    }
+
+
+    sitemap.write(urlOptions);
+   
   }
 
   sitemap.end();
