@@ -1,5 +1,5 @@
 ---
-title: What is the Virtual DOM in Vue.js, A Comprehensive Guide with Examples
+title: What is the Virtual DOM , A Comprehensive Guide with Examples
 description: Exploring the concept of the Virtual DOM in Vue.js and providing practical examples for better understanding.
 tags: [Vue.js, Virtual DOM, Web Development, JavaScript]
 image: /images/blog/vdom/thumbnail.svg
@@ -8,6 +8,8 @@ createdAt: 2023-11-24T15:15:53.000Z
 updatedAt: 2023-11-24T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
 ---
+
+
 
 ## The Importance of Understanding the Virtual DOM
 
@@ -30,6 +32,7 @@ So, let's dive into it.
 The Virtual DOM (VDOM) is a crucial concept widely adopted in modern web development frameworks. In technical terms, it operates as an intermediary representation of the actual Document Object Model (DOM) of a web page.
 
 ### A Lightweight Replica
+
 
 Imagine the real DOM as a complex and resource-intensive structure. When changes are required, frameworks like Vue.js don't manipulate the real DOM directly. Instead, they create a lightweight, virtual copy known as the Virtual DOM.
 
