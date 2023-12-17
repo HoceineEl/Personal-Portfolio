@@ -6,7 +6,7 @@
       :network="network"
       :styled="true"
       :label="false"
-      :url="`https://hoceine.vercel.app${article._path}`"
+      :url="`https://hoceine.com${article._path}`"
       :title="article.title"
       :image="article.image"
       :hashtags="article.tags"

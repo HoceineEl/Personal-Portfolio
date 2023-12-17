@@ -38,7 +38,6 @@ useSeoMeta({
     <article
       v-for="article in articles"
       :key="article._path"
-      v-motion-slide-visible-once-bottom
       class="max-w-sm rounded-xl transition-all duration-500 group hover:shadow-md hover:shadow-indigo-800"
       :aria-label="`Read more about ${article.title}`"
     >
