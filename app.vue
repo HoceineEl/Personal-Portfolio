@@ -5,7 +5,7 @@ useHead({
   meta: [
     {
       name: "google-site-verification",
-      content: "1-6g_gEt8lfYyb7CwGwQ5b2sDuF1eYzKTc0BxdkmviE",
+      content: "4AxK4N9GEIAr7luoQ-C4sMlPs-3TtU52SAy-r07bN84",
     },
   ],
 });
