@@ -12,7 +12,7 @@
           <NuxtPicture
             :src="project.image"
             :img-attrs="{
-              alt: project.name + ' image',
+              alt: project.name + ' By Hoceine EL IDRISSI',
               class: 'w-full h-full object-cover rounded-2xl ',
               width: 200,
             }"

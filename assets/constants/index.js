@@ -45,12 +45,12 @@ const services = [
 
 const technologies = [
     {
-        name: "Vue JS",
+        name: "VueJS",
         icon: "/images/tech/vue.svg",
         progress: 90
     },
     {
-        name: "Nuxt Js",
+        name: "NuxtJs",
         icon: "/images/tech/nuxt.svg",
         progress: 95
     },
@@ -60,7 +60,7 @@ const technologies = [
         progress: 80
     },
     {
-        name: "Tailwind CSS",
+        name: "TailwindCSS",
         icon: "/images/tech/tailwind.svg",
         progress: 105
     },
@@ -70,12 +70,12 @@ const technologies = [
         progress: 75
     },
     {
-        name: "HTML 5",
+        name: "HTML5",
         icon: "/images/tech/html.svg",
         progress: 110
     },
     {
-        name: "CSS 3",
+        name: "CSS3",
         icon: "/images/tech/css.svg",
         progress: 110
     },
