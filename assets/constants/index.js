@@ -280,6 +280,34 @@ const testimonials = [
 
 const projects = [
     {
+        name: "Radiant Emergency Plumber",
+        description:
+            "Developed a website for Manchester Plumbing Services named 'Radiant Emergency Plumber'. Implemented various features to enhance user experience and provide valuable information.",
+        tags: [
+            {
+                name: "VueJs",
+                color: "green-text-gradient",
+            },
+            {
+                name: "NuxtJs",
+                color: "green-text-gradient",
+            },
+            {
+                name: "Tailwind CSS",
+                color: "blue-text-gradient",
+            },
+            {
+                name: "Nuxt Content",
+                color: "purple-text-gradient",
+            },
+        ],
+        image: "/images/my_projects/rep/mockup.png",
+        demo: "https://radiantplumbingsolution.vercel.app/",
+        url: "/radiant-emergency-plumber",
+        source_code_link: "https://github.com/hoceineel/rep",
+    }
+    ,
+    {
         name: "SOSIPO Financial Management App",
         description:
             "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",
@@ -456,6 +484,7 @@ const projects = [
         ],
         image: "/images/my_projects/dakkerni/tile.jpg",
         url: "/remind-me",
+        demo: "https://chromewebstore.google.com/detail/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/lpkahcgbcaenijeaehcmaodpcacmogap",
         source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
     },
     {
