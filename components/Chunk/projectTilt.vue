@@ -55,10 +55,46 @@
                 loading="lazy"
               />
             </a>
+            <a
+              v-if="project.chrome"
+              class="w-10 h-10 bg-tertiary rounded-full p-2"
+              :href="project.chrome"
+              target="_blank"
+              :aria-label="`Visit hoceine el idrissi extention on chrome of the extention : ${project.name}`"
+            >
+              <NuxtImg
+                :src="chrome"
+                :alt="`Visit hoceine el idrissi extention on chrome of the extention : ${project.name}`"
+                width="40"
+                format="webp"
+                quality="70"
+                height="40"
+                loading="lazy"
+              />
+            </a>
+            <a
+              v-if="project.firefox"
+              class="w-10 h-10 bg-tertiary rounded-full p-2"
+              :href="project.firefox"
+              target="_blank"
+              :aria-label="`Visit hoceine el idrissi extention on firefox of the extention : ${project.name}`"
+            >
+              <NuxtImg
+                :src="firefox"
+                :alt="`Visit hoceine el idrissi extention on firefox of the extention : ${project.name}`"
+                width="40"
+                format="webp"
+                quality="70"
+                height="40"
+                loading="lazy"
+              />
+            </a>
           </div>
         </div>
         <div class="my-5">
-          <h3 class="sm:text-[21px] text-[16px] font-semibold">{{ project.name }}</h3>
+          <h3 class="sm:text-[21px] text-[16px] font-semibold break-words">
+            {{ project.name }}
+          </h3>
           <p class="sm:text-[15px] text-[12px] leading-6 text-slate-400">
             {{ project.description }}
           </p>
@@ -89,7 +125,7 @@
 
 <script setup>
 const { projects } = defineProps(["projects"]);
-import { github, visit, search } from "~/assets";
+import { github, visit, search, firefox, chrome } from "~/assets";
 </script>
 
 <style></style>

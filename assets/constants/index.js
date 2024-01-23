@@ -38,7 +38,7 @@ const services = [
         icon: "/images/backend.png",
     },
     {
-        title: "Passionate Learner",
+        title: "Content Creator",
         icon: "/images/creator.png",
     },
 ];
@@ -131,6 +131,7 @@ const technologies = [
         progress: 90
     }
 ];
+
 // const technologies_3d = [
 //     {
 //         name: "Vue JS",
@@ -204,6 +205,7 @@ const technologies = [
 //         progress: 50
 //     },
 // ];
+
 
 const experiences = [
     {
@@ -280,9 +282,9 @@ const testimonials = [
 
 const projects = [
     {
-        name: "Radiant Emergency Plumber",
+        name: "radiantemergencyplumber.co.uk",
         description:
-            "Developed a website for Manchester Plumbing Services named 'Radiant Emergency Plumber'. Implemented various features to enhance user experience and provide valuable information.",
+            " Developed a website for Manchester Plumbing Services named 'Radiant Emergency Plumber'. Implemented various features to enhance user experience and provide valuable information.",
         tags: [
             {
                 name: "VueJs",
@@ -302,7 +304,7 @@ const projects = [
             },
         ],
         image: "/images/my_projects/rep/mockup.png",
-        demo: "https://radiantplumbingsolution.vercel.app/",
+        demo: "https://radiantemergencyplumber.co.uk/",
         url: "/radiant-emergency-plumber",
         source_code_link: "https://github.com/hoceineel/rep",
     }
@@ -462,6 +464,8 @@ const projects = [
         image: "/images/my_projects/nurnet/logo.png",
         url: "/nur-net",
         demo: "https://youtu.be/0HaLcNqbKCI",
+        chrome: 'https://chromewebstore.google.com/u/1/detail/nur-net-the-explicit-cont/enonjhmheggkloeodggkmcfhgppkbgai',
+        firefox: 'https://addons.mozilla.org/en-US/firefox/addon/nur-net-the-content-guard/',
         source_code_link: "https://github.com/HoceineEl/NurNet-chrome",
     },
     {
@@ -484,7 +488,8 @@ const projects = [
         ],
         image: "/images/my_projects/dakkerni/tile.jpg",
         url: "/remind-me",
-        demo: "https://chromewebstore.google.com/detail/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/lpkahcgbcaenijeaehcmaodpcacmogap",
+        chrome: "https://chromewebstore.google.com/detail/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/lpkahcgbcaenijeaehcmaodpcacmogap",
+        firefox: 'https://addons.mozilla.org/en-US/firefox/addon/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/',
         source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
     },
     {
@@ -554,4 +559,26 @@ const projects = [
     },
 ];
 
-export { services, technologies, experiences, testimonials, projects, portrait, Earth, };
+const socials = [
+    {
+        name: 'Facebook',
+        url: 'https://www.facebook.com/hoceinelidrissi',
+        icon: '/images/facebook.svg'
+    },
+    {
+        name: 'YouTube',
+        url: 'https://www.youtube.com/@Hoceineelidrissi',
+        icon: '/images/youtube.svg'
+    },
+    {
+        name: 'LinkedIn',
+        url: 'https://www.linkedin.com/in/elidrissihoceine/',
+        icon: '/images/linkedin.svg'
+    },
+    {
+        name: 'Github',
+        url: 'https://github.com/hoceineel',
+        icon: '/images/github.svg'
+    }
+]
+export { socials, services, technologies, experiences, testimonials, projects, portrait, Earth, };

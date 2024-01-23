@@ -17,38 +17,15 @@
             >Blog</NuxtLink
           >
         </li>
-        <li class="flex gap-3">
-          <div>
-            <a
-              href="https://github.com/hoceineel"
-              target="_blank"
-              aria-label="Visit GitHub profile"
-            >
-              <NuxtImg
-                :src="github"
-                alt="hoceine EL IDRISSI github profile"
-                width="30"
-                loading="lazy"
-                format="webp"
-                quality="80"
-            /></a>
-          </div>
-
-          <div>
-            <a
-              href="https://www.linkedin.com/in/elidrissihoceine/"
-              target="_blank"
-              aria-label="Visit LinkedIn profile"
-            >
-              <NuxtImg
-                :src="linkedin"
-                alt="hoceine EL IDRISSI linkedin profile"
-                width="30"
-                loading="lazy"
-                format="webp"
-                quality="80"
-            /></a>
-          </div>
+        <li class="flex gap-2">
+          <a
+            v-for="social in socials"
+            class="w-7 h-7 rounded-full"
+            :href="social.url"
+            target="_blank"
+          >
+            <NuxtImg :src="social.icon" class="object-fill w-full h-full" format="webp" />
+          </a>
         </li>
       </ul>
     </div>
@@ -56,7 +33,8 @@
 </template>
 
 <script setup>
-import { logo, linkedin, github } from "../assets";
+import { logo } from "../assets";
+import { socials } from "~/assets/constants";
 </script>
 
 <style scoped></style>

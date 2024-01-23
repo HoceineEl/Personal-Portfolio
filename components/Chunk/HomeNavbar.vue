@@ -67,36 +67,6 @@ onMounted(() => {
             >{{ link.title }}</NuxtLink
           >
         </li>
-        <li>
-          <a
-            href="https://github.com/hoceineel"
-            target="_blank"
-            aria-label="hoceine el idrissi github profile "
-            ><NuxtImg
-              :src="github"
-              alt="hoceine el idrissi github profile"
-              width="30"
-              height="30"
-              format="webp"
-              loading="lazy"
-          /></a>
-        </li>
-        <li>
-          <a
-            href="https://www.linkedin.com/in/elidrissihoceine/"
-            aria-label="hoceine el idrissi linkedin profile"
-            target="_blank"
-          >
-            <NuxtImg
-              :src="linkedin"
-              alt="hoceine el idrissi linkedin profile"
-              width="30"
-              height="30"
-              format="webp"
-              quality="70"
-              loading="lazy"
-          /></a>
-        </li>
       </ul>
       <div @click="setToggle" class="lg:hidden">
         <NuxtImg
@@ -127,37 +97,6 @@ onMounted(() => {
                 class="flex items-center gap-3 font-semibold text-[18px]"
                 >{{ link.title }}</NuxtLink
               >
-            </li>
-            <li>
-              <a
-                href="https://github.com/hoceineel"
-                target="_blank"
-                aria-label="hoceine el idrissi github profile"
-                ><NuxtImg
-                  :src="github"
-                  alt="hoceine el idrissi github profile"
-                  width="30"
-                  height="30"
-                  format="webp"
-                  quality="70"
-                  loading="lazy"
-              /></a>
-            </li>
-            <li>
-              <a
-                href="https://www.linkedin.com/in/elidrissihoceine/"
-                target="_blank"
-                aria-label="hoceine el idrissi linkedin profile"
-              >
-                <NuxtImg
-                  :src="linkedin"
-                  alt="hoceine el idrissi linkedin profile"
-                  width="30"
-                  height="30"
-                  format="webp"
-                  quality="70"
-                  loading="lazy"
-              /></a>
             </li>
           </ul>
         </div>

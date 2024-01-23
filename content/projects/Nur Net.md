@@ -1,6 +1,6 @@
 ---
 title: Nur Net Browser Extension
-description: Introducing Nur Net, your shield against distractions. This Chrome and Firefox extension empowers you to take charge of your online journey, redirecting your focus towards more meaningful content. Gain control of your online experience and stay focused on what matters most.
+description: Meet Nur Net, your buddy against distractions! This cool Chrome and Firefox tool helps you take control online, focusing on stuff that really matters. Wanna build your own? Got questions about Nur Net? Drop a message to Hoceine at contact@hoceine.com!
 tags:
   [
     Hoceine el idrissi,
@@ -18,28 +18,24 @@ createdBy: "Hoceine EL IDRISSI"
 
 ## Nur Net Browser Extension
 
-Introducing Nur Net, your shield against distractions. This Chrome and Firefox extension empowers you to take charge of your online journey, redirecting your focus towards more meaningful content. Gain control of your online experience and stay focused on what matters most.
+Say hi to Nur Net, your distraction-fighting buddy! This awesome tool for Chrome and Firefox lets you boss your online time, keeping it real with what truly matters. Thinking about making your own? Got questions on Nur Net? Hit up Hoceine at [contact@hoceine.com](mailto:contact@hoceine.com).
 
-## Project Overview
+## What's Inside?
 
-Nur Net shields against distractions by blocking intensive websites and redirecting users to meaningful content. This project aligns with the following key principles:
+Nur Net is like a superhero that blocks tricky websites, so you stay on track. It's not just an extension; it's your online sidekick, making sure you focus on the good stuff.
 
-- **Intelligent Blocking:** Nur Net intelligently identifies and blocks intensive websites, promoting a more focused and mindful online experience.
+Wanna dive into extension-making or curious about Nur Net? Shoot a message to Hoceine at [contact@hoceine.com](mailto:contact@hoceine.com).
 
-- **Customizable Settings:** Tailor your blocking preferences with Nur Net. Add custom websites to the blocklist, ensuring you have control over what to restrict.
+**Download Now:**
 
-- **Redirect to Positive Content:** Nur Net goes beyond blocking; it guides you towards positivity. When attempting to access restricted content, Nur Net redirects you to Da'awah videos, Quranic verses, or other uplifting material.
+- [Chrome Web Store](https://chromewebstore.google.com/u/1/detail/nur-net-the-explicit-cont/enonjhmheggkloeodggkmcfhgppkbgai)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/nur-net-the-content-guard/)
 
-- **Personalized Protection:** Specify websites you want to block, aligning Nur Net with your unique preferences and goals.
-
-**_Demo : _**
+**Watch a Quick Demo:**
 
 <iframe width="800" height="600" src="https://www.youtube.com/embed/0HaLcNqbKCI?si=oRAVV9d28ylYOMs2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Embrace the power of Nur Net to break free from distractions, refocus on what truly matters, and enjoy a more mindful browsing journey.
-
-## Chrome Developer's Preview
-
-Please note that Extention is currently in Chrome Developer's Preview, with a maximum testing duration of 30 days.
+**Ready to Create Your Own?**
+Questions about Nur Net? Or dreaming of your own extension? Reach out to Hoceine at [contact@hoceine.com](mailto:contact@hoceine.com).
 
 **Source Code:** [GitHub Repository](https://github.com/HoceineEl/NurNet-chrome)

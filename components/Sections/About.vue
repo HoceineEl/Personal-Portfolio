@@ -14,10 +14,12 @@
         collaborate and turn your ideas into exceptional web experiences!
       </p>
     </div>
+  
     <LazyChunkRoles />
   </section>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style lang="scss" scoped></style>

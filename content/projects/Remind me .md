@@ -18,12 +18,13 @@ createdBy: "Hoceine EL IDRISSI"
 
 ## Remind Me | ذكرني Extension
 
-Elevate your spiritual journey with Remind Me, a thoughtful Chrome and Firefox extension designed to infuse your day with moments of reflection and connection to Allah. Tailor your reminders with verses, Azkar for morning and evening, or soothing Quranic recitations.
+Elevate your spiritual journey with Remind Me, a thoughtful Chrome and Firefox extension designed to infuse your day with moments of reflection and connection to Allah. Tailor your reminders with verses, Azkar for morning and evening, or soothing Quranic recitations. The extension is meticulously crafted by Hoceine El Idrissi, a passionate full-stack web developer from Morocco.
+
 <MdImage text="/images/my_projects/dakkerni/home.jpg"></MdImage>
 
 ## Project Overview
 
-Remind Me serves as your spiritual companion, sending customizable notifications at intervals of your choice. Stay connected with Allah throughout your day.
+Remind Me serves as your spiritual companion, sending customizable notifications at intervals of your choice. Stay connected with Allah throughout your day. Whether you prefer verses, Azkar, or Quranic recitations, Remind Me offers a diverse range of customizable options to cater to your spiritual preferences.
 
 ## Key Features
 
@@ -38,18 +39,17 @@ This extension offers a variety of features to enhance your spiritual journey:
 - **New Tab Experience:** Transform your new tab into a portal of spiritual inspiration with a random Quranic verse, ready to play or explore with a click.
   <MdImage text="/images/my_projects/dakkerni/newtab.jpg"></MdImage>
 
-## Chrome Developer's Preview
+## Published on Chrome and Firefox
 
-Please note that Remind Me is currently in Chrome Developer's Preview, with a maximum testing duration of 30 days.
+Exciting news! Remind Me is now available on both Chrome and Firefox. Feel free to download the extension from the following stores and enhance your browsing experience with spiritual reminders:
 
-## Demo and Exploration
+**Download Here:**
 
-Explore the spiritual enrichment that Remind Me brings to your browsing experience. Watch the demo or delve into the source code on GitHub to understand the implementation details.
+- [Chrome Web Store](https://chromewebstore.google.com/detail/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/lpkahcgbcaenijeaehcmaodpcacmogap)
+- [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/)
 
-**Tags:**
+## Connect with Hoceine
 
-- VanillaJs
-- Chrome Extension
-- Firefox Extension
+If you're inspired to develop your own extension or have questions about Remind Me, feel free to reach out! Hoceine El Idrissi welcomes discussions about web development, spirituality, and everything in between. Contact him at **contact@hoceine.com**.
 
 **Source Code:** [GitHub Repository](https://github.com/HoceineEl/dekr-reminder-chrome-extention)

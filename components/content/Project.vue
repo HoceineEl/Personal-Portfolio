@@ -88,8 +88,11 @@ const { page: project, toc } = useContent();
   @apply prose-gray  lg:prose-lg xl:prose-xl prose-img:rounded-xl prose-headings:underline prose-headings:font-poppins  prose-h1:text-teal-300 prose-h2:text-purple-500 prose-h3:text-teal-300 prose-h3:text-lg prose-h2:scroll-mt-56 prose-h3:scroll-mt-56 prose-headings:font-semibold prose-p:text-slate-200 prose-img:mx-auto prose-pre:bg-gray-800 prose-li:list-disc prose-ul:ps-10;
 }
 
-.content li a {
-  @apply text-slate-400 text-[12px] transition-all duration-300;
+.content ul li a {
+  @apply text-lg font-semibold text-green-300 transition-all duration-300;
+}
+.content .toc li a {
+  @apply text-slate-400 text-sm font-normal transition-all duration-300;
 }
 .Project-hr {
   @apply max-w-5xl w-full h-1 bg-[#1E1E3B];
