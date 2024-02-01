@@ -1,20 +1,33 @@
 <template>
   <div class="img-cont" ref="imageContainer">
     <NuxtImg
+      v-if="!imageType"
       :src="text"
       loading="lazy"
       class="w-full"
-      alt="Image in the article"
+      :alt="helperText ? helperText : 'Image in Hoceine El Idrissi blog'"
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
       format="webp"
+    />
+    <NuxtImg
+      v-else
+      :src="text"
+      loading="lazy"
+      class="w-full"
+      :alt="helperText ? helperText : 'Gif in Hoceine El Idrissi blog '"
+      @click="isMobile ? null : toggleZoom()"
+      :class="{ zoomed: isZoomed }"
     />
   </div>
 </template>
 
 <script setup>
-defineProps(["text"]);
-
+defineProps({
+  text: String,
+  helperText: String,
+  imageType: String,
+});
 const isZoomed = ref(false);
 const isMobile = ref(false);
 

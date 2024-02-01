@@ -310,6 +310,33 @@ const projects = [
     }
     ,
     {
+        name: "Eisar Reserve - Room Reservation System",
+        description:
+            "A comprehensive room reservation system designed to simplify the process of managing bookings. Users can interact with the system to make reservations, manage bookings, and explore various features.",
+        tags: [
+            {
+                name: "Laravel",
+                color: "red-text-gradient",
+            },
+            {
+                name: "Filament",
+                color: "yellow-text-gradient",
+            },
+            {
+                name: "Livewire",
+                color: "purple-text-gradient",
+            },
+            {
+                name: "Tailwind Css",
+                color: "blue-text-gradient",
+            },
+
+        ],
+        image: "/images/my_projects/eisar-reserve/mockup.jpg",
+        url: "/eisar-reserve",
+        source_code_link: "https://github.com/HoceineEl/EisarReserve",
+    },
+    {
         name: "SOSIPO Financial Management App",
         description:
             "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",

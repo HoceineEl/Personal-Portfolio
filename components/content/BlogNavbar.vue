@@ -11,6 +11,7 @@
         <NuxtImg format="webp" :src="logo" alt="Hoceine log" width="60" loading="lazy" />
         <p class="hidden xs:block">Hoceine EL IDRISSI</p>
       </a>
+      
       <ul class="justify-between gap-3 flex items-center">
         <li class="font-semibold text-lg">
           <NuxtLink to="/blog" aria-label="Visit the Blog page" :prefetch="false"

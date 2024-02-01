@@ -118,23 +118,23 @@ To achieve these objectives, we introduced innovative solutions:
 2. **Adding Income Entry:**
 
    - Navigates to the financial management section and adds a new recette (income) entry, providing details such as the amount, date, and purpose.
-     <MdImage text="/images/my_projects/sosipo/add-recette.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/add-recette.png" helper-text="Adding Income Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 3. **Submission for Approval:**
 
    - Submits the recette entry for approval.
-     <MdImage text="/images/my_projects/sosipo/recette_wait.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/recette_wait.png" helper-text="Income Entry Waiting for Approval - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 4. **President's Approval:**
 
    - The President logs into the application using their credentials.
    - Navigates to the approval section and sees the pending recette entry from the Treasurer.
-     <MdImage text="/images/my_projects/sosipo/president_not.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/president_not.png" helper-text="President Reviewing Income Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 5. **Review and Decision:**
 
    - Reviews the details of the recette entry and either approves or rejects it, providing comments if necessary.
-     <MdImage text="/images/my_projects/sosipo/approuve.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/approuve.png" helper-text="President Approving Income Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 6. **Status Check:**
 
@@ -152,7 +152,7 @@ To achieve these objectives, we introduced innovative solutions:
 2. **Adding Credit Entry:**
 
    - Navigates to the financial management section and adds a new credit entry, specifying the amount, date, and purpose.
-     <MdImage text="/images/my_projects/sosipo/new_credit.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/new_credit.png" helper-text="Adding Credit Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 3. **Submission for Approval:**
 
@@ -174,12 +174,12 @@ To achieve these objectives, we introduced innovative solutions:
 7. **Adding Repayment Entry:**
 
    - The Treasurer proceeds to add a remboursement (repayment) entry, indicating the amount and selecting the relevant credit entry. The system automatically calculates and displays the remaining amount of the credit.
-     <MdImage text="/images/my_projects/sosipo/new_repayment.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/new_repayment.png" helper-text="Adding Repayment Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 8. **Validation Check:**
 
    - If the amount of the repayment inserted is more than the credit's, it will show a red highlight in the amount field.
-     <MdImage text="/images/my_projects/sosipo/check_amount.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/check_amount.png" helper-text="Validation Check for Repayment Entry - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 9. **Remboursement Submission:**
 
@@ -197,7 +197,7 @@ To achieve these objectives, we introduced innovative solutions:
 1. **Secretary Login:**
 
    - The Secretary logs into the application using their credentials.
-     <MdImage text="/images/my_projects/sosipo/secretary_dashboard.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/secretary_dashboard.png" helper-text="Secretary Dashboard - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 2. **Adding Document:**
 
@@ -223,17 +223,17 @@ To achieve these objectives, we introduced innovative solutions:
 1. **New Treasurer/Secretary Registration:**
 
    - A new Treasurer or Secretary registers in the application.
-     <MdImage text="/images/my_projects/sosipo/register.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/register.png" helper-text="New Treasurer/Secretary Registration - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 2. **Awaiting Approval:**
 
    - The new user can't use the app until the President accepts and approves their registration.
-     <MdImage text="/images/my_projects/sosipo/user_wait.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/user_wait.png" helper-text="New User Awaiting Approval - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 3. **President's Action:**
 
    - The President logs into the application, reviews the new registration, and either approves or rejects it.
-     <MdImage text="/images/my_projects/sosipo/user_approuve.png"></MdImage>
+     <MdImage text="/images/my_projects/sosipo/user_approuve.png" helper-text="President Approving New User - SOSIPO Project by Hoceine El Idrissi"></MdImage>
 
 4. **Access Granted:**
    - If approved, the new Treasurer or Secretary gains access to the application and can start using its features.

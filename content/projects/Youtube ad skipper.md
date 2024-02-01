@@ -1,5 +1,5 @@
 ---
-title: YouTube Ad Skipper Extension
+title: Legal YouTube Ad Skipper Extension
 description: Experience a preview of the innovative YouTube Ad Skipper extension, currently available for Chrome and Firefox. This tool automates the ad-skipping process, providing a sneak peek into a future where you can enjoy uninterrupted content effortlessly.
 tags:
   [
@@ -30,6 +30,17 @@ Explore a solution that transforms your YouTube viewing experience. Bid farewell
 
 Whether you're a casual viewer or a dedicated content consumer, this YouTube Ad Skipper, currently in developer preview, is a game-changer. Elevate your online streaming experience by integrating this tool into your routine. Say hello to uninterrupted content and bid farewell to those pesky ads!
 
+**Download Here:**
+
+- [Chrome Web Store](https://chromewebstore.google.com/detail/legal-youtube-ad-skipper/ceccdngldibjefbfobnkmjaempfkmeke) (Item logo image for Legal YouTube Ad Skipper)
+- [Firefox Add-ons](#) (The extension will be available on Firefox soon)
+
+**Features of Legal YouTube Ad Skipper:**
+
+- Say goodbye to waiting for ads to finish.
+- Totally legal, no need to stress.
+- Make YouTube more enjoyable with simple ad skipping.
+
 **Source Code:** [GitHub Repository](https://github.com/HoceineEl/Youtube-ad-skipper)
 
-**Note:** The YouTube Ad Skipper is currently in developer preview, offering users an early glimpse of its features. Stay tuned for updates and enhancements as we work towards a polished and refined user experience.
+**Developed by:** Hoceine El Idrissi

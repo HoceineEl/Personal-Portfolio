@@ -20,7 +20,7 @@ updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
 ---
 
-## Streamlining Learning - Enhancing Video Delivery in LMS
+# Streamlining Learning - Enhancing Video Delivery in LMS
 
 Integrating HLS into a Learning Management System (LMS) with a powerful tech stack including Laravel, JavaScript, FFMPEG, Plyr, Redis, MySQL, Bootstrap, HLS.js, and Ajax. This project focuses on revolutionizing video delivery within the LMS, offering advanced features and capabilities.
 
@@ -30,7 +30,7 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 
 - **HLS Integration:** Incorporating HLS (HTTP Live Streaming) for improved video streaming performance and adaptability.
 
-  <MdImage text="/images/my_projects/lms/hls.png"></MdImage>
+  <MdImage text="/images/my_projects/lms/hls.png" alt="HLS Integration - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 - **Watermarking:** Adding a watermark to the video content to protect intellectual property and enhance branding.
 
@@ -48,7 +48,7 @@ The goal of this project is to enhance video delivery within a Learning Manageme
 
 **_Video Lifecycle :_**
 
-<MdImage text="/images/my_projects/lms/lifecycle.png"></MdImage>
+<MdImage text="/images/my_projects/lms/lifecycle.png" alt="Video Lifecycle - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 ## Technologies Used
 
@@ -76,19 +76,19 @@ This project utilizes a diverse range of technologies to achieve its objectives:
 
 The project harnesses the power of Laravel Jobs and Queues to efficiently handle tasks related to video processing and encoding. By offloading time-consuming operations to a background queue, the system ensures a smooth and responsive user experience.
 
-<MdImage text="/images/my_projects/lms/queue.png"></MdImage>
+<MdImage text="/images/my_projects/lms/queue.png" alt="Laravel Jobs and Queues - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 ### Redis for Video Encoding State
 
 To provide real-time feedback on video encoding progress, Redis is employed as a caching and data store. The current video encoding state, including the percentage completion, is stored in Redis. This allows for quick retrieval of data, enabling dynamic updates on the user interface.
 
-<MdImage text="/images/my_projects/lms/terminalFFmpeg.png"></MdImage>
+<MdImage text="/images/my_projects/lms/terminalFFmpeg.png" alt="Redis for Video Encoding State - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 ### Ajax Integration
 
 Ajax plays a crucial role in establishing seamless communication between the frontend and backend. Through Ajax requests, the frontend can fetch and display real-time updates on the video encoding state stored in Redis. This asynchronous approach enhances the user experience by eliminating the need for manual page refreshes.
 
-<MdImage text="/images/my_projects/lms/uploadvideo.png"></MdImage>
+<MdImage text="/images/my_projects/lms/uploadvideo.png" alt="Ajax Integration - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 ## Insights and Enhancements
 
@@ -106,40 +106,50 @@ Incorporating Laravel Jobs, Queues, Redis, and Ajax introduces several benefits 
 
 Explore the visual representation of the project through the following screenshots:
 
-- **Before Uploading the Video:** Prepare your video for an enhanced learning experience.
-  <MdImage text="/images/my_projects/lms/beforUploading.png"></MdImage>
+### Before Uploading the Video
 
-- **Video Lifecycle Management:** Visualizing the lifecycle stages of a video within the system.
+Prepare your video for an enhanced learning experience.
+<MdImage text="/images/my_projects/lms/beforUploading.png" alt="Preparing Video for Upload - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-  <MdImage text="/images/my_projects/lms/uploadvideo.png"></MdImage>
+### Video Lifecycle Management
 
-- **Video Uploaded Successfully:** Your content is now ready for seamless delivery.
+Visualizing the lifecycle stages of a video within the system.
+<MdImage text="/images/my_projects/lms/uploadvideo.png" alt="Video Lifecycle Management - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/uploadsuccess.png"></MdImage>
+### Video Uploaded Successfully
 
-- **You Can View the Course Here:** Dive into the course content to deepen your understanding.
+Your content is now ready for seamless delivery.
+<MdImage text="/images/my_projects/lms/uploadsuccess.png" alt="Successful Video Upload - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/viewCourse.png"></MdImage>
+### You Can View the Course Here
 
-- **You Can View the Lesson Here:** Explore each lesson to grasp the concepts thoroughly.
+Dive into the course content to deepen your understanding.
+<MdImage text="/images/my_projects/lms/viewCourse.png" alt="Viewing the Course - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/showlesson.png"></MdImage>
+### You Can View the Lesson Here
 
-- **You Can See Different Qualities Displayed:** Choose the video quality that suits your preference.
+Explore each lesson to grasp the concepts thoroughly.
+<MdImage text="/images/my_projects/lms/showlesson.png" alt="Viewing the Lesson - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/qualities.png"></MdImage>
+### You Can See Different Qualities Displayed
 
-- **(144p):** Experience the video in lower resolution for optimized performance.
+Choose the video quality that suits your preference.
+<MdImage text="/images/my_projects/lms/qualities.png" alt="Different Video Qualities Displayed - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/144.png"></MdImage>
+### 144p Quality
 
-- **(1080p):** Immerse yourself in high-definition video quality for a detailed learning experience.
+Experience the video in lower resolution for optimized performance.
+<MdImage text="/images/my_projects/lms/144.png" alt="144p Video Quality - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/1080.png"></MdImage>
+### 1080p Quality
 
-- **Network Progress during Video Timeline Progress:** Monitor the network progress as the video playback advances.
+Immerse yourself in high-definition video quality for a detailed learning experience.
+<MdImage text="/images/my_projects/lms/1080.png" alt="1080p Video Quality - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
-<MdImage text="/images/my_projects/lms/networkprogress.png"></MdImage>
+### Network Progress during Video Timeline Progress
+
+Monitor the network progress as the video playback advances.
+<MdImage text="/images/my_projects/lms/networkprogress.png" alt="Network Progress during Video Playback - Streamlining Learning by Hoceine el Idrissi"></MdImage>
 
 ## Explore Further
 

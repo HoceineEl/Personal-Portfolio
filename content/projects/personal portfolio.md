@@ -17,7 +17,7 @@ updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"
 ---
 
-## Personal Portfolio Showcase
+# Personal Portfolio Showcase
 
 Welcome to my Personal Portfolio Showcase, a comprehensive exploration of my skills and creativity in web development. This project serves as a testament to my proficiency in Vue.js, Nuxt.js, and Three.js, bringing together interactive and visually appealing web experiences.
 
@@ -33,7 +33,7 @@ In this showcase, I've delved deep into the intricacies of web development, tack
 
 ## Performance Optimization
 
-<MdImage text="/images/my_projects/portfolio/lighthouse.png"></MdImage>
+<MdImage text="/images/my_projects/portfolio/lighthouse.png" alt="Performance Optimization - Personal Portfolio Showcase by Hoceine el Idrissi"></MdImage>
 
 Achieved an impressive 95 on Google Page Speed Insights for performance, 96 for accessibility, and a perfect 100 for both best practices and SEO. This success is attributed to various optimization strategies:
 
@@ -66,23 +66,25 @@ Explore the visual aesthetics of the portfolio through the following screenshots
 
 - **Homepage:** A captivating introduction to the portfolio.
 
-<MdImage text="/images/my_projects/portfolio/hero.png"></MdImage>
+<MdImage text="/images/my_projects/portfolio/hero.png" alt="Homepage - Personal Portfolio Showcase by Hoceine el Idrissi"></MdImage>
 
 - **Project Details:** In-depth details about showcased projects.
 
-<MdImage text="/images/my_projects/portfolio/project.png"></MdImage>
+<MdImage text="/images/my_projects/portfolio/project.png" alt="Project Details - Personal Portfolio Showcase by Hoceine el Idrissi"></MdImage>
 
 - **Blog Index Page:** Dynamic and responsive blog listing.
-  <MdImage text="/images/my_projects/portfolio/blog.png"></MdImage>
+
+<MdImage text="/images/my_projects/portfolio/blog.png" alt="Blog Index Page - Personal Portfolio Showcase by Hoceine el Idrissi"></MdImage>
 
 - **Article Page:** A closer look at the thoughtfully crafted articles.
-  <MdImage text="/images/my_projects/portfolio/article.png"></MdImage>
+
+<MdImage text="/images/my_projects/portfolio/article.png" alt="Article Page - Personal Portfolio Showcase by Hoceine el Idrissi"></MdImage>
 
 ## Explore Further
 
 Visit the live portfolio to experience firsthand the fusion of creativity and technical excellence:
 
-[View Portfolio](#)  
-[Source Code](#)
+[View Portfolio](https://hoceine.com)  
+[Source Code](https://github.com/hoceineel/personal-portfolio)
 
 Embark on a journey through this meticulously crafted showcase, where each element reflects a commitment to pushing the boundaries of web development.
