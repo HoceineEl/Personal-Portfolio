@@ -9,7 +9,7 @@ tags:
     Firefox Extention,
     YouTube Ad Skipper Extension,
   ]
-image: "/images/my_projects/skipper/skipper.jpg"
+image: "/images/my_projects/skipper/banner.jpg"
 createdAt: 2023-12-01T15:15:53.000Z
 updatedAt: 2023-12-01T15:15:53.000Z
 createdBy: "Hoceine EL IDRISSI"

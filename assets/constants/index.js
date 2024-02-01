@@ -538,8 +538,8 @@ const projects = [
             },
         ],
         image: "/images/my_projects/skipper/skipper.jpg",
+        chrome: "https://chromewebstore.google.com/detail/legal-youtube-ad-skipper/ceccdngldibjefbfobnkmjaempfkmeke",
         url: "/youtube-ad-skipper",
-        source_code_link: "https://github.com/HoceineEl/Youtube-ad-skipper",
     },
     {
         name: "Islamic Trivia",

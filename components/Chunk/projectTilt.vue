@@ -26,6 +26,7 @@
               class="w-10 h-10 bg-tertiary rounded-full p-2"
               :href="project.source_code_link"
               target="_blank"
+              v-if="project.source_code_link"
               :aria-label="`Visit project on GitHub: ${project.name}`"
             >
               <NuxtImg
