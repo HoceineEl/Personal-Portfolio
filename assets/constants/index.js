@@ -594,7 +594,7 @@ const socials = [
     },
     {
         name: 'YouTube',
-        url: 'https://www.youtube.com/@Hoceineelidrissi',
+        url: 'https://www.youtube.com/@Hoceineelidrissi2',
         icon: '/images/youtube.svg'
     },
     {
