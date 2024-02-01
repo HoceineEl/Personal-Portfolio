@@ -18,7 +18,7 @@
 
     <LazyChunkChangeMode />
     <div class="fixed bottom-5 left-5">
-      <LazyChunkPlayWaves />
+      <ChunkPlayWaves />
     </div>
     <LazyChunkViewSocial />
   </main>
