@@ -4,7 +4,7 @@ import { github, linkedin } from "~/assets";
 
 <template>
   <footer class="w-full flex justify-around items-center py-10 mt-10" role="contentinfo">
-    <p>Hoceine El Idrissi &copy; 2023</p>
+    <p>Hoceine El Idrissi &copy; {{ new Date().getFullYear() }}</p>
     <div class="flex gap-10">
       <a
         href="https://github.com/hoceineel"

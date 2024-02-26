@@ -49,7 +49,7 @@ import { portrait } from "~/assets/constants";
         :class="isPressed ? 'cursor-grabbing' : 'cursor-grab'"
         class="flex justify-center items-center w-full h-full"
       >
-        <LazyCanvasObject :object="portrait" :scale="1" :speed="4" :type="portrait" />
+        <LazyCanvasObject :object="portrait" :scale="1" :speed="4" />
       </div>
     </div>
     <div class="absolute bottom-3 lg:bottom-32 w-full flex justify-center z-[80]">

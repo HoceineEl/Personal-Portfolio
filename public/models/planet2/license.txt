@@ -1,0 +1,11 @@
+Model Information:
+* title:	NCR veteran ranger bobblehead
+* source:	https://sketchfab.com/3d-models/ncr-veteran-ranger-bobblehead-1b47d75b4e5a4548b5cb41aae45f8dcd
+* author:	cotman sam (https://sketchfab.com/cotman_sam)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "NCR veteran ranger bobblehead" (https://sketchfab.com/3d-models/ncr-veteran-ranger-bobblehead-1b47d75b4e5a4548b5cb41aae45f8dcd) by cotman sam (https://sketchfab.com/cotman_sam) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
