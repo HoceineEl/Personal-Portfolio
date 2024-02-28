@@ -1,6 +1,4 @@
 <template>
-
-
   <section
     id="contact"
     class="section flex flex-wrap gap-10 justify-around relative mt-10"
@@ -86,19 +84,22 @@ const handleMouseUp = () => {
   isPressed.value = false;
 };
 const sendMail = () => {
+  if (!from_name.value || !email.value || !message.value) return;
   emailjs
     .sendForm("service_5arij5h", "template_4wluw72", form.value, "_673j4Vui7FOnZXwS")
     .then(
       (result) => {
         const el = document.createElement("p");
-        el.innerText = "Your message was sent successfully.";
         el.classList.add("text-green-400");
+        el.innerText = "Your message was sent successfully.";
         form.value.appendChild(el);
-
         form.value.reset();
       },
       (error) => {
-        console.log("FAILED...", error.text);
+        const el = document.createElement("p");
+        el.classList.add("text-red-400");
+        el.innerText = "Something went wrong. Please try again.";
+        form.value.appendChild(el);
       }
     );
 };
