@@ -66,17 +66,17 @@ const technologies = [
     },
     {
         name: "Livewire",
-        icon: "/images/tech/livewire.svg",
+        icon: "/images/tech/livewire.png",
         progress: 90
     },
     {
         name: "AlpineJs",
-        icon: "/images/tech/alpine.svg",
+        icon: "/images/tech/alpine.png",
         progress: 80
     },
     {
         name: "FilamentPHP",
-        icon: "/images/tech/filament.svg",
+        icon: "/images/tech/filament.png",
         progress: 90
     },
 
