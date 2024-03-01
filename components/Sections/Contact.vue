@@ -76,6 +76,9 @@
 import { Earth } from "~/assets/constants";
 import emailjs from "@emailjs/browser";
 const form = ref(null);
+const from_name = ref("");
+const email = ref("");
+const message = ref("");
 const isPressed = ref(false);
 const handleMouseDown = () => {
   isPressed.value = true;
@@ -84,24 +87,33 @@ const handleMouseUp = () => {
   isPressed.value = false;
 };
 const sendMail = () => {
-  if (!from_name.value || !email.value || !message.value) return;
-  emailjs
-    .sendForm("service_5arij5h", "template_4wluw72", form.value, "_673j4Vui7FOnZXwS")
-    .then(
-      (result) => {
-        const el = document.createElement("p");
-        el.classList.add("text-green-400");
-        el.innerText = "Your message was sent successfully.";
-        form.value.appendChild(el);
-        form.value.reset();
-      },
-      (error) => {
-        const el = document.createElement("p");
-        el.classList.add("text-red-400");
-        el.innerText = "Something went wrong. Please try again.";
-        form.value.appendChild(el);
-      }
-    );
+  if (from_name.value != "" && email.value != "" && message.value != "") {
+    emailjs
+      .sendForm("service_5arij5h", "template_4wluw72", form.value, "_673j4Vui7FOnZXwS")
+      .then(
+        (result) => {
+          setElm("Your message has been sent successfully.", "text-green-400");
+          form.value.reset();
+        },
+        (error) => {
+          setElm(
+            "There was an error sending your message. Please try again later.",
+            "text-yellow-400"
+          );
+        }
+      );
+  } else {
+    setElm("Please fill all the fields.", "text-red-400");
+  }
+  function setElm(text, color) {
+    const el = document.createElement("p");
+    el.classList.add(color);
+    el.innerText = text;
+    form.value.appendChild(el);
+    setTimeout(() => {
+      el.remove();
+    }, 2500);
+  }
 };
 </script>
 

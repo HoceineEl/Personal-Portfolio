@@ -65,6 +65,22 @@ const technologies = [
         progress: 105
     },
     {
+        name: "Livewire",
+        icon: "/images/tech/livewire.svg",
+        progress: 90
+    },
+    {
+        name: "AlpineJs",
+        icon: "/images/tech/alpine.svg",
+        progress: 80
+    },
+    {
+        name: "FilamentPHP",
+        icon: "/images/tech/filament.svg",
+        progress: 90
+    },
+
+    {
         name: "JavaScript",
         icon: "/images/tech/js.svg",
         progress: 75
