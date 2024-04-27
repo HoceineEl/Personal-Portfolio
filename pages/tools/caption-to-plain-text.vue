@@ -37,7 +37,6 @@ useSeoMeta({
   twitterDescription: "Convert caption(.srt) files to plain text files",
   twitterTitle: "Caption to Plain Text Converter",
   twitterImage: "https://hoceine.com/images/tools/caption-to-plain-text.png",
-  keywords: keywords,
   pageSection: "Technology",
   pagePublishedTime: new Date(),
   pageAuthor: "Hoceine EL IDRISSI",
