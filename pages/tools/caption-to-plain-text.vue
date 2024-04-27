@@ -51,7 +51,7 @@ const ayahNumber = ref(0)
 const fetchRandomAyah = async () => {
   try {
     const randomAyahNumber = Math.floor(Math.random() * 6236) + 1;
-    const response = await fetch(`http://api.alquran.cloud/v1/ayah/${randomAyahNumber}/ar.alafasy`);
+    const response = await fetch(`https://api.alquran.cloud/v1/ayah/${randomAyahNumber}/ar.alafasy`);
     const ayahData = await response.json();
 
     if (ayahData.data && ayahData.data.text) {
