@@ -1,25 +1,22 @@
 <template>
-
-
-    <!-- File Uploader Section -->
-    <div class="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-blue-200 to-indigo-200">
-      <div class="text-center ">
-        <div v-if="ayahText" class="ayah text-center px-4 py-2 bg-slate-800 rounded-lg ">
-          <p class="text-sm sm:text-lg ">{{ ayahText }}</p>
-          <p class="text-xs sm:text-sm">  {{ ayahSurah }}, الاية {{ ayahNumber }}</p>
+    <div class="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-blue-200 to-indigo-200 transition-all duration-500 ease-in-out">
+      <div class="text-center transition-all duration-500 ease-in-out">
+        <div v-if="ayahText" class="ayah text-center px-4 py-2 bg-slate-800 rounded-lg transition-all duration-500 ease-in-out mb-7">
+          <p class="text-lg  lg:text-xl">" {{ ayahText }} "</p>
+          <p class="text-xs sm:text-xs md:text-sm lg:text-md">  {{ ayahSurah }}, الاية {{ ayahNumber }}</p>
         </div>
-        <h1 class="text-4xl font-bold text-indigo-900 mb-2">مُحمِّل الملفات</h1>
-        <p class="text-indigo-700">قم برفع ملفك لمعالجة المحتوى</p>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-900 mb-2 transition-all duration-500 ease-in-out">مُحمِّل الملفات</h1>
+        <p class="text-indigo-700 transition-all duration-500 ease-in-out">قم برفع ملفك لمعالجة المحتوى</p>
       </div>
-      <div class=" bg-white rounded-xl shadow-md flex items-center space-x-4">
-        <div class="">
+      <div class="bg-white rounded-xl shadow-md flex items-center space-x-4 transition-all duration-500 ease-in-out">
+        <div class="transition-all duration-500 ease-in-out">
           <input type="file" @change="uploadFile" class="  
-            file:py-4 file:px-6
-            file:rounded file:border-0 
-            file:text-sm file:font-semibold 
-            file:bg-violet-50 file:text-violet-700 
-            hover:file:bg-violet-100 
-            cursor-pointer" />
+            py-2 sm:py-3 md:py-4 lg:py-5 px-3 sm:px-4 md:px-5 lg:px-6
+            rounded border-0 
+            text-xs sm:text-sm md:text-md lg:text-lg font-semibold 
+            bg-violet-50 text-violet-700 
+            hover:bg-violet-100 
+            cursor-pointer transition-all duration-500 ease-in-out" />
         </div>
       </div>
   </div>
@@ -49,10 +46,8 @@ const fetchRandomAyah = async () => {
   }
 }
 
-// Call the function on component mount
 onMounted(fetchRandomAyah)
 
-// File upload logic
 const uploadFile = (event) => {
   const file = event.target.files[0]
   const reader = new FileReader()
