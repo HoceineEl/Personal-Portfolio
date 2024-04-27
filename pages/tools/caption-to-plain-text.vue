@@ -23,7 +23,25 @@
 </template>
 
 <script setup lang="js">
-
+useSeoMeta({
+  title: "Caption to Plain Text Converter ",
+  description: "Convert caption(.srt) files to plain text files",
+  ogTitle: "Caption to Plain Text Converter",
+  ogDescription: "Convert caption(.srt) files to plain text files",
+  ogType: "page",
+  ogImageAlt: "Caption to Plain Text Converter",
+  ogUrl: `https://hoceine.com/tools/caption-to-plain-text`,
+  ogImage: "https://hoceine.com/images/tools/caption-to-plain-text.png",
+  twitterCard: "summary_large_image",
+  twitterCreator: "@HoceineElidrisi",
+  twitterDescription: "Convert caption(.srt) files to plain text files",
+  twitterTitle: "Caption to Plain Text Converter",
+  twitterImage: "https://hoceine.com/images/tools/caption-to-plain-text.png",
+  keywords: keywords,
+  pageSection: "Technology",
+  pagePublishedTime: new Date(),
+  pageAuthor: "Hoceine EL IDRISSI",
+});
 // Reactive state for Ayah data
 const ayahText = ref('')
 const ayahSurah = ref('')
