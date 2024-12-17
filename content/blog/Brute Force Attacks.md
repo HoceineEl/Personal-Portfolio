@@ -1,12 +1,16 @@
 ---
-title: "Safeguarding Your Laravel Application Against Brute Force Attacks"
-description: "Explore effective strategies to fortify your Laravel application against brute force attacks and enhance its security."
+title: Safeguarding Your Laravel Application Against Brute Force Attacks
+description: Explore effective strategies to fortify your Laravel application
+  against brute force attacks and enhance its security.
 image: /images/blog/brute/thumbnail.png
 banner: /images/blog/brute/thumbnail.png
 createdAt: 2024-02-28T15:15:53.000Z
 updatedAt: 2024-02-28T15:15:53.000Z
-createdBy: "Hoceine EL IDRISSI"
-tags: ["Laravel", "Brute Force Attacks", "Security"]
+createdBy: Hoceine EL IDRISSI
+tags:
+  - Laravel
+  - Brute Force Attacks
+  - Security
 ---
 
 # Safeguarding Your Laravel Application Against Brute Force Attacks
