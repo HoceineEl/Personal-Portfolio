@@ -44,108 +44,70 @@ const services = [
 ];
 
 const technologies = [
-    {
-        name: "VueJS",
-        icon: "/images/tech/vue.svg",
-        progress: 90
-    },
-    {
-        name: "NuxtJs",
-        icon: "/images/tech/nuxt.svg",
-        progress: 95
-    },
+    // Primary stack - Laravel ecosystem (featured/large)
     {
         name: "Laravel",
         icon: "/images/tech/laravel.svg",
-        progress: 80
-    },
-    {
-        name: "TailwindCSS",
-        icon: "/images/tech/tailwind.svg",
-        progress: 105
-    },
-    {
-        name: "Livewire",
-        icon: "/images/tech/livewire.png",
-        progress: 90
-    },
-    {
-        name: "AlpineJs",
-        icon: "/images/tech/alpine.png",
-        progress: 80
+        featured: true
     },
     {
         name: "FilamentPHP",
         icon: "/images/tech/filament.png",
-        progress: 90
-    },
-
-    {
-        name: "JavaScript",
-        icon: "/images/tech/js.svg",
-        progress: 75
+        featured: true
     },
     {
-        name: "HTML5",
-        icon: "/images/tech/html.svg",
-        progress: 110
+        name: "Livewire",
+        icon: "/images/tech/livewire.png",
+        featured: true
+    },
+    // Vue ecosystem (featured/large)
+    {
+        name: "VueJS",
+        icon: "/images/tech/vue.svg",
+        featured: true
     },
     {
-        name: "CSS3",
-        icon: "/images/tech/css.svg",
-        progress: 110
+        name: "NuxtJs",
+        icon: "/images/tech/nuxt.svg",
+        featured: true
     },
-
+    // Supporting technologies
+    {
+        name: "TailwindCSS",
+        icon: "/images/tech/tailwind.svg",
+    },
+    {
+        name: "AlpineJs",
+        icon: "/images/tech/alpine.png",
+    },
+    {
+        name: "Laravel Forge",
+        icon: "/images/tech/forge.svg",
+    },
     {
         name: "PHP",
         icon: "/images/tech/php.svg",
-        progress: 70
     },
     {
-        name: "MySql",
-        icon: "/images/tech/mysql.svg",
-        progress: 70
-    },
-    {
-        name: "Browser Extentions",
-        icon: "/images/tech/browser-extention.svg",
-        progress: 80
+        name: "JavaScript",
+        icon: "/images/tech/js.svg",
     },
     {
         name: "TypeScript",
         icon: "/images/tech/ts.svg",
-        progress: 70
+    },
+    {
+        name: "MySql",
+        icon: "/images/tech/mysql.svg",
     },
     {
         name: "Github",
         icon: "/images/tech/github.svg",
-        progress: 75
     },
     {
         name: "Vite",
         icon: "/images/tech/vite.svg",
-        progress: 70
     },
-    {
-        name: "Figma",
-        icon: "/images/tech/figma.svg",
-        progress: 60
-    },
-    {
-        name: "Bootstrap 5",
-        icon: "/images/tech/bootstrap.svg",
-        progress: 80
-    },
-    {
-        name: "Wordpress",
-        icon: "/images/tech/wordpress.svg",
-        progress: 50
-    },
-    {
-        name: "Vs Code",
-        icon: "/images/tech/vscode.svg",
-        progress: 90
-    }
 ];
 
 // const technologies_3d = [

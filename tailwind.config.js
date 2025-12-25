@@ -16,15 +16,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Neo-Brutalism palette
+        // Simplified palette - Emerald + Orange
         'neo-black': '#0D0D0D',
         'neo-white': '#FFFEF0',
-        'neo-lime': '#CCFF00',
-        'neo-pink': '#FF2E63',
-        'neo-cyan': '#00D4FF',
-        'neo-purple': '#8B5CF6',
-        'neo-orange': '#FF6B35',
-        'neo-yellow': '#FFE66D',
+        'neo-primary': '#10B981',    // Emerald - main accent
+        'neo-secondary': '#FB923C',  // Orange - highlight accent
+        // Legacy aliases (map to new colors)
+        'neo-lime': '#10B981',
+        'neo-pink': '#FB923C',
+        'neo-cyan': '#10B981',
+        'neo-purple': '#10B981',
+        'neo-orange': '#FB923C',
+        'neo-yellow': '#FB923C',
         // Semantic colors
         'surface': 'var(--color-surface)',
         'surface-alt': 'var(--color-surface-alt)',
@@ -49,9 +52,9 @@ export default {
         'neo-lg': '6px 6px 0px var(--color-border)',
         'neo-xl': '8px 8px 0px var(--color-border)',
         'neo-accent': '4px 4px 0px var(--color-accent)',
-        'neo-pink': '4px 4px 0px #FF2E63',
-        'neo-lime': '4px 4px 0px #CCFF00',
-        'neo-cyan': '4px 4px 0px #00D4FF',
+        'neo-pink': '4px 4px 0px #FB923C',
+        'neo-lime': '4px 4px 0px #10B981',
+        'neo-cyan': '4px 4px 0px #10B981',
         'neo-hover': '6px 6px 0px var(--color-border)',
         'neo-active': '2px 2px 0px var(--color-border)',
         card: "0px 35px 120px -15px #211e35",

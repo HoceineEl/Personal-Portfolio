@@ -44,7 +44,7 @@ onUnmounted(() => {
         class="flex items-center gap-3 group"
         @click="setActive('')"
       >
-        <div class="w-10 h-10 bg-neo-lime border-3 border-border flex items-center justify-center font-display font-bold text-neo-black text-lg">
+        <div class="w-10 h-10 bg-neo-primary border-3 border-border flex items-center justify-center font-display font-bold text-white text-lg">
           H
         </div>
         <span class="font-display font-bold text-lg hidden sm:block text-text-primary">
@@ -61,7 +61,7 @@ onUnmounted(() => {
             class="px-4 py-2 font-mono text-sm uppercase tracking-wide transition-all duration-200"
             :class="[
               active === link.title
-                ? 'bg-neo-lime text-neo-black border-3 border-border'
+                ? 'bg-neo-primary text-white border-3 border-border'
                 : 'text-text-secondary hover:text-text-primary hover:bg-surface-alt'
             ]"
             @click="setActive(link.title)"
@@ -82,7 +82,7 @@ onUnmounted(() => {
           <!-- Sun icon (shown in dark mode) -->
           <svg
             v-if="isDark"
-            class="w-5 h-5 text-neo-yellow"
+            class="w-5 h-5 text-neo-secondary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ onUnmounted(() => {
           <!-- Moon icon (shown in light mode) -->
           <svg
             v-else
-            class="w-5 h-5 text-neo-purple"
+            class="w-5 h-5 text-neo-primary"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -115,7 +115,7 @@ onUnmounted(() => {
         <button
           @click="setToggle"
           class="lg:hidden w-10 h-10 border-3 border-border bg-surface flex items-center justify-center"
-          :class="toggle ? 'bg-neo-pink' : ''"
+          :class="toggle ? 'bg-neo-secondary' : ''"
           aria-label="Toggle menu"
         >
           <svg
@@ -154,7 +154,7 @@ onUnmounted(() => {
               class="block px-4 py-3 font-mono text-sm uppercase tracking-wide border-b border-border/20 transition-colors"
               :class="[
                 active === link.title
-                  ? 'bg-neo-lime text-neo-black'
+                  ? 'bg-neo-primary text-white'
                   : 'text-text-secondary hover:text-text-primary hover:bg-surface-alt'
               ]"
               @click="() => { setActive(link.title); setToggle(); }"

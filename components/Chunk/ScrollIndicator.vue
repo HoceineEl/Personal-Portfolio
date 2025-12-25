@@ -19,7 +19,7 @@ onUnmounted(() => {
 <template>
   <div class="fixed top-0 left-0 w-full h-1 z-[100] bg-surface-alt">
     <div
-      class="h-full bg-neo-lime transition-all duration-100 ease-out"
+      class="h-full bg-neo-primary transition-all duration-100 ease-out"
       :style="{ width: `${scrollProgress}%` }"
     />
   </div>

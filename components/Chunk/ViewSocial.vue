@@ -3,7 +3,7 @@ import { socials } from "~/assets/constants";
 </script>
 
 <template>
-  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+  <div class="fixed top-1/2 -translate-y-1/2 right-6 z-40 flex flex-col gap-3">
     <a
       v-for="social in socials"
       :key="social.name"
@@ -11,7 +11,7 @@ import { socials } from "~/assets/constants";
       target="_blank"
       rel="noopener noreferrer"
       :aria-label="`Visit ${social.name}`"
-      class="w-10 h-10 border-3 border-border bg-surface flex items-center justify-center transition-all duration-200 hover:bg-neo-lime hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-sm"
+      class="w-10 h-10 border-3 border-border bg-surface flex items-center justify-center transition-all duration-200 hover:bg-neo-primary hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-sm"
     >
       <NuxtImg
         :src="social.icon"
