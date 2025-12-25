@@ -1,46 +1,79 @@
 <template>
-  <div class="relative section flex flex-wrap justify-center gap-4">
-    <div>
-      <div class="text-center">
-        <p class="header">Technologies I'm Using</p>
-        <h2 class="header-secondary">Tech Stack.</h2>
+  <section class="section relative overflow-hidden">
+    <!-- Section header -->
+    <div class="text-center mb-12">
+      <span class="section-label">Technologies</span>
+      <h2 class="header-secondary">
+        Tech
+        <span class="relative inline-block">
+          <span class="relative z-10">Stack</span>
+          <span class="absolute -bottom-1 left-0 w-full h-3 bg-neo-pink -z-0 rotate-1" />
+        </span>
+      </h2>
+      <p class="description mx-auto text-center mt-4">
+        The tools and technologies I use to bring ideas to life
+      </p>
+    </div>
+
+    <!-- Tech grid -->
+    <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
+      <div
+        v-for="(tech, index) in technologies"
+        :key="tech.name"
+        class="neo-card p-4 flex flex-col items-center justify-center aspect-square group"
+        :style="{ animationDelay: `${index * 50}ms` }"
+      >
+        <div class="w-12 h-12 mb-3 flex items-center justify-center">
+          <NuxtImg
+            :src="tech.icon"
+            :alt="tech.name"
+            loading="lazy"
+            width="48"
+            height="48"
+            class="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+          />
+        </div>
+        <span class="text-xs font-mono text-center text-text-secondary group-hover:text-text-primary transition-colors">
+          {{ tech.name }}
+        </span>
       </div>
-      <div class="flex flex-wrap gap-16 mt-14 justify-center items-center max-w-5xl">
-        <div
-          v-for="tech in technologies"
-          :key="tech.name"
-          class="transition-all duration-1000 group relative"
-        >
-          <div
-            class="w-20 h-20 p-2 bg-[#ffffff11] rounded-xl hover:rounded-full border-transparent border-2 hover:border-teal-500 hover:p-3 transition-all duration-500"
-          >
-            <NuxtImg
-              format="webp"
-              quality="70"
-              :src="tech.icon"
-              :alt="tech.name"
-              loading="lazy"
-              width="80"
-              height="80"
-            />
-          </div>
-          <div
-            class="absolute bottom-full left-1/2 z-20 mb-3 -translate-x-1/2 whitespace-nowrap rounded bg-tertiary py-[6px] px-4 text-sm font-semibold text-white opacity-0 group-hover:opacity-100"
-            :aria-hidden="true"
-          >
-            <span
-              class="absolute bottom-[-3px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-sm bg-tertiary"
-            ></span>
-            <span :aria-hidden="true">{{ tech.name }}</span>
-          </div>
+    </div>
+
+    <!-- Marquee of skills -->
+    <div class="mt-16 border-y-3 border-border py-4 bg-neo-lime overflow-hidden">
+      <div class="marquee-container">
+        <div class="flex gap-8 animate-marquee whitespace-nowrap">
+          <span v-for="i in 2" :key="i" class="flex gap-8">
+            <span v-for="tech in technologies" :key="`${i}-${tech.name}`" class="font-display font-bold text-neo-black text-lg uppercase">
+              {{ tech.name }} *
+            </span>
+          </span>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup>
 import { technologies } from "~/assets/constants";
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.marquee-container {
+  display: flex;
+  overflow: hidden;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+</style>

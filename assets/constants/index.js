@@ -225,48 +225,60 @@ const technologies = [
 
 const experiences = [
     {
+        title: "Full Stack Developer",
+        company_name: "NewTags",
+        icon: "/images/company/newtags.svg",
+        iconBg: "#CCFF00",
+        date: "2024 - Present (2 Years)",
+        points: [
+            "Building multi-tenant SaaS applications using the TALL Stack (Tailwind, Alpine.js, Laravel, Livewire).",
+            "Developed Mediano - Sports Academies Management SaaS with unique branding and subscription management per academy.",
+            "Created Mwshor - Project Management Platform with Kanban boards, timelines, and client tracking.",
+            "Contributed to EisarApp - Training SaaS with progress monitoring, certifications, and compliance management.",
+            "Developed Ala Khutah - Job Posting Platform with candidate tracking and application management.",
+            "Built Adiaf - Wholesale E-commerce Platform with complex pricing tiers and inventory management.",
+            "Architected and deployed multiple production SaaS products serving hundreds of users.",
+        ],
+    },
+    {
         title: "Full Stack Web Developer",
         company_name: "Devosoft",
         icon: "/images/company/devosoft.png",
         iconBg: "#383E56",
-        date: "November 2022 - September 2023     (5M By Night & 5M Full Time)",
+        date: "November 2022 - September 2023",
         points: [
-            "Balancing full-time studies at the Superior School of Technology with night-time internship as a Full Stack Web Developer at Devosoft startup.",
-            " Explored diverse technologies, including Laravel, Figma, Vue.js, GitHub, and even ventured into WordPress.",
-            "Successfully contributed to a variety of projects, from ecommerce management to LMSs, with a passion for tackling new challenges.",
-            "Developed strong client communication skills and honed project planning abilities.",
-            " Shared the love for learning by teaching others about technology."
+            "Balanced full-time studies with night-time internship as a Full Stack Web Developer.",
+            "Explored diverse technologies including Laravel, Filament, Vue.js, Nuxt.js, and WordPress.",
+            "Contributed to various projects from e-commerce platforms to Learning Management Systems.",
+            "Developed strong client communication skills and project planning abilities.",
         ],
     },
-
     {
-        title: "Full Stack Laravel Developer",
-        company_name: "SOSIPO(Ministry of Agriculture)",
+        title: "Backend Developer (Intern)",
+        company_name: "SOSIPO (Ministry of Agriculture)",
         icon: "/images/company/sosipo.png",
         iconBg: "#E6DEDD",
         date: "Jan 2023 - March 2023",
         points: [
-            "Developed a web app for the \"Ministry of Agriculture\" affiliated company as a year-end project, with a strong focus on learning how to secure applications by studying all possible security cases.",
-            "Led a comprehensive project for the SOSIPO Amical Income Association, covering financial operations and more.",
-            "Used Laravel, JavaScript, and Bootstrap for web development.",
+            "Led a financial project using Laravel, JavaScript, and Bootstrap for the Ministry of Agriculture.",
+            "Implemented role-based permissions and comprehensive accounting features.",
+            "Focused on application security by studying all possible security cases.",
             "Gained teamwork and client communication skills.",
         ],
     },
     {
-        title: "Windows Forms .NET Developer",
+        title: "WinForms Developer (Intern)",
         company_name: "A2 Services Et Technologies",
         icon: "/images/company/a2st.png",
         iconBg: "#383E56",
         date: "July 2022 - September 2022",
         points: [
-            `Created a library management system using Windows Forms, SQL Server, and C#
-            during my internship.`,
+            "Created a library management system using Windows Forms, SQL Server, and C#.",
             "Gained valuable hands-on experience in application programming.",
             "Collaborated with the CEO to understand project requirements.",
-            "Contributed to my skill set as a developer.",
+            "Contributed to foundational skills as a developer.",
         ],
     },
-
 ];
 
 const testimonials = [
@@ -297,56 +309,176 @@ const testimonials = [
 ];
 
 const projects = [
+    // === FEATURED SAAS PROJECTS ===
     {
-        name: "radiantemergencyplumber.co.uk",
+        name: "DecorCopilot – AI Interior Design SaaS",
         description:
-            " Developed a website for Manchester Plumbing Services named 'Radiant Emergency Plumber'. Implemented various features to enhance user experience and provide valuable information.",
+            "AI-powered room transformation platform using Google Gemini. Features 30+ design styles, visual search, floor planning, and actionable design suggestions. PWA-enabled with dark/light themes.",
         tags: [
-            {
-                name: "VueJs",
-                color: "green-text-gradient",
-            },
-            {
-                name: "NuxtJs",
-                color: "green-text-gradient",
-            },
-            {
-                name: "Tailwind CSS",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "Nuxt Content",
-                color: "purple-text-gradient",
-            },
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Google Gemini", color: "blue-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+        ],
+        image: "/images/my_projects/decorcopilot/mockup.png",
+        noImage: true,
+        demo: "https://decorcopilot.com",
+        url: "/projects/decorcopilot",
+        featured: true,
+    },
+    {
+        name: "WiserPocket – Financial Management Platform",
+        description:
+            "Personal finance tracking with AI chat assistance, budgeting tools, expense categorization, and analytics dashboard. Features voice input, transaction management, and financial goal tracking.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "AI Chat", color: "green-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+        ],
+        image: "/images/my_projects/wiserpocket/mockup.png",
+        noImage: true,
+        demo: "https://wiserpocket.com",
+        url: "/projects/wiserpocket",
+        featured: true,
+    },
+    {
+        name: "SmartShop – Multi-Tenant E-Commerce Platform",
+        description:
+            "Cloud-based e-commerce SaaS with vendor stores, payment integration (PayPal, Stripe), shipping logistics (Aramex, DHL, FedEx), POS system, and AI-powered business insights. Multi-language and multi-currency support.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Multi-tenant", color: "green-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+        ],
+        image: "/images/my_projects/smartshop/mockup.png",
+        noImage: true,
+        demo: "https://smartshop.ps",
+        url: "/projects/smartshop",
+        featured: true,
+    },
+    {
+        name: "Mediano – Sports Academies Management SaaS",
+        description:
+            "Multi-tenant SaaS for sports academies with unique branding, subscription management, and secure access per academy. All-in-one solution for training sessions, attendance tracking, events, and sales.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "Alpine.js", color: "blue-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Multi-tenant", color: "green-text-gradient" },
+        ],
+        image: "/images/my_projects/mediano/mockup.png",
+        noImage: true,
+        url: "/projects/mediano",
+        featured: true,
+    },
+    {
+        name: "Mwshor – SaaS Project Management Platform",
+        description:
+            "Multi-tenant project management SaaS with Kanban boards, timelines, and comprehensive task management. Client tracking through personalized panels, scalable for any industry.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "Alpine.js", color: "blue-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+        ],
+        image: "/images/my_projects/mwshor/mockup.png",
+        noImage: true,
+        url: "/projects/mwshor",
+        featured: true,
+    },
+    {
+        name: "Adiaf – Hajj Management SaaS System",
+        description:
+            "Comprehensive multi-tenant Hajj management SaaS with role-based panels. Distinct spaces for Company, Center, Admin, Attendant, Guide, and Pilgrim. Full workflow automation for pilgrimage operations.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Multi-tenant", color: "green-text-gradient" },
+            { name: "Role-based", color: "pink-text-gradient" },
+        ],
+        image: "/images/my_projects/adiaf/mockup.png",
+        noImage: true,
+        url: "/projects/adiaf",
+        featured: true,
+    },
+    {
+        name: "Ala Khutah – Historical Hijra Journey Platform",
+        description:
+            "Jobs portal and workforce management for a 470km historical Hijra path project in Saudi Arabia with 7 overnight stations over 6 months. Features recruitment portal with geographic filtering and competency assessment.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Arabic UI", color: "green-text-gradient" },
+        ],
+        image: "/images/my_projects/alakhutah/mockup.png",
+        noImage: true,
+        demo: "https://jobs-app.alakhutah.com",
+        url: "/projects/alakhutah",
+        featured: true,
+    },
+    {
+        name: "EisarApp – Multi-Tenant Training SaaS",
+        description:
+            "Multi-tenant SaaS for training workflows and employee development. Features progress monitoring with certifications and compliance management. Scalable architecture for enterprise training needs.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Multi-tenant", color: "green-text-gradient" },
+        ],
+        image: "/images/my_projects/eisarapp/mockup.png",
+        noImage: true,
+        url: "/projects/eisarapp",
+        featured: true,
+    },
+    {
+        name: "Quran Association Management System",
+        description:
+            "Comprehensive management system for Abi Zaid Al Qayrawani Association. Manages attendance, finances, and role-based access. Integrated WhatsApp API for automated reminders and parent messaging.",
+        tags: [
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "WhatsApp API", color: "green-text-gradient" },
+        ],
+        image: "/images/my_projects/quran-association/mockup.png",
+        noImage: true,
+        url: "/projects/quran-association",
+    },
+    // === OTHER PROJECTS ===
+    {
+        name: "Radiant Emergency Plumber",
+        description:
+            "Professional website for Manchester Plumbing Services with 24/7 emergency response. Features 7+ service pages, SEO optimization, and modern responsive design. Over 18 years of expertise showcased.",
+        tags: [
+            { name: "Vue.js", color: "green-text-gradient" },
+            { name: "Nuxt.js", color: "green-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+            { name: "Nuxt Content", color: "purple-text-gradient" },
         ],
         image: "/images/my_projects/rep/mockup.png",
         demo: "https://radiantemergencyplumber.co.uk/",
         url: "/radiant-emergency-plumber",
         source_code_link: "https://github.com/hoceineel/rep",
-    }
-    ,
+    },
     {
-        name: "Eisar Reserve - Room Reservation System",
+        name: "Eisar Reserve – Room Reservation System",
         description:
-            "A comprehensive room reservation system designed to simplify the process of managing bookings. Users can interact with the system to make reservations, manage bookings, and explore various features.",
+            "Comprehensive room reservation system with booking management, calendar integration, and admin dashboard. Built with FilamentPHP for a powerful admin experience.",
         tags: [
-            {
-                name: "Laravel",
-                color: "red-text-gradient",
-            },
-            {
-                name: "Filament",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Livewire",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "Tailwind Css",
-                color: "blue-text-gradient",
-            },
-
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Livewire", color: "purple-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/eisar-reserve/mockup.jpg",
         url: "/eisar-reserve",
@@ -355,32 +487,12 @@ const projects = [
     {
         name: "SOSIPO Financial Management App",
         description:
-            "Developed a financial management web app for SOSIPO Association, automating processes, enhancing transparency, and boosting efficiency. Achieved financial stability and member satisfaction.",
+            "Financial management web app for Ministry of Agriculture affiliated association. Features role-based permissions, accounting operations, and comprehensive reporting with ChartJS visualizations.",
         tags: [
-            {
-                name: "Laravel",
-                color: "red-text-gradient",
-            },
-            {
-                name: "MySql",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "Bootstrap",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "JavaScript",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "ChartJs",
-                color: "pink-text-gradient",
-            },
-            {
-                name: "Ajax",
-                color: "green-text-gradient",
-            },
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "MySQL", color: "blue-text-gradient" },
+            { name: "Bootstrap", color: "purple-text-gradient" },
+            { name: "ChartJS", color: "pink-text-gradient" },
         ],
         image: "/images/my_projects/sosipo/mockup.png",
         demo: "https://youtu.be/LHKfUdVW8VA",
@@ -388,31 +500,14 @@ const projects = [
         source_code_link: "https://github.com/Hzekrii/SosipoProject",
     },
     {
-        name: "Personal Portfolio Showcase",
+        name: "Personal Portfolio & Blog",
         description:
-            "In my portfolio project, I have showcased my expertise in Vue and Nuxt, integrating 3D models, and tackling complex challenges. I've delved into performance optimization techniques, demonstrating my commitment to creating efficient, interactive web experiences.",
+            "Neo-Brutalism designed portfolio with 3D elements, dark/light mode, and integrated blog. Showcases expertise in Vue, Nuxt, and modern web technologies with performance optimization.",
         tags: [
-            {
-                name: "VueJs",
-                color: "green-text-gradient",
-            },
-            {
-                name: "TailwindcsCss",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "NuxtJs",
-                color: "green-text-gradient",
-            },
-            {
-                name: "ThreeJs",
-                color: "pink-text-gradient",
-            },
-            {
-                name: "TresJs",
-                color: "purple-text-gradient",
-            },
-
+            { name: "Vue.js", color: "green-text-gradient" },
+            { name: "Nuxt.js", color: "green-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
+            { name: "Three.js", color: "pink-text-gradient" },
         ],
         image: "/images/my_projects/portfolio/mockup.png",
         demo: "https://hoceine.com",
@@ -420,47 +515,14 @@ const projects = [
         source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
     },
     {
-        name: "Streamlining Learning - Enhancing Video Delivery in LMS",
+        name: "HLS Video Streaming in LMS",
         description:
-            "Integrate HLS into an LMS with ffmpeg, hls.js, and Plyr, enabling video lifecycle management, watermarking, demo extraction, bitrate encoding, segmentation, HLS formatting, MySQL storage, and multi-quality preview.",
+            "Advanced video delivery system with HLS integration, FFMPEG processing, watermarking, demo extraction, multi-bitrate encoding, and Redis caching. Multi-quality preview with Plyr player.",
         tags: [
-            {
-                name: "Laravel",
-                color: "red-text-gradient",
-            },
-            {
-                name: "Javascript",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "FFMPEG",
-                color: "green-text-gradient",
-            },
-            {
-                name: "Plyr",
-                color: "blue-text-gradient",
-            },
-            {
-                name: "Redis",
-                color: "red-text-gradient",
-            },
-            {
-                name: "MySql",
-                color: "pink-text-gradient",
-            },
-            {
-                name: "Bootstrap",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "HLS.js",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Ajax",
-                color: "purple-text-gradient",
-            },
-
+            { name: "Laravel", color: "red-text-gradient" },
+            { name: "FFMPEG", color: "green-text-gradient" },
+            { name: "HLS.js", color: "yellow-text-gradient" },
+            { name: "Redis", color: "red-text-gradient" },
         ],
         image: "/images/my_projects/lms/home.jpg",
         demo: "https://youtu.be/5erufn_t5cc",
@@ -468,41 +530,13 @@ const projects = [
         source_code_link: "https://github.com/HoceineEl/LearningManagmentSystemeLaravel10",
     },
     {
-        name: "Nikee Website Revamp",
+        name: "Nur Net Browser Extension",
         description:
-            "Revamped Nike's website with a contemporary design, optimized UI/UX, and dynamic sliders for a captivating user experience, enhancing brand engagement and online shopping satisfaction.",
+            "Content guard extension that shields against distractions by blocking intensive websites and redirecting to meaningful content. Available on Chrome and Firefox.",
         tags: [
-            {
-                name: "VueJs",
-                color: "green-text-gradient",
-            },
-            {
-                name: "TailwindCss",
-                color: "blue-text-gradient",
-            },
-        ],
-        image: "/images/my_projects/nike/moockup.png",
-        source_code_link: "https://github.com/HoceineEl/nike-website",
-        url: "/nikee",
-        demo: "https://nikee.pages.dev"
-    },
-    {
-        name: "Nur Net Browser Extention",
-        description:
-            "Nur Net shields against distractions by blocking intensive websites, redirecting users to meaningful content. Take control of your online experience, staying focused on what matters most.",
-        tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Chrome Extention",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "Firefox Extention",
-                color: "blue-text-gradient",
-            },
+            { name: "JavaScript", color: "yellow-text-gradient" },
+            { name: "Chrome Extension", color: "purple-text-gradient" },
+            { name: "Firefox Extension", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/nurnet/logo.png",
         url: "/nur-net",
@@ -512,22 +546,13 @@ const projects = [
         source_code_link: "https://github.com/HoceineEl/NurNet-chrome",
     },
     {
-        name: "Remind Me | ذكرني Extention",
+        name: "Remind Me | ذكرني Extension",
         description:
-            "Remind Me is your spiritual companion, sending customizable notifications with verses, Azkar, or Quranic recitations. Stay connected with Allah throughout your day.",
+            "Spiritual companion extension sending customizable notifications with Quranic verses, Azkar, or recitations. Stay connected with Allah throughout your day.",
         tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Chrome Extention",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "Firefox Extention",
-                color: "blue-text-gradient",
-            },
+            { name: "JavaScript", color: "yellow-text-gradient" },
+            { name: "Chrome Extension", color: "purple-text-gradient" },
+            { name: "Firefox Extension", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/dakkerni/tile.jpg",
         url: "/remind-me",
@@ -536,69 +561,30 @@ const projects = [
         source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
     },
     {
-        name: "Youtube Ad Skipper  Extention",
+        name: "YouTube Ad Skipper Extension",
         description:
-            "Innovated a Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience. Simplify content consumption with a sleek and efficient ad skipper.",
+            "Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience with a sleek and efficient interface.",
         tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Chrome Extention",
-                color: "purple-text-gradient",
-            },
-            {
-                name: "Firefox Extention",
-                color: "blue-text-gradient",
-            },
+            { name: "JavaScript", color: "yellow-text-gradient" },
+            { name: "Chrome Extension", color: "purple-text-gradient" },
+            { name: "Firefox Extension", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/skipper/skipper.jpg",
         chrome: "https://chromewebstore.google.com/detail/legal-youtube-ad-skipper/ceccdngldibjefbfobnkmjaempfkmeke",
         url: "/youtube-ad-skipper",
     },
     {
-        name: "Islamic Trivia",
+        name: "Islamic Trivia Quiz",
         description:
-            "Developed an engaging Islamic quiz, testing knowledge with 50 questions. Tailored individual results with descriptions, offering a unique insight into each participant's understanding of Islam.",
+            "Engaging Islamic knowledge quiz with 50 questions, tailored results, and personalized insights into each participant's understanding of Islam.",
         tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "JSON",
-                color: "green-text-gradient",
-            },
-            {
-                name: "TailwindCss",
-                color: "blue-text-gradient",
-            },
+            { name: "JavaScript", color: "yellow-text-gradient" },
+            { name: "Tailwind CSS", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/quiz/banner.png",
         demo: "https://islamictrivia.vercel.app/",
         url: "/islamic-trivia",
         source_code_link: "https://github.com/HoceineEl/Islamic_Quiz",
-    },
-    {
-        name: "Hagman Game",
-        description:
-            "When I began my journey in learning JavaScript, I honed my logical thinking by creating a Hangman game, elevating it with complex features. This project showcases my growth and problem-solving skills in web development, highlighting the fun side of programming.",
-        tags: [
-            {
-                name: "VanillaJs",
-                color: "yellow-text-gradient",
-            },
-            {
-                name: "Css",
-                color: "blue-text-gradient",
-            },
-
-        ],
-        image: "/images/my_projects/hangman/home.png",
-        demo: "https://hangman-ane.pages.dev/",
-        url: "/hangman",
-        source_code_link: "https://github.com/HoceineEl/hangman",
     },
 ];
 

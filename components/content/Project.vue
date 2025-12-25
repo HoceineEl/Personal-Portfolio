@@ -11,7 +11,31 @@ const { page: project, toc } = useContent();
       role="Project"
       aria-label="Project"
     >
+      <template v-if="project.noImage">
+        <div
+          class="w-full h-[300px] md:h-[400px] bg-neo-purple border-4 border-neo-black rounded-3xl mb-8 flex flex-col items-center justify-center relative overflow-hidden shadow-[12px_12px_0px_0px_rgba(0,0,0,1)]"
+        >
+          <!-- Geometric patterns -->
+          <div class="absolute inset-0 opacity-20 flex items-center justify-center">
+             <div class="w-full h-full bg-grid-pattern opacity-50"></div>
+          </div>
+
+          <div class="w-24 h-24 mb-6 border-4 border-neo-black bg-neo-lime rotate-3 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center relative z-10 transition-transform hover:-rotate-12 duration-500">
+             <span class="text-neo-black font-display font-black text-6xl">{{ project.title.charAt(0) }}</span>
+          </div>
+          <h2 class="relative z-10 font-display font-black text-4xl md:text-6xl text-neo-black uppercase tracking-tighter text-center px-4">
+            <span class="bg-white border-4 border-neo-black px-4 py-2 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] inline-block mb-4 rotate-1">
+              {{ project.title.split(' – ')[0] }}
+            </span>
+          </h2>
+
+          <!-- Decorative bits -->
+          <div class="absolute top-10 right-10 w-16 h-16 bg-neo-cyan border-4 border-neo-black rounded-full shadow-neo -rotate-12"></div>
+          <div class="absolute bottom-10 left-10 w-20 h-20 bg-neo-pink border-4 border-neo-black rotate-12 shadow-neo"></div>
+        </div>
+      </template>
       <NuxtPicture
+        v-else
         :imgAttrs="{
           class:
             'w-full  h-[600px] object-cover rounded-3xl mb-8 object-center overflow-y-auto',

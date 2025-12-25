@@ -1,12 +1,12 @@
 <script setup>
 const formatDate = (dateString) => {
-  const options = { year: "numeric", month: "long", day: "numeric" };
+  const options = { year: "numeric", month: "short", day: "numeric" };
   const date = new Date(dateString);
-  return date.toLocaleDateString(undefined, options);
+  return date.toLocaleDateString("en-US", options);
 };
 
 let fetched = ref(false);
-let articles = ref([]); // Define the articles array
+let articles = ref([]);
 
 onMounted(() => {
   if (!fetched.value) {
@@ -29,91 +29,106 @@ onMounted(() => {
 </script>
 
 <template>
-  <section id="blog" class="section flex flex-col items-center" role="region">
-    <div class="text-center mb-16">
-      <h2 class="header">What I've Shared</h2>
-      <h3 class="header-secondary">My Blog.</h3>
+  <section id="blog" class="section relative">
+    <!-- Section header -->
+    <div class="text-center mb-12">
+      <span class="section-label">Articles</span>
+      <h2 class="header-secondary">
+        Latest
+        <span class="relative inline-block">
+          <span class="relative z-10">Blog</span>
+          <span class="absolute -bottom-1 left-0 w-full h-3 bg-neo-orange -z-0 -rotate-1" />
+        </span>
+        Posts
+      </h2>
+      <p class="description mx-auto text-center mt-4">
+        Thoughts, tutorials, and insights from my journey in web development
+      </p>
     </div>
 
-    <section
-      v-if="fetched"
-      class="w-full flex flex-wrap justify-center items-start gap-10 px-2 sm:px-0"
-      role="list"
+    <!-- Loading state -->
+    <div v-if="!fetched" class="flex justify-center py-16">
+      <div class="w-16 h-16 border-4 border-border border-t-neo-lime animate-spin" />
+    </div>
+
+    <!-- Articles grid -->
+    <div
+      v-else
+      class="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
     >
       <article
         v-for="article in articles"
         :key="article._path"
-        class="w-full sm:w-80 rounded-xl bg-tertiary hover:scale-[1.02] hover:-translate-y-2 transition-all duration-500 pointer-events-none sm:pointer-events-auto"
-        role="listitem"
+        class="neo-card overflow-hidden group"
       >
-        <a :href="article._path" class="flex flex-col" :alt="article.title">
-          <NuxtPicture
-            :src="article.image"
-            :img-attrs="{
-              alt: article.title + ' image',
-              class:
-                'w-full h-60 bg-cover overflow-hidden rounded-ss-lg rounded-tr-lg mb-3',
-              role: 'img',
-              ariaLabel: 'Article Image',
-            }"
-            format="avif,webp"
-            loading="lazy"
-          />
-          <div class="mx-4 flex flex-col justify-center gap-4 py-4">
-            <h2 class="text-lg font-bold font-serif" >
-              {{ article.title }}
-            </h2>
-            <p class="line-clamp-2 max-w-2xl text-sm" role="article-description">
-              {{ article.description }}
-            </p>
-            <div class="flex flex-wrap gap-2" role="list">
+        <NuxtLink :to="article._path" class="block">
+          <!-- Article image -->
+          <div class="relative h-48 overflow-hidden border-b-3 border-border">
+            <NuxtPicture
+              :src="article.image"
+              :img-attrs="{
+                alt: article.title,
+                class: 'w-full h-full object-cover',
+              }"
+              format="avif,webp"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Article content -->
+          <div class="p-5">
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-3">
               <span
-                v-for="tag in article.tags"
-                class="px-2 bg-teal-600 rounded-lg text-sm"
-                role="listitem"
+                v-for="tag in article.tags?.slice(0, 2)"
+                :key="tag"
+                class="text-xs font-mono font-bold px-2 py-1 bg-neo-lime text-neo-black border-2 border-border"
               >
                 {{ tag }}
               </span>
             </div>
-            <div
-              class="metadata flex gap-3 text-sm font-light text-slate-400 flex-wrap"
-              role="contentinfo"
-            >
-              <p class="article-author" role="author">Hoceine EL IDRISSI</p>
-              <time
-                class="flex gap-1 items-center"
-                :datetime="article.createdAt"
-                role="time"
-              >
-                <IconsDate class="w-4 h-4" aria-hidden="true" />
+
+            <h3 class="font-display font-bold text-lg mb-2 text-text-primary line-clamp-2">
+              {{ article.title }}
+            </h3>
+
+            <p class="text-sm text-text-secondary mb-4 line-clamp-2">
+              {{ article.description }}
+            </p>
+
+            <!-- Meta -->
+            <div class="flex items-center gap-4 text-xs font-mono text-text-secondary">
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Hoceine
+              </span>
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
                 {{ formatDate(article.createdAt) }}
-              </time>
-              <p
-                v-if="article.minutes"
-                class="flex gap-1 items-center"
-                role="time-to-read"
-              >
-                <IconsTime class="w-4 h-4" aria-hidden="true" /> {{ article.minutes }} min
-                read
-              </p>
+              </span>
             </div>
           </div>
-        </a>
+        </NuxtLink>
       </article>
-    </section>
-    <IconsCube v-show="!fetched" />
-    <NuxtLink
-      :prefetch="false"
-      to="/blog"
-      class="px-6 py-3 flex gap-2 items-center bg-[#4a148c] font-semibold rounded-full text-lg w-fit mt-10 group"
-      aria-label="See Inside Blog"
-    >
-      See Inside
-      <IconsArrow
-        class="-rotate-90 group-hover:translate-x-2 transition-all duration-300"
-        aria-hidden="true"
-      />
-    </NuxtLink>
+    </div>
+
+    <!-- See more button -->
+    <div class="flex justify-center mt-12">
+      <NuxtLink
+        to="/blog"
+        :prefetch="false"
+        class="neo-btn-primary"
+      >
+        <span>View All Posts</span>
+        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </NuxtLink>
+    </div>
   </section>
 </template>
 

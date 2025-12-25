@@ -1,13 +1,27 @@
+<script setup>
+import { socials } from "~/assets/constants";
+</script>
+
 <template>
-  <div class="fixed flex flex-col gap-2 top-1/2 right-5">
-    <a v-for="social in socials" :href="social.url" target="_blank">
-      <NuxtImg :src="social.icon" class="w-9 sm:w-10" format="webp" />
+  <div class="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
+    <a
+      v-for="social in socials"
+      :key="social.name"
+      :href="social.url"
+      target="_blank"
+      rel="noopener noreferrer"
+      :aria-label="`Visit ${social.name}`"
+      class="w-10 h-10 border-3 border-border bg-surface flex items-center justify-center transition-all duration-200 hover:bg-neo-lime hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-neo-sm"
+    >
+      <NuxtImg
+        :src="social.icon"
+        :alt="social.name"
+        width="18"
+        height="18"
+        class="dark:invert"
+      />
     </a>
   </div>
 </template>
-
-<script setup>
-import { socials } from "assets/constants";
-</script>
 
 <style scoped></style>

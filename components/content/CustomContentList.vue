@@ -34,47 +34,66 @@ useSeoMeta({
 </script>
 
 <template>
-  <main class="w-full flex flex-wrap gap-20 justify-center items-start mt-20">
+  <main class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
     <article
       v-for="article in articles"
       :key="article._path"
-      class="max-w-sm rounded-xl transition-all duration-500 group hover:shadow-md hover:shadow-indigo-800"
+      class="group bg-surface border-3 border-border transition-all duration-300 hover:shadow-neo hover:-translate-x-1 hover:-translate-y-1"
       :aria-label="`Read more about ${article.title}`"
     >
       <a
         :href="article._path"
-        class="flex flex-col"
+        class="flex flex-col h-full"
         :aria-label="`Read more about ${article.title}`"
       >
-        <NuxtPicture
-          :img-attrs="{
-            class:
-              'w-full h-80 mx-auto object-cover text-center overflow-hidden rounded-tr-lg rounded-tl-lg mb-3 sm:mb-0',
-            alt: `${article.title}  cover image`,
-          }"
-          :src="article.image"
-          format="avif,webp"
-        ></NuxtPicture>
-        <div class="mx-4 flex flex-col justify-center gap-4 py-4">
-          <h2 class="text-lg font-bold font-serif">{{ article.title }}</h2>
-          <p class="line-clamp-2 max-w-2xl text-sm">{{ article.description }}</p>
+        <!-- Image Container -->
+        <div class="relative overflow-hidden border-b-3 border-border">
+          <NuxtPicture
+            :img-attrs="{
+              class: 'w-full h-56 object-cover transition-transform duration-500 group-hover:translate-x-1',
+              alt: `${article.title} cover image`,
+            }"
+            :src="article.image"
+            format="avif,webp"
+          />
+          <!-- Category Badge -->
+          <div class="absolute top-3 left-3">
+            <span class="px-3 py-1 bg-neo-lime text-neo-black border-2 border-neo-black font-mono text-xs uppercase font-bold">
+              Article
+            </span>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="flex flex-col flex-grow p-5 gap-4">
+          <h2 class="text-xl font-display font-bold text-text-primary leading-tight line-clamp-2 group-hover:text-neo-pink transition-colors">
+            {{ article.title }}
+          </h2>
+
+          <p class="line-clamp-2 text-text-secondary text-sm leading-relaxed flex-grow">
+            {{ article.description }}
+          </p>
+
+          <!-- Tags -->
           <div class="flex flex-wrap gap-2">
-            <div
-              v-for="tag in article.tags"
-              class="px-2 py-1 transition-all duration-500 shadow-sm shadow-white-100 rounded-full text-sm flex justify-center items-center"
+            <span
+              v-for="tag in article.tags?.slice(0, 3)"
+              :key="tag"
+              class="px-2 py-1 bg-neo-purple/10 border-2 border-neo-purple text-neo-purple font-mono text-xs uppercase"
             >
               {{ tag }}
-            </div>
+            </span>
           </div>
-          <div class="metadata flex gap-3 text-sm font-light text-slate-400 flex-wrap">
-            <p class="article-author">Hoceine EL IDRISSI</p>
 
+          <!-- Metadata -->
+          <div class="flex items-center gap-4 pt-3 border-t-2 border-border text-xs text-text-secondary font-mono">
+            <span class="font-semibold text-neo-cyan">Hoceine</span>
             <time class="flex gap-1 items-center" :datetime="article.createdAt">
               <IconsDate class="w-4 h-4" /> {{ useFormatDate(article.createdAt) }}
             </time>
-            <p v-if="article.minutes" class="flex gap-1 items-center">
-              <IconsTime class="w-4 h-4" /> {{ article.minutes }} min read
-            </p>
+            <span v-if="article.minutes" class="flex gap-1 items-center">
+              <IconsTime class="w-4 h-4" /> {{ article.minutes }}m
+            </span>
           </div>
         </div>
       </a>

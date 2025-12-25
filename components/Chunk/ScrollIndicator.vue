@@ -1,37 +1,28 @@
-<template>
-  <div class="scroll">
-    <div class="bg-gr-scroll" id="myBar"></div>
-  </div>
-</template>
-
 <script setup>
-onBeforeMount(() => {
-  window.onscroll = function () {
-    updateScrollIndicator();
-  };
+const scrollProgress = ref(0);
 
-  function updateScrollIndicator() {
-    let scrollPosition = document.body.scrollTop || document.documentElement.scrollTop;
-    let pageHeight =
-      document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    let scrollPercentage = (scrollPosition / pageHeight) * 100;
-    document.getElementById("myBar").style.width = scrollPercentage + "%";
-  }
+const updateProgress = () => {
+  const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+  const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  scrollProgress.value = (winScroll / height) * 100;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', updateProgress);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateProgress);
 });
 </script>
 
-<style>
-.scroll {
-  width: 100%;
-  height: 8px;
-  position: fixed;
-  top: 0;
-  background: transparent;
-  z-index: 200;
-}
+<template>
+  <div class="fixed top-0 left-0 w-full h-1 z-[100] bg-surface-alt">
+    <div
+      class="h-full bg-neo-lime transition-all duration-100 ease-out"
+      :style="{ width: `${scrollProgress}%` }"
+    />
+  </div>
+</template>
 
-#myBar {
-  width: 0;
-  height: 8px;
-}
-</style>
+<style scoped></style>

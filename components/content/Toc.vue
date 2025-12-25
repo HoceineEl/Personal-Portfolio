@@ -45,58 +45,74 @@ onMounted(() => {
     role="navigation"
     aria-labelledby="toc-heading"
   >
+    <!-- Mobile Toggle -->
     <button
-      class="p-1 bg-[#1E1E3B] rounded-lg"
+      class="w-full flex items-center justify-between p-3 bg-surface border-3 border-border font-display font-bold text-text-primary lg:hidden"
       @click="active = !active"
       v-if="!showAside"
       aria-label="Toggle Table of Contents"
     >
-      <IconsBurger class="w-8 h-8" v-if="!active" />
-      <IconsClose class="w-8 h-8" v-if="active" />
+      <span class="flex items-center gap-2">
+        <span class="w-3 h-3 bg-neo-lime"></span>
+        Contents
+      </span>
+      <IconsBurger class="w-5 h-5" v-if="!active" />
+      <IconsClose class="w-5 h-5" v-if="active" />
     </button>
+
+    <!-- TOC Navigation -->
     <nav
       class="transition-all duration-300 toc-nav"
       v-show="active || showAside"
       aria-hidden="false"
     >
-      <header class="font-semibold mb-3 border-b border-slate-700 pb-2">
-        <h3 id="toc-heading" class="heading-gradient text-center font-bold" tabindex="-1">
+      <header class="mb-4 pb-3 border-b-3 border-border">
+        <h3
+          id="toc-heading"
+          class="font-display font-bold text-text-primary flex items-center gap-2"
+          tabindex="-1"
+        >
+          <span class="w-3 h-3 bg-neo-cyan"></span>
           Table of Contents
         </h3>
       </header>
 
-      <ul class="ml-0 pl-4 max-h-[600px] overflow-y-auto">
+      <ul class="space-y-1 max-h-[500px] overflow-y-auto pr-2">
         <li
           v-for="link in toc.links"
           :id="`#${link.id}`"
           :key="link.id"
-          class="mb-2 ml-0 cursor-pointer list-none text-sm last:mb-0"
+          class="group"
         >
           <a
             :href="`#${link.id}`"
-            :class="{
-              '!text-purple-300 !font-semibold': link.id == currentActiveLink,
-            }"
-            >{{ link.text }}</a
+            class="block py-2 px-3 text-sm font-mono text-text-secondary hover:text-text-primary hover:bg-neo-purple/10 border-l-3 transition-all duration-200"
+            :class="[
+              link.id == currentActiveLink
+                ? 'border-neo-purple text-neo-purple font-semibold bg-neo-purple/5'
+                : 'border-transparent'
+            ]"
           >
+            {{ link.text }}
+          </a>
 
-          <ul v-if="link.children" class="my-2 ml-3">
+          <ul v-if="link.children" class="ml-4 space-y-1 mt-1">
             <li
               v-for="child in link.children"
               :id="`#${child.id}`"
               :key="child.id"
-              class="mb-2 ml-0 cursor-pointer list-none text-xs last:mb-0"
-              :class="{
-                '!text-teal-200 !font-semibold': child.id == currentActiveLink,
-              }"
             >
               <a
                 :href="`#${child.id}`"
-                :class="{
-                  '!text-teal-200 !font-semibold': child.id == currentActiveLink,
-                }"
-                >{{ child.text }}</a
+                class="block py-1.5 px-3 text-xs font-mono text-text-secondary hover:text-neo-cyan border-l-2 transition-all duration-200"
+                :class="[
+                  child.id == currentActiveLink
+                    ? 'border-neo-cyan text-neo-cyan font-semibold'
+                    : 'border-border'
+                ]"
               >
+                {{ child.text }}
+              </a>
             </li>
           </ul>
         </li>
@@ -107,18 +123,28 @@ onMounted(() => {
 
 <style scoped>
 .toc {
-  @apply sticky top-16 lg:top-24 w-full;
+  @apply sticky top-24 w-full;
 }
 
 .toc-nav {
-  @apply bg-transparent p-5 rounded-lg text-slate-300 mt-3;
+  @apply bg-surface border-3 border-border p-4 shadow-neo-sm;
 }
 
-.toc-link {
-  @apply mb-2 text-slate-400 text-[12px] transition-all duration-300 cursor-pointer lg:ms-4;
+/* Custom scrollbar for TOC */
+.toc-nav ul::-webkit-scrollbar {
+  width: 4px;
 }
 
-.toc-link a {
-  @apply hover:text-teal-600 hover:font-semibold;
+.toc-nav ul::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.dark .toc-nav ul::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toc-nav ul::-webkit-scrollbar-thumb {
+  @apply bg-neo-purple;
+  opacity: 0.5;
 }
 </style>

@@ -1,103 +1,76 @@
 <script setup>
-import { devosoft, a2st, sosipo } from "~/assets";
 import { experiences } from "~/assets/constants";
 </script>
+
 <template>
-  <section id="work" class="relative section">
+  <section id="work" class="section relative">
+    <!-- Section header -->
     <div class="text-center mb-16">
-      <p class="header">What I have done so far</p>
-      <h3 class="header-secondary">Work Experience.</h3>
+      <span class="section-label">Experience</span>
+      <h2 class="header-secondary">
+        Work
+        <span class="relative inline-block">
+          <span class="relative z-10">History</span>
+          <span class="absolute -bottom-1 left-0 w-full h-3 bg-neo-cyan -z-0 -rotate-1" />
+        </span>
+      </h2>
     </div>
-    <div class="flex lg:block gap-20 px-1">
-      <div class="timeline" aria-hidden="true" role="presentation">
-        <div class="timeline-img translate-y-[10rem]">
-          <NuxtImg
-            format="webp"
-            quality="70"
-            :src="devosoft"
-            alt="devosoft"
-            class="mt-1"
-            loading="lazy"
-            height="60"
-          />
-        </div>
+
+    <!-- Timeline -->
+    <div class="max-w-4xl mx-auto relative">
+      <!-- Timeline line -->
+      <div class="absolute left-4 md:left-1/2 top-0 bottom-0 w-1 bg-border md:-translate-x-1/2" />
+
+      <!-- Experience items -->
+      <div class="space-y-12">
         <div
-          class="timeline-img translate-y-[36rem] sm:translate-y-[35rem] md:translate-y-[36rem]"
-        >
-          <NuxtImg
-            format="webp"
-            quality="70"
-            :src="sosipo"
-            alt="sosipo"
-            class="mt-1"
-            loading="lazy"
-            width="80"
-            height="80"
-          />
-        </div>
-        <div
-          class="timeline-img translate-y-[59rem] sm:translate-y-[54rem] md:translate-y-[59rem]"
-        >
-          <NuxtImg
-            format="webp"
-            quality="70"
-            :src="a2st"
-            alt="a2st"
-            class="rounded-sm mt-1"
-            loading="lazy"
-            width="80"
-            height="40"
-          />
-        </div>
-      </div>
-      <div class="">
-        <div
-          class="lg:w-[900px] flex mx-auto justify-between mb-6"
           v-for="(exp, index) in experiences"
           :key="exp.title"
-          v-motion-slide-visible-once-left="index % 2 === 0"
-          v-motion-slide-visible-once-right="index % 2 !== 0"
+          class="relative flex flex-col md:flex-row gap-6"
+          :class="index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'"
         >
-          <div
-            class="relative p-[1px] bg-white rounded-lg green-pink-gradient"
-            :class="[index % 2 ? 'order-3' : '-order-1']"
-          >
-            <div
-              class="lg:w-96 w-full bg-tertiary py-4 rounded-lg min-h-[20rem]"
-              role="region"
-            >
-              <div class="w-full flex justify-center items-center mb-3 sm:hidden">
-                <div
-                  class="w-16 h-16 rounded-full bg-[#261D56] flex items-center justify-center p-3"
-                >
-                  <NuxtImg
-                    format="webp"
-                    quality="70"
-                    :src="exp.icon"
-                    :alt="exp.company_name"
-                    class="p-1 h-fit w-8"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              <div class="px-8 w-full">
-                <h3 class="font-bold text-xl">{{ exp.title }}</h3>
-                <p class="text-secondary">{{ exp.company_name }}</p>
-              </div>
-              <ul
-                class="mt-5 text-[13px] text-gray-200 flex flex-col gap-2 list-disc ms-8 px-8 mb-6"
-              >
-                <li v-for="point in exp.points" role="listitem">{{ point }}</li>
-              </ul>
-              <p class="text-secondary mt-2 px-8 lg:hidden">{{ exp.date }}</p>
-            </div>
+          <!-- Timeline dot -->
+          <div class="absolute left-4 md:left-1/2 w-8 h-8 -translate-x-1/2 bg-neo-lime border-3 border-border z-10 flex items-center justify-center">
+            <span class="font-mono font-bold text-neo-black text-xs">{{ index + 1 }}</span>
           </div>
+
+          <!-- Content card -->
           <div
-            class="mt-40 w-96 text-center text-secondary hidden lg:flex"
-            :class="[index % 2 ? 'justify-end' : 'justify-start']"
-            role="contentinfo"
+            class="ml-12 md:ml-0 md:w-[calc(50%-2rem)] neo-card p-6"
+            :class="index % 2 === 0 ? 'md:mr-auto' : 'md:ml-auto'"
           >
-            <p class="max-w-[300px]">{{ exp.date }}</p>
+            <!-- Company logo -->
+            <div class="flex items-start gap-4 mb-4">
+              <div class="w-14 h-14 bg-surface-alt border-3 border-border flex items-center justify-center p-2 shrink-0">
+                <NuxtImg
+                  :src="exp.icon"
+                  :alt="exp.company_name"
+                  class="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <h3 class="font-display font-bold text-lg text-text-primary">{{ exp.title }}</h3>
+                <p class="font-mono text-sm text-neo-pink">{{ exp.company_name }}</p>
+              </div>
+            </div>
+
+            <!-- Date badge -->
+            <div class="neo-tag-accent mb-4 text-xs">
+              {{ exp.date }}
+            </div>
+
+            <!-- Points -->
+            <ul class="space-y-2">
+              <li
+                v-for="(point, pIndex) in exp.points"
+                :key="pIndex"
+                class="flex items-start gap-3 text-sm text-text-secondary"
+              >
+                <span class="w-2 h-2 bg-neo-cyan mt-2 shrink-0" />
+                <span>{{ point }}</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -105,12 +78,4 @@ import { experiences } from "~/assets/constants";
   </section>
 </template>
 
-<style scoped>
-.timeline {
-  @apply z-[2] w-1 bg-secondary lg:mx-auto h-[1300px] sm:flex flex-col lg:justify-start items-center mt-0 lg:absolute relative lg:left-1/2 left-5 transform lg:-translate-x-1/2 hidden;
-}
-
-.timeline-img {
-  @apply w-12 h-12 rounded-full border bg-primary border-white-100 flex items-center justify-center p-2;
-}
-</style>
+<style scoped></style>
