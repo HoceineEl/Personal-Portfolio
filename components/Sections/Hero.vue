@@ -154,7 +154,7 @@ onMounted(() => {
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
           <a href="mailto:contact@hoceine.com" class="group neo-btn-primary text-sm py-3 px-5 justify-center">
-            <span>Start a Project</span>
+            <span>Let's Collaborate</span>
             <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
@@ -254,7 +254,7 @@ onMounted(() => {
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
             <a href="mailto:contact@hoceine.com" class="group neo-btn-primary">
-              <span>Start a Project</span>
+              <span>Let's Collaborate</span>
               <svg class="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
