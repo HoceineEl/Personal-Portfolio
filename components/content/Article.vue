@@ -260,7 +260,7 @@ const getArticleColor = (doc) => {
 /* Code blocks */
 .nuxt-content pre {
   @apply my-8 overflow-x-auto rounded-none p-0;
-  background: #0d1117 !important;
+  background: #1a1b26 !important;
   border: 3px solid var(--color-border);
   box-shadow: 4px 4px 0px var(--color-border);
 }

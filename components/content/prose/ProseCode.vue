@@ -72,7 +72,7 @@ defineProps({
   margin: 0 !important;
   padding: 1rem !important;
   overflow-x: auto;
-  background: #0d1117 !important;
+  background: #1a1b26 !important;
   border: 3px solid var(--color-border, #FFFEF0);
   box-shadow: 4px 4px 0px var(--color-border, #FFFEF0);
 }

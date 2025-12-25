@@ -63,9 +63,9 @@ export default defineNuxtConfig({
     documentDriven: true,
     highlight: {
       theme: {
-        default: 'github-dark',
-        dark: 'github-dark',
-        light: 'github-light',
+        default: 'tokyo-night',
+        dark: 'tokyo-night',
+        light: 'tokyo-night',
       },
       langs: [
         'php',

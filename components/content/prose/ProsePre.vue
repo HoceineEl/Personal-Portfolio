@@ -50,7 +50,7 @@ pre code .line {
 
 /* Shiki theme overrides for better visibility */
 .shiki {
-  background: #0d1117 !important;
+  background: #1a1b26 !important;
 }
 
 .shiki code {
