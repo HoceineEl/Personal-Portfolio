@@ -1,8 +1,8 @@
 <script setup>
 import { projects } from "~/assets/constants";
 
-const INITIAL_COUNT = 6;
-const LOAD_MORE_COUNT = 6;
+const INITIAL_COUNT = 9;
+const LOAD_MORE_COUNT = 9;
 
 const visibleCount = ref(INITIAL_COUNT);
 const isExpanded = ref(false);
