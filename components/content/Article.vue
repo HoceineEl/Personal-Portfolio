@@ -2,6 +2,45 @@
 import { hoceine } from "~/assets";
 
 const { prev, next, toc } = useContent();
+
+// Color palette for blog articles
+const colorPalette = [
+  'bg-neo-pink',
+  'bg-neo-orange',
+  'bg-neo-lime',
+  'bg-neo-purple',
+  'bg-neo-cyan',
+  'bg-neo-yellow',
+  'bg-gradient-to-br from-neo-pink to-neo-orange',
+  'bg-gradient-to-br from-neo-cyan to-neo-lime',
+  'bg-gradient-to-br from-neo-purple to-neo-pink',
+  'bg-gradient-to-br from-neo-orange to-neo-yellow',
+];
+
+// Get color based on article tags or title hash for variety
+const getArticleColor = (doc) => {
+  const tags = doc.tags || [];
+
+  // Priority tag-based colors
+  if (tags.includes('Livewire') || tags.includes('Livewire 4')) return 'bg-gradient-to-br from-neo-pink to-neo-purple';
+  if (tags.includes('FilamentPHP') || tags.includes('Filament') || tags.includes('Filament v4')) return 'bg-neo-orange';
+  if (tags.includes('Laravel 12')) return 'bg-gradient-to-br from-neo-pink to-neo-orange';
+  if (tags.includes('SaaS')) return 'bg-gradient-to-br from-neo-cyan to-neo-lime';
+  if (tags.includes('Multi-tenancy')) return 'bg-neo-purple';
+  if (tags.includes('Testing') || tags.includes('Pest')) return 'bg-gradient-to-br from-neo-lime to-neo-cyan';
+  if (tags.includes('Performance')) return 'bg-neo-yellow';
+  if (tags.includes('Security')) return 'bg-gradient-to-br from-neo-purple to-neo-pink';
+  if (tags.includes('API')) return 'bg-neo-cyan';
+  if (tags.includes('Queues') || tags.includes('Horizon')) return 'bg-gradient-to-br from-neo-orange to-neo-pink';
+  if (tags.includes('Database') || tags.includes('Eloquent')) return 'bg-neo-lime';
+  if (tags.includes('Vue') || tags.includes('Nuxt')) return 'bg-lime-400';
+  if (tags.includes('Laravel')) return 'bg-neo-pink';
+  if (tags.includes('PHP')) return 'bg-neo-purple';
+
+  // Fallback: use title hash for consistent but varied colors
+  const hash = doc.title.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return colorPalette[hash % colorPalette.length];
+};
 </script>
 <template>
   <ContentDoc v-slot="{ doc }">
@@ -13,16 +52,47 @@ const { prev, next, toc } = useContent();
     >
       <!-- Hero Banner -->
       <div class="relative w-full border-3 border-border overflow-hidden">
-        <NuxtPicture
-          :imgAttrs="{
-            class: 'w-full h-[500px] object-cover object-center',
-            alt: `${doc.title} banner image`,
-            role: 'img',
-            ariaLabel: 'Article Image',
-          }"
-          :src="doc.banner"
-          format="avif,webp"
-        />
+        <!-- Image placeholder for noImage articles -->
+        <template v-if="doc.noImage || !doc.banner">
+          <div
+            class="w-full h-[400px] flex flex-col items-center justify-center text-center relative overflow-hidden"
+            :class="getArticleColor(doc)"
+          >
+            <!-- Geometric patterns -->
+            <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+              <div class="absolute top-8 left-8 w-24 h-24 border-4 border-neo-black rounded-full"></div>
+              <div class="absolute bottom-12 right-12 w-32 h-32 border-4 border-neo-black rotate-45"></div>
+              <div class="absolute top-1/3 right-1/4 w-16 h-16 border-4 border-neo-black"></div>
+              <div class="absolute bottom-1/4 left-1/3 w-20 h-4 border-4 border-neo-black"></div>
+            </div>
+
+            <!-- Main content -->
+            <div class="w-28 h-28 mb-6 border-4 border-neo-black bg-white -rotate-3 shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] flex items-center justify-center">
+              <span class="text-neo-black font-display font-black text-6xl">{{ doc.title.charAt(0) }}</span>
+            </div>
+
+            <p class="font-display font-black text-neo-black leading-tight uppercase tracking-tighter text-xl px-4 py-2 bg-white border-3 border-neo-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] max-w-md">
+              {{ doc.title.split(':')[0].split('–')[0].substring(0, 40) }}
+            </p>
+
+            <!-- Floating elements -->
+            <div class="absolute -bottom-4 -right-4 w-16 h-16 bg-neo-lime border-4 border-neo-black rotate-12"></div>
+            <div class="absolute top-6 right-12 w-10 h-10 bg-white border-3 border-neo-black rounded-full"></div>
+            <div class="absolute bottom-8 left-8 w-8 h-8 bg-neo-cyan border-3 border-neo-black -rotate-12"></div>
+          </div>
+        </template>
+        <template v-else>
+          <NuxtPicture
+            :imgAttrs="{
+              class: 'w-full h-[500px] object-cover object-center',
+              alt: `${doc.title} banner image`,
+              role: 'img',
+              ariaLabel: 'Article Image',
+            }"
+            :src="doc.banner"
+            format="avif,webp"
+          />
+        </template>
         <div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />
       </div>
 
@@ -189,21 +259,67 @@ const { prev, next, toc } = useContent();
 
 /* Code blocks */
 .nuxt-content pre {
-  @apply my-8 overflow-x-auto;
-  background: #0D0D0D !important;
+  @apply my-8 overflow-x-auto rounded-none p-0;
+  background: #0d1117 !important;
   border: 3px solid var(--color-border);
   box-shadow: 4px 4px 0px var(--color-border);
 }
 
-.nuxt-content code {
-  @apply font-mono text-sm;
+.nuxt-content pre code {
+  @apply font-mono text-sm block p-4 overflow-x-auto;
+  background: transparent !important;
+  line-height: 1.7;
+  tab-size: 2;
 }
 
+/* Inline code */
 .nuxt-content :not(pre) > code {
   background: rgba(139, 92, 246, 0.15);
   color: #8B5CF6;
-  padding: 2px 6px;
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  padding: 2px 8px;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+/* Code block with filename/language label */
+.nuxt-content pre[class*="language-"]::before {
+  content: attr(data-language);
+  @apply absolute top-0 right-0 px-3 py-1 text-xs font-mono font-bold uppercase;
+  background: #CCFF00;
+  color: #0D0D0D;
+  border-left: 3px solid var(--color-border);
+  border-bottom: 3px solid var(--color-border);
+}
+
+/* Line highlighting */
+.nuxt-content pre code .line.highlighted {
+  background: rgba(204, 255, 0, 0.1);
+  border-left: 3px solid #CCFF00;
+  margin-left: -1rem;
+  padding-left: calc(1rem - 3px);
+  display: inline-block;
+  width: calc(100% + 2rem);
+}
+
+/* Diff styling */
+.nuxt-content pre code .line.diff.add {
+  background: rgba(0, 212, 255, 0.1);
+  border-left: 3px solid #00D4FF;
+}
+
+.nuxt-content pre code .line.diff.remove {
+  background: rgba(255, 46, 99, 0.1);
+  border-left: 3px solid #FF2E63;
+}
+
+/* Line numbers if enabled */
+.nuxt-content pre code .line::before {
+  content: counter(line);
+  counter-increment: line;
+  @apply inline-block w-8 mr-4 text-right opacity-40 select-none;
+  color: var(--color-text-secondary);
 }
 
 /* Lists */

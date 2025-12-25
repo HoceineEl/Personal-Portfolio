@@ -60,10 +60,42 @@ export default defineNuxtConfig({
 
   },
   content: {
+    documentDriven: true,
     highlight: {
-      theme: "rose-pine-moon",
+      theme: {
+        default: 'github-dark',
+        dark: 'github-dark',
+        light: 'github-light',
+      },
+      langs: [
+        'php',
+        'javascript',
+        'typescript',
+        'vue',
+        'vue-html',
+        'html',
+        'css',
+        'scss',
+        'json',
+        'yaml',
+        'bash',
+        'shell',
+        'sql',
+        'markdown',
+        'diff',
+        'ini',
+        'nginx',
+        'dockerfile',
+        'xml',
+        'jsx',
+        'tsx',
+        'python',
+        'ruby',
+        'go',
+        'rust',
+        'blade',
+      ],
     },
-    documentDriven: true
   },
   vite: {
     build: {

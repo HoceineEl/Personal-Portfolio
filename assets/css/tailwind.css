@@ -361,3 +361,81 @@
 .preload-transitions * {
   transition: none !important;
 }
+
+/* ===== Shiki Syntax Highlighting ===== */
+.shiki,
+pre.shiki,
+pre[class*="language-"] {
+  background: #0d1117 !important;
+  border: 3px solid var(--color-border);
+  box-shadow: 4px 4px 0px var(--color-border);
+  border-radius: 0;
+  padding: 0;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+
+.shiki code,
+pre.shiki code,
+pre[class*="language-"] code {
+  display: block;
+  padding: 1rem 1.25rem;
+  overflow-x: auto;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  background: transparent !important;
+  color: #e6edf3;
+}
+
+/* Line display */
+.shiki code .line,
+pre code .line {
+  display: block;
+  min-height: 1.5rem;
+}
+
+/* Highlighted lines */
+.shiki code .line.highlighted,
+pre code .line.highlighted {
+  background: rgba(204, 255, 0, 0.1);
+  border-left: 3px solid #CCFF00;
+  margin: 0 -1.25rem;
+  padding: 0 1.25rem;
+  padding-left: calc(1.25rem - 3px);
+}
+
+/* Diff styles */
+.shiki code .line.diff.add,
+pre code .line.diff.add {
+  background: rgba(0, 212, 255, 0.15);
+}
+
+.shiki code .line.diff.remove,
+pre code .line.diff.remove {
+  background: rgba(255, 46, 99, 0.15);
+}
+
+/* Inline code */
+:not(pre) > code {
+  background: rgba(139, 92, 246, 0.15) !important;
+  color: #a78bfa !important;
+  padding: 2px 8px !important;
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 0 !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 0.875em !important;
+  font-weight: 500 !important;
+}
+
+/* Dark theme token colors - ensure visibility */
+.shiki .keyword { color: #ff7b72 !important; }
+.shiki .string { color: #a5d6ff !important; }
+.shiki .comment { color: #8b949e !important; font-style: italic; }
+.shiki .function { color: #d2a8ff !important; }
+.shiki .number { color: #79c0ff !important; }
+.shiki .operator { color: #ff7b72 !important; }
+.shiki .punctuation { color: #c9d1d9 !important; }
+.shiki .variable { color: #ffa657 !important; }
+.shiki .class-name { color: #ffa657 !important; }
+.shiki .property { color: #79c0ff !important; }
