@@ -151,8 +151,7 @@ export default defineNuxtConfig({
     '@tailwindcss/typography',
     '@nuxt/image',
     'nuxt-simple-robots',
-    '@stefanobartoletti/nuxt-social-share',
-    '@nuxthq/studio'
+    '@stefanobartoletti/nuxt-social-share'
   ],
   socialShare: {
     // module options
