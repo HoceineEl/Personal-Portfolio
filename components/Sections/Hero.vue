@@ -2,7 +2,7 @@
 const roles = [
   'Full Stack Developer',
   'Laravel Specialist',
-  'Vue & Nuxt Expert',
+  'Filament Expert',
   'TALL Stack Architect',
   'SaaS Builder'
 ];
@@ -12,10 +12,10 @@ const isLoaded = ref(false);
 
 const techStack = [
   { name: 'Laravel', color: 'bg-neo-secondary' },
-  { name: 'Vue.js', color: 'bg-neo-primary' },
-  { name: 'Nuxt', color: 'bg-neo-primary' },
-  { name: 'Filament', color: 'bg-neo-secondary' },
-  { name: 'Livewire', color: 'bg-neo-primary' }
+  { name: 'Filament', color: 'bg-neo-primary' },
+  { name: 'Livewire', color: 'bg-neo-primary' },
+  { name: 'Tailwind', color: 'bg-neo-secondary' },
+  { name: 'Claude Code', color: 'bg-neo-primary' }
 ];
 
 onMounted(() => {
@@ -84,82 +84,65 @@ onMounted(() => {
 
       <!-- Mobile Layout (stacked) -->
       <div class="lg:hidden">
-        <!-- Availability badge -->
+        <!-- Hook badge -->
         <div
-          class="mb-6 transition-all duration-500"
+          class="mb-4 transition-all duration-500"
           :class="isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'"
         >
-          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-neo-primary border-2 border-border shadow-neo-sm">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
-            </span>
-            <span class="font-mono text-xs font-bold text-white uppercase tracking-wide">
-              Available for Hire
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-neo-secondary border-2 border-border shadow-neo-sm">
+            <span class="font-mono text-xs font-bold text-neo-black uppercase tracking-wide">
+              20+ SaaS Products Shipped
             </span>
           </div>
         </div>
 
-        <!-- Main heading -->
+        <!-- Main heading - Bold value proposition -->
         <div
-          class="mb-6 transition-all duration-700 delay-100"
+          class="mb-4 transition-all duration-700 delay-100"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
-          <span class="block font-mono text-xs text-text-secondary uppercase tracking-widest mb-2">
-            Hello, I'm
-          </span>
-
-          <h1 class="font-display leading-none">
-            <span class="relative inline-block">
-              <span class="relative z-10 text-4xl xs:text-5xl font-black text-text-primary">Hoceine</span>
-              <span class="absolute -bottom-1 left-0 w-full h-3 bg-neo-primary -z-0" />
+          <h1 class="font-display leading-tight">
+            <span class="block text-2xl xs:text-3xl font-bold text-text-secondary mb-1">
+              I Build
             </span>
-            <span class="block text-3xl xs:text-4xl font-bold text-text-primary mt-1">
-              El Idrissi
-              <span class="inline-block w-3 h-3 bg-neo-secondary border-2 border-border ml-1 align-middle" />
+            <span class="relative inline-block">
+              <span class="relative z-10 text-4xl xs:text-5xl font-black text-text-primary">SaaS That</span>
+            </span>
+            <span class="block text-4xl xs:text-5xl font-black">
+              <span class="text-neo-primary">Scale</span>
+              <span class="inline-block w-3 h-3 bg-neo-secondary border-2 border-border ml-2 align-middle" />
             </span>
           </h1>
         </div>
 
-        <!-- Role - simplified -->
+        <!-- Name & subtitle -->
         <div
-          class="mb-6 transition-all duration-700 delay-200"
+          class="mb-5 transition-all duration-700 delay-200"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
-          <div class="h-7 overflow-hidden relative">
-            <TransitionGroup name="role-slide" tag="div" class="relative">
-              <p
-                v-for="(role, index) in roles"
-                :key="role"
-                v-show="currentRole === index"
-                class="font-display font-bold text-lg text-neo-secondary absolute top-0 left-0 whitespace-nowrap"
-              >
-                {{ role }}
-              </p>
-            </TransitionGroup>
-          </div>
+          <p class="font-mono text-sm text-text-secondary">
+            <span class="text-neo-secondary font-bold">Hoceine El Idrissi</span> · Full Stack Developer from Morocco
+          </p>
         </div>
 
-        <!-- Description -->
+        <!-- Description - Impact focused -->
         <p
-          class="text-sm text-text-secondary mb-6 leading-relaxed font-body transition-all duration-700 delay-300"
+          class="text-sm text-text-secondary mb-5 leading-relaxed font-body transition-all duration-700 delay-300"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
-          Crafting <span class="font-semibold text-text-primary">robust SaaS applications</span>
-          and <span class="font-semibold text-text-primary">elegant web solutions</span>
-          from Morocco. Specialized in the TALL stack.
+          I turn complex ideas into <span class="font-semibold text-text-primary">production-ready multi-tenant SaaS</span>
+          using Laravel, Filament & Livewire. From concept to deployment in weeks, not months.
         </p>
 
-        <!-- Tech stack pills - alternating colors -->
+        <!-- Tech stack pills - compact -->
         <div
-          class="flex flex-wrap gap-2 mb-6 transition-all duration-700 delay-400"
+          class="flex flex-wrap gap-1.5 mb-5 transition-all duration-700 delay-400"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
           <span
             v-for="(tech, i) in techStack"
             :key="tech.name"
-            class="px-2.5 py-1 font-mono text-xs font-bold border-2 border-border"
-            :class="i % 2 === 0 ? 'bg-neo-primary text-white' : 'bg-neo-secondary text-neo-black'"
+            class="px-2 py-0.5 font-mono text-[10px] font-bold border border-border bg-surface-alt text-text-secondary"
           >
             {{ tech.name }}
           </span>
@@ -167,40 +150,33 @@ onMounted(() => {
 
         <!-- CTA Buttons -->
         <div
-          class="flex flex-col xs:flex-row gap-3 mb-8 transition-all duration-700 delay-500"
+          class="flex flex-col xs:flex-row gap-3 mb-6 transition-all duration-700 delay-500"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
           <a href="mailto:contact@hoceine.com" class="group neo-btn-primary text-sm py-3 px-5 justify-center">
-            <span>Let's Work Together</span>
+            <span>Start a Project</span>
             <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
           </a>
           <a href="#projects" class="group neo-btn text-sm py-3 px-5 justify-center">
-            <span>View My Work</span>
+            <span>See My Work</span>
             <svg class="w-4 h-4 ml-2 transition-transform duration-200 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>
           </a>
         </div>
 
-        <!-- Mobile Stats Grid -->
+        <!-- Social proof stats -->
         <div
-          class="grid grid-cols-3 gap-3 transition-all duration-700 delay-600"
+          class="flex items-center gap-4 text-xs font-mono text-text-secondary transition-all duration-700 delay-600"
           :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
         >
-          <div class="neo-card p-4 text-center">
-            <span class="font-display text-2xl font-black text-neo-secondary block">3+</span>
-            <span class="font-mono text-[10px] text-text-secondary uppercase">Years</span>
-          </div>
-          <div class="neo-card p-4 text-center">
-            <span class="font-display text-2xl font-black text-neo-primary block">20+</span>
-            <span class="font-mono text-[10px] text-text-secondary uppercase">Projects</span>
-          </div>
-          <div class="neo-card p-4 text-center">
-            <span class="font-display text-2xl font-black text-neo-secondary block">15+</span>
-            <span class="font-mono text-[10px] text-text-secondary uppercase">Tech</span>
-          </div>
+          <span><span class="font-bold text-neo-secondary">3+</span> Years</span>
+          <span class="w-1 h-1 bg-border rounded-full" />
+          <span><span class="font-bold text-neo-primary">20+</span> Projects</span>
+          <span class="w-1 h-1 bg-border rounded-full" />
+          <span><span class="font-bold text-neo-secondary">100%</span> Remote</span>
         </div>
       </div>
 
@@ -208,93 +184,65 @@ onMounted(() => {
       <div class="hidden lg:grid lg:grid-cols-12 gap-12 items-center">
         <!-- Left content -->
         <div class="lg:col-span-7 xl:col-span-8">
-          <!-- Availability badge -->
+          <!-- Hook badge -->
           <div
-            class="inline-block mb-8 transition-all duration-500"
+            class="inline-block mb-6 transition-all duration-500"
             :class="isLoaded ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'"
           >
-            <div class="relative inline-flex items-center gap-2 px-4 py-2 bg-neo-primary border-3 border-border shadow-neo -rotate-2">
-              <span class="relative flex h-3 w-3">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-                <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-              </span>
-              <span class="font-mono text-sm font-bold text-white uppercase tracking-wide">
-                Available for Hire
+            <div class="relative inline-flex items-center gap-2 px-4 py-2 bg-neo-secondary border-3 border-border shadow-neo -rotate-1">
+              <span class="font-mono text-sm font-bold text-neo-black uppercase tracking-wide">
+                20+ SaaS Products Shipped
               </span>
             </div>
           </div>
 
-          <!-- Main heading with stacked blocks effect -->
+          <!-- Main heading - Bold value proposition -->
           <div
-            class="mb-8 transition-all duration-700 delay-100"
+            class="mb-6 transition-all duration-700 delay-100"
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
-            <span class="block font-mono text-base text-text-secondary uppercase tracking-widest mb-3">
-              Hello, I'm
-            </span>
-
-            <h1 class="font-display leading-none">
-              <!-- First name with highlight -->
-              <span class="relative inline-block">
-                <span class="relative z-10 text-display-xl text-text-primary">Hoceine</span>
-                <span class="absolute -bottom-2 left-0 w-full h-6 bg-neo-primary -z-0" />
+            <h1 class="font-display leading-tight">
+              <span class="block text-display-md font-bold text-text-secondary mb-2">
+                I Build
               </span>
-
-              <!-- Last name -->
-              <span class="block text-display-lg text-text-primary mt-2">
-                El Idrissi
-                <span class="inline-block w-6 h-6 bg-neo-secondary border-2 border-border ml-2 align-middle" />
+              <span class="relative inline-block">
+                <span class="relative z-10 text-display-xl text-text-primary">SaaS That</span>
+              </span>
+              <span class="block text-display-xl">
+                <span class="text-neo-primary">Scale</span>
+                <span class="inline-block w-6 h-6 bg-neo-secondary border-3 border-border ml-3 align-middle" />
               </span>
             </h1>
           </div>
 
-          <!-- Role ticker -->
+          <!-- Name & subtitle -->
           <div
             class="mb-8 transition-all duration-700 delay-200"
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
-            <div class="inline-flex items-center gap-3 px-5 py-3 bg-surface-alt border-3 border-border shadow-neo">
-              <span class="font-mono text-text-secondary text-sm">{"role":</span>
-              <div class="h-8 overflow-hidden relative min-w-[200px]">
-                <TransitionGroup name="role-slide" tag="div" class="relative">
-                  <p
-                    v-for="(role, index) in roles"
-                    :key="role"
-                    v-show="currentRole === index"
-                    class="font-display font-bold text-xl text-neo-secondary absolute top-0 left-0 whitespace-nowrap"
-                  >
-                    "{{ role }}"
-                  </p>
-                </TransitionGroup>
-              </div>
-              <span class="font-mono text-text-secondary text-sm">}</span>
-            </div>
+            <p class="font-mono text-lg text-text-secondary">
+              <span class="text-neo-secondary font-bold">Hoceine El Idrissi</span> · Full Stack Developer from Morocco
+            </p>
           </div>
 
-          <!-- Description -->
+          <!-- Description - Impact focused -->
           <p
-            class="text-xl text-text-secondary max-w-xl mb-10 leading-relaxed font-body transition-all duration-700 delay-300"
+            class="text-xl text-text-secondary max-w-xl mb-8 leading-relaxed font-body transition-all duration-700 delay-300"
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
-            Crafting <span class="font-bold text-text-primary border-b-3 border-neo-primary">robust SaaS applications</span>
-            and <span class="font-bold text-text-primary border-b-3 border-neo-secondary">elegant web solutions</span>
-            from Morocco. Specialized in the TALL stack with 3+ years of professional experience.
+            I turn complex ideas into <span class="font-bold text-text-primary">production-ready multi-tenant SaaS</span>
+            using Laravel, Filament & Livewire. From concept to deployment in <span class="font-bold text-neo-primary">weeks, not months</span>.
           </p>
 
-          <!-- Tech stack pills -->
+          <!-- Tech stack pills - subtle -->
           <div
-            class="flex flex-wrap gap-2 mb-10 transition-all duration-700 delay-400"
+            class="flex flex-wrap gap-2 mb-8 transition-all duration-700 delay-400"
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
             <span
-              v-for="(tech, index) in techStack"
+              v-for="tech in techStack"
               :key="tech.name"
-              class="px-3 py-1.5 font-mono text-sm font-bold border-3 border-border shadow-neo-sm"
-              :class="[
-                tech.color,
-                tech.color.includes('secondary') ? 'text-neo-black' : 'text-white'
-              ]"
-              :style="{ transitionDelay: `${500 + index * 50}ms` }"
+              class="px-3 py-1 font-mono text-xs font-bold border-2 border-border bg-surface-alt text-text-secondary"
             >
               {{ tech.name }}
             </span>
@@ -302,77 +250,87 @@ onMounted(() => {
 
           <!-- CTA Buttons -->
           <div
-            class="flex flex-wrap gap-4 transition-all duration-700 delay-500"
+            class="flex flex-wrap items-center gap-6 transition-all duration-700 delay-500"
             :class="isLoaded ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'"
           >
             <a href="mailto:contact@hoceine.com" class="group neo-btn-primary">
-              <span>Let's Work Together</span>
+              <span>Start a Project</span>
               <svg class="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </a>
             <a href="#projects" class="group neo-btn">
-              <span>View My Work</span>
+              <span>See My Work</span>
               <svg class="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
               </svg>
             </a>
+            <!-- Social proof inline -->
+            <div class="flex items-center gap-4 text-sm font-mono text-text-secondary">
+              <span><span class="font-bold text-neo-secondary">3+</span> Years</span>
+              <span class="w-1 h-1 bg-border rounded-full" />
+              <span><span class="font-bold text-neo-primary">100%</span> Remote</span>
+            </div>
           </div>
         </div>
 
-        <!-- Right side - Stats & Visual (Desktop only) -->
+        <!-- Right side - Featured work preview -->
         <div class="lg:col-span-5 xl:col-span-4">
           <div
             class="relative transition-all duration-700 delay-300"
             :class="isLoaded ? 'translate-x-0 opacity-100' : 'translate-x-12 opacity-0'"
           >
-            <!-- Stats cards stack -->
-            <div class="space-y-4">
-              <!-- Main stat card -->
-              <div class="neo-card p-6 -rotate-1 relative">
-                <div class="absolute -top-3 -right-3 w-8 h-8 bg-neo-primary border-3 border-border rotate-12" />
-                <div class="flex items-center justify-between mb-4">
-                  <span class="font-mono text-sm text-text-secondary uppercase">Experience</span>
-                  <span class="w-2 h-2 bg-neo-primary rounded-full animate-pulse" />
-                </div>
-                <div class="flex items-baseline gap-2">
-                  <span class="font-display text-5xl font-black text-neo-secondary">3+</span>
-                  <span class="font-body text-text-secondary">years</span>
-                </div>
-                <div class="mt-3 flex gap-1">
-                  <div class="h-2 flex-1 bg-neo-secondary border border-border" />
-                  <div class="h-2 flex-1 bg-neo-secondary border border-border" />
-                  <div class="h-2 flex-1 bg-neo-secondary border border-border" />
-                  <div class="h-2 flex-1 bg-surface-alt border border-border" />
-                  <div class="h-2 flex-1 bg-surface-alt border border-border" />
-                </div>
+            <!-- What I deliver card -->
+            <div class="neo-card p-6 -rotate-1 relative">
+              <div class="absolute -top-3 -right-3 w-10 h-10 bg-neo-primary border-3 border-border rotate-12 flex items-center justify-center">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
               </div>
-
-              <!-- Secondary stats row -->
-              <div class="grid grid-cols-2 gap-4">
-                <div class="neo-card p-4 rotate-1">
-                  <span class="font-display text-3xl font-black text-neo-primary block">20+</span>
-                  <span class="font-mono text-xs text-text-secondary uppercase">Projects</span>
-                </div>
-                <div class="neo-card p-4 -rotate-1">
-                  <span class="font-display text-3xl font-black text-neo-secondary block">15+</span>
-                  <span class="font-mono text-xs text-text-secondary uppercase">Technologies</span>
-                </div>
-              </div>
-
-              <!-- Featured badge -->
-              <div class="neo-card p-4 bg-neo-secondary border-3 border-border rotate-2">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-white border-2 border-neo-black flex items-center justify-center -rotate-6">
-                    <svg class="w-6 h-6 text-neo-black" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              <h3 class="font-display font-bold text-lg mb-4 text-text-primary">What I Deliver</h3>
+              <ul class="space-y-3">
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 bg-neo-primary border-2 border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
                     </svg>
-                  </div>
-                  <div>
-                    <span class="font-display font-bold text-neo-black block text-sm">SaaS Specialist</span>
-                    <span class="font-mono text-xs text-neo-black/70">Multi-tenant Apps</span>
-                  </div>
-                </div>
+                  </span>
+                  <span class="text-sm text-text-secondary"><span class="font-bold text-text-primary">Multi-tenant SaaS</span> with custom domains</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 bg-neo-primary border-2 border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-text-secondary"><span class="font-bold text-text-primary">Admin panels</span> with Filament</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 bg-neo-primary border-2 border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-text-secondary"><span class="font-bold text-text-primary">API integrations</span> & payment systems</span>
+                </li>
+                <li class="flex items-start gap-3">
+                  <span class="w-5 h-5 bg-neo-primary border-2 border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/>
+                    </svg>
+                  </span>
+                  <span class="text-sm text-text-secondary"><span class="font-bold text-text-primary">Modern</span> frontends & PWAs</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Floating accent -->
+            <div class="absolute -bottom-4 -left-4 neo-card p-3 bg-neo-secondary border-3 border-border rotate-3">
+              <div class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-neo-black" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <span class="font-mono text-xs font-bold text-neo-black">Open for Freelance</span>
               </div>
             </div>
           </div>
@@ -391,9 +349,9 @@ onMounted(() => {
               <span class="w-2 h-2 lg:w-3 lg:h-3 bg-neo-primary rotate-45 flex-shrink-0" />
               <span class="font-display font-bold text-sm lg:text-lg text-text-primary whitespace-nowrap">LARAVEL EXPERT</span>
               <span class="w-2 h-2 lg:w-3 lg:h-3 bg-neo-secondary rotate-45 flex-shrink-0" />
-              <span class="font-display font-bold text-sm lg:text-lg text-text-primary whitespace-nowrap">VUE.JS SPECIALIST</span>
+              <span class="font-display font-bold text-sm lg:text-lg text-text-primary whitespace-nowrap">FILAMENT SPECIALIST</span>
               <span class="w-2 h-2 lg:w-3 lg:h-3 bg-neo-primary rotate-45 flex-shrink-0" />
-              <span class="font-display font-bold text-sm lg:text-lg text-text-primary whitespace-nowrap">SAAS ARCHITECT</span>
+              <span class="font-display font-bold text-sm lg:text-lg text-text-primary whitespace-nowrap">AI-POWERED DEV</span>
               <span class="w-2 h-2 lg:w-3 lg:h-3 bg-neo-secondary rotate-45 flex-shrink-0" />
             </template>
           </div>

@@ -1,6 +1,38 @@
 <script setup>
 import { projects } from "~/assets/constants";
 
+const INITIAL_COUNT = 6;
+const LOAD_MORE_COUNT = 6;
+
+const visibleCount = ref(INITIAL_COUNT);
+const isExpanded = ref(false);
+
+const visibleProjects = computed(() => {
+  return projects.slice(0, visibleCount.value);
+});
+
+const hasMore = computed(() => {
+  return visibleCount.value < projects.length;
+});
+
+const remainingCount = computed(() => {
+  return projects.length - visibleCount.value;
+});
+
+const showMore = () => {
+  visibleCount.value = Math.min(visibleCount.value + LOAD_MORE_COUNT, projects.length);
+  if (visibleCount.value >= projects.length) {
+    isExpanded.value = true;
+  }
+};
+
+const showLess = () => {
+  visibleCount.value = INITIAL_COUNT;
+  isExpanded.value = false;
+  // Scroll to projects section
+  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+};
+
 const tagColors = {
   'VueJs': 'bg-neo-lime text-neo-black',
   'NuxtJs': 'bg-neo-lime text-neo-black',
@@ -48,7 +80,7 @@ const getTagColor = (tagName) => {
     <!-- Projects grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       <article
-        v-for="project in projects"
+        v-for="(project, index) in visibleProjects"
         :key="project.name"
         class="neo-card overflow-hidden group"
       >
@@ -153,6 +185,31 @@ const getTagColor = (tagName) => {
           </NuxtLink>
         </div>
       </article>
+    </div>
+
+    <!-- Show More / Show Less Button -->
+    <div class="flex justify-center mt-10">
+      <button
+        v-if="hasMore"
+        @click="showMore"
+        class="group neo-btn-primary px-8 py-4"
+      >
+        <span>Show More Projects</span>
+        <span class="ml-2 px-2 py-0.5 bg-white/20 rounded text-sm font-mono">+{{ remainingCount }}</span>
+        <svg class="w-5 h-5 ml-2 transition-transform duration-200 group-hover:translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+      </button>
+      <button
+        v-else-if="isExpanded"
+        @click="showLess"
+        class="group neo-btn px-8 py-4"
+      >
+        <span>Show Less</span>
+        <svg class="w-5 h-5 ml-2 transition-transform duration-200 group-hover:-translate-y-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+      </button>
     </div>
   </section>
 </template>

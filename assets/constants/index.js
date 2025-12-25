@@ -26,19 +26,19 @@ export const navLinks = [
 
 const services = [
     {
-        title: "Web Developer",
+        title: "Laravel Expert",
         icon: "/images/web.png",
     },
     {
-        title: "Vue & Nuxt Developer",
+        title: "Filament Specialist",
         icon: "/images/mobile.png",
     },
     {
-        title: "Laravel Developer",
+        title: "Livewire Developer",
         icon: "/images/backend.png",
     },
     {
-        title: "Content Creator",
+        title: "SaaS Architect",
         icon: "/images/creator.png",
     },
 ];
@@ -60,15 +60,9 @@ const technologies = [
         icon: "/images/tech/livewire.png",
         featured: true
     },
-    // Vue ecosystem (featured/large)
     {
-        name: "VueJS",
-        icon: "/images/tech/vue.svg",
-        featured: true
-    },
-    {
-        name: "NuxtJs",
-        icon: "/images/tech/nuxt.svg",
+        name: "Inertia.js",
+        icon: "/images/tech/inertia.png",
         featured: true
     },
     // Supporting technologies
@@ -79,6 +73,14 @@ const technologies = [
     {
         name: "AlpineJs",
         icon: "/images/tech/alpine.png",
+    },
+    {
+        name: "VueJS",
+        icon: "/images/tech/vue.svg",
+    },
+    {
+        name: "NuxtJs",
+        icon: "/images/tech/nuxt.svg",
     },
     {
         name: "Laravel Forge",
@@ -107,6 +109,10 @@ const technologies = [
     {
         name: "Vite",
         icon: "/images/tech/vite.svg",
+    },
+    {
+        name: "Claude Code",
+        icon: "/images/tech/claude.png",
     },
 ];
 
@@ -198,7 +204,7 @@ const experiences = [
             "Created Mwshor - Project Management Platform with Kanban boards, timelines, and client tracking.",
             "Contributed to EisarApp - Training SaaS with progress monitoring, certifications, and compliance management.",
             "Developed Ala Khutah - Job Posting Platform with candidate tracking and application management.",
-            "Built Adiaf - Wholesale E-commerce Platform with complex pricing tiers and inventory management.",
+            "Built Adiaf - Hajj Management SaaS with multi-panel system for companies, centers, guides, and pilgrims.",
             "Architected and deployed multiple production SaaS products serving hundreds of users.",
         ],
     },
@@ -278,9 +284,8 @@ const projects = [
             "AI-powered room transformation platform using Google Gemini. Features 30+ design styles, visual search, floor planning, and actionable design suggestions. PWA-enabled with dark/light themes.",
         tags: [
             { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Google Gemini", color: "blue-text-gradient" },
+            { name: "Inertia.js", color: "purple-text-gradient" },
+            { name: "Google Gemini", color: "green-text-gradient" },
             { name: "Tailwind CSS", color: "blue-text-gradient" },
         ],
         image: "/images/my_projects/decorcopilot/mockup.png",
@@ -295,8 +300,7 @@ const projects = [
             "Personal finance tracking with AI chat assistance, budgeting tools, expense categorization, and analytics dashboard. Features voice input, transaction management, and financial goal tracking.",
         tags: [
             { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
+            { name: "Inertia.js", color: "purple-text-gradient" },
             { name: "AI Chat", color: "green-text-gradient" },
             { name: "Tailwind CSS", color: "blue-text-gradient" },
         ],
