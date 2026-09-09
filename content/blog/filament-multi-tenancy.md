@@ -359,3 +359,14 @@ The key is understanding that Filament handles the heavy lifting—you just need
 
 - [Filament Multi-Tenancy Documentation](https://filamentphp.com/docs/4.x/users/tenancy)
 - [Filament Tenancy Panels](https://filamentphp.com/docs/4.x/panels/tenancy)
+
+
+---
+
+## Going further: letting each tenant build its own website
+
+Panel tenancy scopes your admin. The question that usually follows is whether each tenant can also have its own public site — and that part Filament leaves to you.
+
+That gap is why I built **[FilamentCraft](https://filamentcraft.dev?ref=blog-multi-tenancy)**, a commercial plugin that adds a Shopify-style drag-and-drop website builder to a Filament panel. Sites belong to any owner model through a polymorphic morph, so it sits on top of the tenancy you already configured above — Filament's own, stancl/tenancy, spatie/multitenancy, or none at all. Your tenants build and publish their pages themselves; you keep shipping the application.
+
+There is a [live demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-multi-tenancy) with no signup if you want to see what that feels like from the tenant's side.
