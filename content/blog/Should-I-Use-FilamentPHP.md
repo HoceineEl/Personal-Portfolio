@@ -166,3 +166,14 @@ Filament integrates with Laravel policies and gates, making it easy to implement
 ---
 
 Ready to supercharge your Laravel applications? Try [FilamentPHP](https://filamentphp.com/) today and experience the difference!
+
+
+---
+
+## One thing Filament does not do out of the box
+
+Filament is excellent at giving *you* an interface to your data. It does not give your **clients** a way to build their own pages — every copy change, every new landing page, still comes back to you as a ticket.
+
+That is the problem I ended up building a product around: **[FilamentCraft](https://filamentcraft.dev?ref=blog-should-i-use-filament)**, a commercial plugin that turns a Filament panel into a drag-and-drop website builder, with a live preview, user-editable themes, multi-tenancy and full RTL. It supports Filament 4 and 5 from one codebase.
+
+If that sounds like your situation, the [demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-should-i-use-filament) is open with no signup.

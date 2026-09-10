@@ -433,3 +433,14 @@ The key is to leverage each technology's strengths: Livewire for reactivity, Fil
 - [Livewire Documentation](https://livewire.laravel.com)
 - [FilamentPHP Documentation](https://filamentphp.com/docs)
 - [Tailwind CSS v4](https://tailwindcss.com/docs)
+
+
+---
+
+## The page-building problem every SaaS eventually hits
+
+Somewhere after launch, a SaaS built on this stack needs marketing pages, and often per-customer pages too. Hand-coding each one turns your team into a page factory.
+
+**[FilamentCraft](https://filamentcraft.dev?ref=blog-tall-saas)** is the commercial plugin I built for that: a drag-and-drop website builder inside your Filament panel, with sites scoped to any owner model so each tenant can build and publish their own. Server-rendered output, so the SEO story stays intact.
+
+[Open the demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-tall-saas) — no signup, you land straight in the editor.

@@ -257,3 +257,12 @@ Whether you're building a simple CMS or a complex SaaS platform, Filament v4 has
 - [Filament v4 Release Announcement](https://filamentphp.com/content/alexandersix-filament-v4-is-stable)
 - [What's New in Filament v4](https://filamentphp.com/content/leandrocfe-whats-new-in-filament-v4)
 - [Filament v4 Documentation](https://filamentphp.com/docs/4.x)
+
+
+---
+
+## Building on v4 in production
+
+Everything above is what I used to build **[FilamentCraft](https://filamentcraft.dev?ref=blog-filament-4)**, a commercial visual website builder that ships as a Filament plugin. It leans hard on the v4 pieces in this guide — schemas for the section settings panel, the new nested-resource behaviour, and the performance work that makes a live iframe preview practical.
+
+It supports Filament 4 and 5 from a single codebase, which turned out to be much less painful than expected: v5 is a Livewire 4 bump with no Filament API changes to speak of. You can try the editor at the [demo site](https://demo.filamentcraft.dev/launch/admin?ref=blog-filament-4), no signup required.
