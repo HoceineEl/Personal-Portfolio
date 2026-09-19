@@ -1,33 +1,46 @@
+<script setup>
+import { SITE_URL, profile, projects } from "~/assets/constants";
+
+useHead({ titleTemplate: null });
+
+usePageSeo({
+  title: `${profile.name} · Full-stack developer, web and mobile`,
+  description:
+    "Hoceine El Idrissi is a full-stack developer in Morocco building web platforms, native iOS and Android apps with NativePHP, and Filament admin panels. See selected work, services and writing.",
+  path: "/",
+  type: "profile",
+});
+
+useJsonLd([
+  personSchema,
+  {
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    url: SITE_URL,
+    name: profile.name,
+    publisher: { "@id": `${SITE_URL}/#person` },
+    inLanguage: "en",
+  },
+  {
+    "@type": "ProfilePage",
+    "@id": `${SITE_URL}/#profile`,
+    url: SITE_URL,
+    mainEntity: { "@id": `${SITE_URL}/#person` },
+    hasPart: projects
+      .filter((project) => project.featured)
+      .map((project) => ({ "@type": "CreativeWork", name: project.name, url: `${SITE_URL}${project.url}` })),
+  },
+]);
+</script>
+
 <template>
-  <main class="relative z-0 selection:bg-neo-lime selection:text-neo-black bg-surface">
-    <!-- Decorative grid background -->
-    <div class="fixed inset-0 bg-grid-pattern opacity-30 dark:opacity-10 pointer-events-none" />
-
-    <header>
-      <ChunkHomeNavbar />
-      <SectionsHero />
-    </header>
-
-    <LazySectionsAbout />
-    <LazySectionsTech />
-    <LazySectionsExperience />
-    <LazySectionsWorks />
-    <LazySectionsBlog />
-
-    <div class="relative">
-      <LazySectionsContact />
-    </div>
-
-    <LazySectionsFooter />
-
-    <LazyChunkViewSocial />
-  </main>
+  <div>
+    <HomeHero />
+    <HomeWork />
+    <HomeServices />
+    <HomeAbout />
+    <HomeWriting />
+    <HomeContact />
+    <div class="h-16 md:h-24" />
+  </div>
 </template>
-
-<script setup></script>
-
-<style scoped>
-section {
-  @apply scroll-mt-24;
-}
-</style>

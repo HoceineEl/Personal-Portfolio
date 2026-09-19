@@ -1,12 +1,9 @@
-<script setup>
-// import { CursorFx } from "@luxdamore/vue-cursor-fx";
-</script>
-
 <template>
-  <div>
-    <slot />
+  <div class="flex min-h-screen flex-col">
+    <SiteHeader />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <SiteFooter />
   </div>
-  <!-- <cursor-fx /> -->
-  <ChunkScrollToggler />
 </template>
-<style scoped></style>

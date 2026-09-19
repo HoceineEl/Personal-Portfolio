@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const token = (name) => `oklch(var(--${name}) / <alpha-value>)`;
+
 export default {
   darkMode: 'class',
   content: [
@@ -7,6 +9,7 @@ export default {
     'pages/**/*.vue',
     'composables/**/*.{js,ts}',
     'plugins/**/*.{js,ts}',
+    'assets/constants/**/*.js',
     'App.{js,ts,vue}',
     'app.{js,ts,vue}',
     'Error.{js,ts,vue}',
@@ -16,96 +19,61 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Simplified palette - Emerald + Orange
-        'neo-black': '#0D0D0D',
-        'neo-white': '#FFFEF0',
-        'neo-primary': '#10B981',    // Emerald - main accent
-        'neo-secondary': '#FB923C',  // Orange - highlight accent
-        // Legacy aliases (map to new colors)
-        'neo-lime': '#10B981',
-        'neo-pink': '#FB923C',
-        'neo-cyan': '#10B981',
-        'neo-purple': '#10B981',
-        'neo-orange': '#FB923C',
-        'neo-yellow': '#FB923C',
-        // Semantic colors
-        'surface': 'var(--color-surface)',
-        'surface-alt': 'var(--color-surface-alt)',
-        'text-primary': 'var(--color-text-primary)',
-        'text-secondary': 'var(--color-text-secondary)',
-        'border': 'var(--color-border)',
-        'accent': 'var(--color-accent)',
-        // Legacy support
-        primary: "#050816",
-        secondary: "#aaa6c3",
-        tertiary: "#151030",
-        blogColor: "#0F172A",
-        "black-100": "#100d25",
-        "black-200": "#090325",
-        "white-100": "#f3f3f3",
-        "main-violet": "#915EFF",
-      },
-      boxShadow: {
-        // Neo-Brutalism shadows - hard offset, no blur
-        'neo': '4px 4px 0px var(--color-border)',
-        'neo-sm': '2px 2px 0px var(--color-border)',
-        'neo-lg': '6px 6px 0px var(--color-border)',
-        'neo-xl': '8px 8px 0px var(--color-border)',
-        'neo-accent': '4px 4px 0px var(--color-accent)',
-        'neo-pink': '4px 4px 0px #FB923C',
-        'neo-lime': '4px 4px 0px #10B981',
-        'neo-cyan': '4px 4px 0px #10B981',
-        'neo-hover': '6px 6px 0px var(--color-border)',
-        'neo-active': '2px 2px 0px var(--color-border)',
-        card: "0px 35px 120px -15px #211e35",
-      },
-      screens: {
-        xs: "450px",
+        bg: token('bg'),
+        raised: token('raised'),
+        ink: token('ink'),
+        muted: token('muted'),
+        line: token('line'),
+        sun: token('sun'),
+        'sun-ink': token('sun-ink'),
+        'on-sun': token('on-sun'),
+        live: token('live'),
+        // Legacy aliases kept so older markup (tools page, markdown) still resolves
+        surface: token('bg'),
+        'surface-alt': token('raised'),
+        'text-primary': token('ink'),
+        'text-secondary': token('muted'),
+        border: token('line'),
+        accent: token('sun'),
+        'neo-black': 'oklch(0.16 0.006 80)',
+        'neo-white': 'oklch(0.985 0 0)',
+        'neo-primary': token('sun'),
+        'neo-secondary': token('sun'),
+        'neo-lime': token('sun'),
+        'neo-pink': token('sun'),
+        'neo-cyan': token('sun'),
+        'neo-purple': token('sun'),
+        'neo-orange': token('sun'),
+        'neo-yellow': token('sun'),
       },
       fontFamily: {
-        'display': ['Clash Display', 'Space Grotesk', 'system-ui', 'sans-serif'],
-        'mono': ['JetBrains Mono', 'Space Mono', 'monospace'],
-        'body': ['DM Sans', 'system-ui', 'sans-serif'],
-        'poppins': ['Poppins', 'Arial', 'sans-serif'],
+        sans: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       fontSize: {
-        'display-xl': ['clamp(3rem, 8vw, 6rem)', { lineHeight: '1.1', fontWeight: '800' }],
-        'display-lg': ['clamp(2.5rem, 6vw, 4.5rem)', { lineHeight: '1.15', fontWeight: '700' }],
-        'display-md': ['clamp(2rem, 4vw, 3rem)', { lineHeight: '1.2', fontWeight: '700' }],
+        'display-xl': ['clamp(2.75rem, 1.2rem + 6.4vw, 6rem)', { lineHeight: '0.92', letterSpacing: '-0.035em' }],
+        'display-lg': ['clamp(2.25rem, 1.3rem + 4vw, 4.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
+        'display-md': ['clamp(1.75rem, 1.2rem + 2.4vw, 3rem)', { lineHeight: '1', letterSpacing: '-0.025em' }],
+        'display-sm': ['clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
       },
-      borderWidth: {
-        '3': '3px',
-        '4': '4px',
+      maxWidth: {
+        prose: '68ch',
+        page: '84rem',
       },
-      animation: {
-        'marquee': 'marquee 25s linear infinite',
-        'marquee-reverse': 'marquee-reverse 25s linear infinite',
-        'float': 'float 6s ease-in-out infinite',
-        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'Gargarya': 'bounce2x 1s ease-in-out infinite',
+      screens: {
+        xs: '450px',
       },
-      keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0%)' },
-          '100%': { transform: 'translateX(-100%)' },
-        },
-        'marquee-reverse': {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(0%)' },
-        },
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
-        },
-        bounce2x: {
-          '0%,100%': { transform: 'translateY(-60%)' },
-          '50%': { transform: 'none' },
-        },
+      transitionTimingFunction: {
+        'out-quart': 'cubic-bezier(0.25, 1, 0.5, 1)',
+        'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
       },
-      backgroundImage: {
-        'grid-pattern': `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg stroke='%23000' stroke-width='0.5' opacity='0.08'%3E%3Cpath d='M0 0h60v60H0z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        'dots-pattern': `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000' fill-opacity='0.05'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3C/g%3E%3C/svg%3E")`,
-        'hero-pattern': "url('/assets/herobg.webp')",
+      zIndex: {
+        sticky: '30',
+        header: '40',
+        overlay: '50',
+        toast: '60',
       },
     },
   },

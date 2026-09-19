@@ -1,25 +1,19 @@
 <template>
-    <div class="flex flex-col justify-center items-center w-full h-screen bg-gradient-to-r from-blue-200 to-indigo-200 transition-all duration-500 ease-in-out">
-      <div class="text-center transition-all duration-500 ease-in-out">
-        <div v-if="ayahText" class="ayah text-center px-4 py-2 bg-slate-800 rounded-lg transition-all duration-500 ease-in-out mb-7">
-          <p class="text-lg  lg:text-xl">" {{ ayahText }} "</p>
-          <p class="text-xs sm:text-xs md:text-sm lg:text-md">  {{ ayahSurah }}, الاية {{ ayahNumber }}</p>
-        </div>
-        <h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-indigo-900 mb-2 transition-all duration-500 ease-in-out">مُحمِّل الملفات</h1>
-        <p class="text-indigo-700 transition-all duration-500 ease-in-out">قم برفع ملفك لمعالجة المحتوى</p>
-      </div>
-      <div class="bg-white rounded-xl shadow-md flex items-center space-x-4 transition-all duration-500 ease-in-out">
-        <div class="transition-all duration-500 ease-in-out">
-          <input type="file" @change="uploadFile" class="  
-            py-2 sm:py-3 md:py-4 lg:py-5 px-3 sm:px-4 md:px-5 lg:px-6
-            rounded border-0 
-            text-xs sm:text-sm md:text-md lg:text-lg font-semibold 
-            bg-violet-50 text-violet-700 
-            hover:bg-violet-100 
-            cursor-pointer transition-all duration-500 ease-in-out" />
-        </div>
-      </div>
-  </div>
+  <section dir="rtl" lang="ar" class="shell flex min-h-[80vh] flex-col items-center justify-center gap-10 pb-20 pt-32 text-center">
+    <figure v-if="ayahText" class="max-w-2xl rounded-[2rem] bg-raised px-8 py-6">
+      <blockquote class="text-xl leading-loose lg:text-2xl">" {{ ayahText }} "</blockquote>
+      <figcaption class="mt-3 text-sm text-muted">{{ ayahSurah }}، الاية {{ ayahNumber }}</figcaption>
+    </figure>
+    <div>
+      <h1 class="wide text-display-lg font-black">مُحمِّل الملفات</h1>
+      <p class="mt-4 text-lg text-muted">قم برفع ملفك لمعالجة المحتوى</p>
+    </div>
+    <label class="btn-sun cursor-pointer px-8 py-4 text-base">
+      <input type="file" accept=".srt,.vtt,.txt" class="sr-only" @change="uploadFile" />
+      <UiIcon name="arrow-down" class="rotate-180" />
+      .srt
+    </label>
+  </section>
 </template>
 
 <script setup lang="js">

@@ -44,57 +44,30 @@ defineProps({
 
 .code-language {
   position: absolute;
-  top: 0;
-  right: 0;
-  padding: 4px 12px;
-  font-size: 0.75rem;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  padding: 0.125rem 0.625rem;
+  border-radius: 9999px;
   font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: uppercase;
-  background: #CCFF00;
-  color: #0D0D0D;
-  border-left: 3px solid var(--color-border, #0D0D0D);
-  border-bottom: 3px solid var(--color-border, #0D0D0D);
-  z-index: 10;
+  background: oklch(var(--sun));
+  color: oklch(var(--on-sun));
 }
 
 .code-filename {
-  padding: 8px 16px;
-  font-size: 0.75rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 1rem 1rem 0 0;
   font-family: 'JetBrains Mono', monospace;
-  background: #1a1a2e;
-  color: #a0a0a0;
-  border-bottom: 1px solid #333;
+  font-size: 0.8rem;
+  background: oklch(0.25 0.02 270);
+  color: oklch(0.8 0.01 270);
 }
 
-/* Code block styling */
-.code-block-wrapper pre {
-  margin: 0 !important;
-  padding: 1rem !important;
-  overflow-x: auto;
-  background: #1a1b26 !important;
-  border: 3px solid var(--color-border, #FFFEF0);
-  box-shadow: 4px 4px 0px var(--color-border, #FFFEF0);
-}
-
-.code-block-wrapper pre code {
-  font-family: 'JetBrains Mono', ui-monospace, monospace !important;
-  font-size: 0.875rem !important;
-  line-height: 1.7 !important;
-  background: transparent !important;
-}
-
-/* Line styling */
-.code-block-wrapper pre code .line {
-  display: block;
-  min-height: 1.5rem;
-}
-
-/* Highlighted lines */
-.code-block-wrapper pre code .line.highlight {
-  background: rgba(204, 255, 0, 0.1);
-  border-left: 3px solid #CCFF00;
-  margin-left: -1rem;
-  padding-left: calc(1rem - 3px);
+.code-filename + pre {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 </style>

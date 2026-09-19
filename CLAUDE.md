@@ -8,85 +8,52 @@ Personal portfolio and blog for Hoceine El Idrissi, a Full Stack Web Developer s
 
 ## Tech Stack
 
-- **Framework**: Nuxt 3 (Vue.js)
-- **Styling**: Tailwind CSS with Neo-Brutalism design system
-- **Content**: @nuxt/content for blog posts (Markdown in `/content/blog/`)
-- **3D**: TresJS/Three.js for 3D elements
-- **Modules**: @nuxtjs/tailwindcss, @vueuse/motion, nuxt-delay-hydration, @nuxt/image
+- **Framework**: Nuxt 3 (Vue 3), SSR
+- **Styling**: Tailwind CSS 3 with OKLCH design tokens (CSS variables in `assets/css/tailwind.css`)
+- **Content**: @nuxt/content v2 (Markdown in `content/blog/` and `content/projects/`)
+- **Modules**: @nuxtjs/tailwindcss, @nuxt/content, @nuxt/image, nuxt-simple-robots, nuxt-delay-hydration
 
 ## Development Commands
 
 ```bash
-# Install dependencies
 npm install
-
-# Development server (http://localhost:3000)
-npm run dev
-
-# Production build
+npm run dev       # http://localhost:3000
 npm run build
-
-# Generate static site
-npm run generate
-
-# Preview production build
 npm run preview
 ```
 
 ## Project Structure
 
 ```
-├── assets/
-│   ├── constants/index.js    # Projects, experiences, technologies, socials
-│   └── css/tailwind.css      # CSS variables & Neo-Brutalism components
+├── assets/constants/index.js  # profile, services, process, projects, experiences, openSource, socials
+├── assets/css/tailwind.css    # tokens (light/dark), components (.shell .btn-sun .btn-ghost .chip .field .blinds), prose
 ├── components/
-│   ├── Sections/             # Main page sections (Hero, About, Tech, Works, etc.)
-│   ├── Chunk/                # Reusable UI components (Navbar, ScrollIndicator)
-│   ├── blog/                 # Blog-specific components (Navbar)
-│   └── content/              # Content components (Article, Toc, CustomContentList)
-├── composables/
-│   └── useTheme.ts           # Dark/light mode toggle
-├── content/blog/             # Blog posts in Markdown
-├── layouts/
-│   ├── default.vue           # Main layout
-│   └── blog.vue              # Blog layout
-├── pages/
-│   ├── index.vue             # Home page
-│   └── blog/                 # Blog pages
-└── public/images/            # Static images
+│   ├── Home/                  # Hero, Work, Services, About, Writing, Contact (home sections)
+│   ├── Project/               # Cover (SVG illustrations per `cover` variant), Feature, List
+│   ├── Post/                  # Row, Toc
+│   ├── Site/                  # Header, Footer
+│   └── Ui/                    # Icon, ReadingProgress
+├── composables/               # useTheme, useSiteSeo (usePageSeo, useJsonLd, personSchema), useFormatDate
+├── pages/                     # index, blog/, projects/, tools/
+├── server/routes/             # sitemap.xml, rss.xml
+├── middleware/                # lowercase URL redirect
+└── public/                    # images, og.png, favicon.svg, llms.txt
 ```
 
 ## Design System
 
-**Neo-Brutalism Theme** with CSS variables for dark/light mode:
-- Colors: `neo-lime` (#CCFF00), `neo-pink` (#FF2E63), `neo-cyan` (#00D4FF), `neo-purple` (#8B5CF6)
-- Borders: 3px solid (`border-3`)
-- Shadows: Hard offset shadows (`shadow-neo`)
-- Fonts: Display font for headings, mono for code/labels
-
-## Key Files
-
-- `assets/constants/index.js` - All project data, experiences, and technologies
-- `composables/useTheme.ts` - Theme toggle logic with localStorage persistence
-- `tailwind.config.js` - Tailwind configuration with custom design tokens
-- `nuxt.config.js` - Nuxt configuration and modules
+- **Direction**: "sunlight through blinds", taken from the portrait. Dark-first, light theme supported, system preference by default.
+- **Color**: tokens `bg`, `raised`, `ink`, `muted`, `line`, `sun` (amber brand), `sun-ink` (sun as text), `on-sun`, `live`. Use them with Tailwind opacity (`text-ink/80`, `ring-line/15`).
+- **Type**: Archivo variable (use `.wide` for display headings), JetBrains Mono only for code, dates and repo names. Display sizes: `text-display-xl|lg|md|sm`.
+- **Motif**: `.blinds` diagonal stripes, used sparingly (hero, covers, contact, 404).
+- **Motion**: CSS only; `.reveal` uses scroll-driven animations as progressive enhancement. Respect reduced motion.
+- No neo-brutal hard shadows, no gradient text, no scale-on-hover.
 
 ## Adding Content
 
-**New Blog Post**: Create `.md` file in `content/blog/` with frontmatter:
-```yaml
----
-title: "Post Title"
-description: "Description"
-image: "/images/blog/image.webp"
-banner: "/images/blog/banner.webp"
-tags: ["tag1", "tag2"]
-createdAt: "2024-01-01"
-minutes: 5
----
-```
+**New blog post**: `.md` in `content/blog/` with `title`, `description`, `tags`, `createdAt`, `updatedAt`, optional `image`/`banner` (or `noImage: true`).
 
-**New Project**: Add to `projects` array in `assets/constants/index.js`
+**New project**: add an entry to `projects` in `assets/constants/index.js` (`url` must match the content path, e.g. `/projects/my-app`; `cover` picks an illustration variant: builder, store, gallery, chart, kanban, calendar, table, panels, phone, voice; or set `image`). Add `content/projects/my-app.md` for the detail page. Order in the array is the display order; `featured: true` puts it in the showcase.
 
 ## User Preferences (from CLAUDE.md)
 

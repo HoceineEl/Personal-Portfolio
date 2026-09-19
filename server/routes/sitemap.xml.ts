@@ -17,13 +17,13 @@ export default defineEventHandler(async (event) => {
   const sitemap = new SitemapStream({ hostname: BASE_URL });
 
   // Fetch and add dynamic content URLs with priority and lastmod
-  const docs = await serverQueryContent(event).find();
+  const docs = await serverQueryContent(event).only(['_path', 'createdAt', 'updatedAt']).find();
   for (const doc of docs) {
     const urlOptions = {
       url: doc._path,
       changefreq: CHANGE_FREQ_MONTHLY,
     priority: 0.8,
-      lastmod: doc.createdAt || doc.updatedAt || new Date()
+      lastmod: doc.updatedAt || doc.createdAt || new Date()
     };
 
       // Include lastmod only if it's available (for Markdown files)
@@ -60,7 +60,7 @@ function getStaticEndpoints(): string[] {
   const __dirname = dirname(fileURLToPath(import.meta.url));
   const files = getFiles(`${__dirname}/../../pages`);
   return files
-    .filter((file) => !file.includes('slug'))
+    .filter((file) => !file.includes('slug') && !file.includes('/tools/'))
     .map((file) => file.split('pages')[1])
     .map((file) => (file.endsWith('index.vue') ? file.split('/index.vue')[0] : file.split('.vue')[0]));
 }

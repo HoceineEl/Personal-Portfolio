@@ -1,579 +1,424 @@
+export const SITE_URL = "https://hoceine.com";
 
-import portrait from '/models/portrait/scene.gltf?url'
-import Earth from '/models/planet/scene.gltf?url'
+export const profile = {
+    name: "Hoceine El Idrissi",
+    firstName: "Hoceine",
+    role: "Full-stack developer",
+    email: "contact@hoceine.com",
+    location: "Morocco",
+    timezone: "Africa/Casablanca",
+    photo: "/images/hoceine.jpeg",
+    twitter: "@HoceineElidrisi",
+    description:
+        "Hoceine El Idrissi is a full-stack developer in Morocco building web platforms, native iOS and Android apps with NativePHP, and Filament admin panels, often in Arabic, for teams in Saudi Arabia, the UK and beyond.",
+};
+
 export const navLinks = [
+    { id: "/#work", title: "Work" },
+    { id: "/#services", title: "Services" },
+    { id: "/#about", title: "About" },
+    { id: "/blog", title: "Writing" },
+];
+
+export const services = [
     {
-        id: "#about",
-        title: "About",
+        title: "Web apps and platforms",
+        body: "From a first version you can put in front of users to a platform with tenants, roles, billing and four languages. Laravel on the back, Livewire, React or Vue on the front, whichever fits.",
     },
     {
-        id: "#work",
-        title: "Work",
+        title: "Mobile apps for iOS and Android",
+        body: "Native apps built with NativePHP that share the Laravel codebase you already have: camera, microphone, push notifications, offline screens. WiserPocket ships this way.",
     },
     {
-        id: "#projects",
-        title: "Projects",
+        title: "Admin panels and Filament plugins",
+        body: "Panels your operations team actually enjoys using. Custom resources, dashboards, bulk actions, and plugins built to the standard of FilamentCraft.",
     },
     {
-        id: "#contact",
-        title: "Contact",
+        title: "Arabic-first and RTL products",
+        body: "Right-to-left interfaces, bilingual content and Arabic copy that reads naturally, shipped for clients in Saudi Arabia, Morocco and across the region.",
     },
     {
-        id: "/blog",
-        title: "Blog",
+        title: "Rescue and level up an existing app",
+        body: "Slow queries, tangled controllers, no tests. I untangle it, add Pest coverage, and leave the codebase easier to change than I found it.",
     },
 ];
 
-const services = [
+export const process = [
     {
-        title: "Laravel Expert",
-        icon: "/images/web.png",
+        title: "A short call",
+        body: "Thirty minutes to understand the business, the users and what done looks like. No slide decks.",
     },
     {
-        title: "Filament Specialist",
-        icon: "/images/mobile.png",
+        title: "A scoped plan",
+        body: "A written plan with milestones, trade-offs and a fixed price or weekly rate. You know what you get before you pay.",
     },
     {
-        title: "Livewire Developer",
-        icon: "/images/backend.png",
-    },
-    {
-        title: "SaaS Architect",
-        icon: "/images/creator.png",
+        title: "Weekly working builds",
+        body: "A deployed build every week on a staging URL. You click through real software, not status reports.",
     },
 ];
 
-const technologies = [
-    // Primary stack - Laravel ecosystem (featured/large)
-    {
-        name: "Laravel",
-        icon: "/images/tech/laravel.svg",
-        featured: true
-    },
-    {
-        name: "FilamentPHP",
-        icon: "/images/tech/filament.png",
-        featured: true
-    },
-    {
-        name: "Livewire",
-        icon: "/images/tech/livewire.png",
-        featured: true
-    },
-    {
-        name: "Inertia.js",
-        icon: "/images/tech/inertia.png",
-        featured: true
-    },
-    // Supporting technologies
-    {
-        name: "TailwindCSS",
-        icon: "/images/tech/tailwind.svg",
-    },
-    {
-        name: "AlpineJs",
-        icon: "/images/tech/alpine.png",
-    },
-    {
-        name: "VueJS",
-        icon: "/images/tech/vue.svg",
-    },
-    {
-        name: "NuxtJs",
-        icon: "/images/tech/nuxt.svg",
-    },
-    {
-        name: "Laravel Forge",
-        icon: "/images/tech/forge.svg",
-    },
-    {
-        name: "PHP",
-        icon: "/images/tech/php.svg",
-    },
-    {
-        name: "JavaScript",
-        icon: "/images/tech/js.svg",
-    },
-    {
-        name: "TypeScript",
-        icon: "/images/tech/ts.svg",
-    },
-    {
-        name: "MySql",
-        icon: "/images/tech/mysql.svg",
-    },
-    {
-        name: "Github",
-        icon: "/images/tech/github.svg",
-    },
-    {
-        name: "Vite",
-        icon: "/images/tech/vite.svg",
-    },
-    {
-        name: "Claude Code",
-        icon: "/images/tech/claude.png",
-    },
+export const technologies = [
+    { name: "Laravel", icon: "/images/tech/laravel.svg", group: "core" },
+    { name: "FilamentPHP", icon: "/images/tech/filament.png", group: "core" },
+    { name: "Livewire", icon: "/images/tech/livewire.png", group: "core" },
+    { name: "Alpine.js", icon: "/images/tech/alpine.png", group: "core" },
+    { name: "Tailwind CSS", icon: "/images/tech/tailwind.svg", group: "core" },
+    { name: "PHP", icon: "/images/tech/php.svg", group: "core" },
+    { name: "Inertia.js", icon: "/images/tech/inertia.png", group: "also" },
+    { name: "Vue", icon: "/images/tech/vue.svg", group: "also" },
+    { name: "Nuxt", icon: "/images/tech/nuxt.svg", group: "also" },
+    { name: "TypeScript", icon: "/images/tech/ts.svg", group: "also" },
+    { name: "MySQL", icon: "/images/tech/mysql.svg", group: "also" },
+    { name: "React", icon: "/images/tech/react.svg", group: "also" },
+    { name: "NativePHP", icon: null, group: "also" },
+    { name: "Pest", icon: null, group: "also" },
+    { name: "Laravel Forge", icon: "/images/tech/forge.svg", group: "tools" },
+    { name: "GitHub", icon: "/images/tech/github.svg", group: "tools" },
+    { name: "Vite", icon: "/images/tech/vite.svg", group: "tools" },
+    { name: "Claude Code", icon: "/images/tech/claude.png", group: "tools" },
 ];
 
-// const technologies_3d = [
-//     {
-//         name: "Vue JS",
-//         icon: vue_3d,
-//         progress: 90
-//     },
-//     {
-//         name: "Nuxt Js",
-//         icon: nuxt_3d,
-//         progress: 95
-//     },
-//     {
-//         name: "Laravel",
-//         icon: laravel_3d,
-//         progress: 80
-//     },
-//     {
-//         name: "Tailwind CSS",
-//         icon: tailwind_3d,
-//         progress: 105
-//     },
-//     {
-//         name: "JavaScript",
-//         icon: js_3d,
-//         progress: 75
-//     },
-//     {
-//         name: "HTML 5",
-//         icon: html_3d,
-//         progress: 110
-//     },
-//     {
-//         name: "CSS 3",
-//         icon: css_3d,
-//         progress: 110
-//     },
-
-//     {
-//         name: "PHP",
-//         icon: php_3d,
-//         progress: 70
-//     },
-//     {
-//         name: "MySql",
-//         icon: MySql_3d,
-//         progress: 70
-//     },
-//     {
-//         name: "Github",
-//         icon: github_3d,
-//         progress: 75
-//     },
-//     {
-//         name: "Vite",
-//         icon: vite_3d,
-//         progress: 70
-//     },
-//     {
-//         name: "Figma",
-//         icon: figma_3d,
-//         progress: 60
-//     },
-//     {
-//         name: "Bootstrap 5",
-//         icon: bootstrap_3d,
-//         progress: 80
-//     },
-//     {
-//         name: "Wordpress",
-//         icon: wordpress_3d,
-//         progress: 50
-//     },
-// ];
-
-
-const experiences = [
+export const experiences = [
     {
-        title: "Full Stack Developer",
+        title: "Founder & maintainer",
+        company_name: "FilamentCraft",
+        url: "/projects/filamentcraft",
+        date: "2026 – now",
+        summary:
+            "A commercial Shopify-style website builder for Filament 4 and 5, sold through its own Composer registry. 32 built-in sections, a no-code section builder and full RTL.",
+    },
+    {
+        title: "TALL stack developer",
         company_name: "NewTags",
-        icon: "/images/company/newtags.svg",
-        iconBg: "#CCFF00",
-        date: "2024 - Present (2 Years)",
-        points: [
-            "Building multi-tenant SaaS applications using the TALL Stack (Tailwind, Alpine.js, Laravel, Livewire).",
-            "Developed Mediano - Sports Academies Management SaaS with unique branding and subscription management per academy.",
-            "Created Mwshor - Project Management Platform with Kanban boards, timelines, and client tracking.",
-            "Contributed to EisarApp - Training SaaS with progress monitoring, certifications, and compliance management.",
-            "Developed Ala Khutah - Job Posting Platform with candidate tracking and application management.",
-            "Built Adiaf - Hajj Management SaaS with multi-panel system for companies, centers, guides, and pilgrims.",
-            "Architected and deployed multiple production SaaS products serving hundreds of users.",
-        ],
+        date: "2024 – now",
+        summary:
+            "Client platforms for companies in Saudi Arabia: Mediano, Mwshor, Adiaf, the Ala Khutah jobs portal and EisarApp, from first migration to production.",
     },
     {
-        title: "Full Stack Web Developer",
+        title: "Full stack web developer",
         company_name: "Devosoft",
-        icon: "/images/company/devosoft.png",
-        iconBg: "#383E56",
-        date: "November 2022 - September 2023",
-        points: [
-            "Balanced full-time studies with night-time internship as a Full Stack Web Developer.",
-            "Explored diverse technologies including Laravel, Filament, Vue.js, Nuxt.js, and WordPress.",
-            "Contributed to various projects from e-commerce platforms to Learning Management Systems.",
-            "Developed strong client communication skills and project planning abilities.",
-        ],
+        date: "2022 – 2023",
+        summary:
+            "Night-time developer while finishing my studies. E-commerce platforms and learning management systems with Laravel, Filament, Vue, Nuxt and WordPress.",
     },
     {
-        title: "Backend Developer (Intern)",
-        company_name: "SOSIPO (Ministry of Agriculture)",
-        icon: "/images/company/sosipo.png",
-        iconBg: "#E6DEDD",
-        date: "Jan 2023 - March 2023",
-        points: [
-            "Led a financial project using Laravel, JavaScript, and Bootstrap for the Ministry of Agriculture.",
-            "Implemented role-based permissions and comprehensive accounting features.",
-            "Focused on application security by studying all possible security cases.",
-            "Gained teamwork and client communication skills.",
-        ],
+        title: "Backend developer, intern",
+        company_name: "SOSIPO · Ministry of Agriculture",
+        url: "/projects/sosipo",
+        date: "2023",
+        summary:
+            "Led a financial management app with role-based permissions and full accounting flows for an association affiliated with the ministry.",
     },
     {
-        title: "WinForms Developer (Intern)",
-        company_name: "A2 Services Et Technologies",
-        icon: "/images/company/a2st.png",
-        iconBg: "#383E56",
-        date: "July 2022 - September 2022",
-        points: [
-            "Created a library management system using Windows Forms, SQL Server, and C#.",
-            "Gained valuable hands-on experience in application programming.",
-            "Collaborated with the CEO to understand project requirements.",
-            "Contributed to foundational skills as a developer.",
-        ],
+        title: "Desktop developer, intern",
+        company_name: "A2 Services et Technologies",
+        date: "2022",
+        summary: "A library management system in C#, WinForms and SQL Server. Where it all started.",
     },
 ];
 
-const testimonials = [
+export const projects = [
     {
-        testimonial:
-            "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-        name: "Sara Lee",
-        designation: "CFO",
-        company: "Acme Co",
-        image: "https://randomuser.me/api/portraits/women/4.jpg",
-    },
-    {
-        testimonial:
-            "I've never met a web developer who truly cares about their clients' success like Rick does.",
-        name: "Chris Brown",
-        designation: "COO",
-        company: "DEF Corp",
-        image: "https://randomuser.me/api/portraits/men/5.jpg",
-    },
-    {
-        testimonial:
-            "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-        name: "Lisa Wang",
-        designation: "CTO",
-        company: "456 Enterprises",
-        image: "https://randomuser.me/api/portraits/women/6.jpg",
-    },
-];
-
-const projects = [
-    // === FEATURED SAAS PROJECTS ===
-    {
-        name: "DecorCopilot – AI Interior Design SaaS",
+        name: "FilamentCraft",
+        tagline: "Visual website builder for Filament",
         description:
-            "AI-powered room transformation platform using Google Gemini. Features 30+ design styles, visual search, floor planning, and actionable design suggestions. PWA-enabled with dark/light themes.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Inertia.js", color: "purple-text-gradient" },
-            { name: "Google Gemini", color: "green-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
+            "Turns any Filament panel into a Shopify-style site builder: drag sections onto a live canvas, edit against an iframe preview, publish. A commercial plugin with 32 sections, a no-code section builder, a store module and full RTL.",
+        year: 2026,
+        role: "Founder",
+        platforms: "Filament plugin",
+        stack: ["Filament 4 & 5", "Livewire", "TypeScript", "Pest"],
+        cover: "builder",
+        url: "/projects/filamentcraft",
+        demo: "https://filamentcraft.dev?ref=portfolio",
+        highlights: [
+            "32 sections plus a no-code section builder",
+            "Sold through its own Composer registry",
+            "Filament 4 and 5 from one codebase",
         ],
-        image: "/images/my_projects/decorcopilot/mockup.png",
-        noImage: true,
-        demo: "https://decorcopilot.com",
-        url: "/projects/decorcopilot",
         featured: true,
     },
     {
-        name: "WiserPocket – Financial Management Platform",
+        name: "WiserPocket",
+        tagline: "AI finance tracker, on web, iOS and Android",
         description:
-            "Personal finance tracking with AI chat assistance, budgeting tools, expense categorization, and analytics dashboard. Features voice input, transaction management, and financial goal tracking.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Inertia.js", color: "purple-text-gradient" },
-            { name: "AI Chat", color: "green-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-        ],
-        image: "/images/my_projects/wiserpocket/mockup.png",
-        noImage: true,
-        demo: "https://wiserpocket.com",
+            "Log spending by talking or by snapping a receipt, then ask an AI assistant about your own money. Budgets, goals, debts and recurring transactions in four languages, with a native mobile app built on NativePHP.",
+        year: 2025,
+        role: "Solo",
+        platforms: "Web, iOS, Android",
+        stack: ["Laravel", "React", "NativePHP", "Gemini"],
+        cover: "phone",
         url: "/projects/wiserpocket",
+        demo: "https://wiserpocket.com",
+        highlights: [
+            "Voice and receipt input",
+            "Native iOS and Android with NativePHP",
+            "English, Arabic, French and Spanish",
+        ],
         featured: true,
     },
     {
-        name: "SmartShop – Multi-Tenant E-Commerce Platform",
+        name: "SmartShop",
+        tagline: "Multi-vendor e-commerce platform",
         description:
-            "Cloud-based e-commerce SaaS with vendor stores, payment integration (PayPal, Stripe), shipping logistics (Aramex, DHL, FedEx), POS system, and AI-powered business insights. Multi-language and multi-currency support.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Multi-tenant", color: "green-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-        ],
-        image: "/images/my_projects/smartshop/mockup.png",
-        noImage: true,
-        demo: "https://smartshop.ps",
+            "Vendor stores with PayPal and Stripe, Aramex, DHL and FedEx shipping, a point-of-sale mode, and AI business insights. Multi-language and multi-currency.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
+        cover: "store",
         url: "/projects/smartshop",
+        demo: "https://smartshop.ps",
+        highlights: [
+            "Stores for many vendors on one platform",
+            "PayPal, Stripe, Aramex, DHL and FedEx",
+            "Point of sale and a REST API",
+        ],
         featured: true,
     },
     {
-        name: "Mediano – Sports Academies Management SaaS",
+        name: "Adiaf",
+        tagline: "Hajj operations platform",
         description:
-            "Multi-tenant SaaS for sports academies with unique branding, subscription management, and secure access per academy. All-in-one solution for training sessions, attendance tracking, events, and sales.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "Alpine.js", color: "blue-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Multi-tenant", color: "green-text-gradient" },
+            "Hajj operators in Saudi Arabia run the whole pilgrimage on it. Companies, centers, admins, attendants, guides and pilgrims each get their own panel, from registration and group assignment to the daily schedule.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Filament", "Multi-panel", "RTL"],
+        cover: "panels",
+        url: "/projects/adiaf",
+        highlights: [
+            "Six role-based panels",
+            "Pilgrim registration to completion",
+            "Built for Ashraqat Company",
         ],
-        image: "/images/my_projects/mediano/mockup.png",
-        noImage: true,
+        featured: true,
+    },
+    {
+        name: "Mediano",
+        tagline: "Sports academy management",
+        description:
+            "One platform, many sports academies, each with its own branding, subscription and data. Training sessions, attendance, events, tournaments and merchandise sales in one place, evolving continuously since 2024.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
+        cover: "calendar",
         url: "/projects/mediano",
+        highlights: [
+            "A branded space per academy",
+            "3,400+ commits since mid-2024",
+            "Kept current up to Laravel 13 and Filament 5",
+        ],
         featured: true,
     },
     {
-        name: "Mwshor – SaaS Project Management Platform",
+        name: "Nokhbat Alhoffaz",
+        tagline: "Quran and book-reading circles app",
         description:
-            "Multi-tenant project management SaaS with Kanban boards, timelines, and comprehensive task management. Client tracking through personalized panels, scalable for any industry.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "Alpine.js", color: "blue-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
+            "A phone-first app for Quran memorisation circles. Teachers publish the day's portion on Tajweed mushaf pages, students send voice recitations, teachers reply by voice with a private score. Streaks, attendance and push reminders take care of themselves.",
+        year: 2026,
+        role: "Solo",
+        platforms: "Installable web app",
+        stack: ["Laravel 13", "React 19", "Filament 5", "Web Push"],
+        cover: "voice",
+        url: "/projects/nokhbat-alhoffaz",
+        highlights: [
+            "Voice recitations and voice replies",
+            "Tajweed mushaf pages, Warsh narration",
+            "Push reminders and automatic streaks",
         ],
-        image: "/images/my_projects/mwshor/mockup.png",
-        noImage: true,
+        featured: true,
+    },
+    {
+        name: "DecorCopilot",
+        tagline: "AI interior design, web and mobile",
+        description:
+            "Photograph a room and restyle it in 30+ design styles with Google Gemini. Visual search, floor planning and suggestions you can act on, as a PWA and a NativePHP mobile app.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web, mobile",
+        stack: ["Laravel", "Inertia", "Gemini", "NativePHP"],
+        cover: "gallery",
+        url: "/projects/decorcopilot",
+        demo: "https://decorcopilot.com",
+        highlights: [
+            "30+ design styles",
+            "Google Gemini image generation",
+            "PWA and NativePHP mobile app",
+        ],
+        featured: true,
+    },
+    {
+        name: "Ala Khutah",
+        tagline: "Recruitment for a 470 km Hijra trail",
+        description:
+            "Jobs portal and workforce management for a historical Hijra route in Saudi Arabia: seven overnight stations over six months, with geographic filtering and competency scoring.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Filament", "Arabic UI"],
+        cover: "table",
+        url: "/projects/alakhutah",
+        demo: "https://jobs-app.alakhutah.com",
+        featured: true,
+    },
+    {
+        name: "Mwshor",
+        tagline: "Project management for agencies",
+        description:
+            "Kanban boards, timelines and task management, with client panels so customers follow progress without a single status email.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "Alpine.js"],
+        cover: "kanban",
         url: "/projects/mwshor",
         featured: true,
     },
     {
-        name: "Adiaf – Hajj Management SaaS System",
+        name: "EisarApp",
+        tagline: "Training and compliance platform",
         description:
-            "Comprehensive multi-tenant Hajj management SaaS with role-based panels. Distinct spaces for Company, Center, Admin, Attendant, Guide, and Pilgrim. Full workflow automation for pilgrimage operations.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Multi-tenant", color: "green-text-gradient" },
-            { name: "Role-based", color: "pink-text-gradient" },
-        ],
-        image: "/images/my_projects/adiaf/mockup.png",
-        noImage: true,
-        url: "/projects/adiaf",
-        featured: true,
-    },
-    {
-        name: "Ala Khutah – Historical Hijra Journey Platform",
-        description:
-            "Jobs portal and workforce management for a 470km historical Hijra path project in Saudi Arabia with 7 overnight stations over 6 months. Features recruitment portal with geographic filtering and competency assessment.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Arabic UI", color: "green-text-gradient" },
-        ],
-        image: "/images/my_projects/alakhutah/mockup.png",
-        noImage: true,
-        demo: "https://jobs-app.alakhutah.com",
-        url: "/projects/alakhutah",
-        featured: true,
-    },
-    {
-        name: "EisarApp – Multi-Tenant Training SaaS",
-        description:
-            "Multi-tenant SaaS for training workflows and employee development. Features progress monitoring with certifications and compliance management. Scalable architecture for enterprise training needs.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Multi-tenant", color: "green-text-gradient" },
-        ],
-        image: "/images/my_projects/eisarapp/mockup.png",
-        noImage: true,
+            "Training workflows for enterprise teams, with progress tracking, certifications and compliance reporting per organisation.",
+        year: 2023,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
+        cover: "chart",
         url: "/projects/eisarapp",
         featured: true,
     },
     {
-        name: "Quran Association Management System",
+        name: "Abi Zaid Association",
+        tagline: "Management system for a Quran school",
         description:
-            "Comprehensive management system for Abi Zaid Al Qayrawani Association. Manages attendance, finances, and role-based access. Integrated WhatsApp API for automated reminders and parent messaging.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "WhatsApp API", color: "green-text-gradient" },
-        ],
-        image: "/images/my_projects/quran-association/mockup.png",
-        noImage: true,
+            "Attendance, finances and role-based access for the Abi Zaid Al Qayrawani Association, with WhatsApp reminders sent to parents automatically.",
+        year: 2023,
+        role: "Solo",
+        platforms: "Web",
+        stack: ["Laravel", "Filament", "WhatsApp API"],
+        cover: "calendar",
         url: "/projects/quran-association",
+        demo: "https://abi-zaid.com",
+        featured: true,
     },
-    // === OTHER PROJECTS ===
+    {
+        name: "Eisar Reserve",
+        tagline: "Room reservation system",
+        description: "Bookings, calendar views and a themeable Filament admin for managing rooms and guests.",
+        year: 2024,
+        stack: ["Laravel", "Filament"],
+        image: "/images/my_projects/eisar-reserve/mockup.jpg",
+        url: "/projects/eisar-reserve",
+        source: "https://github.com/HoceineEl/EisarReserve",
+    },
     {
         name: "Radiant Emergency Plumber",
-        description:
-            "Professional website for Manchester Plumbing Services with 24/7 emergency response. Features 7+ service pages, SEO optimization, and modern responsive design. Over 18 years of expertise showcased.",
-        tags: [
-            { name: "Vue.js", color: "green-text-gradient" },
-            { name: "Nuxt.js", color: "green-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-            { name: "Nuxt Content", color: "purple-text-gradient" },
-        ],
+        tagline: "Marketing site for a Manchester plumber",
+        description: "24/7 emergency plumbing site with seven service pages, built for local search.",
+        year: 2023,
+        stack: ["Nuxt", "Nuxt Content", "Tailwind CSS"],
         image: "/images/my_projects/rep/mockup.png",
+        url: "/projects/radiant-emergency-plumber",
         demo: "https://radiantemergencyplumber.co.uk/",
-        url: "/radiant-emergency-plumber",
-        source_code_link: "https://github.com/hoceineel/rep",
     },
     {
-        name: "Eisar Reserve – Room Reservation System",
-        description:
-            "Comprehensive room reservation system with booking management, calendar integration, and admin dashboard. Built with FilamentPHP for a powerful admin experience.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "FilamentPHP", color: "yellow-text-gradient" },
-            { name: "Livewire", color: "purple-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-        ],
-        image: "/images/my_projects/eisar-reserve/mockup.jpg",
-        url: "/eisar-reserve",
-        source_code_link: "https://github.com/HoceineEl/EisarReserve",
-    },
-    {
-        name: "SOSIPO Financial Management App",
-        description:
-            "Financial management web app for Ministry of Agriculture affiliated association. Features role-based permissions, accounting operations, and comprehensive reporting with ChartJS visualizations.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "MySQL", color: "blue-text-gradient" },
-            { name: "Bootstrap", color: "purple-text-gradient" },
-            { name: "ChartJS", color: "pink-text-gradient" },
-        ],
-        image: "/images/my_projects/sosipo/mockup.png",
-        demo: "https://youtu.be/LHKfUdVW8VA",
-        url: "/sosipo",
-        source_code_link: "https://github.com/Hzekrii/SosipoProject",
-    },
-    {
-        name: "Personal Portfolio & Blog",
-        description:
-            "Neo-Brutalism designed portfolio with 3D elements, dark/light mode, and integrated blog. Showcases expertise in Vue, Nuxt, and modern web technologies with performance optimization.",
-        tags: [
-            { name: "Vue.js", color: "green-text-gradient" },
-            { name: "Nuxt.js", color: "green-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-            { name: "Three.js", color: "pink-text-gradient" },
-        ],
-        image: "/images/my_projects/portfolio/mockup.png",
-        demo: "https://hoceine.com",
-        url: "/personal-portfolio",
-        source_code_link: "https://github.com/HoceineEl/Personal-Portfolio",
-    },
-    {
-        name: "HLS Video Streaming in LMS",
-        description:
-            "Advanced video delivery system with HLS integration, FFMPEG processing, watermarking, demo extraction, multi-bitrate encoding, and Redis caching. Multi-quality preview with Plyr player.",
-        tags: [
-            { name: "Laravel", color: "red-text-gradient" },
-            { name: "FFMPEG", color: "green-text-gradient" },
-            { name: "HLS.js", color: "yellow-text-gradient" },
-            { name: "Redis", color: "red-text-gradient" },
-        ],
+        name: "HLS video in an LMS",
+        tagline: "Adaptive streaming pipeline",
+        description: "FFmpeg processing, watermarking, demo extraction and multi-bitrate HLS with Redis-backed queues.",
+        year: 2023,
+        stack: ["Laravel", "FFmpeg", "HLS.js", "Redis"],
         image: "/images/my_projects/lms/home.jpg",
+        url: "/projects/enhancing-video-delivery-in-lms",
         demo: "https://youtu.be/5erufn_t5cc",
-        url: "/enhancing-video-delivery-in-lms",
-        source_code_link: "https://github.com/HoceineEl/LearningManagmentSystemeLaravel10",
+        source: "https://github.com/HoceineEl/LearningManagmentSystemeLaravel10",
     },
     {
-        name: "Nur Net Browser Extension",
-        description:
-            "Content guard extension that shields against distractions by blocking intensive websites and redirecting to meaningful content. Available on Chrome and Firefox.",
-        tags: [
-            { name: "JavaScript", color: "yellow-text-gradient" },
-            { name: "Chrome Extension", color: "purple-text-gradient" },
-            { name: "Firefox Extension", color: "blue-text-gradient" },
-        ],
+        name: "SOSIPO Finance",
+        tagline: "Accounting for a ministry association",
+        description: "Role-based financial management with approvals, repayments and ChartJS reporting.",
+        year: 2023,
+        stack: ["Laravel", "MySQL", "Bootstrap"],
+        image: "/images/my_projects/sosipo/mockup.png",
+        url: "/projects/sosipo",
+        source: "https://github.com/Hzekrii/SosipoProject",
+    },
+    {
+        name: "Nur Net",
+        tagline: "Content guard browser extension",
+        description: "Blocks harmful sites and redirects to something worth your time. Chrome and Firefox.",
+        year: 2023,
+        stack: ["JavaScript", "WebExtensions"],
         image: "/images/my_projects/nurnet/logo.png",
-        url: "/nur-net",
-        demo: "https://youtu.be/0HaLcNqbKCI",
-        chrome: 'https://chromewebstore.google.com/u/1/detail/nur-net-the-explicit-cont/enonjhmheggkloeodggkmcfhgppkbgai',
-        firefox: 'https://addons.mozilla.org/en-US/firefox/addon/nur-net-the-content-guard/',
-        source_code_link: "https://github.com/HoceineEl/NurNet-chrome",
+        url: "/projects/nur-net",
+        chrome: "https://chromewebstore.google.com/u/1/detail/nur-net-the-explicit-cont/enonjhmheggkloeodggkmcfhgppkbgai",
+        firefox: "https://addons.mozilla.org/en-US/firefox/addon/nur-net-the-content-guard/",
+        source: "https://github.com/HoceineEl/NurNet-chrome",
     },
     {
-        name: "Remind Me | ذكرني Extension",
-        description:
-            "Spiritual companion extension sending customizable notifications with Quranic verses, Azkar, or recitations. Stay connected with Allah throughout your day.",
-        tags: [
-            { name: "JavaScript", color: "yellow-text-gradient" },
-            { name: "Chrome Extension", color: "purple-text-gradient" },
-            { name: "Firefox Extension", color: "blue-text-gradient" },
-        ],
+        name: "Remind Me · ذكرني",
+        tagline: "Quran and azkar reminders extension",
+        description: "Gentle notifications with verses, azkar or recitations through the day.",
+        year: 2023,
+        stack: ["JavaScript", "WebExtensions"],
         image: "/images/my_projects/dakkerni/tile.jpg",
-        url: "/remind-me",
+        url: "/projects/remind-me",
         chrome: "https://chromewebstore.google.com/detail/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/lpkahcgbcaenijeaehcmaodpcacmogap",
-        firefox: 'https://addons.mozilla.org/en-US/firefox/addon/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/',
-        source_code_link: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
+        firefox: "https://addons.mozilla.org/en-US/firefox/addon/remind-me-%D8%B0%D9%83%D8%B1%D9%86%D9%8A/",
+        source: "https://github.com/HoceineEl/dekr-reminder-chrome-extention",
     },
     {
-        name: "YouTube Ad Skipper Extension",
-        description:
-            "Chrome and Firefox extension to automate YouTube ad skipping, enhancing the viewing experience with a sleek and efficient interface.",
-        tags: [
-            { name: "JavaScript", color: "yellow-text-gradient" },
-            { name: "Chrome Extension", color: "purple-text-gradient" },
-            { name: "Firefox Extension", color: "blue-text-gradient" },
-        ],
+        name: "YouTube Ad Skipper",
+        tagline: "Browser extension",
+        description: "Skips YouTube ads the moment the button appears.",
+        year: 2023,
+        stack: ["JavaScript", "WebExtensions"],
         image: "/images/my_projects/skipper/skipper.jpg",
+        url: "/projects/youtube-ad-skipper",
         chrome: "https://chromewebstore.google.com/detail/legal-youtube-ad-skipper/ceccdngldibjefbfobnkmjaempfkmeke",
-        url: "/youtube-ad-skipper",
     },
     {
-        name: "Islamic Trivia Quiz",
-        description:
-            "Engaging Islamic knowledge quiz with 50 questions, tailored results, and personalized insights into each participant's understanding of Islam.",
-        tags: [
-            { name: "JavaScript", color: "yellow-text-gradient" },
-            { name: "Tailwind CSS", color: "blue-text-gradient" },
-        ],
+        name: "Islamic Trivia",
+        tagline: "50-question knowledge quiz",
+        description: "A quiz with tailored results and insight into each answer.",
+        year: 2023,
+        stack: ["JavaScript", "Tailwind CSS"],
         image: "/images/my_projects/quiz/banner.png",
+        url: "/projects/islamic-trivia",
         demo: "https://islamictrivia.vercel.app/",
-        url: "/islamic-trivia",
-        source_code_link: "https://github.com/HoceineEl/Islamic_Quiz",
+        source: "https://github.com/HoceineEl/Islamic_Quiz",
     },
 ];
 
-const socials = [
+export const openSource = [
     {
-        name: 'Facebook',
-        url: 'https://www.facebook.com/hoceinelidrissi',
-        icon: '/images/facebook.svg'
+        name: "filament-modular-subscriptions",
+        body: "Modular subscriptions for Filament with pricing and usage calculation.",
+        url: "https://github.com/NewTags/filament-modular-subscriptions",
     },
     {
-        name: 'YouTube',
-        url: 'https://www.youtube.com/@Hoceineelidrissi2',
-        icon: '/images/youtube.svg'
+        name: "filament-usage-billing",
+        body: "Metered, modular billing for multi-tenant Filament apps.",
+        url: "https://github.com/HoceineEl/filament-usage-billing",
     },
     {
-        name: 'LinkedIn',
-        url: 'https://www.linkedin.com/in/elidrissihoceine/',
-        icon: '/images/linkedin.svg'
+        name: "laravel-modular-subscriptions",
+        body: "Subscriptions with custom modules for any Laravel app.",
+        url: "https://github.com/HoceineEl/laravel-modular-subscriptions",
     },
     {
-        name: 'Github',
-        url: 'https://github.com/hoceineel',
-        icon: '/images/github.svg'
-    }
-]
-export { socials, services, technologies, experiences, testimonials, projects, portrait, Earth, };
+        name: "filament-scroll-navigator",
+        body: "Scroll-to-top and scroll-to-bottom for long Filament pages.",
+        url: "https://github.com/HoceineEl/filament-scroll-navigator",
+    },
+];
+
+export const findProject = (path) => projects.find((project) => project.url === path);
+
+export const socials = [
+    { name: "GitHub", url: "https://github.com/hoceineel", icon: "/images/github.svg" },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/elidrissihoceine/", icon: "/images/linkedin.svg" },
+    { name: "YouTube", url: "https://www.youtube.com/@Hoceineelidrissi2", icon: "/images/youtube.svg" },
+    { name: "Facebook", url: "https://www.facebook.com/hoceinelidrissi", icon: "/images/facebook.svg" },
+];

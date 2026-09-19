@@ -1,46 +1,26 @@
-// Theme composable for dark/light mode
+export const themeBootScript = `(function(){try{var s=localStorage.getItem('theme');var d=s?s==='dark':matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.classList.toggle('dark',d)}catch(e){document.documentElement.classList.add('dark')}})()`
+
 export const useTheme = () => {
   const isDark = useState('theme-dark', () => true)
 
+  const apply = () => {
+    const root = document.documentElement
+    root.classList.add('theme-switching')
+    root.classList.toggle('dark', isDark.value)
+    requestAnimationFrame(() => requestAnimationFrame(() => root.classList.remove('theme-switching')))
+  }
+
   const toggleTheme = () => {
     isDark.value = !isDark.value
-    updateDOM()
-    saveToStorage()
-  }
-
-  const updateDOM = () => {
-    if (process.client) {
-      if (isDark.value) {
-        document.documentElement.classList.add('dark')
-      } else {
-        document.documentElement.classList.remove('dark')
-      }
-    }
-  }
-
-  const saveToStorage = () => {
-    if (process.client) {
+    apply()
+    try {
       localStorage.setItem('theme', isDark.value ? 'dark' : 'light')
-    }
+    } catch {}
   }
 
   const initTheme = () => {
-    if (process.client) {
-      // Check localStorage first
-      const saved = localStorage.getItem('theme')
-      if (saved) {
-        isDark.value = saved === 'dark'
-      } else {
-        // Default to dark mode
-        isDark.value = true
-      }
-      updateDOM()
-    }
+    isDark.value = document.documentElement.classList.contains('dark')
   }
 
-  return {
-    isDark,
-    toggleTheme,
-    initTheme
-  }
+  return { isDark, toggleTheme, initTheme }
 }
