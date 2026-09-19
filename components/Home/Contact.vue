@@ -1,38 +1,12 @@
 <script setup>
 import { profile } from "~/assets/constants";
 
-const fields = reactive({ from_name: "", email: "", message: "" });
-const status = ref("idle");
+const fields = reactive({ name: "", message: "" });
 const copied = ref(false);
 
-const statusText = computed(() => ({
-  sending: "Sending…",
-  sent: "Thanks, message received. I'll get back to you soon.",
-  error: `That didn't go through. Try again, or email ${profile.email} directly.`,
-}[status.value] || ""));
-
-const sendMail = async () => {
-  status.value = "sending";
-  try {
-    const response = await $fetch(profile.formEndpoint, {
-      method: "POST",
-      headers: { Accept: "application/json" },
-      body: {
-        name: fields.from_name,
-        email: fields.email,
-        message: fields.message,
-        _replyto: fields.email,
-        _subject: `New project enquiry from ${fields.from_name}`,
-        _template: "table",
-        _captcha: "false",
-      },
-    });
-    if (String(response?.success) !== "true") throw new Error(response?.message);
-    status.value = "sent";
-    Object.assign(fields, { from_name: "", email: "", message: "" });
-  } catch {
-    status.value = "error";
-  }
+const openWhatsApp = () => {
+  const text = `Salaam Hoceine, I'm ${fields.name.trim()}.\n\n${fields.message.trim()}`;
+  window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
 };
 
 const copyEmail = async () => {
@@ -94,18 +68,12 @@ const copyEmail = async () => {
 
       <form
         class="self-start rounded-[2rem] bg-bg p-6 text-ink shadow-[0_30px_60px_-30px_oklch(0_0_0/0.45)] sm:p-8 lg:col-span-6"
-        @submit.prevent="sendMail"
+        @submit.prevent="openWhatsApp"
       >
-        <div class="grid gap-5 sm:grid-cols-2">
-          <label class="block">
-            <span class="text-sm font-semibold">Your name</span>
-            <input v-model="fields.from_name" name="from_name" type="text" autocomplete="name" required class="field mt-2" />
-          </label>
-          <label class="block">
-            <span class="text-sm font-semibold">Email</span>
-            <input v-model="fields.email" name="email" type="email" autocomplete="email" required class="field mt-2" />
-          </label>
-        </div>
+        <label class="block">
+          <span class="text-sm font-semibold">Your name</span>
+          <input v-model="fields.name" name="name" type="text" autocomplete="name" required class="field mt-2" />
+        </label>
         <label class="mt-5 block">
           <span class="text-sm font-semibold">What are you building?</span>
           <textarea
@@ -118,18 +86,11 @@ const copyEmail = async () => {
           />
         </label>
         <div class="mt-6 flex flex-wrap items-center gap-4">
-          <button type="submit" class="btn-sun" :disabled="status === 'sending'" :aria-busy="status === 'sending'">
-            {{ status === "sending" ? "Sending…" : "Send message" }}
-            <UiIcon v-if="status !== 'sending'" name="arrow-right" />
+          <button type="submit" class="btn-sun">
+            <UiIcon name="WhatsApp" />
+            Continue on WhatsApp
           </button>
-          <p
-            class="min-h-[1.5rem] text-[0.95rem]"
-            :class="status === 'error' ? 'text-red-600 dark:text-red-400' : 'text-muted'"
-            role="status"
-            aria-live="polite"
-          >
-            {{ status === "sending" ? "" : statusText }}
-          </p>
+          <p class="text-[0.95rem] text-muted">Opens WhatsApp with your message ready to send.</p>
         </div>
       </form>
     </div>
