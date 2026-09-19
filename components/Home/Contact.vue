@@ -1,8 +1,6 @@
 <script setup>
-import emailjs from "@emailjs/browser";
 import { profile } from "~/assets/constants";
 
-const form = ref(null);
 const fields = reactive({ from_name: "", email: "", message: "" });
 const status = ref("idle");
 const copied = ref(false);
@@ -16,7 +14,20 @@ const statusText = computed(() => ({
 const sendMail = async () => {
   status.value = "sending";
   try {
-    await emailjs.sendForm("service_5arij5h", "template_4wluw72", form.value, "_673j4Vui7FOnZXwS");
+    const response = await $fetch(profile.formEndpoint, {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: {
+        name: fields.from_name,
+        email: fields.email,
+        message: fields.message,
+        _replyto: fields.email,
+        _subject: `New project enquiry from ${fields.from_name}`,
+        _template: "table",
+        _captcha: "false",
+      },
+    });
+    if (String(response?.success) !== "true") throw new Error(response?.message);
     status.value = "sent";
     Object.assign(fields, { from_name: "", email: "", message: "" });
   } catch {
@@ -82,7 +93,6 @@ const copyEmail = async () => {
       </div>
 
       <form
-        ref="form"
         class="self-start rounded-[2rem] bg-bg p-6 text-ink shadow-[0_30px_60px_-30px_oklch(0_0_0/0.45)] sm:p-8 lg:col-span-6"
         @submit.prevent="sendMail"
       >

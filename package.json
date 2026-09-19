@@ -21,7 +21,6 @@
     "sitemap": "^7.1.1"
   },
   "dependencies": {
-    "@emailjs/browser": "^3.11.0",
     "@nuxt/image": "^1.9.0",
     "@nuxtjs/sitemap": "^2.4.0",
     "@tresjs/cientos": "^3.3.0",
