@@ -73,6 +73,16 @@ onUnmounted(() => {
           </li>
         </ul>
 
+        <a
+          :href="`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent('Salaam Hoceine, ')}`"
+          target="_blank"
+          rel="noopener"
+          class="grid h-11 w-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-raised hover:text-[#25D366]"
+          aria-label="Message Hoceine on WhatsApp"
+        >
+          <UiIcon name="WhatsApp" />
+        </a>
+
         <button
           type="button"
           class="grid h-11 w-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-raised hover:text-ink"

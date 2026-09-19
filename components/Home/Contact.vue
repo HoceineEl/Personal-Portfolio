@@ -4,9 +4,22 @@ import { profile } from "~/assets/constants";
 const fields = reactive({ name: "", message: "" });
 const copied = ref(false);
 
-const openWhatsApp = () => {
-  const text = `Salaam Hoceine, I'm ${fields.name.trim()}.\n\n${fields.message.trim()}`;
+const sent = ref(false);
+
+const submit = () => {
+  const name = fields.name.trim();
+  const message = fields.message.trim();
+
+  fetch(profile.formEndpoint, {
+    method: "POST",
+    keepalive: true,
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ name, message, _subject: `New project enquiry from ${name}`, _template: "table", _captcha: "false" }),
+  }).catch(() => {});
+
+  const text = `Salaam Hoceine, I'm ${name}.\n\n${message}`;
   window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  sent.value = true;
 };
 
 const copyEmail = async () => {
@@ -68,7 +81,7 @@ const copyEmail = async () => {
 
       <form
         class="self-start rounded-[2rem] bg-bg p-6 text-ink shadow-[0_30px_60px_-30px_oklch(0_0_0/0.45)] sm:p-8 lg:col-span-6"
-        @submit.prevent="openWhatsApp"
+        @submit.prevent="submit"
       >
         <label class="block">
           <span class="text-sm font-semibold">Your name</span>
@@ -90,7 +103,9 @@ const copyEmail = async () => {
             <UiIcon name="WhatsApp" />
             Continue on WhatsApp
           </button>
-          <p class="text-[0.95rem] text-muted">Opens WhatsApp with your message ready to send.</p>
+          <p class="text-[0.95rem] text-muted" role="status" aria-live="polite">
+            {{ sent ? "Got it. Press send in WhatsApp and I'll reply there." : "Opens WhatsApp with your message ready to send." }}
+          </p>
         </div>
       </form>
     </div>

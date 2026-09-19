@@ -6,6 +6,7 @@ export const profile = {
     role: "Full-stack developer",
     email: "contact@hoceine.com",
     whatsapp: "212697361188",
+    formEndpoint: "https://formsubmit.co/ajax/contact@hoceine.com",
     location: "Morocco",
     timezone: "Africa/Casablanca",
     photo: "/images/hoceine.jpeg",
