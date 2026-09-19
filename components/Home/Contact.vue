@@ -3,6 +3,7 @@ import { profile } from "~/assets/constants";
 
 const fields = reactive({ name: "", message: "" });
 const copied = ref(false);
+const whatsappNumber = `+${profile.whatsapp.replace(/^(\d{3})(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, "$1 $2 $3 $4 $5 $6")}`;
 
 const sent = ref(false);
 
@@ -66,6 +67,16 @@ const copyEmail = async () => {
             <span aria-live="polite">{{ copied ? "Copied" : "Copy" }}</span>
           </button>
         </div>
+
+        <a
+          :href="`https://wa.me/${profile.whatsapp}`"
+          target="_blank"
+          rel="noopener"
+          class="mt-5 inline-flex items-center gap-3 text-xl font-bold transition-opacity hover:opacity-70 sm:text-2xl"
+        >
+          <UiIcon name="WhatsApp" />
+          <span class="tabular-nums">{{ whatsappNumber }}</span>
+        </a>
 
         <dl class="mt-12 grid max-w-md grid-cols-2 gap-6 text-[0.95rem]">
           <div>
