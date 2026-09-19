@@ -5,7 +5,7 @@ export const profile = {
     firstName: "Hoceine",
     role: "Full-stack developer",
     email: "contact@hoceine.com",
-    formEndpoint: "https://formsubmit.co/ajax/majdhocein@hotmail.com",
+    formEndpoint: "https://formsubmit.co/ajax/contact@hoceine.com",
     location: "Morocco",
     timezone: "Africa/Casablanca",
     photo: "/images/hoceine.jpeg",
