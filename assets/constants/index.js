@@ -185,6 +185,27 @@ export const projects = [
         featured: true,
     },
     {
+        name: "Ala Khutah",
+        tagline: "Saudi national project on the Hijra trail",
+        description:
+            "The recruitment and workforce platform behind Ala Khutah, a Saudi national experience that retraces the Prophet's Hijra over 470 km, with seven overnight stations over six months. Built for a project backed by the Royal Commission for Makkah City and Holy Sites, the Saudi Tourism Authority and Sela.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Filament", "Arabic UI"],
+        cover: "table",
+        image: "/images/my_projects/alakhutah/cover.webp",
+        screenshot: true,
+        url: "/projects/alakhutah",
+        demo: "https://jobs-app.alakhutah.com",
+        highlights: [
+            "Backed by the Royal Commission for Makkah City and Holy Sites",
+            "470 km trail, 7 stations, 41 historical sites",
+            "Hiring by location and competency, fully in Arabic",
+        ],
+        featured: true,
+    },
+    {
         name: "SmartShop",
         tagline: "Multi-vendor e-commerce platform",
         description:
@@ -266,22 +287,6 @@ export const projects = [
             "Google Gemini image generation",
             "Installable as a PWA",
         ],
-        featured: true,
-    },
-    {
-        name: "Ala Khutah",
-        tagline: "Recruitment for a 470 km Hijra trail",
-        description:
-            "Jobs portal and workforce management for a historical Hijra route in Saudi Arabia: seven overnight stations over six months, with geographic filtering and competency scoring.",
-        year: 2024,
-        role: "Full stack",
-        platforms: "Web",
-        stack: ["Laravel", "Filament", "Arabic UI"],
-        cover: "table",
-        image: "/images/my_projects/alakhutah/cover.webp",
-        screenshot: true,
-        url: "/projects/alakhutah",
-        demo: "https://jobs-app.alakhutah.com",
         featured: true,
     },
     {
