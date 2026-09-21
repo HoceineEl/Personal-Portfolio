@@ -1,5 +1,5 @@
 <template>
-  <div class="img-cont" ref="imageContainer">
+  <span class="img-cont" ref="imageContainer">
     <NuxtImg
       v-if="!imageType"
       :src="text"
@@ -19,7 +19,7 @@
       @click="isMobile ? null : toggleZoom()"
       :class="{ zoomed: isZoomed }"
     />
-  </div>
+  </span>
 </template>
 
 <script setup>
@@ -51,6 +51,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .img-cont {
+  display: block;
   position: relative;
   cursor: zoom-in;
 }
