@@ -175,6 +175,8 @@ export const projects = [
         platforms: "Web",
         stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
         cover: "store",
+        image: "/images/my_projects/smartshop/cover.webp",
+        screenshot: true,
         url: "/projects/smartshop",
         demo: "https://smartshop.ps",
         highlights: [
@@ -212,6 +214,8 @@ export const projects = [
         platforms: "Web",
         stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
         cover: "calendar",
+        image: "/images/my_projects/mediano/cover.webp",
+        screenshot: true,
         url: "/projects/mediano",
         highlights: [
             "A branded space per academy",
@@ -230,6 +234,11 @@ export const projects = [
         platforms: "Installable web app",
         stack: ["Laravel 13", "React 19", "Filament 5", "Web Push"],
         cover: "voice",
+        phones: [
+            { light: "/images/my_projects/nokhbat-alhoffaz/today.webp", dark: "/images/my_projects/nokhbat-alhoffaz/today-dark.webp", alt: "A student's day: today's portion and the other circles" },
+            { light: "/images/my_projects/nokhbat-alhoffaz/mushaf.webp", dark: "/images/my_projects/nokhbat-alhoffaz/mushaf.webp", alt: "Today's portion on a Tajweed mushaf page, with the recitation player" },
+            { light: "/images/my_projects/nokhbat-alhoffaz/teacher.webp", dark: "/images/my_projects/nokhbat-alhoffaz/teacher-dark.webp", alt: "Teacher dashboard with students, replies and circles" },
+        ],
         url: "/projects/nokhbat-alhoffaz",
         highlights: [
             "Voice recitations and voice replies",

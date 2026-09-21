@@ -2,8 +2,7 @@
 title: Mediano – Sports Academies Management SaaS
 description: Multi-tenant SaaS for sports academies with unique branding, subscription management, attendance tracking, and sales.
 tags: [Laravel, Livewire, Alpine.js, FilamentPHP, Multi-tenant, SaaS]
-image: "/images/my_projects/mediano/mockup.png"
-noImage: true
+image: "/images/my_projects/mediano/cover.webp"
 createdAt: 2024-03-01T00:00:00.000Z
 updatedAt: 2024-03-01T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"

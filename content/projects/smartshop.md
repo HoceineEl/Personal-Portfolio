@@ -2,8 +2,7 @@
 title: SmartShop – Multi-Tenant E-Commerce Platform
 description: Cloud-based e-commerce SaaS with vendor stores, payment integration, shipping logistics, and AI-powered business insights.
 tags: [Laravel, Livewire, FilamentPHP, Multi-tenant, E-commerce, SaaS]
-image: "/images/my_projects/smartshop/mockup.png"
-noImage: true
+image: "/images/my_projects/smartshop/cover.webp"
 createdAt: 2024-04-01T00:00:00.000Z
 updatedAt: 2024-04-01T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"

@@ -13,7 +13,22 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
 
 <template>
   <div class="cover relative isolate aspect-[3/2] overflow-hidden rounded-[1.75rem] bg-raised">
-    <template v-if="project.image && project.screenshot">
+    <template v-if="project.phones">
+      <div class="cover-light blinds absolute inset-0 -z-10" aria-hidden="true" />
+      <div class="cover-window absolute inset-x-0 top-[10%] flex items-start justify-center gap-[3%]">
+        <figure
+          v-for="(phone, index) in project.phones"
+          :key="phone.light"
+          class="w-[27%] overflow-hidden rounded-[1.4rem] bg-ink p-[0.35rem] shadow-[0_24px_40px_oklch(0_0_0/0.3)]"
+          :class="index !== 1 && 'mt-[8%]'"
+        >
+          <NuxtImg :src="phone.light" :alt="phone.alt" width="300" height="650" class="w-full rounded-[1.1rem] dark:hidden" sizes="xs:30vw md:15vw xl:200px" :loading="eager ? 'eager' : 'lazy'" />
+          <NuxtImg :src="phone.dark" :alt="phone.alt" width="300" height="650" class="hidden w-full rounded-[1.1rem] dark:block" sizes="xs:30vw md:15vw xl:200px" loading="lazy" />
+        </figure>
+      </div>
+    </template>
+
+    <template v-else-if="project.image && project.screenshot">
       <div class="cover-light blinds absolute inset-0 -z-10" aria-hidden="true" />
       <div class="cover-window absolute bottom-0 left-[8%] right-0 top-[12%] flex flex-col overflow-hidden rounded-tl-[14px] bg-bg shadow-[0_24px_40px_oklch(0_0_0/0.28)]">
         <div class="flex h-6 shrink-0 items-center gap-1.5 bg-ink/5 px-4 sm:h-7" aria-hidden="true">
