@@ -4,9 +4,9 @@ import { SITE_URL, profile, projects } from "~/assets/constants";
 useHead({ titleTemplate: null });
 
 usePageSeo({
-  title: `${profile.name} · Full-stack web developer`,
+  title: `Laravel & Filament Developer for Hire · ${profile.name}`,
   description:
-    "Hoceine El Idrissi is a full-stack web developer in Morocco building web platforms, installable web apps and Filament admin panels. See selected work, services and writing.",
+    "Freelance Laravel and Filament developer in Morocco. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
   path: "/",
   type: "profile",
 });

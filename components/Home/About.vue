@@ -13,7 +13,8 @@ const groups = [
     <div class="grid gap-14 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-6">
         <h2 id="about-title" class="wide text-display-lg font-black">Salaam, I'm Hoceine</h2>
-        <div class="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-muted">
+        <p class="mt-4 text-lg font-medium text-ink/80">Full-stack Laravel developer in Morocco, working with teams in Saudi Arabia and the UK.</p>
+        <div class="mt-6 max-w-xl space-y-5 text-lg leading-relaxed text-muted">
           <p>
             I started with C# desktop apps during an internship in 2022, worked nights as a web developer while
             finishing my studies, and have been building Laravel products full time ever since.

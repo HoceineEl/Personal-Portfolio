@@ -29,7 +29,7 @@ onUnmounted(() => clearInterval(timer));
             <span class="pulse absolute inline-flex h-full w-full rounded-full bg-live" />
             <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-live" />
           </span>
-          Taking on new projects
+          Freelance Laravel &amp; Filament developer · Taking on new projects
         </p>
 
         <h1
@@ -42,7 +42,7 @@ onUnmounted(() => clearInterval(timer));
         </h1>
 
         <p class="rise mt-8 max-w-[34rem] text-lg leading-relaxed text-muted sm:text-xl" style="--d: 420ms">
-          I'm <strong class="font-semibold text-ink">{{ profile.name }}</strong>, a full-stack developer in Morocco.
+          I'm <strong class="font-semibold text-ink">{{ profile.name }}</strong>, a freelance Laravel and Filament developer in Morocco.
           Web platforms, installable web apps and admin panels that teams in Saudi Arabia, the UK
           and Palestine rely on, often in Arabic.
         </p>

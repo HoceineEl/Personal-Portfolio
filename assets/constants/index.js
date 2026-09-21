@@ -23,19 +23,19 @@ export const navLinks = [
 
 export const services = [
     {
-        title: "Web apps and platforms",
+        title: "Laravel web apps and platforms",
         body: "From a first version you can put in front of users to a platform with tenants, roles, billing and four languages. Laravel on the back, Livewire, React or Vue on the front, whichever fits.",
     },
     {
-        title: "Installable web apps (PWAs)",
+        title: "Laravel PWA development",
         body: "Phone-first web apps that install to the home screen, work offline for the basics and send push notifications, without an app store in the way. Nokhbat Alhoffaz and WiserPocket both work this way.",
     },
     {
-        title: "Admin panels and Filament plugins",
+        title: "Filament admin panel development",
         body: "Panels your operations team actually enjoys using. Custom resources, dashboards, bulk actions, and plugins built to the standard of FilamentCraft.",
     },
     {
-        title: "Arabic-first and RTL products",
+        title: "Arabic and RTL web apps",
         body: "Right-to-left interfaces, bilingual content and Arabic copy that reads naturally, shipped for clients in Saudi Arabia, Morocco and across the region.",
     },
     {

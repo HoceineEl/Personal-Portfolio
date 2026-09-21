@@ -7,7 +7,7 @@ import { process, services } from "~/assets/constants";
     <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-5">
         <div class="lg:sticky lg:top-32">
-          <h2 id="services-title" class="wide text-display-lg font-black">What I can build for you</h2>
+          <h2 id="services-title" class="wide text-display-lg font-black">Laravel &amp; Filament services</h2>
           <p class="mt-6 max-w-md text-lg leading-relaxed text-muted">
             Freelance or embedded in your team, remote from Morocco, overlapping working hours with Europe and the
             Gulf.

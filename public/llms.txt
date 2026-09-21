@@ -1,6 +1,6 @@
 # Hoceine El Idrissi
 
-> Full-stack web developer based in Morocco. Builds web platforms with Laravel (Livewire, Filament, Inertia with React or Vue), installable web apps (PWAs), and Filament admin panels and plugins. Many products are Arabic-first with full right-to-left support. Available for freelance and contract work: contact@hoceine.com
+> Freelance Laravel & Filament developer based in Morocco. Builds web platforms with Laravel (Livewire, Filament, Inertia with React or Vue), installable web apps (PWAs), and Filament admin panels and plugins. Many products are Arabic-first with full right-to-left support. Available for freelance and contract work: contact@hoceine.com
 
 ## Selected work
 

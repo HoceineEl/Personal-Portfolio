@@ -11,7 +11,7 @@ const layout = ["md:col-span-7", "md:col-span-5 md:mt-40", "md:col-span-5", "md:
 <template>
   <section id="work" class="shell py-20 md:py-32" aria-labelledby="work-title">
     <div class="grid gap-6 md:grid-cols-12 md:items-end">
-      <h2 id="work-title" class="wide text-display-lg font-black md:col-span-7">Selected work</h2>
+      <h2 id="work-title" class="wide text-display-lg font-black md:col-span-7">Selected Laravel work</h2>
       <p class="max-w-md text-lg text-muted md:col-span-5 md:justify-self-end">
         Web platforms, installable web apps and a commercial Filament plugin, in production since 2023 and several of them in
         Arabic. A few up close:
