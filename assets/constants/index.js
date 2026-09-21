@@ -3,7 +3,7 @@ export const SITE_URL = "https://hoceine.com";
 export const profile = {
     name: "Hoceine El Idrissi",
     firstName: "Hoceine",
-    role: "Full-stack developer",
+    role: "Full-stack web developer",
     email: "contact@hoceine.com",
     whatsapp: "212697361188",
     formEndpoint: "https://formsubmit.co/ajax/contact@hoceine.com",
@@ -12,7 +12,7 @@ export const profile = {
     photo: "/images/hoceine.jpeg",
     twitter: "@HoceineElidrisi",
     description:
-        "Hoceine El Idrissi is a full-stack developer in Morocco building web platforms, native iOS and Android apps with NativePHP, and Filament admin panels, often in Arabic, for teams in Saudi Arabia, the UK and beyond.",
+        "Hoceine El Idrissi is a full-stack web developer in Morocco building web platforms, installable web apps (PWAs) and Filament admin panels, often in Arabic, for teams in Saudi Arabia, the UK and beyond.",
 };
 
 export const navLinks = [
@@ -28,8 +28,8 @@ export const services = [
         body: "From a first version you can put in front of users to a platform with tenants, roles, billing and four languages. Laravel on the back, Livewire, React or Vue on the front, whichever fits.",
     },
     {
-        title: "Mobile apps for iOS and Android",
-        body: "Native apps built with NativePHP that share the Laravel codebase you already have: camera, microphone, push notifications, offline screens. WiserPocket ships this way.",
+        title: "Installable web apps (PWAs)",
+        body: "Phone-first web apps that install to the home screen, work offline for the basics and send push notifications, without an app store in the way. Nokhbat Alhoffaz and WiserPocket both work this way.",
     },
     {
         title: "Admin panels and Filament plugins",
@@ -73,7 +73,7 @@ export const technologies = [
     { name: "TypeScript", icon: "/images/tech/ts.svg", group: "also" },
     { name: "MySQL", icon: "/images/tech/mysql.svg", group: "also" },
     { name: "React", icon: "/images/tech/react.svg", group: "also" },
-    { name: "NativePHP", icon: null, group: "also" },
+    { name: "PWA", icon: null, group: "also" },
     { name: "Pest", icon: null, group: "also" },
     { name: "Laravel Forge", icon: "/images/tech/forge.svg", group: "tools" },
     { name: "GitHub", icon: "/images/tech/github.svg", group: "tools" },
@@ -142,19 +142,19 @@ export const projects = [
     },
     {
         name: "WiserPocket",
-        tagline: "AI finance tracker, on web, iOS and Android",
+        tagline: "AI finance tracker you can talk to",
         description:
-            "Log spending by talking or by snapping a receipt, then ask an AI assistant about your own money. Budgets, goals, debts and recurring transactions in four languages, with a native mobile app built on NativePHP.",
+            "Log spending by talking or by snapping a receipt, then ask an AI assistant about your own money. Budgets, goals, debts and recurring transactions in four languages, installable on any phone.",
         year: 2025,
         role: "Solo",
-        platforms: "Web, iOS, Android",
-        stack: ["Laravel", "React", "NativePHP", "Gemini"],
+        platforms: "Web, PWA",
+        stack: ["Laravel", "React", "Inertia", "Gemini"],
         cover: "phone",
         url: "/projects/wiserpocket",
         demo: "https://wiserpocket.com",
         highlights: [
             "Voice and receipt input",
-            "Native iOS and Android with NativePHP",
+            "Installable, with an AI assistant that has memory",
             "English, Arabic, French and Spanish",
         ],
         featured: true,
@@ -234,20 +234,20 @@ export const projects = [
     },
     {
         name: "DecorCopilot",
-        tagline: "AI interior design, web and mobile",
+        tagline: "AI interior design",
         description:
-            "Photograph a room and restyle it in 30+ design styles with Google Gemini. Visual search, floor planning and suggestions you can act on, as a PWA and a NativePHP mobile app.",
+            "Photograph a room and restyle it in 30+ design styles with Google Gemini. Visual search, floor planning and suggestions you can act on, as an installable web app.",
         year: 2024,
         role: "Full stack",
-        platforms: "Web, mobile",
-        stack: ["Laravel", "Inertia", "Gemini", "NativePHP"],
+        platforms: "Web, PWA",
+        stack: ["Laravel", "Inertia", "Gemini", "PWA"],
         cover: "gallery",
         url: "/projects/decorcopilot",
         demo: "https://decorcopilot.com",
         highlights: [
             "30+ design styles",
             "Google Gemini image generation",
-            "PWA and NativePHP mobile app",
+            "Installable as a PWA",
         ],
         featured: true,
     },

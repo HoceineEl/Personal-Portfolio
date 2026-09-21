@@ -43,7 +43,7 @@ onUnmounted(() => clearInterval(timer));
 
         <p class="rise mt-8 max-w-[34rem] text-lg leading-relaxed text-muted sm:text-xl" style="--d: 420ms">
           I'm <strong class="font-semibold text-ink">{{ profile.name }}</strong>, a full-stack developer in Morocco.
-          Web platforms, native iOS and Android apps with NativePHP, and admin panels that teams in Saudi Arabia, the UK
+          Web platforms, installable web apps and admin panels that teams in Saudi Arabia, the UK
           and Palestine rely on, often in Arabic.
         </p>
 

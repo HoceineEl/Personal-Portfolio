@@ -21,10 +21,10 @@ const groups = [
           <p>
             Laravel is home. On top of it I reach for whatever the product needs:
             <strong class="font-semibold text-ink">Livewire and Filament</strong> for admin-heavy platforms,
-            <strong class="font-semibold text-ink">React or Vue</strong> for rich interfaces, and
-            <strong class="font-semibold text-ink">NativePHP</strong> when the app belongs on a phone. That is how a
-            finance tracker ends up on the web, iOS and Android from one codebase, and a Hajj platform ships with six
-            separate panels without turning to mud.
+            <strong class="font-semibold text-ink">React or Vue</strong> for rich interfaces, and a
+            <strong class="font-semibold text-ink">PWA</strong> when people should keep it on their phone. That is how
+            a Quran circles app ends up on students' home screens, and a Hajj platform ships with six separate panels
+            without turning to mud.
           </p>
           <p>
             I care about the parts nobody sees in a demo: tenancy boundaries, queues that recover, tests that catch the

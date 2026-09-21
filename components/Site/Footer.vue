@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
       <div>
         <p class="wide text-2xl font-extrabold tracking-tight">{{ profile.name }}</p>
         <p class="mt-2 max-w-md text-muted">
-          {{ profile.role }} in {{ profile.location }}. Building web and mobile apps with Laravel, and writing
+          {{ profile.role }} in {{ profile.location }}. Building web apps with Laravel, and writing
           about how.
         </p>
         <a :href="`mailto:${profile.email}`" class="link mt-5 inline-block font-medium">{{ profile.email }}</a>

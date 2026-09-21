@@ -4,9 +4,9 @@ import { SITE_URL, profile, projects } from "~/assets/constants";
 useHead({ titleTemplate: null });
 
 usePageSeo({
-  title: `${profile.name} · Full-stack developer, web and mobile`,
+  title: `${profile.name} · Full-stack web developer`,
   description:
-    "Hoceine El Idrissi is a full-stack developer in Morocco building web platforms, native iOS and Android apps with NativePHP, and Filament admin panels. See selected work, services and writing.",
+    "Hoceine El Idrissi is a full-stack web developer in Morocco building web platforms, installable web apps and Filament admin panels. See selected work, services and writing.",
   path: "/",
   type: "profile",
 });

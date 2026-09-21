@@ -156,7 +156,7 @@ useJsonLd([
           <div>
             <p class="font-semibold">Written by {{ profile.name }}</p>
             <p class="mt-2 leading-relaxed text-muted">
-              Full-stack developer in Morocco building web and mobile products with Laravel, Filament and Livewire.
+              Full-stack web developer in Morocco building products with Laravel, Filament and Livewire.
               If you need someone who has already solved this kind of problem,
               <NuxtLink to="/#contact" class="link font-medium text-ink">let's talk</NuxtLink>.
             </p>

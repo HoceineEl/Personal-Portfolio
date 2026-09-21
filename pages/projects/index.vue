@@ -6,7 +6,7 @@ const others = projects.filter((project) => !project.featured);
 
 usePageSeo({
   title: "Projects",
-  description: `${projects.length} projects by Hoceine El Idrissi: web platforms, admin panels, mobile apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue.`,
+  description: `${projects.length} projects by Hoceine El Idrissi: web platforms, admin panels, installable web apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue.`,
   path: "/projects",
 });
 
