@@ -165,6 +165,26 @@ export const projects = [
         featured: true,
     },
     {
+        name: "Mediano",
+        tagline: "Sports academy management",
+        description:
+            "One platform, many sports academies, each with its own branding, subscription and data. Training sessions, attendance, events, tournaments and merchandise sales in one place, evolving continuously since 2024.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
+        cover: "calendar",
+        image: "/images/my_projects/mediano/cover.webp",
+        screenshot: true,
+        url: "/projects/mediano",
+        highlights: [
+            "A branded space per academy",
+            "3,400+ commits since mid-2024",
+            "Kept current up to Laravel 13 and Filament 5",
+        ],
+        featured: true,
+    },
+    {
         name: "SmartShop",
         tagline: "Multi-vendor e-commerce platform",
         description:
@@ -200,26 +220,6 @@ export const projects = [
             "Six role-based panels",
             "Pilgrim registration to completion",
             "Built for Ashraqat Company",
-        ],
-        featured: true,
-    },
-    {
-        name: "Mediano",
-        tagline: "Sports academy management",
-        description:
-            "One platform, many sports academies, each with its own branding, subscription and data. Training sessions, attendance, events, tournaments and merchandise sales in one place, evolving continuously since 2024.",
-        year: 2024,
-        role: "Full stack",
-        platforms: "Web",
-        stack: ["Laravel", "Livewire", "Filament", "Multi-tenant"],
-        cover: "calendar",
-        image: "/images/my_projects/mediano/cover.webp",
-        screenshot: true,
-        url: "/projects/mediano",
-        highlights: [
-            "A branded space per academy",
-            "3,400+ commits since mid-2024",
-            "Kept current up to Laravel 13 and Filament 5",
         ],
         featured: true,
     },

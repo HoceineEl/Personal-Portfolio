@@ -6,9 +6,9 @@
 
 - [FilamentCraft](https://hoceine.com/projects/filamentcraft): Commercial Shopify-style visual website builder for Filament 4 and 5 (2026, founder).
 - [WiserPocket](https://hoceine.com/projects/wiserpocket): AI finance tracker with voice and receipt input (2025).
+- [Mediano](https://hoceine.com/projects/mediano): Multi-tenant sports academy management, 3,400+ commits since 2024 (2024).
 - [SmartShop](https://hoceine.com/projects/smartshop): Multi-vendor e-commerce platform with payments, shipping and point of sale (2024).
 - [Adiaf](https://hoceine.com/projects/adiaf): Hajj operations platform with six role-based panels, built for Ashraqat Company (2024).
-- [Mediano](https://hoceine.com/projects/mediano): Multi-tenant sports academy management, 3,400+ commits since 2024 (2024).
 - [Nokhbat Alhoffaz](https://hoceine.com/projects/nokhbat-alhoffaz): Installable app for Quran memorisation and book-reading circles with voice recitations (2026).
 - [DecorCopilot](https://hoceine.com/projects/decorcopilot): AI interior design with Google Gemini (2024).
 - [All projects](https://hoceine.com/projects)
