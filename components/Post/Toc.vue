@@ -1,4 +1,5 @@
 <script setup>
+const { t } = useI18n();
 const props = defineProps({
   links: { type: Array, default: () => [] },
 });
@@ -26,14 +27,14 @@ onUnmounted(() => observer?.disconnect());
 </script>
 
 <template>
-  <nav v-if="links.length" aria-label="On this page">
-    <p class="text-sm font-semibold">On this page</p>
-    <ul class="mt-4 space-y-1 border-l border-line/15 text-[0.9rem]">
+  <nav v-if="links.length" :aria-label="t('post.onThisPage')">
+    <p class="text-sm font-semibold">{{ t("post.onThisPage") }}</p>
+    <ul class="mt-4 space-y-1 border-s border-line/15 text-[0.9rem]">
       <template v-for="link in links" :key="link.id">
         <li>
           <a
             :href="`#${link.id}`"
-            class="-ml-px block border-l py-1.5 pl-4 leading-snug transition-colors"
+            class="-ms-px block border-s py-1.5 ps-4 leading-snug transition-colors"
             :class="active === link.id ? 'border-sun font-medium text-ink' : 'border-transparent text-muted hover:text-ink'"
           >
             {{ link.text }}
@@ -42,7 +43,7 @@ onUnmounted(() => observer?.disconnect());
         <li v-for="child in link.children || []" :key="child.id">
           <a
             :href="`#${child.id}`"
-            class="-ml-px block border-l py-1 pl-7 text-[0.85rem] leading-snug transition-colors"
+            class="-ms-px block border-s py-1 ps-7 text-[0.85rem] leading-snug transition-colors"
             :class="active === child.id ? 'border-sun text-ink' : 'border-transparent text-muted hover:text-ink'"
           >
             {{ child.text }}

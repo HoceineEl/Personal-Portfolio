@@ -230,7 +230,7 @@
 
 .nuxt-content ul,
 .nuxt-content ol {
-  @apply space-y-2 pl-6;
+  @apply space-y-2 ps-6;
 }
 
 .nuxt-content ul {
@@ -295,6 +295,16 @@ pre.shiki {
   background: oklch(0.2 0.02 270) !important;
   color: oklch(0.9 0.01 270);
   tab-size: 2;
+}
+
+.nuxt-content pre,
+.nuxt-content :not(pre) > code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.nuxt-content pre {
+  text-align: left;
 }
 
 .nuxt-content pre code {

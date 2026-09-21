@@ -73,7 +73,7 @@ const groups = ["core", "also", "tools"];
           <li v-for="item in experiences" :key="item.company_name + item.date" class="reveal border-b border-line/15 py-6">
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
               <p class="text-lg font-semibold">
-                <NuxtLink v-if="item.url" :to="item.url" class="link">{{ item.company_name }}</NuxtLink>
+                <NuxtLink v-if="item.url" :to="localePath(item.url)" class="link">{{ item.company_name }}</NuxtLink>
                 <template v-else>{{ item.company_name }}</template>
               </p>
               <p class="font-mono text-sm tabular-nums text-muted" dir="auto">{{ item.date }}</p>

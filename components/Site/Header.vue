@@ -10,7 +10,7 @@ const route = useRoute();
 const menuOpen = ref(false);
 const scrolled = ref(false);
 
-const isActive = (link) => link.to.startsWith("/blog") && route.path.startsWith("/blog");
+const isActive = (link) => link.to.endsWith("/blog") && /(^|\/)blog(\/|$)/.test(route.path);
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 24;

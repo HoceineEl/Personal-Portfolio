@@ -1,13 +1,16 @@
 <script setup>
-const { t } = useI18n();
-const { data } = await useAsyncData("home-writing", async () => {
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const { blogCollection } = useContentLocale();
+const { data } = await useAsyncData(`home-writing-${locale.value}`, async () => {
+  const collection = blogCollection.value;
   const [posts, count] = await Promise.all([
-    queryCollection("blog")
+    queryCollection(collection)
       .select("title", "path", "description", "createdAt", "tags", "minutes")
       .order("createdAt", "DESC")
       .limit(5)
       .all(),
-    queryCollection("blog").count(),
+    queryCollection(collection).count(),
   ]);
   return { posts, count };
 });
@@ -22,11 +25,11 @@ const { data } = await useAsyncData("home-writing", async () => {
       </p>
     </div>
 
-    <div class="mt-12 border-t border-line/15" lang="en" dir="ltr">
+    <div class="mt-12 border-t border-line/15">
       <PostRow v-for="post in data?.posts" :key="post.path" :post="post" />
     </div>
 
-    <NuxtLink to="/blog" class="btn-ghost group mt-10">
+    <NuxtLink :to="localePath('/blog')" class="btn-ghost group mt-10">
       {{ t("writing.all") }}
       <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
     </NuxtLink>

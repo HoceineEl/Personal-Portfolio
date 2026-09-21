@@ -2,39 +2,39 @@ import { SitemapStream, streamToPromise } from 'sitemap'
 
 const BASE_URL = 'https://hoceine.com'
 
-const bilingual = (path: string) => [
-  { lang: 'en', url: `${BASE_URL}${path || '/'}` },
-  { lang: 'ar', url: `${BASE_URL}/ar${path}` },
-  { lang: 'x-default', url: `${BASE_URL}${path || '/'}` },
-]
+const alternates = (path: string, hasArabic = true) =>
+  hasArabic
+    ? [
+        { lang: 'en', url: `${BASE_URL}${path || '/'}` },
+        { lang: 'ar', url: `${BASE_URL}/ar${path}` },
+        { lang: 'x-default', url: `${BASE_URL}${path || '/'}` },
+      ]
+    : []
 
 export default defineEventHandler(async (event) => {
   const sitemap = new SitemapStream({ hostname: BASE_URL })
   const now = new Date()
 
-  for (const path of ['', '/projects']) {
-    const links = bilingual(path)
+  const [blog, projects, blogAr, projectsAr] = await Promise.all(
+    (['blog', 'projects', 'blog_ar', 'projects_ar'] as const).map((collection) =>
+      queryCollection(event, collection).select('path', 'createdAt', 'updatedAt').all()
+    )
+  )
+  const arabicPaths = new Set([...blogAr, ...projectsAr].map((doc) => doc.path.replace(/^\/ar/, '')))
+
+  for (const path of ['', '/projects', '/blog']) {
+    const links = alternates(path)
     sitemap.write({ url: path || '/', changefreq: 'weekly', priority: 1, lastmod: now, links })
     sitemap.write({ url: `/ar${path}`, changefreq: 'weekly', priority: 0.9, lastmod: now, links })
   }
 
-  sitemap.write({ url: '/blog', changefreq: 'weekly', priority: 0.9, lastmod: now })
-
-  const docs = (
-    await Promise.all(
-      (['blog', 'projects'] as const).map((collection) =>
-        queryCollection(event, collection).select('path', 'createdAt', 'updatedAt').all()
-      )
-    )
-  ).flat()
-
-  for (const doc of docs) {
-    sitemap.write({
-      url: doc.path,
-      changefreq: 'monthly',
-      priority: 0.8,
-      lastmod: doc.updatedAt || doc.createdAt || now,
-    })
+  for (const doc of [...blog, ...projects]) {
+    const links = alternates(doc.path, arabicPaths.has(doc.path))
+    const lastmod = doc.updatedAt || doc.createdAt || now
+    sitemap.write({ url: doc.path, changefreq: 'monthly', priority: 0.8, lastmod, links })
+    if (arabicPaths.has(doc.path)) {
+      sitemap.write({ url: `/ar${doc.path}`, changefreq: 'monthly', priority: 0.7, lastmod, links })
+    }
   }
 
   sitemap.end()

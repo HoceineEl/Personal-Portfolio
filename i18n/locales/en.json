@@ -102,5 +102,46 @@
     "homeDescription": "Freelance Laravel and Filament developer in Morocco. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
     "projectsTitle": "Projects",
     "projectsDescription": "{count} projects by Hoceine El Idrissi: web platforms, admin panels, installable web apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue."
+  },
+  "blog": {
+    "title": "Writing",
+    "intro": "Long, practical guides on Laravel, Filament and Livewire, written from the products I build. {count} so far.",
+    "latest": "Latest · {date}",
+    "read": "Read it",
+    "everything": "Everything",
+    "empty": "Nothing under this topic yet.",
+    "newer": "Newer",
+    "older": "Older",
+    "page": "Page {page} of {total}",
+    "pagination": "Pagination",
+    "seoTitle": "Writing on Laravel, Filament and Livewire",
+    "seoDescription": "{count} practical articles by Hoceine El Idrissi on Laravel, FilamentPHP, Livewire, Pest and building real products with the TALL stack."
+  },
+  "post": {
+    "breadcrumb": "Breadcrumb",
+    "updated": "Updated {date}",
+    "minutes": "{count} min read",
+    "onThisPage": "On this page",
+    "topics": "Topics",
+    "share": "Share",
+    "writtenBy": "Written by {name}",
+    "authorBio": "Full-stack web developer in Morocco building products with Laravel, Filament and Livewire. If you need someone who has already solved this kind of problem,",
+    "talk": "let's talk",
+    "previous": "Previous",
+    "next": "Next",
+    "more": "More articles",
+    "keepReading": "Keep reading",
+    "home": "Home"
+  },
+  "project": {
+    "year": "Year",
+    "role": "Role",
+    "builtWith": "Built with",
+    "live": "Visit the live site",
+    "demo": "Watch the demo",
+    "chrome": "Chrome Web Store",
+    "firefox": "Firefox Add-ons",
+    "source": "Source code",
+    "next": "Next project"
   }
 }

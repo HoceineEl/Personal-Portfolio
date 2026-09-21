@@ -1,17 +1,18 @@
 <script setup>
-definePageMeta({ i18n: { locales: ["en"] } });
-
-import { profile } from "~/assets/constants";
-
 const route = useRoute();
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const { profile, section } = useSiteData();
+const { blogCollection } = useContentLocale();
 const path = route.path.replace(/\/$/, "");
 const fields = ["title", "path", "description", "createdAt", "tags", "minutes"];
 
 const { data } = await useAsyncData(`post-${path}`, async () => {
+  const collection = blogCollection.value;
   const [post, surround, pool] = await Promise.all([
-    queryCollection("blog").path(path).first(),
-    queryCollectionItemSurroundings("blog", path, { fields }).order("createdAt", "DESC"),
-    queryCollection("blog").select(...fields).where("path", "<>", path).all(),
+    queryCollection(collection).path(path).first(),
+    queryCollectionItemSurroundings(collection, path, { fields }).order("createdAt", "DESC"),
+    queryCollection(collection).select(...fields).where("path", "<>", path).all(),
   ]);
   return { post, surround, pool };
 });
@@ -33,11 +34,13 @@ const related = computed(() => {
     .map(({ item }) => item);
 });
 
+const blogPath = localePath("/blog");
 const primaryTopic = post.value.tags?.[0];
+const formatDate = (date) => useFormatDate(date, "long", locale.value);
 const updated = post.value.updatedAt && post.value.updatedAt.slice(0, 10) !== post.value.createdAt?.slice(0, 10);
 const shareUrl = absoluteUrl(post.value.path);
 const shares = [
-  { name: "X", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.value.title)}&url=${encodeURIComponent(shareUrl)}&via=${profile.twitter.slice(1)}` },
+  { name: "X", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.value.title)}&url=${encodeURIComponent(shareUrl)}&via=${profile.value.twitter.slice(1)}` },
   { name: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}` },
 ];
 
@@ -50,6 +53,7 @@ usePageSeo({
   publishedTime: post.value.createdAt,
   modifiedTime: post.value.updatedAt || post.value.createdAt,
   tags: post.value.tags,
+  locale: locale.value,
 });
 
 useJsonLd([
@@ -66,13 +70,13 @@ useJsonLd([
     keywords: (post.value.tags || []).join(", "),
     wordCount: post.value.wordCount,
     timeRequired: post.value.minutes ? `PT${post.value.minutes}M` : undefined,
-    inLanguage: "en",
-    author: { "@id": `${absoluteUrl("/")}#person`, "@type": "Person", name: profile.name, url: absoluteUrl("/") },
+    inLanguage: locale.value,
+    author: { "@id": `${absoluteUrl("/")}#person`, "@type": "Person", name: profile.value.name, url: absoluteUrl("/") },
     publisher: { "@id": `${absoluteUrl("/")}#person` },
   },
   breadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Writing", path: "/blog" },
+    { name: t("post.home"), path: localePath("/") },
+    { name: t("blog.title"), path: blogPath },
     { name: post.value.title, path: post.value.path },
   ]),
 ]);
@@ -83,11 +87,11 @@ useJsonLd([
     <UiReadingProgress />
 
     <header class="shell">
-      <nav class="flex flex-wrap items-center gap-2 text-sm text-muted" aria-label="Breadcrumb">
-        <NuxtLink to="/blog" class="transition-colors hover:text-ink">Writing</NuxtLink>
+      <nav class="flex flex-wrap items-center gap-2 text-sm text-muted" :aria-label="t('post.breadcrumb')">
+        <NuxtLink :to="blogPath" class="transition-colors hover:text-ink">{{ t("blog.title") }}</NuxtLink>
         <template v-if="primaryTopic">
           <span aria-hidden="true">/</span>
-          <NuxtLink :to="{ path: '/blog', query: { topic: primaryTopic } }" class="transition-colors hover:text-ink">
+          <NuxtLink :to="{ path: blogPath, query: { topic: primaryTopic } }" class="transition-colors hover:text-ink">
             {{ primaryTopic }}
           </NuxtLink>
         </template>
@@ -97,13 +101,13 @@ useJsonLd([
       <p class="mt-6 max-w-3xl text-lg leading-relaxed text-muted sm:text-xl">{{ post.description }}</p>
 
       <div class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 border-y border-line/15 py-4 text-[0.95rem]">
-        <NuxtLink to="/#about" class="flex items-center gap-3">
+        <NuxtLink :to="section('#about')" class="flex items-center gap-3">
           <NuxtImg :src="profile.photo" alt="" width="40" height="40" class="h-10 w-10 rounded-full object-cover object-top" />
           <span class="font-semibold">{{ profile.name }}</span>
         </NuxtLink>
-        <time :datetime="post.createdAt" class="text-muted">{{ useFormatDate(post.createdAt) }}</time>
-        <span v-if="updated" class="text-muted">Updated {{ useFormatDate(post.updatedAt) }}</span>
-        <span v-if="post.minutes" class="text-muted">{{ post.minutes }} min read</span>
+        <time :datetime="post.createdAt" class="text-muted">{{ formatDate(post.createdAt) }}</time>
+        <span v-if="updated" class="text-muted">{{ t("post.updated", { date: formatDate(post.updatedAt) }) }}</span>
+        <span v-if="post.minutes" class="text-muted">{{ t("post.minutes", { count: post.minutes }) }}</span>
       </div>
     </header>
 
@@ -123,7 +127,7 @@ useJsonLd([
       <aside class="order-first lg:order-none">
         <div class="lg:sticky lg:top-28">
           <details class="rounded-2xl bg-raised p-5 lg:hidden">
-            <summary class="cursor-pointer text-sm font-semibold">On this page</summary>
+            <summary class="cursor-pointer text-sm font-semibold">{{ t("post.onThisPage") }}</summary>
             <PostToc :links="post.body?.toc?.links || []" class="mt-2 [&>p]:hidden" />
           </details>
           <PostToc :links="post.body?.toc?.links || []" class="hidden max-h-[calc(100vh-10rem)] overflow-y-auto lg:block" />
@@ -133,14 +137,14 @@ useJsonLd([
 
     <footer class="shell mt-20">
       <div class="max-w-prose">
-        <ul v-if="post.tags?.length" class="flex flex-wrap gap-2" aria-label="Topics">
+        <ul v-if="post.tags?.length" class="flex flex-wrap gap-2" :aria-label="t('post.topics')">
           <li v-for="tag in post.tags" :key="tag">
-            <NuxtLink :to="{ path: '/blog', query: { topic: tag } }" class="chip transition-colors hover:text-ink">{{ tag }}</NuxtLink>
+            <NuxtLink :to="{ path: blogPath, query: { topic: tag } }" class="chip transition-colors hover:text-ink">{{ tag }}</NuxtLink>
           </li>
         </ul>
 
         <div class="mt-8 flex flex-wrap items-center gap-3 text-[0.95rem]">
-          <span class="text-muted">Share</span>
+          <span class="text-muted">{{ t("post.share") }}</span>
           <a
             v-for="share in shares"
             :key="share.name"
@@ -156,30 +160,29 @@ useJsonLd([
         <div class="mt-12 flex gap-5 rounded-[2rem] bg-raised p-6 sm:p-8">
           <NuxtImg :src="profile.photo" alt="" width="64" height="64" class="h-16 w-16 shrink-0 rounded-full object-cover object-top" />
           <div>
-            <p class="font-semibold">Written by {{ profile.name }}</p>
+            <p class="font-semibold">{{ t("post.writtenBy", { name: profile.name }) }}</p>
             <p class="mt-2 leading-relaxed text-muted">
-              Full-stack web developer in Morocco building products with Laravel, Filament and Livewire.
-              If you need someone who has already solved this kind of problem,
-              <NuxtLink to="/#contact" class="link font-medium text-ink">let's talk</NuxtLink>.
+              {{ t("post.authorBio") }}
+              <NuxtLink :to="section('#contact')" class="link font-medium text-ink">{{ t("post.talk") }}</NuxtLink>.
             </p>
           </div>
         </div>
       </div>
 
-      <nav v-if="newer || older" class="mt-16 grid gap-4 md:grid-cols-2" aria-label="More articles">
+      <nav v-if="newer || older" class="mt-16 grid gap-4 md:grid-cols-2" :aria-label="t('post.more')">
         <NuxtLink v-if="older" :to="older.path" class="group rounded-[1.5rem] p-6 ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
-          <span class="flex items-center gap-2 text-sm text-muted"><UiIcon name="arrow-left" /> Previous</span>
+          <span class="flex items-center gap-2 text-sm text-muted"><UiIcon name="arrow-left" class="flip-rtl" /> {{ t("post.previous") }}</span>
           <span class="mt-3 block text-lg font-semibold leading-snug">{{ older.title }}</span>
         </NuxtLink>
         <span v-else class="hidden md:block" />
-        <NuxtLink v-if="newer" :to="newer.path" class="group rounded-[1.5rem] p-6 text-right ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
-          <span class="flex items-center justify-end gap-2 text-sm text-muted">Next <UiIcon name="arrow-right" /></span>
+        <NuxtLink v-if="newer" :to="newer.path" class="group rounded-[1.5rem] p-6 text-end ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
+          <span class="flex items-center justify-end gap-2 text-sm text-muted">{{ t("post.next") }} <UiIcon name="arrow-right" class="flip-rtl" /></span>
           <span class="mt-3 block text-lg font-semibold leading-snug">{{ newer.title }}</span>
         </NuxtLink>
       </nav>
 
       <section v-if="related.length" class="mt-20" aria-labelledby="related-title">
-        <h2 id="related-title" class="wide text-display-sm font-extrabold">Keep reading</h2>
+        <h2 id="related-title" class="wide text-display-sm font-extrabold">{{ t("post.keepReading") }}</h2>
         <div class="mt-6 border-t border-line/15">
           <PostRow v-for="item in related" :key="item.path" :post="item" />
         </div>

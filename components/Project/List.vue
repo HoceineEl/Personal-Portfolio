@@ -1,4 +1,5 @@
 <script setup>
+const localePath = useLocalePath();
 defineProps({
   projects: { type: Array, required: true },
 });
@@ -8,7 +9,7 @@ defineProps({
   <ul class="border-t border-line/15">
     <li v-for="project in projects" :key="project.url" class="border-b border-line/15">
       <NuxtLink
-        :to="project.url"
+        :to="localePath(project.url)"
         class="group grid grid-cols-[3.5rem_1fr_auto] items-baseline gap-x-4 gap-y-1 py-5 transition-colors sm:grid-cols-[4.5rem_minmax(0,1.1fr)_minmax(0,1fr)_auto] sm:gap-x-6"
       >
         <span class="font-mono text-sm tabular-nums text-muted">{{ project.year }}</span>

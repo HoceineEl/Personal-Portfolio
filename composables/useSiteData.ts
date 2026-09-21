@@ -16,7 +16,7 @@ export const useSiteData = () => {
       { to: section('#work'), title: t('nav.work') },
       { to: section('#services'), title: t('nav.services') },
       { to: section('#about'), title: t('nav.about') },
-      { to: '/blog', title: t('nav.writing') },
+      { to: localePath('/blog'), title: t('nav.writing') },
     ]),
     profile: computed(() => (isAr.value ? { ...profile, ...profileAr } : profile)),
     services: computed(() => pick(services, servicesAr)),

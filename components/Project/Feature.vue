@@ -1,4 +1,5 @@
 <script setup>
+const localePath = useLocalePath();
 const { t } = useI18n();
 
 defineProps({
@@ -15,7 +16,7 @@ defineProps({
       <div class="flex items-start justify-between gap-6" :class="large ? '' : 'mt-5'">
         <div>
           <h3 class="wide break-words font-extrabold tracking-tight" :class="large ? 'text-display-md lg:text-[2.75rem]' : 'text-display-sm'">
-            <NuxtLink :to="project.url" class="after:absolute after:inset-0 after:content-['']">
+            <NuxtLink :to="localePath(project.url)" class="after:absolute after:inset-0 after:content-['']">
               {{ project.name }}
             </NuxtLink>
           </h3>
