@@ -85,6 +85,8 @@ export const experiences = [
     {
         title: "Founder & maintainer",
         company_name: "FilamentCraft",
+        image: "/images/my_projects/filamentcraft/cover.webp",
+        screenshot: true,
         url: "/projects/filamentcraft",
         date: "2026 – now",
         summary:
@@ -150,6 +152,8 @@ export const projects = [
         platforms: "Web, PWA",
         stack: ["Laravel", "React", "Inertia", "Gemini"],
         cover: "phone",
+        image: "/images/my_projects/wiserpocket/cover.webp",
+        screenshot: true,
         url: "/projects/wiserpocket",
         demo: "https://wiserpocket.com",
         highlights: [
@@ -242,6 +246,8 @@ export const projects = [
         platforms: "Web, PWA",
         stack: ["Laravel", "Inertia", "Gemini", "PWA"],
         cover: "gallery",
+        image: "/images/my_projects/decorcopilot/cover.webp",
+        screenshot: true,
         url: "/projects/decorcopilot",
         demo: "https://decorcopilot.com",
         highlights: [

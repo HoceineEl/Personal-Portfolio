@@ -2,8 +2,7 @@
 title: DecorCopilot – AI Interior Design
 description: AI-powered room transformation platform using Google Gemini with 30+ design styles, visual search, and floor planning.
 tags: [Laravel, Livewire, FilamentPHP, Google Gemini, Tailwind CSS, AI, SaaS]
-image: "/images/my_projects/decorcopilot/mockup.png"
-noImage: true
+image: "/images/my_projects/decorcopilot/cover.webp"
 createdAt: 2024-06-01T00:00:00.000Z
 updatedAt: 2024-06-01T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"

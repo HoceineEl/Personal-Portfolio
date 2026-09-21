@@ -2,8 +2,7 @@
 title: FilamentCraft – Visual Website Builder for Filament
 description: A commercial Shopify-style, drag-and-drop website builder for FilamentPHP v4 and v5, with a no-code section builder, multi-tenancy, themes and full RTL.
 tags: [Laravel, Livewire, FilamentPHP, Page Builder, CMS, Multi-tenancy, SaaS, Commercial]
-image: "/images/my_projects/filamentcraft/mockup.png"
-noImage: true
+image: "/images/my_projects/filamentcraft/cover.webp"
 createdAt: 2026-06-10T00:00:00.000Z
 updatedAt: 2026-09-09T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"

@@ -13,7 +13,25 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
 
 <template>
   <div class="cover relative isolate aspect-[3/2] overflow-hidden rounded-[1.75rem] bg-raised">
-    <template v-if="project.image">
+    <template v-if="project.image && project.screenshot">
+      <div class="cover-light blinds absolute inset-0 -z-10" aria-hidden="true" />
+      <div class="cover-window absolute left-[8%] top-[12%] w-[92%] overflow-hidden rounded-tl-[14px] bg-bg shadow-[0_24px_40px_oklch(0_0_0/0.28)]">
+        <div class="flex h-[6%] min-h-3 items-center gap-[1%] bg-ink/5 px-[3%]" aria-hidden="true">
+          <span class="aspect-square w-[1.6%] rounded-full bg-ink/25" />
+          <span class="aspect-square w-[1.6%] rounded-full bg-ink/15" />
+          <span class="aspect-square w-[1.6%] rounded-full bg-ink/15" />
+        </div>
+        <NuxtImg
+          :src="project.image"
+          :alt="`Screenshot of ${project.name}: ${project.tagline}`"
+          class="w-full object-cover object-left-top"
+          sizes="xs:100vw md:50vw xl:800px"
+          :loading="eager ? 'eager' : 'lazy'"
+        />
+      </div>
+    </template>
+
+    <template v-else-if="project.image">
       <NuxtImg
         :src="project.image"
         :alt="`${project.name}: ${project.tagline}`"

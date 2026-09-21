@@ -2,7 +2,7 @@
 title: WiserPocket – AI Finance Tracker
 description: An AI finance tracker with voice input and receipt scanning, built with Laravel, Inertia and React.
 tags: [Laravel, React, Inertia, Filament, AI, PWA, Finance]
-noImage: true
+image: "/images/my_projects/wiserpocket/cover.webp"
 createdAt: 2025-11-27T00:00:00.000Z
 updatedAt: 2026-09-19T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"
