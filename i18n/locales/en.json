@@ -1,0 +1,106 @@
+{
+  "nav": {
+    "work": "Work",
+    "services": "Services",
+    "about": "About",
+    "writing": "Writing",
+    "main": "Main",
+    "home": "{name}, home",
+    "skip": "Skip to content",
+    "start": "Start a project",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "theme": "Toggle dark theme",
+    "whatsapp": "Message Hoceine on WhatsApp",
+    "switchLang": "العربية",
+    "switchLangLabel": "اقرأ الموقع بالعربية"
+  },
+  "whatsappGreeting": "Salaam Hoceine, ",
+  "hero": {
+    "status": "Freelance Laravel & Filament developer · Taking on new projects",
+    "line1": "I build apps",
+    "line2": "people open",
+    "line3": "every day.",
+    "intro": "I'm {name}, a freelance Laravel and Filament developer in Morocco. Web platforms, installable web apps and admin panels that teams in Saudi Arabia, the UK and Palestine rely on, often in Arabic.",
+    "cta": "Start a project",
+    "work": "See the work",
+    "photoAlt": "{name} sitting backwards on a wooden chair, sunlight falling through window blinds",
+    "inPlace": "in {place}",
+    "sayHi": "Say salaam"
+  },
+  "work": {
+    "title": "Selected Laravel work",
+    "intro": "Web platforms, installable web apps and a commercial Filament plugin, in production since 2023 and several of them in Arabic. A few up close:",
+    "more": "More projects",
+    "all": "All {count} projects",
+    "view": "View the project",
+    "stack": "Stack"
+  },
+  "services": {
+    "title": "Laravel & Filament services",
+    "intro": "Freelance or embedded in your team, remote from Morocco, overlapping working hours with Europe and the Gulf.",
+    "cta": "Tell me about it",
+    "process": "How a project runs"
+  },
+  "about": {
+    "title": "Salaam, I'm Hoceine",
+    "subtitle": "Full-stack Laravel developer in Morocco, working with teams in Saudi Arabia and the UK.",
+    "experience": "Experience",
+    "openSource": "Open source",
+    "groups": {
+      "core": "Every day",
+      "also": "When the project needs it",
+      "tools": "On my desk"
+    }
+  },
+  "writing": {
+    "title": "Writing on Laravel & Filament",
+    "intro": "{count} articles on Laravel, Filament and Livewire. Long, practical, and written from real projects.",
+    "all": "Read all articles",
+    "minutes": "{count} min read",
+    "topics": "Topics"
+  },
+  "contact": {
+    "title": "Have a product in mind? Let's build it.",
+    "intro": "Tell me what you're building and where it's stuck. I read and reply to every message myself.",
+    "copy": "Copy",
+    "copied": "Copied",
+    "basedIn": "Based in",
+    "basedValue": "{place}, GMT+1",
+    "worksWith": "Works with",
+    "worksWithValue": "Founders, agencies, product teams",
+    "name": "Your name",
+    "message": "What are you building?",
+    "placeholder": "A few lines about the product, the timeline, and what help you need.",
+    "submit": "Continue on WhatsApp",
+    "helper": "Opens WhatsApp with your message ready to send.",
+    "sent": "Got it. Press send in WhatsApp and I'll reply there.",
+    "whatsappText": "Salaam Hoceine, I'm {name}.\n\n{message}"
+  },
+  "projects": {
+    "title": "Projects",
+    "intro": "Everything worth showing, from products used every day to the small tools that got me here.",
+    "earlier": "Earlier work and side projects"
+  },
+  "footer": {
+    "about": "{role} in {place}. Building web apps with Laravel, and writing about how.",
+    "allProjects": "All projects",
+    "on": "{name} on {network}"
+  },
+  "error": {
+    "notFound": "This page wandered off.",
+    "broken": "Something broke on my end.",
+    "notFoundBody": "The link might be old, or I renamed something. The good stuff is still here.",
+    "brokenBody": "It's been logged. Try again in a moment, or head back home.",
+    "home": "Back home",
+    "blog": "Read the blog",
+    "notFoundTitle": "Page not found",
+    "brokenTitle": "Something broke"
+  },
+  "seo": {
+    "homeTitle": "Laravel & Filament Developer for Hire · {name}",
+    "homeDescription": "Freelance Laravel and Filament developer in Morocco. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
+    "projectsTitle": "Projects",
+    "projectsDescription": "{count} projects by Hoceine El Idrissi: web platforms, admin panels, installable web apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue."
+  }
+}

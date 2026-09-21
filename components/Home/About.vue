@@ -1,20 +1,22 @@
 <script setup>
-import { experiences, openSource, technologies } from "~/assets/constants";
+import { technologies } from "~/assets/constants";
 
-const groups = [
-  { key: "core", label: "Every day" },
-  { key: "also", label: "When the project needs it" },
-  { key: "tools", label: "On my desk" },
-];
+const { t } = useI18n();
+const localePath = useLocalePath();
+const { about, experiences, openSource } = useSiteData();
+const groups = ["core", "also", "tools"];
 </script>
 
 <template>
   <section id="about" class="shell py-20 md:py-32" aria-labelledby="about-title">
     <div class="grid gap-14 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-6">
-        <h2 id="about-title" class="wide text-display-lg font-black">Salaam, I'm Hoceine</h2>
-        <p class="mt-4 text-lg font-medium text-ink/80">Full-stack Laravel developer in Morocco, working with teams in Saudi Arabia and the UK.</p>
-        <div class="mt-6 max-w-xl space-y-5 text-lg leading-relaxed text-muted">
+        <h2 id="about-title" class="wide text-display-lg font-black">{{ t("about.title") }}</h2>
+        <p class="mt-4 text-lg font-medium text-ink/80">{{ t("about.subtitle") }}</p>
+        <div v-if="about" class="mt-6 max-w-xl space-y-5 text-lg leading-relaxed text-muted">
+          <p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p>
+        </div>
+        <div v-else class="mt-6 max-w-xl space-y-5 text-lg leading-relaxed text-muted">
           <p>
             I started with C# desktop apps during an internship in 2022, worked nights as a web developer while
             finishing my studies, and have been building Laravel products full time ever since.
@@ -39,11 +41,11 @@ const groups = [
         </div>
 
         <div class="mt-12 space-y-6">
-          <div v-for="group in groups" :key="group.key">
-            <h3 class="text-sm font-semibold text-muted">{{ group.label }}</h3>
+          <div v-for="group in groups" :key="group">
+            <h3 class="text-sm font-semibold text-muted">{{ t(`about.groups.${group}`) }}</h3>
             <ul class="mt-3 flex flex-wrap gap-2">
               <li
-                v-for="tech in technologies.filter((item) => item.group === group.key)"
+                v-for="tech in technologies.filter((item) => item.group === group)"
                 :key="tech.name"
                 class="flex items-center gap-2 rounded-full bg-raised py-1.5 pl-2 pr-3.5 text-[0.95rem] font-medium"
               >
@@ -66,7 +68,7 @@ const groups = [
       </div>
 
       <div class="lg:col-span-5 lg:col-start-8">
-        <h3 class="text-xl font-semibold">Experience</h3>
+        <h3 class="text-xl font-semibold">{{ t("about.experience") }}</h3>
         <ol class="mt-6 border-t border-line/15">
           <li v-for="item in experiences" :key="item.company_name + item.date" class="reveal border-b border-line/15 py-6">
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -74,18 +76,18 @@ const groups = [
                 <NuxtLink v-if="item.url" :to="item.url" class="link">{{ item.company_name }}</NuxtLink>
                 <template v-else>{{ item.company_name }}</template>
               </p>
-              <p class="font-mono text-sm tabular-nums text-muted">{{ item.date }}</p>
+              <p class="font-mono text-sm tabular-nums text-muted" dir="auto">{{ item.date }}</p>
             </div>
             <p class="mt-1 text-[0.95rem] text-ink/80">{{ item.title }}</p>
             <p class="mt-3 leading-relaxed text-muted">{{ item.summary }}</p>
           </li>
         </ol>
 
-        <h3 class="mt-14 text-xl font-semibold">Open source</h3>
+        <h3 class="mt-14 text-xl font-semibold">{{ t("about.openSource") }}</h3>
         <ul class="mt-6 space-y-5">
           <li v-for="repo in openSource" :key="repo.url">
             <a :href="repo.url" target="_blank" rel="noopener" class="group block">
-              <span class="flex items-center gap-2 font-mono text-[0.95rem] font-medium transition-colors group-hover:text-sun-ink">
+              <span dir="ltr" class="flex items-center gap-2 font-mono text-[0.95rem] font-medium transition-colors group-hover:text-sun-ink">
                 {{ repo.name }}
                 <UiIcon name="arrow-up-right" class="text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
               </span>

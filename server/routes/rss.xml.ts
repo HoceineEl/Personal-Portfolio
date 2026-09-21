@@ -1,21 +1,19 @@
-import { serverQueryContent } from '#content/server'
-
 const SITE_URL = 'https://hoceine.com'
 
 const escape = (value: string = '') =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 export default defineEventHandler(async (event) => {
-  const posts = await serverQueryContent(event, 'blog')
-    .only(['title', '_path', 'description', 'createdAt', 'tags'])
-    .sort({ createdAt: -1 })
-    .find()
+  const posts = await queryCollection(event, 'blog')
+    .select('title', 'path', 'description', 'createdAt', 'tags')
+    .order('createdAt', 'DESC')
+    .all()
 
   const items = posts
     .map((post) => `    <item>
       <title>${escape(post.title)}</title>
-      <link>${SITE_URL}${post._path}</link>
-      <guid isPermaLink="true">${SITE_URL}${post._path}</guid>
+      <link>${SITE_URL}${post.path}</link>
+      <guid isPermaLink="true">${SITE_URL}${post.path}</guid>
       <pubDate>${new Date(post.createdAt).toUTCString()}</pubDate>
       <description>${escape(post.description)}</description>
 ${(post.tags || []).map((tag: string) => `      <category>${escape(tag)}</category>`).join('\n')}

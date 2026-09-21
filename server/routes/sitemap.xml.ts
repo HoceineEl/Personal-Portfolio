@@ -1,82 +1,43 @@
-// Import necessary modules and functions
-import { serverQueryContent } from '#content/server';
-import { SitemapStream, streamToPromise } from 'sitemap';
-import { dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
+import { SitemapStream, streamToPromise } from 'sitemap'
 
-// Define base URL for your website
-const BASE_URL = 'https://hoceine.com';
+const BASE_URL = 'https://hoceine.com'
 
-// Constants for changefreq values
-const CHANGE_FREQ_MONTHLY = 'monthly';
-const CHANGE_FREQ_WEEKLY = 'weekly';
+const bilingual = (path: string) => [
+  { lang: 'en', url: `${BASE_URL}${path || '/'}` },
+  { lang: 'ar', url: `${BASE_URL}/ar${path}` },
+  { lang: 'x-default', url: `${BASE_URL}${path || '/'}` },
+]
 
-// Define an event handler
 export default defineEventHandler(async (event) => {
-  const sitemap = new SitemapStream({ hostname: BASE_URL });
+  const sitemap = new SitemapStream({ hostname: BASE_URL })
+  const now = new Date()
 
-  // Fetch and add dynamic content URLs with priority and lastmod
-  const docs = await serverQueryContent(event).only(['_path', 'createdAt', 'updatedAt']).find();
+  for (const path of ['', '/projects']) {
+    const links = bilingual(path)
+    sitemap.write({ url: path || '/', changefreq: 'weekly', priority: 1, lastmod: now, links })
+    sitemap.write({ url: `/ar${path}`, changefreq: 'weekly', priority: 0.9, lastmod: now, links })
+  }
+
+  sitemap.write({ url: '/blog', changefreq: 'weekly', priority: 0.9, lastmod: now })
+
+  const docs = (
+    await Promise.all(
+      (['blog', 'projects'] as const).map((collection) =>
+        queryCollection(event, collection).select('path', 'createdAt', 'updatedAt').all()
+      )
+    )
+  ).flat()
+
   for (const doc of docs) {
-    const urlOptions = {
-      url: doc._path,
-      changefreq: CHANGE_FREQ_MONTHLY,
-    priority: 0.8,
-      lastmod: doc.updatedAt || doc.createdAt || new Date()
-    };
-
-      // Include lastmod only if it's available (for Markdown files)
-
-
-    sitemap.write(urlOptions);
+    sitemap.write({
+      url: doc.path,
+      changefreq: 'monthly',
+      priority: 0.8,
+      lastmod: doc.updatedAt || doc.createdAt || now,
+    })
   }
 
-  // Add static endpoint URLs with priority and lastmod
-  const staticEndpoints = getStaticEndpoints();
-  for (const staticEndpoint of staticEndpoints) {
-   const urlOptions = {
-      url: staticEndpoint,
-      changefreq: CHANGE_FREQ_MONTHLY,
-     priority: 0.9,
-      lastmod: getLastModificationDate(staticEndpoint)
-    };
-
-    if (staticEndpoint.endsWith("/projects")) {
-      urlOptions.priority = 0.8;
-    }
-
-
-    sitemap.write(urlOptions);
-   
-  }
-
-  sitemap.end();
-  return streamToPromise(sitemap);
-});
-
-// Function to get static endpoint URLs
-function getStaticEndpoints(): string[] {
-  const __dirname = dirname(fileURLToPath(import.meta.url));
-  const files = getFiles(`${__dirname}/../../pages`);
-  return files
-    .filter((file) => !file.includes('slug') && !file.includes('/tools/'))
-    .map((file) => file.split('pages')[1])
-    .map((file) => (file.endsWith('index.vue') ? file.split('/index.vue')[0] : file.split('.vue')[0]));
-}
-
-// Function to recursively get all files from the /pages folder
-function getFiles(dir: string): string[] {
-  const dirents = fs.readdirSync(dir, { withFileTypes: true });
-  const files = dirents.map((dirent) => {
-    const res = resolve(dir, dirent.name);
-    return dirent.isDirectory() ? getFiles(res) : res;
-  });
-  return files.flat();
-}
-
-// Function to get the last modification date for a static endpoint (replace it with your implementation)
-function getLastModificationDate(endpoint: string): Date {
-  // Replace this with logic to get the last modification date for the given endpoint
-  return new Date();
-}
+  sitemap.end()
+  setHeader(event, 'content-type', 'application/xml; charset=utf-8')
+  return (await streamToPromise(sitemap)).toString()
+})

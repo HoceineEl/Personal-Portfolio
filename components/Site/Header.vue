@@ -1,12 +1,16 @@
 <script setup>
-import { navLinks, profile } from "~/assets/constants";
-
 const { isDark, toggleTheme } = useTheme();
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const switchLocalePath = useSwitchLocalePath();
+const { navLinks, profile, section } = useSiteData();
+const otherLocale = computed(() => (locale.value === "ar" ? "en" : "ar"));
+const otherLocalePath = computed(() => switchLocalePath(otherLocale.value) || localePath("/", otherLocale.value));
 const route = useRoute();
 const menuOpen = ref(false);
 const scrolled = ref(false);
 
-const isActive = (link) => link.id.startsWith("/blog") && route.path.startsWith("/blog");
+const isActive = (link) => link.to.startsWith("/blog") && route.path.startsWith("/blog");
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 24;
@@ -39,18 +43,19 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-header bg-bg/85 backdrop-blur-md transition-shadow duration-300"
+    class="fixed inset-x-0 top-0 z-header transition-shadow duration-300"
     :class="(scrolled || menuOpen) && 'shadow-[0_1px_0_oklch(var(--line)/0.1)]'"
   >
+    <div class="absolute inset-0 -z-10 bg-bg/85 backdrop-blur-md" aria-hidden="true" />
     <a
       href="#main"
       class="absolute left-4 top-3 -translate-y-20 rounded-full bg-sun px-4 py-2 text-sm font-semibold text-on-sun focus:translate-y-0"
     >
-      Skip to content
+      {{ t("nav.skip") }}
     </a>
 
-    <nav class="shell flex h-16 items-center justify-between gap-6 md:h-20" aria-label="Main">
-      <NuxtLink to="/" class="group flex items-center gap-3" :aria-label="`${profile.name}, home`">
+    <nav class="shell flex h-16 items-center justify-between gap-6 md:h-20" :aria-label="t('nav.main')">
+      <NuxtLink :to="localePath('/')" class="group flex items-center gap-3" :aria-label="t('nav.home', { name: profile.name })">
         <span class="grid h-9 w-9 place-items-center rounded-full bg-sun text-on-sun">
           <span class="wide text-sm font-black leading-none">H</span>
         </span>
@@ -61,9 +66,9 @@ onUnmounted(() => {
 
       <div class="flex items-center gap-1 md:gap-2">
         <ul class="hidden items-center md:flex">
-          <li v-for="link in navLinks" :key="link.id">
+          <li v-for="link in navLinks" :key="link.to">
             <NuxtLink
-              :to="link.id"
+              :to="link.to"
               class="rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-200 hover:text-ink"
               :class="isActive(link) ? 'text-ink' : 'text-muted'"
               :aria-current="isActive(link) ? 'page' : undefined"
@@ -74,11 +79,11 @@ onUnmounted(() => {
         </ul>
 
         <a
-          :href="`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent('Salaam Hoceine, ')}`"
+          :href="`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(t('whatsappGreeting'))}`"
           target="_blank"
           rel="noopener"
           class="grid h-11 w-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-raised hover:text-[#25D366]"
-          aria-label="Message Hoceine on WhatsApp"
+          :aria-label="t('nav.whatsapp')"
         >
           <UiIcon name="WhatsApp" />
         </a>
@@ -86,7 +91,7 @@ onUnmounted(() => {
         <button
           type="button"
           class="grid h-11 w-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-raised hover:text-ink"
-          aria-label="Toggle dark theme"
+          :aria-label="t('nav.theme')"
           :aria-pressed="isDark"
           @click="toggleTheme"
         >
@@ -94,8 +99,18 @@ onUnmounted(() => {
           <UiIcon name="moon" class="dark:hidden" />
         </button>
 
-        <NuxtLink to="/#contact" class="btn-sun ml-1 hidden px-5 py-2.5 text-sm md:inline-flex">
-          Start a project
+        <NuxtLink
+          :to="otherLocalePath"
+          class="grid h-11 min-w-11 place-items-center rounded-full px-3 text-sm font-semibold text-muted transition-colors hover:bg-raised hover:text-ink"
+          :lang="otherLocale"
+          :hreflang="otherLocale"
+          :aria-label="t('nav.switchLangLabel')"
+        >
+          {{ t("nav.switchLang") }}
+        </NuxtLink>
+
+        <NuxtLink :to="section('#contact')" class="btn-sun ms-1 hidden px-5 py-2.5 text-sm md:inline-flex">
+          {{ t("nav.start") }}
         </NuxtLink>
 
         <button
@@ -103,7 +118,7 @@ onUnmounted(() => {
           class="grid h-11 w-11 place-items-center rounded-full text-xl transition-colors hover:bg-raised md:hidden"
           :aria-expanded="menuOpen"
           aria-controls="mobile-menu"
-          :aria-label="menuOpen ? 'Close menu' : 'Open menu'"
+          :aria-label="menuOpen ? t('nav.closeMenu') : t('nav.openMenu')"
           @click="menuOpen = !menuOpen"
         >
           <UiIcon :name="menuOpen ? 'close' : 'menu'" />
@@ -118,19 +133,19 @@ onUnmounted(() => {
         class="fixed inset-x-0 bottom-0 top-16 z-overlay flex flex-col bg-bg px-4 pb-8 pt-6 md:hidden"
       >
         <ul class="flex flex-col">
-          <li v-for="link in navLinks" :key="link.id" class="border-b border-line/10">
+          <li v-for="link in navLinks" :key="link.to" class="border-b border-line/10">
             <NuxtLink
-              :to="link.id"
+              :to="link.to"
               class="wide flex items-center justify-between py-5 text-3xl font-extrabold tracking-tight"
               @click="menuOpen = false"
             >
               {{ link.title }}
-              <UiIcon name="arrow-right" class="text-xl text-muted" />
+              <UiIcon name="arrow-right" class="flip-rtl text-xl text-muted" />
             </NuxtLink>
           </li>
         </ul>
-        <NuxtLink to="/#contact" class="btn-sun mt-auto w-full py-4 text-base" @click="menuOpen = false">
-          Start a project
+        <NuxtLink :to="section('#contact')" class="btn-sun mt-auto w-full py-4 text-base" @click="menuOpen = false">
+          {{ t("nav.start") }}
         </NuxtLink>
       </div>
     </Transition>

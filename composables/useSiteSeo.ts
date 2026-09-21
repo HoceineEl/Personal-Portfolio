@@ -9,6 +9,7 @@ type PageSeo = {
   publishedTime?: string
   modifiedTime?: string
   tags?: string[]
+  locale?: string
 }
 
 export const absoluteUrl = (path = '/') => (path.startsWith('http') ? path : `${SITE_URL}${path}`)
@@ -24,6 +25,8 @@ export const personSchema = {
   description: profile.description,
   address: { '@type': 'PostalAddress', addressCountry: 'MA' },
   sameAs: socials.map((social) => social.url),
+  alternateName: 'حسين الإدريسي',
+  knowsLanguage: ['ar', 'en'],
   knowsAbout: ['Laravel', 'FilamentPHP', 'Livewire', 'Alpine.js', 'Tailwind CSS', 'PHP', 'Multi-tenant SaaS', 'Vue.js', 'Nuxt'],
 }
 
@@ -41,7 +44,8 @@ export const usePageSeo = (seo: PageSeo) => {
     ogImage: image,
     ogImageAlt: seo.title,
     ogSiteName: profile.name,
-    ogLocale: 'en_US',
+    ogLocale: seo.locale === 'ar' ? 'ar_SA' : 'en_US',
+    ogLocaleAlternate: seo.locale ? (seo.locale === 'ar' ? ['en_US'] : ['ar_SA']) : undefined,
     twitterCard: 'summary_large_image',
     twitterCreator: profile.twitter,
     twitterTitle: seo.title,

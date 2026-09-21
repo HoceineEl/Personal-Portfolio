@@ -1,5 +1,9 @@
 <script setup>
-import { navLinks, profile, socials } from "~/assets/constants";
+import { socials } from "~/assets/constants";
+
+const { t } = useI18n();
+const localePath = useLocalePath();
+const { navLinks, profile } = useSiteData();
 
 const year = new Date().getFullYear();
 </script>
@@ -10,19 +14,18 @@ const year = new Date().getFullYear();
       <div>
         <p class="wide text-2xl font-extrabold tracking-tight">{{ profile.name }}</p>
         <p class="mt-2 max-w-md text-muted">
-          {{ profile.role }} in {{ profile.location }}. Building web apps with Laravel, and writing
-          about how.
+          {{ t("footer.about", { role: profile.role, place: profile.location }) }}
         </p>
-        <a :href="`mailto:${profile.email}`" class="link mt-5 inline-block font-medium">{{ profile.email }}</a>
+        <a :href="`mailto:${profile.email}`" class="link mt-5 inline-block font-medium" dir="ltr">{{ profile.email }}</a>
       </div>
 
       <div class="flex flex-col gap-6 md:items-end">
         <ul class="flex flex-wrap gap-x-6 gap-y-2 text-[0.95rem]">
-          <li v-for="link in navLinks" :key="link.id">
-            <NuxtLink :to="link.id" class="text-muted transition-colors hover:text-ink">{{ link.title }}</NuxtLink>
+          <li v-for="link in navLinks" :key="link.to">
+            <NuxtLink :to="link.to" class="text-muted transition-colors hover:text-ink">{{ link.title }}</NuxtLink>
           </li>
           <li>
-            <NuxtLink to="/projects" class="text-muted transition-colors hover:text-ink">All projects</NuxtLink>
+            <NuxtLink :to="localePath('/projects')" class="text-muted transition-colors hover:text-ink">{{ t("footer.allProjects") }}</NuxtLink>
           </li>
         </ul>
         <ul class="flex gap-1">
@@ -32,7 +35,7 @@ const year = new Date().getFullYear();
               target="_blank"
               rel="noopener me"
               class="grid h-11 w-11 place-items-center rounded-full text-lg text-muted transition-colors hover:bg-raised hover:text-ink"
-              :aria-label="`${profile.firstName} on ${social.name}`"
+              :aria-label="t('footer.on', { name: profile.firstName, network: social.name })"
             >
               <UiIcon :name="social.name" />
             </a>

@@ -17,6 +17,8 @@
 </template>
 
 <script setup lang="js">
+definePageMeta({ i18n: { locales: ["en"] } });
+
 useSeoMeta({
   title: "Caption to Plain Text Converter ",
   description: "Convert caption(.srt) files to plain text files",

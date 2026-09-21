@@ -1,15 +1,17 @@
 <script setup>
+definePageMeta({ i18n: { locales: ["en"] } });
+
 import { profile } from "~/assets/constants";
 
 const route = useRoute();
 const path = route.path.replace(/\/$/, "");
-const fields = ["title", "_path", "description", "createdAt", "tags", "minutes"];
+const fields = ["title", "path", "description", "createdAt", "tags", "minutes"];
 
 const { data } = await useAsyncData(`post-${path}`, async () => {
   const [post, surround, pool] = await Promise.all([
-    queryContent(path).findOne(),
-    queryContent("blog").only(fields).sort({ createdAt: -1 }).findSurround(path),
-    queryContent("blog").only(fields).where({ _path: { $ne: path } }).find(),
+    queryCollection("blog").path(path).first(),
+    queryCollectionItemSurroundings("blog", path, { fields }).order("createdAt", "DESC"),
+    queryCollection("blog").select(...fields).where("path", "<>", path).all(),
   ]);
   return { post, surround, pool };
 });
@@ -33,7 +35,7 @@ const related = computed(() => {
 
 const primaryTopic = post.value.tags?.[0];
 const updated = post.value.updatedAt && post.value.updatedAt.slice(0, 10) !== post.value.createdAt?.slice(0, 10);
-const shareUrl = absoluteUrl(post.value._path);
+const shareUrl = absoluteUrl(post.value.path);
 const shares = [
   { name: "X", href: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.value.title)}&url=${encodeURIComponent(shareUrl)}&via=${profile.twitter.slice(1)}` },
   { name: "LinkedIn", href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}` },
@@ -42,7 +44,7 @@ const shares = [
 usePageSeo({
   title: post.value.title,
   description: post.value.description,
-  path: post.value._path,
+  path: post.value.path,
   image: post.value.image,
   type: "article",
   publishedTime: post.value.createdAt,
@@ -71,7 +73,7 @@ useJsonLd([
   breadcrumbSchema([
     { name: "Home", path: "/" },
     { name: "Writing", path: "/blog" },
-    { name: post.value.title, path: post.value._path },
+    { name: post.value.title, path: post.value.path },
   ]),
 ]);
 </script>
@@ -165,12 +167,12 @@ useJsonLd([
       </div>
 
       <nav v-if="newer || older" class="mt-16 grid gap-4 md:grid-cols-2" aria-label="More articles">
-        <NuxtLink v-if="older" :to="older._path" class="group rounded-[1.5rem] p-6 ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
+        <NuxtLink v-if="older" :to="older.path" class="group rounded-[1.5rem] p-6 ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
           <span class="flex items-center gap-2 text-sm text-muted"><UiIcon name="arrow-left" /> Previous</span>
           <span class="mt-3 block text-lg font-semibold leading-snug">{{ older.title }}</span>
         </NuxtLink>
         <span v-else class="hidden md:block" />
-        <NuxtLink v-if="newer" :to="newer._path" class="group rounded-[1.5rem] p-6 text-right ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
+        <NuxtLink v-if="newer" :to="newer.path" class="group rounded-[1.5rem] p-6 text-right ring-1 ring-inset ring-line/15 transition-colors hover:bg-raised">
           <span class="flex items-center justify-end gap-2 text-sm text-muted">Next <UiIcon name="arrow-right" /></span>
           <span class="mt-3 block text-lg font-semibold leading-snug">{{ newer.title }}</span>
         </NuxtLink>
@@ -179,7 +181,7 @@ useJsonLd([
       <section v-if="related.length" class="mt-20" aria-labelledby="related-title">
         <h2 id="related-title" class="wide text-display-sm font-extrabold">Keep reading</h2>
         <div class="mt-6 border-t border-line/15">
-          <PostRow v-for="item in related" :key="item._path" :post="item" />
+          <PostRow v-for="item in related" :key="item.path" :post="item" />
         </div>
       </section>
     </footer>

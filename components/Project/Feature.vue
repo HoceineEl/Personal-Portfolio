@@ -1,4 +1,6 @@
 <script setup>
+const { t } = useI18n();
+
 defineProps({
   project: { type: Object, required: true },
   large: { type: Boolean, default: false },
@@ -24,7 +26,7 @@ defineProps({
           class="mt-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg ring-1 ring-inset ring-line/15 transition-colors duration-300 group-hover:bg-sun group-hover:text-on-sun group-hover:ring-sun"
           aria-hidden="true"
         >
-          <UiIcon name="arrow-up-right" />
+          <UiIcon name="arrow-up-right" class="flip-rtl" />
         </span>
       </div>
       <p v-if="large" class="mt-5 leading-relaxed text-muted">{{ project.description }}</p>
@@ -35,10 +37,10 @@ defineProps({
         </li>
       </ul>
       <p v-if="large" class="mt-6 inline-flex items-center gap-2 font-semibold text-sun-ink">
-        View the project
-        <UiIcon name="arrow-right" class="transition-transform duration-300 group-hover:translate-x-1" />
+        {{ t("work.view") }}
+        <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
       </p>
-      <ul class="mt-5 flex flex-wrap gap-2" aria-label="Stack">
+      <ul class="mt-5 flex flex-wrap gap-2" :aria-label="t('work.stack')">
         <li class="chip font-mono tabular-nums">{{ project.year }}</li>
         <li v-for="item in project.stack" :key="item" class="chip">{{ item }}</li>
       </ul>

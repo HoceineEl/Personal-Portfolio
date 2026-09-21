@@ -1,14 +1,18 @@
 <script setup>
-import { SITE_URL, profile, projects } from "~/assets/constants";
+import { SITE_URL } from "~/assets/constants";
+
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const { profile, projects } = useSiteData();
 
 useHead({ titleTemplate: null });
 
 usePageSeo({
-  title: `Laravel & Filament Developer for Hire · ${profile.name}`,
-  description:
-    "Freelance Laravel and Filament developer in Morocco. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
-  path: "/",
+  title: t("seo.homeTitle", { name: profile.value.name }),
+  description: t("seo.homeDescription"),
+  path: localePath("/"),
   type: "profile",
+  locale: locale.value,
 });
 
 useJsonLd([
@@ -17,16 +21,16 @@ useJsonLd([
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
-    name: profile.name,
+    name: profile.value.name,
     publisher: { "@id": `${SITE_URL}/#person` },
-    inLanguage: "en",
+    inLanguage: locale.value,
   },
   {
     "@type": "ProfilePage",
-    "@id": `${SITE_URL}/#profile`,
-    url: SITE_URL,
+    "@id": `${absoluteUrl(localePath("/"))}#profile`,
+    url: absoluteUrl(localePath("/")),
     mainEntity: { "@id": `${SITE_URL}/#person` },
-    hasPart: projects
+    hasPart: projects.value
       .filter((project) => project.featured)
       .map((project) => ({ "@type": "CreativeWork", name: project.name, url: `${SITE_URL}${project.url}` })),
   },

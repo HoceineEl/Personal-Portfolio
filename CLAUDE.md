@@ -8,10 +8,10 @@ Personal portfolio and blog for Hoceine El Idrissi, a Full Stack Web Developer s
 
 ## Tech Stack
 
-- **Framework**: Nuxt 3 (Vue 3), SSR
+- **Framework**: Nuxt 4 (Vue 3), SSR
 - **Styling**: Tailwind CSS 3 with OKLCH design tokens (CSS variables in `assets/css/tailwind.css`)
-- **Content**: @nuxt/content v2 (Markdown in `content/blog/` and `content/projects/`)
-- **Modules**: @nuxtjs/tailwindcss, @nuxt/content, @nuxt/image, nuxt-simple-robots, nuxt-delay-hydration
+- **Content**: @nuxt/content v3 (Markdown in `content/blog/` and `content/projects/`, collections in `content.config.ts`)
+- **Modules**: @nuxtjs/tailwindcss, @nuxtjs/i18n, @nuxt/content, @nuxt/image, @nuxtjs/robots, nuxt-delay-hydration
 
 ## Development Commands
 
@@ -48,6 +48,14 @@ npm run preview
 - **Motif**: `.blinds` diagonal stripes, used sparingly (hero, covers, contact, 404).
 - **Motion**: CSS only; `.reveal` uses scroll-driven animations as progressive enhancement. Respect reduced motion.
 - No neo-brutal hard shadows, no gradient text, no scale-on-hover.
+
+## Languages
+
+- English at `/`, Arabic at `/ar` (RTL, Alexandria font), via `@nuxtjs/i18n` with `prefix_except_default`.
+- UI strings: `i18n/locales/en.json` and `ar.json`. Arabic project/service/experience copy: `assets/constants/ar.js`, merged over English data by `composables/useSiteData.ts`. Components read data from `useSiteData()`, not directly from constants.
+- Blog, project detail and tools pages are English only (`definePageMeta({ i18n: { locales: ['en'] } })`).
+- Arabic copy: write with the fasih skill. Put a non-breaking space after و before Latin words or digits.
+- `/llms.txt` and `/llms-full.txt` are generated from constants and content (`server/utils/llms.ts`).
 
 ## Adding Content
 

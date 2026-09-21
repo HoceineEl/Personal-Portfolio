@@ -1,23 +1,27 @@
 <script setup>
-import { projects } from "~/assets/constants";
+const { t, locale } = useI18n();
+const localePath = useLocalePath();
+const { projects, profile } = useSiteData();
 
-const featured = projects.filter((project) => project.featured);
-const others = projects.filter((project) => !project.featured);
+const featured = computed(() => projects.value.filter((project) => project.featured));
+const others = computed(() => projects.value.filter((project) => !project.featured));
 
 usePageSeo({
-  title: "Projects",
-  description: `${projects.length} projects by Hoceine El Idrissi: web platforms, admin panels, installable web apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue.`,
-  path: "/projects",
+  title: t("seo.projectsTitle"),
+  description: t("seo.projectsDescription", { count: projects.value.length }),
+  path: localePath("/projects"),
+  locale: locale.value,
 });
 
 useJsonLd([
   {
     "@type": "CollectionPage",
-    url: absoluteUrl("/projects"),
-    name: "Projects by Hoceine El Idrissi",
+    url: absoluteUrl(localePath("/projects")),
+    name: `${t("seo.projectsTitle")} · ${profile.value.name}`,
+    inLanguage: locale.value,
     mainEntity: {
       "@type": "ItemList",
-      itemListElement: projects.map((project, index) => ({
+      itemListElement: projects.value.map((project, index) => ({
         "@type": "ListItem",
         position: index + 1,
         url: absoluteUrl(project.url),
@@ -26,8 +30,8 @@ useJsonLd([
     },
   },
   breadcrumbSchema([
-    { name: "Home", path: "/" },
-    { name: "Projects", path: "/projects" },
+    { name: profile.value.name, path: localePath("/") },
+    { name: t("seo.projectsTitle"), path: localePath("/projects") },
   ]),
 ]);
 </script>
@@ -35,9 +39,9 @@ useJsonLd([
 <template>
   <div class="shell pb-24 pt-32 md:pt-40">
     <header class="grid gap-6 md:grid-cols-12 md:items-end">
-      <h1 class="wide text-display-xl font-black md:col-span-7">Projects</h1>
+      <h1 class="wide text-display-xl font-black md:col-span-7">{{ t("projects.title") }}</h1>
       <p class="max-w-md text-lg leading-relaxed text-muted md:col-span-5 md:justify-self-end">
-        Everything worth showing, from products used every day to the small tools that got me here.
+        {{ t("projects.intro") }}
       </p>
     </header>
 
@@ -53,7 +57,7 @@ useJsonLd([
     </div>
 
     <section class="mt-24 md:mt-32" aria-labelledby="earlier-title">
-      <h2 id="earlier-title" class="text-xl font-semibold">Earlier work and side projects</h2>
+      <h2 id="earlier-title" class="text-xl font-semibold">{{ t("projects.earlier") }}</h2>
       <ProjectList :projects="others" class="mt-6" />
     </section>
   </div>

@@ -1,5 +1,6 @@
 <script setup>
-import { process, services } from "~/assets/constants";
+const { t } = useI18n();
+const { process, services, section } = useSiteData();
 </script>
 
 <template>
@@ -7,14 +8,13 @@ import { process, services } from "~/assets/constants";
     <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-5">
         <div class="lg:sticky lg:top-32">
-          <h2 id="services-title" class="wide text-display-lg font-black">Laravel &amp; Filament services</h2>
+          <h2 id="services-title" class="wide text-display-lg font-black">{{ t("services.title") }}</h2>
           <p class="mt-6 max-w-md text-lg leading-relaxed text-muted">
-            Freelance or embedded in your team, remote from Morocco, overlapping working hours with Europe and the
-            Gulf.
+            {{ t("services.intro") }}
           </p>
-          <NuxtLink to="/#contact" class="btn-sun group mt-8">
-            Tell me about it
-            <UiIcon name="arrow-right" class="transition-transform duration-300 group-hover:translate-x-1" />
+          <NuxtLink :to="section('#contact')" class="btn-sun group mt-8">
+            {{ t("services.cta") }}
+            <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
           </NuxtLink>
         </div>
       </div>
@@ -32,7 +32,7 @@ import { process, services } from "~/assets/constants";
     </div>
 
     <div class="shell mt-20 md:mt-28">
-      <h3 class="text-xl font-semibold">How a project runs</h3>
+      <h3 class="text-xl font-semibold">{{ t("services.process") }}</h3>
       <ol class="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
         <li v-for="(step, index) in process" :key="step.title" class="reveal">
           <span class="wide block text-6xl font-black leading-none text-sun-ink" aria-hidden="true">{{ index + 1 }}</span>

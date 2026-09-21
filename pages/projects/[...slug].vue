@@ -1,10 +1,12 @@
 <script setup>
+definePageMeta({ i18n: { locales: ["en"] } });
+
 import { findProject, projects, profile } from "~/assets/constants";
 
 const route = useRoute();
 const path = route.path.replace(/\/$/, "");
 
-const { data: doc } = await useAsyncData(`project-${path}`, () => queryContent(path).findOne());
+const { data: doc } = await useAsyncData(`project-${path}`, () => queryCollection("projects").path(path).first());
 
 if (!doc.value) {
   throw createError({ statusCode: 404, statusMessage: "Project not found", fatal: true });

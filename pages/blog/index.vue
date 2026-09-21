@@ -1,12 +1,14 @@
 <script setup>
+definePageMeta({ i18n: { locales: ["en"] } });
+
 const route = useRoute();
 const PER_PAGE = 12;
 
 const { data: posts } = await useAsyncData("blog-index", () =>
-  queryContent("blog")
-    .only(["title", "_path", "description", "createdAt", "tags", "minutes"])
-    .sort({ createdAt: -1 })
-    .find()
+  queryCollection("blog")
+    .select("title", "path", "description", "createdAt", "tags", "minutes")
+    .order("createdAt", "DESC")
+    .all()
 );
 
 const topics = computed(() => {
@@ -51,7 +53,7 @@ useJsonLd([
     blogPost: (posts.value || []).slice(0, 20).map((post) => ({
       "@type": "BlogPosting",
       headline: post.title,
-      url: absoluteUrl(post._path),
+      url: absoluteUrl(post.path),
       datePublished: post.createdAt,
     })),
   },
@@ -74,7 +76,7 @@ useJsonLd([
 
     <NuxtLink
       v-if="showLatest && latest"
-      :to="latest._path"
+      :to="latest.path"
       class="group relative mt-14 grid gap-8 overflow-hidden rounded-[2rem] bg-sun p-8 text-on-sun md:mt-20 md:grid-cols-12 md:p-12"
     >
       <div class="latest-light absolute inset-y-0 right-0 w-1/2" aria-hidden="true" />
@@ -111,7 +113,7 @@ useJsonLd([
     </nav>
 
     <div class="mt-8 border-t border-line/15">
-      <PostRow v-for="post in visible" :key="post._path" :post="post" />
+      <PostRow v-for="post in visible" :key="post.path" :post="post" />
       <p v-if="!visible.length" class="py-16 text-lg text-muted">Nothing under this topic yet.</p>
     </div>
 

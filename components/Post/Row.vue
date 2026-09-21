@@ -12,7 +12,7 @@ defineProps({
     </time>
     <div class="min-w-0">
       <h3 class="text-xl font-semibold leading-snug tracking-tight transition-colors group-hover:text-sun-ink md:text-[1.375rem]">
-        <NuxtLink :to="post._path" class="after:absolute after:inset-0 after:content-['']">{{ post.title }}</NuxtLink>
+        <NuxtLink :to="post.path" class="after:absolute after:inset-0 after:content-['']">{{ post.title }}</NuxtLink>
       </h3>
       <p v-if="showDescription && post.description" class="mt-2 line-clamp-2 max-w-prose leading-relaxed text-muted">
         {{ post.description }}

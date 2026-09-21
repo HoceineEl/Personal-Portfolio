@@ -16,7 +16,7 @@ defineProps({
         <span class="col-start-2 text-muted sm:col-start-auto">{{ project.tagline }}</span>
         <UiIcon
           name="arrow-up-right"
-          class="row-start-1 self-center justify-self-end text-lg text-muted transition-[transform,color] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink sm:col-start-4"
+          class="flip-rtl row-start-1 self-center justify-self-end text-lg text-muted transition-[transform,color] duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink sm:col-start-4"
         />
       </NuxtLink>
     </li>

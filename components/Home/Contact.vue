@@ -1,9 +1,9 @@
 <script setup>
-import { profile } from "~/assets/constants";
-
+const { t } = useI18n();
+const { profile } = useSiteData();
 const fields = reactive({ name: "", message: "" });
 const copied = ref(false);
-const whatsappNumber = `+${profile.whatsapp.replace(/^(\d{3})(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, "$1 $2 $3 $4 $5 $6")}`;
+const whatsappNumber = `+${profile.value.whatsapp.replace(/^(\d{3})(\d)(\d{2})(\d{2})(\d{2})(\d{2})$/, "$1 $2 $3 $4 $5 $6")}`;
 
 const sent = ref(false);
 
@@ -13,18 +13,18 @@ const submit = () => {
 
   $fetch("/api/contact", { method: "POST", body: { name, message } }).catch(() => {});
 
-  const text = `Salaam Hoceine, I'm ${name}.\n\n${message}`;
-  window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
+  const text = t("contact.whatsappText", { name, message });
+  window.open(`https://wa.me/${profile.value.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
   sent.value = true;
 };
 
 const copyEmail = async () => {
   try {
-    await navigator.clipboard.writeText(profile.email);
+    await navigator.clipboard.writeText(profile.value.email);
     copied.value = true;
     setTimeout(() => (copied.value = false), 2000);
   } catch {
-    window.location.href = `mailto:${profile.email}`;
+    window.location.href = `mailto:${profile.value.email}`;
   }
 };
 </script>
@@ -40,15 +40,16 @@ const copyEmail = async () => {
     <div class="shell grid gap-14 lg:grid-cols-12 lg:gap-10">
       <div class="lg:col-span-6">
         <h2 id="contact-title" class="wide text-display-lg font-black">
-          Have a product in mind? Let's build it.
+          {{ t("contact.title") }}
         </h2>
         <p class="mt-6 max-w-md text-lg leading-relaxed text-on-sun/80">
-          Tell me what you're building and where it's stuck. I read and reply to every message myself.
+          {{ t("contact.intro") }}
         </p>
 
         <div class="mt-10 flex flex-wrap items-center gap-3">
           <a
             :href="`mailto:${profile.email}`"
+            dir="ltr"
             class="wide break-all text-2xl font-extrabold underline decoration-on-sun/30 decoration-2 underline-offset-8 transition-colors hover:decoration-on-sun sm:text-3xl"
           >
             {{ profile.email }}
@@ -59,7 +60,7 @@ const copyEmail = async () => {
             @click="copyEmail"
           >
             <UiIcon :name="copied ? 'check' : 'copy'" />
-            <span aria-live="polite">{{ copied ? "Copied" : "Copy" }}</span>
+            <span aria-live="polite">{{ copied ? t("contact.copied") : t("contact.copy") }}</span>
           </button>
         </div>
 
@@ -70,17 +71,17 @@ const copyEmail = async () => {
           class="mt-5 inline-flex items-center gap-3 text-xl font-bold transition-opacity hover:opacity-70 sm:text-2xl"
         >
           <UiIcon name="WhatsApp" />
-          <span class="tabular-nums">{{ whatsappNumber }}</span>
+          <span class="tabular-nums" dir="ltr">{{ whatsappNumber }}</span>
         </a>
 
         <dl class="mt-12 grid max-w-md grid-cols-2 gap-6 text-[0.95rem]">
           <div>
-            <dt class="text-on-sun/70">Based in</dt>
-            <dd class="mt-1 font-semibold">{{ profile.location }}, GMT+1</dd>
+            <dt class="text-on-sun/70">{{ t("contact.basedIn") }}</dt>
+            <dd class="mt-1 font-semibold">{{ t("contact.basedValue", { place: profile.location }) }}</dd>
           </div>
           <div>
-            <dt class="text-on-sun/70">Works with</dt>
-            <dd class="mt-1 font-semibold">Founders, agencies, product teams</dd>
+            <dt class="text-on-sun/70">{{ t("contact.worksWith") }}</dt>
+            <dd class="mt-1 font-semibold">{{ t("contact.worksWithValue") }}</dd>
           </div>
         </dl>
       </div>
@@ -90,27 +91,27 @@ const copyEmail = async () => {
         @submit.prevent="submit"
       >
         <label class="block">
-          <span class="text-sm font-semibold">Your name</span>
+          <span class="text-sm font-semibold">{{ t("contact.name") }}</span>
           <input v-model="fields.name" name="name" type="text" autocomplete="name" required class="field mt-2" />
         </label>
         <label class="mt-5 block">
-          <span class="text-sm font-semibold">What are you building?</span>
+          <span class="text-sm font-semibold">{{ t("contact.message") }}</span>
           <textarea
             v-model="fields.message"
             name="message"
             rows="6"
             required
-            placeholder="A few lines about the product, the timeline, and what help you need."
+            :placeholder="t('contact.placeholder')"
             class="field mt-2 resize-y"
           />
         </label>
         <div class="mt-6 flex flex-wrap items-center gap-4">
           <button type="submit" class="btn-sun">
             <UiIcon name="WhatsApp" />
-            Continue on WhatsApp
+            {{ t("contact.submit") }}
           </button>
           <p class="text-[0.95rem] text-muted" role="status" aria-live="polite">
-            {{ sent ? "Got it. Press send in WhatsApp and I'll reply there." : "Opens WhatsApp with your message ready to send." }}
+            {{ sent ? t("contact.sent") : t("contact.helper") }}
           </p>
         </div>
       </form>

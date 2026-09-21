@@ -1,6 +1,6 @@
 <script setup>
-import { profile } from "~/assets/constants";
-
+const { t } = useI18n();
+const { profile, section } = useSiteData();
 const localTime = ref("");
 let timer;
 
@@ -8,7 +8,7 @@ const tick = () => {
   localTime.value = new Intl.DateTimeFormat("en-GB", {
     hour: "2-digit",
     minute: "2-digit",
-    timeZone: profile.timezone,
+    timeZone: profile.value.timezone,
   }).format(new Date());
 };
 
@@ -29,30 +29,30 @@ onUnmounted(() => clearInterval(timer));
             <span class="pulse absolute inline-flex h-full w-full rounded-full bg-live" />
             <span class="relative inline-flex h-2.5 w-2.5 rounded-full bg-live" />
           </span>
-          Freelance Laravel &amp; Filament developer · Taking on new projects
+          {{ t("hero.status") }}
         </p>
 
         <h1
           id="hero-title"
           class="hero-title mt-6 text-display-xl font-black"
         >
-          <span class="line"><span class="rise" style="--d: 80ms">I build apps</span></span>
-          <span class="line"><span class="rise" style="--d: 160ms">people open</span></span>
-          <span class="line"><span class="rise" style="--d: 240ms"><span class="sun-mark">every day.</span></span></span>
+          <span class="line"><span class="rise" style="--d: 80ms">{{ t("hero.line1") }}</span></span>
+          <span class="line"><span class="rise" style="--d: 160ms">{{ t("hero.line2") }}</span></span>
+          <span class="line"><span class="rise" style="--d: 240ms"><span class="sun-mark">{{ t("hero.line3") }}</span></span></span>
         </h1>
 
         <p class="rise mt-8 max-w-[34rem] text-lg leading-relaxed text-muted sm:text-xl" style="--d: 420ms">
-          I'm <strong class="font-semibold text-ink">{{ profile.name }}</strong>, a freelance Laravel and Filament developer in Morocco.
-          Web platforms, installable web apps and admin panels that teams in Saudi Arabia, the UK
-          and Palestine rely on, often in Arabic.
+          <i18n-t keypath="hero.intro" tag="span" scope="global">
+            <template #name><strong class="font-semibold text-ink">{{ profile.name }}</strong></template>
+          </i18n-t>
         </p>
 
         <div class="rise mt-10 flex flex-wrap items-center gap-3" style="--d: 500ms">
-          <NuxtLink to="/#contact" class="btn-sun group">
-            Start a project
-            <UiIcon name="arrow-right" class="transition-transform duration-300 group-hover:translate-x-1" />
+          <NuxtLink :to="section('#contact')" class="btn-sun group">
+            {{ t("hero.cta") }}
+            <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
           </NuxtLink>
-          <NuxtLink to="/#work" class="btn-ghost">See the work</NuxtLink>
+          <NuxtLink :to="section('#work')" class="btn-ghost">{{ t("hero.work") }}</NuxtLink>
         </div>
       </div>
 
@@ -61,7 +61,7 @@ onUnmounted(() => clearInterval(timer));
         <figure class="relative overflow-hidden rounded-[2rem] bg-raised">
           <NuxtImg
             :src="profile.photo"
-            :alt="`${profile.name} sitting backwards on a wooden chair, sunlight falling through window blinds`"
+            :alt="t('hero.photoAlt', { name: profile.name })"
             width="768"
             height="1115"
             sizes="xs:100vw md:420px xl:560px"
@@ -76,12 +76,12 @@ onUnmounted(() => clearInterval(timer));
             <span class="flex items-center gap-2 text-muted">
               <UiIcon name="clock" class="text-base text-ink" />
               <span>
-                <span class="font-mono font-medium tabular-nums text-ink">{{ localTime || "GMT+1" }}</span>
-                in {{ profile.location }}
+                <span class="font-mono font-medium tabular-nums text-ink" dir="ltr">{{ localTime || "GMT+1" }}</span>
+                {{ t("hero.inPlace", { place: profile.location }) }}
               </span>
             </span>
             <a :href="`mailto:${profile.email}`" class="font-medium text-ink underline decoration-sun decoration-2 underline-offset-4">
-              Say salaam
+              {{ t("hero.sayHi") }}
             </a>
           </figcaption>
         </figure>
