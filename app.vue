@@ -1,5 +1,4 @@
 <script setup>
-import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 import { SITE_URL, profile } from "~/assets/constants";
 
 defineRobotMeta();
@@ -30,7 +29,6 @@ onMounted(() => {
 <template>
   <div>
     <NuxtLoadingIndicator color="oklch(0.84 0.165 82)" :height="3" />
-    <SpeedInsights />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
