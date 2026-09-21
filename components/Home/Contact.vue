@@ -11,12 +11,7 @@ const submit = () => {
   const name = fields.name.trim();
   const message = fields.message.trim();
 
-  fetch(profile.formEndpoint, {
-    method: "POST",
-    keepalive: true,
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ name, message, _subject: `New project enquiry from ${name}`, _template: "table", _captcha: "false" }),
-  }).catch(() => {});
+  $fetch("/api/contact", { method: "POST", body: { name, message } }).catch(() => {});
 
   const text = `Salaam Hoceine, I'm ${name}.\n\n${message}`;
   window.open(`https://wa.me/${profile.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");

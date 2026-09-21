@@ -40,9 +40,8 @@ const year = new Date().getFullYear();
         </ul>
       </div>
     </div>
-    <div class="shell flex flex-col gap-2 border-t border-line/10 py-6 text-sm text-muted sm:flex-row sm:justify-between">
+    <div class="shell flex flex-col gap-2 border-t border-line/10 py-6 text-sm text-muted sm:flex-row">
       <p>&copy; {{ year }} {{ profile.name }}</p>
-      <p>Built with Nuxt. Set in Archivo.</p>
     </div>
   </footer>
 </template>
