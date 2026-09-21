@@ -3,8 +3,9 @@ import { projects } from "~/assets/constants";
 
 const featured = projects.filter((project) => project.featured);
 const [lead, ...rest] = featured;
-const pairs = rest.slice(0, 6);
-const others = [...rest.slice(6), ...projects.filter((project) => !project.featured).slice(0, 3)];
+const pairs = rest.slice(0, 7);
+const others = [...rest.slice(7), ...projects.filter((project) => !project.featured).slice(0, 3)];
+const isLoneLast = (index) => pairs.length % 2 === 1 && index === pairs.length - 1;
 const layout = ["md:col-span-7", "md:col-span-5 md:mt-40", "md:col-span-5", "md:col-span-7 md:mt-24"];
 </script>
 
@@ -27,8 +28,9 @@ const layout = ["md:col-span-7", "md:col-span-5 md:mt-40", "md:col-span-5", "md:
         v-for="(project, index) in pairs"
         :key="project.url"
         :project="project"
+        :large="isLoneLast(index)"
         class="reveal"
-        :class="layout[index % 4]"
+        :class="isLoneLast(index) ? 'md:col-span-12' : layout[index % 4]"
       />
     </div>
 
