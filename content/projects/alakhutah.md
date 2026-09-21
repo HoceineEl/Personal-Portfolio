@@ -1,6 +1,6 @@
 ---
 title: Ala Khutah – Saudi National Hijra Trail Platform
-description: Recruitment and workforce platform for Ala Khutah, a Saudi national project backed by the Royal Commission for Makkah City and Holy Sites that retraces the Hijra over 470 km.
+description: Recruitment platform for Ala Khutah, a Saudi national project: 2M+ visitors at launch, 1M+ registrations, 100,000 shortlisted and 30,000 hired.
 tags: [Laravel, Livewire, FilamentPHP, Arabic UI, Saudi Arabia]
 image: "/images/my_projects/alakhutah/cover.webp"
 createdAt: 2024-01-15T00:00:00.000Z
@@ -17,6 +17,13 @@ createdBy: "Hoceine EL IDRISSI"
 The project is backed by the Royal Commission for Makkah City and Holy Sites, the Saudi Tourism Authority, Sela, the Pilgrim Experience Program and the Quality of Life Program under Saudi Vision 2030.
 
 I built the recruitment and workforce platform that staffs it: the portal where people apply for roles along the trail, and the tools the organisers use to screen, place and schedule them.
+
+### Scale
+
+- **2,000,000+ visitors** in the launch window
+- **1,000,000+ registrations** from applicants across the Kingdom
+- **100,000 candidates shortlisted** through location and competency filters
+- **30,000 people hired** to staff the trail, its stations and services
 
 ### Key Features
 
