@@ -85,8 +85,6 @@ export const experiences = [
     {
         title: "Founder & maintainer",
         company_name: "FilamentCraft",
-        image: "/images/my_projects/filamentcraft/cover.webp",
-        screenshot: true,
         url: "/projects/filamentcraft",
         date: "2026 – now",
         summary:
@@ -133,6 +131,8 @@ export const projects = [
         platforms: "Filament plugin",
         stack: ["Filament 4 & 5", "Livewire", "TypeScript", "Pest"],
         cover: "builder",
+        image: "/images/my_projects/filamentcraft/cover.webp",
+        screenshot: true,
         url: "/projects/filamentcraft",
         demo: "https://filamentcraft.dev?ref=portfolio",
         highlights: [

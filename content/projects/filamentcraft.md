@@ -16,6 +16,8 @@ FilamentCraft turns any Filament panel into a Shopify-style website builder. Ins
 
 It is a commercial plugin, sold and maintained by me, and it is the largest thing I have built to date: 32 built-in sections, a no-code section builder, revisioned templates, and one codebase that supports Filament 4 and 5 on Livewire 3 and 4.
 
+![The FilamentCraft editor: a section list on the left and a live preview of the page on the right](/images/my_projects/filamentcraft/editor.webp)
+
 ### Key Features
 
 - **No-code section builder** – Users compose brand-new section types from a palette of 25 blocks and 24 layouts, and the settings panel is generated from whatever they built
@@ -26,6 +28,8 @@ It is a commercial plugin, sold and maintained by me, and it is the largest thin
 - **Multilingual with full RTL** – Every locale is an independent content slice, with hreflang tags and a drop-in visitor language switcher
 - **E-commerce sections** – Product grids, carts and checkout driven by your real database through one small `Storefront` contract
 - **SEO and AI search** – Server-rendered pages, per-page SEO with a live SERP preview, sitemap, JSON-LD, llms.txt and IndexNow
+
+![Color schemes, a live search result preview, device preview, font picker and language switcher inside the editor](/images/my_projects/filamentcraft/features.webp)
 
 ### Technologies Used
 
