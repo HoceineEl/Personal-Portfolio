@@ -25,8 +25,17 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
           :src="project.image"
           :alt="`Screenshot of ${project.name}: ${project.tagline}`"
           class="min-h-0 w-full flex-1 object-cover object-left-top"
+          :class="project.imageDark && 'dark:hidden'"
           sizes="xs:100vw md:50vw xl:800px"
           :loading="eager ? 'eager' : 'lazy'"
+        />
+        <NuxtImg
+          v-if="project.imageDark"
+          :src="project.imageDark"
+          :alt="`Screenshot of ${project.name}: ${project.tagline}`"
+          class="hidden min-h-0 w-full flex-1 object-cover object-left-top dark:block"
+          sizes="xs:100vw md:50vw xl:800px"
+          loading="lazy"
         />
       </div>
     </template>
