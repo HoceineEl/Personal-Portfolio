@@ -2,8 +2,7 @@
 title: Ala Khutah – Historical Hijra Journey Platform
 description: Jobs portal and workforce management for a 470km historical Hijra path project in Saudi Arabia with recruitment and competency assessment.
 tags: [Laravel, Livewire, FilamentPHP, Arabic UI, Saudi Arabia]
-image: "/images/my_projects/alakhutah/mockup.png"
-noImage: true
+image: "/images/my_projects/alakhutah/cover.webp"
 createdAt: 2024-01-15T00:00:00.000Z
 updatedAt: 2024-01-15T00:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"

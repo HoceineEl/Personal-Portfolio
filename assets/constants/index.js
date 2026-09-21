@@ -278,6 +278,8 @@ export const projects = [
         platforms: "Web",
         stack: ["Laravel", "Filament", "Arabic UI"],
         cover: "table",
+        image: "/images/my_projects/alakhutah/cover.webp",
+        screenshot: true,
         url: "/projects/alakhutah",
         demo: "https://jobs-app.alakhutah.com",
         featured: true,
