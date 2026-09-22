@@ -1,12 +1,13 @@
 <script setup>
+definePageMeta({ i18n: { locales: ["en"] } });
+
 const route = useRoute();
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
-const { blogCollection } = useContentLocale();
 const PER_PAGE = 12;
 
 const { data: posts } = await useAsyncData(`blog-index-${locale.value}`, () =>
-  queryCollection(blogCollection.value)
+  queryCollection("blog")
     .select("title", "path", "description", "createdAt", "tags", "minutes")
     .order("createdAt", "DESC")
     .all()

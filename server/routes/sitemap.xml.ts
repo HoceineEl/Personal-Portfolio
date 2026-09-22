@@ -15,14 +15,16 @@ export default defineEventHandler(async (event) => {
   const sitemap = new SitemapStream({ hostname: BASE_URL })
   const now = new Date()
 
-  const [blog, projects, blogAr, projectsAr] = await Promise.all(
-    (['blog', 'projects', 'blog_ar', 'projects_ar'] as const).map((collection) =>
+  const [blog, projects, projectsAr] = await Promise.all(
+    (['blog', 'projects', 'projects_ar'] as const).map((collection) =>
       queryCollection(event, collection).select('path', 'createdAt', 'updatedAt').all()
     )
   )
-  const arabicPaths = new Set([...blogAr, ...projectsAr].map((doc) => doc.path.replace(/^\/ar/, '')))
+  const arabicPaths = new Set(projectsAr.map((doc) => doc.path.replace(/^\/ar/, '')))
 
-  for (const path of ['', '/projects', '/blog']) {
+  sitemap.write({ url: '/blog', changefreq: 'weekly', priority: 0.9, lastmod: now })
+
+  for (const path of ['', '/projects']) {
     const links = alternates(path)
     sitemap.write({ url: path || '/', changefreq: 'weekly', priority: 1, lastmod: now, links })
     sitemap.write({ url: `/ar${path}`, changefreq: 'weekly', priority: 0.9, lastmod: now, links })

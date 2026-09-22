@@ -6,7 +6,7 @@ const escape = (value: string = '') =>
   value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 type Feed = {
-  collection: 'blog' | 'blog_ar'
+  collection: 'blog'
   title: string
   blogPath: string
   feedPath: string

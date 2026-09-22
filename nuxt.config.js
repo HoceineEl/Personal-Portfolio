@@ -82,6 +82,9 @@ export default defineNuxtConfig({
     sitemap: ['https://hoceine.com/sitemap.xml'],
   },
   routeRules: {
+    '/ar/blog': { redirect: { to: '/blog', statusCode: 301 } },
+    '/ar/blog/**': { redirect: { to: '/blog/**', statusCode: 301 } },
+    '/ar/rss.xml': { redirect: { to: '/rss.xml', statusCode: 301 } },
     '/blog/**': { robots: true },
     '/': { robots: true },
   },
@@ -115,7 +118,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     prerender: {
-      routes: ['/robots.txt', '/sitemap.xml', '/rss.xml', '/ar/rss.xml', '/llms.txt', '/llms-full.txt']
+      routes: ['/robots.txt', '/sitemap.xml', '/rss.xml', '/llms.txt', '/llms-full.txt']
     }
   },
   router: {

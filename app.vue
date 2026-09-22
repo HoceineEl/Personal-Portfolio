@@ -19,9 +19,7 @@ useHead({
   ],
   link: () => [
     { rel: "canonical", href: `${SITE_URL}${route.path === "/" ? "" : route.path.replace(/\/$/, "")}` },
-    localeHead.value.htmlAttrs?.lang === "ar"
-      ? { rel: "alternate", type: "application/rss+xml", title: `${localProfile.value.name} · المقالات`, href: "/ar/rss.xml" }
-      : { rel: "alternate", type: "application/rss+xml", title: `${profile.name} · Writing`, href: "/rss.xml" },
+    { rel: "alternate", type: "application/rss+xml", title: `${profile.name} · Writing`, href: "/rss.xml" },
     ...(localeHead.value.link || []).filter((link) => link.rel === "alternate"),
   ],
   script: [{ innerHTML: themeBootScript, tagPosition: "head" }],

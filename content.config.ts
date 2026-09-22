@@ -16,7 +16,6 @@ export default defineContentConfig({
   collections: {
     blog: defineCollection({ type: 'page', source: 'blog/*.md', schema }),
     projects: defineCollection({ type: 'page', source: 'projects/*.md', schema }),
-    blog_ar: defineCollection({ type: 'page', source: 'ar/blog/*.md', schema }),
     projects_ar: defineCollection({ type: 'page', source: 'ar/projects/*.md', schema }),
   },
 })

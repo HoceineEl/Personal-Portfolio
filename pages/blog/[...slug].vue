@@ -1,18 +1,18 @@
 <script setup>
+definePageMeta({ i18n: { locales: ["en"] } });
+
 const route = useRoute();
 const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { profile, section } = useSiteData();
-const { blogCollection } = useContentLocale();
 const path = route.path.replace(/\/$/, "");
 const fields = ["title", "path", "description", "createdAt", "tags", "minutes"];
 
 const { data } = await useAsyncData(`post-${path}`, async () => {
-  const collection = blogCollection.value;
   const [post, surround, pool] = await Promise.all([
-    queryCollection(collection).path(path).first(),
-    queryCollectionItemSurroundings(collection, path, { fields }).order("createdAt", "DESC"),
-    queryCollection(collection).select(...fields).where("path", "<>", path).all(),
+    queryCollection("blog").path(path).first(),
+    queryCollectionItemSurroundings("blog", path, { fields }).order("createdAt", "DESC"),
+    queryCollection("blog").select(...fields).where("path", "<>", path).all(),
   ]);
   return { post, surround, pool };
 });

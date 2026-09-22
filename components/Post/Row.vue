@@ -1,10 +1,13 @@
 <script setup>
-const { t, locale } = useI18n();
+const { t, locale: siteLocale } = useI18n();
 
-defineProps({
+const props = defineProps({
   post: { type: Object, required: true },
   showDescription: { type: Boolean, default: true },
+  locale: { type: String, default: null },
 });
+
+const locale = computed(() => props.locale || siteLocale.value);
 </script>
 
 <template>
@@ -19,10 +22,10 @@ defineProps({
       <p v-if="showDescription && post.description" class="mt-2 line-clamp-2 max-w-prose leading-relaxed text-muted">
         {{ post.description }}
       </p>
-      <ul v-if="post.tags?.length" class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted" :aria-label="t('post.topics')">
+      <ul v-if="post.tags?.length" class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted" :aria-label="t('post.topics', {}, { locale })">
         <li v-for="tag in post.tags.slice(0, 3)" :key="tag">#{{ tag.replace(/\s+/g, "") }}</li>
       </ul>
     </div>
-    <p v-if="post.minutes" class="hidden whitespace-nowrap text-sm text-muted md:block md:pt-1.5">{{ t("post.minutes", { count: post.minutes }) }}</p>
+    <p v-if="post.minutes" class="hidden whitespace-nowrap text-sm text-muted md:block md:pt-1.5">{{ t("post.minutes", { count: post.minutes }, { locale }) }}</p>
   </article>
 </template>

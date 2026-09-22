@@ -53,7 +53,7 @@ npm run preview
 
 - English at `/`, Arabic at `/ar` (RTL, Alexandria font), via `@nuxtjs/i18n` with `prefix_except_default`.
 - UI strings: `i18n/locales/en.json` and `ar.json`. Arabic project/service/experience copy: `assets/constants/ar.js`, merged over English data by `composables/useSiteData.ts`. Components read data from `useSiteData()`, not directly from constants.
-- Every page has an Arabic version. Arabic articles and case studies live in `content/ar/blog/` and `content/ar/projects/` (collections `blog_ar`, `projects_ar`), with the same file names as the English ones. `useContentLocale()` picks the collection. When adding or editing a post or project, update the Arabic twin too (fasih skill; keep code blocks byte-identical). The tools page is English only.
+- Blog articles are English only (`/blog`); do not translate them. Project case studies have Arabic twins in `content/ar/projects/` (collection `projects_ar`, same file names); `useContentLocale()` picks the collection. When adding or editing a project, update its Arabic twin too (fasih skill; keep code blocks byte-identical). The tools page is English only.
 - Arabic copy: write with the fasih skill. Put a non-breaking space after و before Latin words or digits.
 - `/llms.txt` and `/llms-full.txt` are generated from constants and content (`server/utils/llms.ts`).
 
