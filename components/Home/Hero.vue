@@ -1,29 +1,16 @@
 <script setup>
 const { t } = useI18n();
-const { profile, section } = useSiteData();
-const localTime = ref("");
-let timer;
-
-const tick = () => {
-  localTime.value = new Intl.DateTimeFormat("en-GB", {
-    hour: "2-digit",
-    minute: "2-digit",
-    timeZone: profile.value.timezone,
-  }).format(new Date());
-};
-
-onMounted(() => {
-  tick();
-  timer = setInterval(tick, 15000);
-});
-
-onUnmounted(() => clearInterval(timer));
+const localePath = useLocalePath();
+const { profile, projects, section } = useSiteData();
+const current = computed(() => projects.value[0]);
+const localTime = useLocalTime(() => profile.value.timezone);
 </script>
 
 <template>
-  <section class="shell relative pb-16 pt-28 md:pb-24 md:pt-36 lg:pt-40" aria-labelledby="hero-title">
-    <div class="grid items-end gap-12 lg:grid-cols-12 lg:gap-10">
-      <div class="lg:col-span-7">
+  <section class="relative isolate overflow-clip" aria-labelledby="hero-title">
+    <div class="hero-light blinds absolute inset-0 -z-10" aria-hidden="true" />
+    <div class="shell grid items-end gap-12 pb-16 pt-28 md:pb-24 md:pt-36 lg:grid-cols-12 lg:gap-10 lg:pt-40">
+      <div class="min-w-0 lg:col-span-7">
         <p class="rise flex items-center gap-2.5 text-[0.95rem] text-muted" style="--d: 0ms">
           <span class="relative flex h-2.5 w-2.5">
             <span class="pulse absolute inline-flex h-full w-full rounded-full bg-live" />
@@ -54,6 +41,19 @@ onUnmounted(() => clearInterval(timer));
           </NuxtLink>
           <NuxtLink :to="section('#work')" class="btn-ghost">{{ t("hero.work") }}</NuxtLink>
         </div>
+
+        <NuxtLink
+          :to="localePath(current.url)"
+          class="rise group mt-12 flex max-w-[34rem] items-center gap-4 border-t border-line/15 pt-5 text-[0.95rem]"
+          style="--d: 620ms"
+        >
+          <span class="shrink-0 text-muted">{{ t("hero.now") }}</span>
+          <span class="min-w-0 flex-1 sm:truncate">
+            <strong class="font-semibold transition-colors group-hover:text-sun-ink">{{ current.name }}</strong>
+            <span class="text-muted"> · {{ current.tagline }}</span>
+          </span>
+          <UiIcon name="arrow-right" class="flip-rtl shrink-0 text-muted transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+        </NuxtLink>
       </div>
 
       <div class="rise relative mx-auto w-full max-w-[26rem] lg:col-span-5 lg:max-w-none" style="--d: 200ms">
@@ -137,6 +137,21 @@ onUnmounted(() => clearInterval(timer));
   from {
     transform: translateY(105%);
   }
+}
+
+.hero-light {
+  opacity: 0.1;
+  mask-image: linear-gradient(transparent 4rem, black 14rem), radial-gradient(120% 90% at 85% 10%, black, transparent 70%);
+  mask-composite: intersect;
+  animation: drift 22s ease-in-out infinite alternate;
+}
+
+.dark .hero-light {
+  opacity: 0.07;
+}
+
+[dir="rtl"] .hero-light {
+  mask-image: linear-gradient(transparent 4rem, black 14rem), radial-gradient(120% 90% at 15% 10%, black, transparent 70%);
 }
 
 .portrait-light {

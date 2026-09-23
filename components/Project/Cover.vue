@@ -285,7 +285,7 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
 <style scoped>
 .cover-light {
   mask-image: linear-gradient(115deg, transparent 20%, black 55%, transparent 95%);
-  opacity: 0.55;
+  opacity: 0.28;
   transition: transform 1.2s var(--ease-out), opacity 0.6s var(--ease-out);
 }
 
@@ -299,7 +299,7 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
 
 .group:hover .cover-light {
   transform: translateX(6%);
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .group:hover .cover-window {

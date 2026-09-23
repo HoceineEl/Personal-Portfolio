@@ -9,8 +9,26 @@ const otherLocalePath = computed(() => switchLocalePath(otherLocale.value) || lo
 const route = useRoute();
 const menuOpen = ref(false);
 const scrolled = ref(false);
+const activeSection = ref("");
+let observer;
 
-const isActive = (link) => link.to.endsWith("/blog") && /(^|\/)blog(\/|$)/.test(route.path);
+const isActive = (link) =>
+  link.to.endsWith("/blog") ? /(^|\/)blog(\/|$)/.test(route.path) : Boolean(activeSection.value) && link.to.endsWith(`#${activeSection.value}`);
+
+const watchSections = () => {
+  observer?.disconnect();
+  activeSection.value = "";
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) activeSection.value = entry.target.id;
+        else if (activeSection.value === entry.target.id) activeSection.value = "";
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" }
+  );
+  document.querySelectorAll("#work, #services, #about").forEach((el) => observer.observe(el));
+};
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 24;
@@ -24,6 +42,8 @@ watch(menuOpen, (open) => {
   document.documentElement.style.overflow = open ? "hidden" : "";
 });
 
+watch(() => route.path, () => nextTick(watchSections));
+
 watch(() => route.fullPath, () => {
   menuOpen.value = false;
 });
@@ -32,11 +52,13 @@ onMounted(() => {
   onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("keydown", onKey);
+  watchSections();
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", onScroll);
   window.removeEventListener("keydown", onKey);
+  observer?.disconnect();
   document.documentElement.style.overflow = "";
 });
 </script>
@@ -69,9 +91,9 @@ onUnmounted(() => {
           <li v-for="link in navLinks" :key="link.to">
             <NuxtLink
               :to="link.to"
-              class="rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-200 hover:text-ink"
+              class="nav-link relative rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors duration-200 hover:text-ink"
               :class="isActive(link) ? 'text-ink' : 'text-muted'"
-              :aria-current="isActive(link) ? 'page' : undefined"
+              :aria-current="isActive(link) ? (link.to.endsWith('/blog') ? 'page' : 'location') : undefined"
             >
               {{ link.title }}
             </NuxtLink>
@@ -153,6 +175,23 @@ onUnmounted(() => {
 </template>
 
 <style scoped>
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 50%;
+  bottom: 0.1rem;
+  height: 3px;
+  border-radius: 999px;
+  background: oklch(var(--sun));
+  opacity: 0;
+  transition: inset-inline 0.4s var(--ease-out), opacity 0.2s;
+}
+
+.nav-link[aria-current]::after {
+  inset-inline: 1rem;
+  opacity: 1;
+}
+
 .sheet-enter-active,
 .sheet-leave-active {
   transition: opacity 0.25s var(--ease-out), transform 0.35s var(--ease-out);

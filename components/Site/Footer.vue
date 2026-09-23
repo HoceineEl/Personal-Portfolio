@@ -6,13 +6,16 @@ const localePath = useLocalePath();
 const { navLinks, profile } = useSiteData();
 
 const year = new Date().getFullYear();
+const localTime = useLocalTime(() => profile.value.timezone);
+
+const toTop = () => window.scrollTo({ top: 0 });
 </script>
 
 <template>
   <footer class="border-t border-line/10">
     <div class="shell grid gap-10 py-12 md:grid-cols-[1fr_auto] md:items-end md:py-16">
       <div>
-        <p class="wide text-2xl font-extrabold tracking-tight">{{ profile.name }}</p>
+        <p class="wide text-display-sm font-black">{{ profile.name }}</p>
         <p class="mt-2 max-w-md text-muted">
           {{ t("footer.about", { role: profile.role, place: profile.location }) }}
         </p>
@@ -43,8 +46,17 @@ const year = new Date().getFullYear();
         </ul>
       </div>
     </div>
-    <div class="shell flex flex-col gap-2 border-t border-line/10 py-6 text-sm text-muted sm:flex-row">
+    <div class="shell flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line/10 py-6 text-sm text-muted">
       <p>&copy; {{ year }} {{ profile.name }}</p>
+      <p class="flex items-center gap-2">
+        <UiIcon name="clock" />
+        {{ t("footer.time") }}
+        <span class="font-mono tabular-nums text-ink" dir="ltr">{{ localTime || "GMT+1" }}</span>
+      </p>
+      <button type="button" class="group inline-flex h-11 items-center gap-2 font-medium transition-colors hover:text-ink" @click="toTop">
+        {{ t("footer.top") }}
+        <UiIcon name="arrow-right" class="-rotate-90 transition-transform duration-300 group-hover:-translate-y-0.5" />
+      </button>
     </div>
   </footer>
 </template>

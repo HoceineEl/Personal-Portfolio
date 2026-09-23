@@ -33,13 +33,37 @@ const { process, services, section } = useSiteData();
 
     <div class="shell mt-20 md:mt-28">
       <h3 class="text-xl font-semibold">{{ t("services.process") }}</h3>
-      <ol class="mt-8 grid gap-10 md:grid-cols-3 md:gap-8">
-        <li v-for="(step, index) in process" :key="step.title" class="reveal">
-          <span class="wide block text-6xl font-black leading-none text-sun-ink" aria-hidden="true">{{ index + 1 }}</span>
-          <h4 class="mt-5 text-xl font-bold">{{ step.title }}</h4>
-          <p class="mt-2 leading-relaxed text-muted">{{ step.body }}</p>
+      <ol class="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+        <li v-for="(step, index) in process" :key="step.title" class="step reveal relative ps-16 md:ps-0 md:pt-20">
+          <span
+            class="wide absolute start-0 top-0 grid h-12 w-12 place-items-center rounded-full bg-sun text-xl font-black text-on-sun"
+            aria-hidden="true"
+          >{{ index + 1 }}</span>
+          <h4 class="text-xl font-bold">{{ step.title }}</h4>
+          <p class="mt-2 max-w-sm leading-relaxed text-muted">{{ step.body }}</p>
         </li>
       </ol>
     </div>
   </section>
 </template>
+
+<style scoped>
+.step:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 1.5rem;
+  top: 3.5rem;
+  bottom: -2rem;
+  border-inline-start: 1px dashed oklch(var(--line) / 0.25);
+}
+
+@media (min-width: 768px) {
+  .step:not(:last-child)::before {
+    inset-inline: 3.75rem -1.75rem;
+    top: 1.5rem;
+    bottom: auto;
+    border-inline-start: 0;
+    border-top: 1px dashed oklch(var(--line) / 0.25);
+  }
+}
+</style>

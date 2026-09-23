@@ -8,7 +8,7 @@ const lead = computed(() => featured.value[0]);
 const pairs = computed(() => featured.value.slice(1, 8));
 const others = computed(() => [...featured.value.slice(8), ...projects.value.filter((project) => !project.featured).slice(0, 3)]);
 const isLoneLast = (index) => pairs.value.length % 2 === 1 && index === pairs.value.length - 1;
-const layout = ["md:col-span-7", "md:col-span-5 md:mt-40", "md:col-span-5", "md:col-span-7 md:mt-24"];
+const layout = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:col-span-7 md:mt-16"];
 </script>
 
 <template>

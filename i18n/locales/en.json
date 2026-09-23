@@ -26,7 +26,8 @@
     "work": "See the work",
     "photoAlt": "{name} sitting backwards on a wooden chair, sunlight falling through window blinds",
     "inPlace": "in {place}",
-    "sayHi": "Say salaam"
+    "sayHi": "Say salaam",
+    "now": "Now building"
   },
   "work": {
     "title": "Selected Laravel work",
@@ -85,7 +86,9 @@
   "footer": {
     "about": "{role} in {place}. Building web apps with Laravel, and writing about how.",
     "allProjects": "All projects",
-    "on": "{name} on {network}"
+    "on": "{name} on {network}",
+    "top": "Back to top",
+    "time": "Local time"
   },
   "error": {
     "notFound": "This page wandered off.",
