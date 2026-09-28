@@ -10,6 +10,7 @@ const schema = z.object({
   createdBy: z.string().optional(),
   wordCount: z.number().optional(),
   minutes: z.number().optional(),
+  rawbody: z.string(),
 })
 
 export default defineContentConfig({

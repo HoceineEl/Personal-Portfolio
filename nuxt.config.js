@@ -79,6 +79,7 @@ export default defineNuxtConfig({
   },
   robots: {
     allow: ['/'],
+    groups: [{ userAgent: '*', contentSignal: { search: 'yes', 'ai-input': 'yes', 'ai-train': 'yes' } }],
     sitemap: ['https://hoceine.com/sitemap.xml'],
   },
   routeRules: {
@@ -86,7 +87,18 @@ export default defineNuxtConfig({
     '/ar/blog/**': { redirect: { to: '/blog/**', statusCode: 301 } },
     '/ar/rss.xml': { redirect: { to: '/rss.xml', statusCode: 301 } },
     '/blog/**': { robots: true },
-    '/': { robots: true },
+    '/': {
+      robots: true,
+      headers: {
+        Link: [
+          '</.well-known/api-catalog>; rel="api-catalog"',
+          '</llms.txt>; rel="describedby"; type="text/plain"',
+          '</rss.xml>; rel="alternate"; type="application/rss+xml"',
+          '</sitemap.xml>; rel="sitemap"; type="application/xml"',
+        ].join(', '),
+        Vary: 'Accept',
+      },
+    },
   },
   site: {
     url: 'https://hoceine.com',
@@ -118,7 +130,7 @@ export default defineNuxtConfig({
   nitro: {
     compressPublicAssets: true,
     prerender: {
-      routes: ['/robots.txt', '/sitemap.xml', '/rss.xml', '/llms.txt', '/llms-full.txt']
+      routes: ['/robots.txt', '/sitemap.xml', '/rss.xml', '/llms.txt', '/llms-full.txt', '/.well-known/api-catalog']
     }
   },
   router: {
