@@ -101,8 +101,8 @@
     "brokenTitle": "Something broke"
   },
   "seo": {
-    "homeTitle": "Laravel & Filament Developer for Hire · {name}",
-    "homeDescription": "Freelance Laravel and Filament developer in Morocco. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
+    "homeTitle": "{name} · Laravel & Filament Developer",
+    "homeDescription": "Laravel and Filament developer in Morocco, and founder of FilamentCraft and Dukanos. I build web platforms, admin panels, PWAs and Arabic/RTL apps for clients in Saudi Arabia, the Gulf and the UK.",
     "projectsTitle": "Projects",
     "projectsDescription": "{count} projects by Hoceine El Idrissi: web platforms, admin panels, installable web apps, browser extensions and developer tools built with Laravel, Filament, Livewire and Vue."
   },
