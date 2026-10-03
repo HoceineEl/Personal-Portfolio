@@ -374,6 +374,8 @@ Schemas represent a paradigm shift in how we build admin interfaces. By unifying
 
 The key insight is that server-driven UI doesn't mean sacrificing interactivity. With Livewire under the hood, schemas feel responsive while keeping all logic on the server.
 
+The best stress test I have found for this is [FilamentCraft](https://filamentcraft.dev?ref=blog-schemas), my page builder for Filament. Every section's settings panel is a schema, and in the no-code section builder that schema is generated from whatever blocks the user dropped in. If schemas could not be built at runtime from data, that feature would not exist.
+
 ---
 
 ## Resources

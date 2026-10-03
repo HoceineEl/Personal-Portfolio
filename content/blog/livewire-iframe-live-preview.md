@@ -215,7 +215,7 @@ assumes it will see mutations. The browser assumes injected scripts are not mean
 Respect each of those assumptions explicitly and the preview becomes boring, which is what you
 want from a preview.
 
-I build this into [FilamentCraft](https://filamentcraft.dev), a commercial page builder for
+I build this into [FilamentCraft](https://filamentcraft.dev?ref=blog-iframe-preview), a commercial page builder for
 Filament, so the code above is from a real product rather than a sample. If you want to poke at
-the result, the [demo](https://demo.filamentcraft.dev/launch/admin) drops you straight into the
+the result, the [demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-iframe-preview) drops you straight into the
 editor with no signup.

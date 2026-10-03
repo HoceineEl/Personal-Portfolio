@@ -385,6 +385,8 @@ Global scopes are essential for SaaS data isolation, but they're just one layer 
 
 Remember: **Data leaks in multi-tenant apps are catastrophic**. Take the time to implement thorough isolation.
 
+This is the setup I run in production on [Dukanos](/projects/dukanos), where every shop's orders, stock and customers live in the same tables, and on [Mediano](/projects/mediano), which hosts many sports academies on one database. In both, the tenant isolation tests are the ones I would least want to delete.
+
 ---
 
 ## Resources

@@ -41,6 +41,10 @@ createdBy: "Hoceine EL IDRISSI"
 - **Pest و PHPStan level 6 و Pint** – أكثر من 1,700 اختبار يجب أن تنجح قبل كل إصدار
 - **Paddle** – البائع المسجَّل (Merchant of record)، ويغذّي مستودع Composer خاصًا أستضيفه بنفسي
 
+### في بيئة الإنتاج
+
+يشغّل FilamentCraft واجهات المتاجر في [دكانوس](/ar/projects/dukanos)، منصتي للتجارة، ومواقع الأكاديميات في [ميديانو](/ar/projects/mediano).
+
 ### عرض حي
 
 جرّبها دون تسجيل على [demo.filamentcraft.dev](https://demo.filamentcraft.dev/launch/admin?ref=portfolio): نقرة واحدة تنقلك مباشرة إلى المحرر على موقع حقيقي.

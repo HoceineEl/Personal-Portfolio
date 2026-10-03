@@ -458,6 +458,8 @@ FilamentPHP's form builder handles everything from simple inputs to complex mult
 
 Master these patterns, and you can build any form your application needs.
 
+I pushed these patterns furthest in [FilamentCraft](https://filamentcraft.dev?ref=blog-form-builder), a website builder for Filament, where the settings form for a section is assembled at runtime from the fields that section declares. Conditional visibility, repeaters and custom fields carry most of the weight there. The [demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-form-builder) needs no signup if you want to click around the result.
+
 ---
 
 ## Resources

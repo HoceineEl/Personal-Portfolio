@@ -23,6 +23,7 @@ Mediano is a multi-tenant SaaS platform designed for sports academies, providing
 - **Event Management** – Organize tournaments and events
 - **Sales Management** – Track merchandise and fees
 - **Secure Access** – Role-based permissions per academy
+- **Academy websites** – Each academy builds and edits its own public site with [FilamentCraft](https://filamentcraft.dev?ref=portfolio), my Filament page builder, without asking us for changes
 
 ### Technologies Used
 
@@ -30,6 +31,7 @@ Mediano is a multi-tenant SaaS platform designed for sports academies, providing
 - **Livewire** – Real-time features
 - **Alpine.js** – Frontend interactions
 - **FilamentPHP** – Admin panels
+- **FilamentCraft** – Website builder for each academy
 - **Tailwind CSS** – Styling
 
 ### Client

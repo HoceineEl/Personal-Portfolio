@@ -41,6 +41,10 @@ It is a commercial plugin, sold and maintained by me, and it is the largest thin
 - **Pest, PHPStan level 6, Pint** – 1,700+ tests gating every release
 - **Paddle** – Merchant of record, feeding a self-hosted private Composer registry
 
+### In Production
+
+FilamentCraft runs the storefronts on [Dukanos](/projects/dukanos), my commerce SaaS, and the academy websites on [Mediano](/projects/mediano).
+
 ### Live Demo
 
 Try it with no signup at [demo.filamentcraft.dev](https://demo.filamentcraft.dev/launch/admin?ref=portfolio) — one click drops you straight into the editor on a real site.
