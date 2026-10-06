@@ -39,6 +39,7 @@ useJsonLd([
 
 <template>
   <div>
+    <UiReadingProgress />
     <HomeHero />
     <HomeWork />
     <HomeServices />

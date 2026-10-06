@@ -6,5 +6,7 @@
     </main>
     <SiteFooter />
     <SiteWhatsAppFab />
+    <UiScrollTop />
+    <UiCursorLight />
   </div>
 </template>

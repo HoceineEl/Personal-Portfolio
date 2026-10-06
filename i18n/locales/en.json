@@ -15,7 +15,7 @@
     "switchLang": "العربية",
     "switchLangLabel": "اقرأ الموقع بالعربية"
   },
-  "whatsappGreeting": "Salaam Hoceine, ",
+  "whatsappGreeting": "Hi Hoceine, ",
   "hero": {
     "status": "Freelance Laravel & Filament developer · Taking on new projects",
     "line1": "I build apps",
@@ -26,7 +26,7 @@
     "work": "See the work",
     "photoAlt": "{name} sitting backwards on a wooden chair, sunlight falling through window blinds",
     "inPlace": "in {place}",
-    "sayHi": "Say salaam",
+    "sayHi": "Say hi",
     "now": "Now building"
   },
   "work": {
@@ -44,7 +44,7 @@
     "process": "How a project runs"
   },
   "about": {
-    "title": "Salaam, I'm Hoceine",
+    "title": "Hi, I'm Hoceine",
     "subtitle": "Full-stack Laravel developer in Morocco, working with teams in Saudi Arabia and the UK.",
     "experience": "Experience",
     "openSource": "Open source",
@@ -76,7 +76,7 @@
     "submit": "Continue on WhatsApp",
     "helper": "Opens WhatsApp with your message ready to send.",
     "sent": "Got it. Press send in WhatsApp and I'll reply there.",
-    "whatsappText": "Salaam Hoceine, I'm {name}.\n\n{message}"
+    "whatsappText": "Hi Hoceine, I'm {name}.\n\n{message}"
   },
   "projects": {
     "title": "Projects",

@@ -14,8 +14,8 @@ useHead({
   },
   meta: [
     { name: "google-site-verification", content: "4AxK4N9GEIAr7luoQ-C4sMlPs-3TtU52SAy-r07bN84" },
-    { name: "theme-color", content: "#171512", media: "(prefers-color-scheme: dark)" },
-    { name: "theme-color", content: "#fbfbfb", media: "(prefers-color-scheme: light)" },
+    { name: "theme-color", content: "#141413", media: "(prefers-color-scheme: dark)" },
+    { name: "theme-color", content: "#f8f9f4", media: "(prefers-color-scheme: light)" },
   ],
   link: () => [
     { rel: "canonical", href: `${SITE_URL}${route.path === "/" ? "" : route.path.replace(/\/$/, "")}` },
@@ -32,7 +32,7 @@ onMounted(() => {
 
 <template>
   <div>
-    <NuxtLoadingIndicator color="oklch(0.84 0.165 82)" :height="3" />
+    <NuxtLoadingIndicator color="oklch(0.9 0.19 120)" :height="3" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

@@ -3,28 +3,32 @@
 @tailwind utilities;
 
 :root {
-  --bg: 0.985 0 0;
-  --raised: 0.955 0 0;
-  --ink: 0.19 0.01 75;
-  --muted: 0.44 0.012 75;
-  --line: 0.19 0.01 75;
-  --sun: 0.84 0.165 82;
-  --sun-ink: 0.5 0.11 65;
-  --on-sun: 0.17 0.02 70;
+  --bg: 0.975 0.004 115;
+  --raised: 0.94 0.01 115;
+  --ink: 0.2 0.008 110;
+  --muted: 0.45 0.012 110;
+  --line: 0.2 0.008 110;
+  --sun: 0.9 0.19 120;
+  --sun-ink: 0.48 0.13 128;
+  --on-sun: 0.2 0.04 125;
+  --deep: 0.235 0.004 70;
+  --on-deep: 0.96 0.008 110;
   --live: 0.55 0.15 150;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   color-scheme: light;
 }
 
 .dark {
-  --bg: 0.165 0.006 75;
-  --raised: 0.205 0.008 75;
-  --ink: 0.955 0.006 85;
-  --muted: 0.76 0.012 80;
-  --line: 0.955 0.006 85;
-  --sun: 0.84 0.165 82;
-  --sun-ink: 0.86 0.15 84;
-  --on-sun: 0.17 0.02 70;
+  --bg: 0.17 0.004 90;
+  --raised: 0.215 0.005 90;
+  --ink: 0.96 0.008 110;
+  --muted: 0.75 0.01 110;
+  --line: 0.96 0.008 110;
+  --sun: 0.9 0.19 120;
+  --sun-ink: 0.9 0.18 120;
+  --on-sun: 0.2 0.04 125;
+  --deep: 0.235 0.004 70;
+  --on-deep: 0.96 0.008 110;
   --live: 0.78 0.17 150;
   color-scheme: dark;
 }
@@ -45,7 +49,6 @@
 
   body {
     @apply bg-bg font-sans text-ink;
-    font-variation-settings: 'wdth' 100;
   }
 
   h1, h2, h3, h4 {
@@ -77,8 +80,12 @@
   }
 
   .wide {
-    font-stretch: 125%;
-    font-variation-settings: 'wdth' 125;
+    font-family: 'Big Shoulders Display', 'Schibsted Grotesk', ui-sans-serif, sans-serif;
+    letter-spacing: -0.005em;
+  }
+
+  :is(h1, h2).wide {
+    text-transform: uppercase;
   }
 
   .btn {
@@ -151,11 +158,16 @@
 
 /* Arabic */
 [lang="ar"] body {
-  font-family: 'Alexandria', 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Alexandria', 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
 }
 
 [lang="ar"] :is(h1, h2, h3, h4, .wide, [class*="text-display"]) {
   letter-spacing: 0;
+}
+
+[lang="ar"] .wide {
+  font-family: 'Alexandria', ui-sans-serif, sans-serif;
+  text-transform: none;
 }
 
 [lang="ar"] :is(h1, h2, [class*="text-display"]) {
@@ -164,7 +176,7 @@
 
 [lang="ar"] [lang="en"],
 [lang="ar"] [dir="ltr"] {
-  font-family: 'Archivo', ui-sans-serif, system-ui, sans-serif;
+  font-family: 'Schibsted Grotesk', ui-sans-serif, system-ui, sans-serif;
 }
 
 [lang="ar"] .font-mono {
@@ -196,7 +208,7 @@
 
 .nuxt-content h2 {
   @apply mt-16 text-display-sm;
-  font-variation-settings: 'wdth' 112;
+  font-family: 'Big Shoulders Display', ui-sans-serif, sans-serif;
 }
 
 .nuxt-content h3 {

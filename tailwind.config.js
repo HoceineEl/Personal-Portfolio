@@ -28,6 +28,8 @@ export default {
         'sun-ink': token('sun-ink'),
         'on-sun': token('on-sun'),
         live: token('live'),
+        deep: token('deep'),
+        'on-deep': token('on-deep'),
         // Legacy aliases kept so older markup (tools page, markdown) still resolves
         surface: token('bg'),
         'surface-alt': token('raised'),
@@ -47,16 +49,16 @@ export default {
         'neo-yellow': token('sun'),
       },
       fontFamily: {
-        sans: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        body: ['Archivo', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['"Schibsted Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['"Big Shoulders Display"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['"Schibsted Grotesk"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       fontSize: {
-        'display-xl': ['clamp(2.75rem, 1.2rem + 6.4vw, 6rem)', { lineHeight: '0.92', letterSpacing: '-0.035em' }],
-        'display-lg': ['clamp(2.25rem, 1.3rem + 4vw, 4.5rem)', { lineHeight: '0.95', letterSpacing: '-0.03em' }],
-        'display-md': ['clamp(1.75rem, 1.2rem + 2.4vw, 3rem)', { lineHeight: '1', letterSpacing: '-0.025em' }],
-        'display-sm': ['clamp(1.375rem, 1.1rem + 1.1vw, 1.875rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        'display-xl': ['clamp(3.5rem, 1.6rem + 7.6vw, 6rem)', { lineHeight: '0.86', letterSpacing: '-0.01em' }],
+        'display-lg': ['clamp(2.75rem, 1.5rem + 4.8vw, 5rem)', { lineHeight: '0.9', letterSpacing: '-0.005em' }],
+        'display-md': ['clamp(2rem, 1.3rem + 2.8vw, 3.25rem)', { lineHeight: '0.95', letterSpacing: '0' }],
+        'display-sm': ['clamp(1.6rem, 1.2rem + 1.4vw, 2.1rem)', { lineHeight: '1', letterSpacing: '0' }],
       },
       maxWidth: {
         prose: '68ch',

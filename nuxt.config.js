@@ -23,7 +23,7 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=Alexandria:wght@300..900&family=JetBrains+Mono:wght@400..600&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500..900&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Alexandria:wght@300..900&family=JetBrains+Mono:wght@400..600&display=swap',
         },
       ],
     },
