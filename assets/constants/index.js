@@ -143,6 +143,27 @@ export const projects = [
         featured: true,
     },
     {
+        name: "Scheduler Pro",
+        tagline: "Scheduling and Kanban for Filament",
+        description:
+            "A commercial Filament plugin that adds resource timelines, calendars, Gantt planning and Kanban boards to any panel, bound to your Eloquent models. It refuses double bookings and slots outside working hours, and one command generates a working widget from your tables.",
+        year: 2026,
+        role: "Founder",
+        platforms: "Filament plugin",
+        stack: ["Filament 4 & 5", "Livewire", "Laravel", "Pest"],
+        cover: "calendar",
+        image: "/images/my_projects/scheduler-pro/cover.webp",
+        screenshot: true,
+        url: "/projects/scheduler-pro",
+        demo: "https://scheduler-pro.hoceine.com?ref=portfolio",
+        highlights: [
+            "Seven views, from timelines to Gantt and Kanban",
+            "Conflict, buffer and availability rules on every move",
+            "Filament 4 and 5, with full RTL",
+        ],
+        featured: true,
+    },
+    {
         name: "Dukanos",
         tagline: "Store, till and WhatsApp orders for small shops",
         description:
