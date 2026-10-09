@@ -164,6 +164,9 @@ export const projectsAr = {
     "/projects/radiant-emergency-plumber": { tagline: "موقع تسويقي لشركة سباكة في مانشستر" },
     "/projects/enhancing-video-delivery-in-lms": { tagline: "بث فيديو متكيّف لمنصة تعليمية" },
     "/projects/sosipo": { tagline: "نظام محاسبة لجمعية تابعة لوزارة" },
+    "/projects/filament-keyboard-shortcuts": { tagline: "اختصارات لوحة المفاتيح للوحات Filament", description: "اضغط ? لتظهر قائمة الاختصارات، و g ثم حرفًا للتنقل بين الصفحات." },
+    "/projects/filament-undo-toast": { tagline: "تراجع عن الحذف والتعديل في Filament", description: "بعد كل حذف أو تعديل يظهر إشعار فيه عدّ تنازلي وزر للتراجع." },
+    "/projects/filament-quick-action-dock": { tagline: "شريط إجراءات عائم للوحات Filament", description: "شريط قابل للسحب يضع أكثر الإجراءات استخدامًا في كل صفحة من اللوحة." },
     "/projects/nur-net": { tagline: "إضافة متصفح لحماية المحتوى" },
     "/projects/remind-me": { tagline: "إضافة للتذكير بالقرآن والأذكار" },
     "/projects/youtube-ad-skipper": { tagline: "إضافة متصفح لتخطي الإعلانات" },
@@ -171,6 +174,9 @@ export const projectsAr = {
 };
 
 export const openSourceAr = {
+    "filament-keyboard-shortcuts": "قائمة اختصارات قابلة للبحث، وتنقل بالحروف، ومفاتيح لصفوف الجداول في Filament.",
+    "filament-undo-toast": "إشعار تراجع بعدّ تنازلي بعد الحذف والاستعادة والتعديل وفك الارتباط في Filament.",
+    "filament-quick-action-dock": "شريط عائم قابل للسحب لأكثر الإجراءات استخدامًا في كل صفحة من Filament.",
     "filament-modular-subscriptions": "اشتراكات مرنة لـ Filament مع التسعير وحساب الاستهلاك.",
     "filament-usage-billing": "فوترة حسب الاستهلاك لتطبيقات Filament متعددة المستأجرين.",
     "laravel-modular-subscriptions": "اشتراكات بوحدات مخصصة لأي تطبيق لارافيل.",

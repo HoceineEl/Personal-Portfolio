@@ -372,6 +372,39 @@ export const projects = [
         featured: true,
     },
     {
+        name: "Keyboard Shortcuts",
+        tagline: "Keyboard navigation for Filament panels",
+        description: "Press ? for a searchable cheat sheet, g then a letter to jump between pages, and j/k to move through table rows. Free and open source.",
+        year: 2026,
+        stack: ["Filament 4 & 5", "Livewire", "Alpine.js"],
+        image: "/images/my_projects/filament-keyboard-shortcuts/cover.webp",
+        url: "/projects/filament-keyboard-shortcuts",
+        demo: "https://filamentphp.com/plugins/hocein-el-idrissi-keyboard-shortcuts",
+        source: "https://github.com/HoceineEl/filament-keyboard-shortcuts",
+    },
+    {
+        name: "Undo Toast",
+        tagline: "Undo for delete, edit and detach in Filament",
+        description: "Every delete, restore, edit or detach shows a toast with a countdown and an Undo button, or Ctrl+Z. Hard deletes come back with their relations. Free and open source.",
+        year: 2026,
+        stack: ["Filament 4 & 5", "Livewire", "Alpine.js"],
+        image: "/images/my_projects/filament-undo-toast/cover.webp",
+        url: "/projects/filament-undo-toast",
+        demo: "https://filamentphp.com/plugins/hocein-el-idrissi-undo-toast",
+        source: "https://github.com/HoceineEl/filament-undo-toast",
+    },
+    {
+        name: "Quick Action Dock",
+        tagline: "A floating dock of actions for Filament",
+        description: "A draggable dock with your most used actions on every page of the panel. It remembers where each user put it, and you decide who sees which action. Free and open source.",
+        year: 2026,
+        stack: ["Filament 4 & 5", "Livewire", "Alpine.js"],
+        image: "/images/my_projects/filament-quick-action-dock/cover.webp",
+        url: "/projects/filament-quick-action-dock",
+        demo: "https://filamentphp.com/plugins/hocein-el-idrissi-quick-action-dock",
+        source: "https://github.com/HoceineEl/filament-quick-action-dock",
+    },
+    {
         name: "Eisar Reserve",
         tagline: "Room reservation system",
         description: "Bookings, calendar views and a themeable Filament admin for managing rooms and guests.",
@@ -460,6 +493,21 @@ export const projects = [
 ];
 
 export const openSource = [
+    {
+        name: "filament-keyboard-shortcuts",
+        body: "Searchable shortcut sheet, g-chord navigation and table row keys for Filament.",
+        url: "https://github.com/HoceineEl/filament-keyboard-shortcuts",
+    },
+    {
+        name: "filament-undo-toast",
+        body: "An undo toast with a countdown after delete, restore, edit and detach in Filament.",
+        url: "https://github.com/HoceineEl/filament-undo-toast",
+    },
+    {
+        name: "filament-quick-action-dock",
+        body: "A draggable floating dock of your most used actions on every Filament page.",
+        url: "https://github.com/HoceineEl/filament-quick-action-dock",
+    },
     {
         name: "filament-modular-subscriptions",
         body: "Modular subscriptions for Filament with pricing and usage calculation.",
