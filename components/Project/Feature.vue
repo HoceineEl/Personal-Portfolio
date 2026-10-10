@@ -5,6 +5,7 @@ const { t } = useI18n();
 defineProps({
   project: { type: Object, required: true },
   large: { type: Boolean, default: false },
+  small: { type: Boolean, default: false },
   eager: { type: Boolean, default: false },
 });
 </script>
@@ -15,16 +16,17 @@ defineProps({
     <div :class="large && 'lg:col-span-4 lg:pb-2'">
       <div class="flex items-start justify-between gap-6" :class="large ? '' : 'mt-5'">
         <div>
-          <h3 class="wide break-words font-extrabold tracking-tight" :class="large ? 'text-display-md lg:text-[2.75rem]' : 'text-display-sm'">
+          <h3 class="wide break-words font-extrabold tracking-tight" :class="large ? 'text-display-md lg:text-[2.75rem]' : small ? 'text-xl' : 'text-display-sm'">
             <NuxtLink :to="localePath(project.url)" class="after:absolute after:inset-0 after:content-['']">
               {{ project.name }}
             </NuxtLink>
           </h3>
-          <p class="mt-2 text-muted" :class="large && 'text-lg'">{{ project.tagline }}</p>
+          <p class="mt-2 text-muted" :class="large ? 'text-lg' : small && 'text-[0.95rem]'">{{ project.tagline }}</p>
         </div>
         <span
           v-if="!large"
-          class="mt-1 grid h-11 w-11 shrink-0 place-items-center rounded-full text-lg ring-1 ring-inset ring-line/15 transition-colors duration-300 group-hover:bg-sun group-hover:text-on-sun group-hover:ring-sun"
+          :class="small ? 'h-9 w-9 text-base' : 'h-11 w-11 text-lg'"
+          class="mt-1 grid shrink-0 place-items-center rounded-full ring-1 ring-inset ring-line/15 transition-colors duration-300 group-hover:bg-sun group-hover:text-on-sun group-hover:ring-sun"
           aria-hidden="true"
         >
           <UiIcon name="arrow-up-right" class="flip-rtl" />
@@ -41,7 +43,7 @@ defineProps({
         {{ t("work.view") }}
         <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
       </p>
-      <ul class="mt-5 flex flex-wrap gap-2" :aria-label="t('work.stack')">
+      <ul class="flex flex-wrap gap-2" :class="small ? 'mt-4' : 'mt-5'" :aria-label="t('work.stack')">
         <li class="chip font-mono tabular-nums">{{ project.year }}</li>
         <li v-for="item in project.stack" :key="item" class="chip">{{ item }}</li>
       </ul>

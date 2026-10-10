@@ -381,6 +381,7 @@ export const projects = [
         url: "/projects/filament-keyboard-shortcuts",
         demo: "https://filamentphp.com/plugins/hocein-el-idrissi-keyboard-shortcuts",
         source: "https://github.com/HoceineEl/filament-keyboard-shortcuts",
+        plugin: true,
     },
     {
         name: "Undo Toast",
@@ -392,6 +393,7 @@ export const projects = [
         url: "/projects/filament-undo-toast",
         demo: "https://filamentphp.com/plugins/hocein-el-idrissi-undo-toast",
         source: "https://github.com/HoceineEl/filament-undo-toast",
+        plugin: true,
     },
     {
         name: "Quick Action Dock",
@@ -403,6 +405,7 @@ export const projects = [
         url: "/projects/filament-quick-action-dock",
         demo: "https://filamentphp.com/plugins/hocein-el-idrissi-quick-action-dock",
         source: "https://github.com/HoceineEl/filament-quick-action-dock",
+        plugin: true,
     },
     {
         name: "Eisar Reserve",

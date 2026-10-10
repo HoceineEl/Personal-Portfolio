@@ -31,6 +31,7 @@
   },
   "work": {
     "title": "Selected Laravel work",
+    "plugins": "Open-source Filament plugins",
     "intro": "Web platforms, installable web apps and a commercial Filament plugin, in production since 2023 and several of them in Arabic. A few up close:",
     "more": "More projects",
     "all": "All {count} projects",

@@ -3,8 +3,9 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { projects, profile } = useSiteData();
 
-const featured = computed(() => projects.value.filter((project) => project.featured));
-const others = computed(() => projects.value.filter((project) => !project.featured));
+const featured = computed(() => projects.value.filter((project) => project.featured && !project.plugin));
+const plugins = computed(() => projects.value.filter((project) => project.plugin));
+const others = computed(() => projects.value.filter((project) => !project.featured && !project.plugin));
 
 usePageSeo({
   title: t("seo.projectsTitle"),
@@ -55,6 +56,13 @@ useJsonLd([
         :class="index % 2 === 1 && 'md:mt-24'"
       />
     </div>
+
+    <section class="mt-24 md:mt-32" aria-labelledby="plugins-title">
+      <h2 id="plugins-title" class="text-xl font-semibold">{{ t("work.plugins") }}</h2>
+      <div class="mt-6 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <ProjectFeature v-for="project in plugins" :key="project.url" :project="project" small class="reveal" />
+      </div>
+    </section>
 
     <section class="mt-24 md:mt-32" aria-labelledby="earlier-title">
       <h2 id="earlier-title" class="text-xl font-semibold">{{ t("projects.earlier") }}</h2>

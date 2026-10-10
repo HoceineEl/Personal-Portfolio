@@ -3,10 +3,11 @@ const { t } = useI18n();
 const localePath = useLocalePath();
 const { projects } = useSiteData();
 
-const featured = computed(() => projects.value.filter((project) => project.featured));
+const featured = computed(() => projects.value.filter((project) => project.featured && !project.plugin));
+const plugins = computed(() => projects.value.filter((project) => project.plugin));
 const lead = computed(() => featured.value[0]);
 const pairs = computed(() => featured.value.slice(1, 8));
-const others = computed(() => [...featured.value.slice(8), ...projects.value.filter((project) => !project.featured).slice(0, 3)]);
+const others = computed(() => [...featured.value.slice(8), ...projects.value.filter((project) => !project.featured && !project.plugin).slice(0, 3)]);
 const isLoneLast = (index) => pairs.value.length % 2 === 1 && index === pairs.value.length - 1;
 const layout = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:col-span-7 md:mt-16"];
 </script>
@@ -33,6 +34,13 @@ const layout = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:
         class="reveal"
         :class="isLoneLast(index) ? 'md:col-span-12' : layout[index % 4]"
       />
+    </div>
+
+    <div class="mt-24 md:mt-32">
+      <h3 class="text-xl font-semibold">{{ t("work.plugins") }}</h3>
+      <div class="mt-6 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+        <ProjectFeature v-for="project in plugins" :key="project.url" :project="project" small class="reveal" />
+      </div>
     </div>
 
     <div class="mt-24 md:mt-32">

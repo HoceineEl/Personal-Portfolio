@@ -12,7 +12,7 @@ const content = computed(() => (hasSidebar.value ? { x: 92, w: 288 } : { x: 20, 
 </script>
 
 <template>
-  <div class="cover relative isolate aspect-[3/2] overflow-hidden rounded-[1.75rem] bg-raised">
+  <div class="cover relative isolate overflow-hidden rounded-[1.75rem] bg-raised" :class="project.plugin ? 'aspect-video' : 'aspect-[3/2]'">
     <template v-if="project.phones">
       <div class="cover-light blinds absolute inset-0 -z-10" aria-hidden="true" />
       <div class="cover-window absolute inset-x-0 top-[10%] flex items-start justify-center gap-[3%]">
