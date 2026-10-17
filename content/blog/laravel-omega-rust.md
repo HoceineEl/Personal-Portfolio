@@ -6,7 +6,8 @@ tags:
   - Rust
   - Inertia.js
   - News
-noImage: true
+image: /images/blog/laravel-omega/cover.jpg
+banner: /images/blog/laravel-omega/cover.jpg
 createdAt: 2026-10-17T10:00:00.000Z
 updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
