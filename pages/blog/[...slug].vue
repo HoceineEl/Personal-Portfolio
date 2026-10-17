@@ -6,7 +6,7 @@ const { t, locale } = useI18n();
 const localePath = useLocalePath();
 const { profile, section } = useSiteData();
 const path = route.path.replace(/\/$/, "");
-const fields = ["title", "path", "description", "createdAt", "tags", "minutes"];
+const fields = ["title", "path", "description", "createdAt", "tags", "minutes", "image"];
 
 const { data } = await useAsyncData(`post-${path}`, async () => {
   const [post, surround, pool] = await Promise.all([

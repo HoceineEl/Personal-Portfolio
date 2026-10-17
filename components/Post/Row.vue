@@ -11,7 +11,17 @@ const locale = computed(() => props.locale || siteLocale.value);
 </script>
 
 <template>
-  <article class="group relative grid gap-x-8 gap-y-2 border-b border-line/15 py-7 md:grid-cols-[9rem_1fr_auto]">
+  <article class="group relative grid gap-x-8 gap-y-2 border-b border-line/15 py-7 md:grid-cols-[9rem_1fr_auto]" :class="{ 'lg:grid-cols-[9rem_1fr_15rem]': post.image }">
+    <NuxtImg
+      v-if="post.image"
+      :src="post.image"
+      alt=""
+      width="1200"
+      height="630"
+      sizes="xs:100vw md:240px"
+      loading="lazy"
+      class="mb-3 aspect-[1200/630] w-full rounded-xl bg-raised object-cover ring-1 ring-line/15 transition duration-300 group-hover:ring-sun md:hidden lg:order-last lg:mb-0 lg:block"
+    />
     <time :datetime="post.createdAt" class="font-mono text-sm tabular-nums text-muted md:pt-1.5">
       {{ useFormatDate(post.createdAt, "short", locale) }}
     </time>
@@ -24,8 +34,9 @@ const locale = computed(() => props.locale || siteLocale.value);
       </p>
       <ul v-if="post.tags?.length" class="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm text-muted" :aria-label="t('post.topics', {}, { locale })">
         <li v-for="tag in post.tags.slice(0, 3)" :key="tag">#{{ tag.replace(/\s+/g, "") }}</li>
+        <li v-if="post.minutes && post.image" class="hidden lg:block">· {{ t("post.minutes", { count: post.minutes }, { locale }) }}</li>
       </ul>
     </div>
-    <p v-if="post.minutes" class="hidden whitespace-nowrap text-sm text-muted md:block md:pt-1.5">{{ t("post.minutes", { count: post.minutes }, { locale }) }}</p>
+    <p v-if="post.minutes" class="hidden whitespace-nowrap text-sm text-muted md:block md:pt-1.5" :class="{ 'lg:hidden': post.image }">{{ t("post.minutes", { count: post.minutes }, { locale }) }}</p>
   </article>
 </template>

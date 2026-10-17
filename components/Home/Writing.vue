@@ -3,7 +3,7 @@ const { t, locale } = useI18n();
 const { data } = await useAsyncData("home-writing", async () => {
   const [posts, count] = await Promise.all([
     queryCollection("blog")
-      .select("title", "path", "description", "createdAt", "tags", "minutes")
+      .select("title", "path", "description", "createdAt", "tags", "minutes", "image")
       .order("createdAt", "DESC")
       .limit(5)
       .all(),

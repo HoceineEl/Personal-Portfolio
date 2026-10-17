@@ -8,7 +8,7 @@ const PER_PAGE = 12;
 
 const { data: posts } = await useAsyncData(`blog-index-${locale.value}`, () =>
   queryCollection("blog")
-    .select("title", "path", "description", "createdAt", "tags", "minutes")
+    .select("title", "path", "description", "createdAt", "tags", "minutes", "image")
     .order("createdAt", "DESC")
     .all()
 );
@@ -85,12 +85,27 @@ useJsonLd([
       class="group relative mt-14 grid gap-8 overflow-hidden rounded-[2rem] bg-sun p-8 text-on-sun md:mt-20 md:grid-cols-12 md:p-12"
     >
       <div class="latest-light absolute inset-y-0 right-0 w-1/2" aria-hidden="true" />
-      <div class="relative md:col-span-8">
+      <div class="relative flex flex-col" :class="latest.image ? 'md:col-span-6' : 'md:col-span-8'">
         <p class="text-sm font-semibold">{{ t("blog.latest", { date: useFormatDate(latest.createdAt, "long", locale) }) }}</p>
-        <h2 class="wide mt-4 text-display-md font-black">{{ latest.title }}</h2>
+        <h2 class="wide mt-4 font-black" :class="latest.image ? 'text-display-sm' : 'text-display-md'">{{ latest.title }}</h2>
         <p class="mt-5 max-w-2xl text-lg leading-relaxed text-on-sun/80">{{ latest.description }}</p>
+        <span v-if="latest.image" class="mt-8 inline-flex items-center gap-2 self-start rounded-full bg-on-sun px-5 py-3 font-semibold text-sun">
+          {{ t("blog.read") }}
+          <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+        </span>
       </div>
-      <div class="relative flex items-end md:col-span-4 md:justify-end">
+      <div v-if="latest.image" class="relative md:col-span-6 md:self-center">
+        <NuxtImg
+          :src="latest.image"
+          alt=""
+          width="1200"
+          height="630"
+          sizes="xs:100vw md:50vw xl:640px"
+          loading="eager"
+          class="aspect-[1200/630] w-full rounded-2xl object-cover ring-1 ring-on-sun/15 transition-transform duration-500 md:rotate-[1.5deg] md:group-hover:rotate-0"
+        />
+      </div>
+      <div v-else class="relative flex items-end md:col-span-4 md:justify-end">
         <span class="inline-flex items-center gap-2 rounded-full bg-on-sun px-5 py-3 font-semibold text-sun">
           {{ t("blog.read") }}
           <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
