@@ -1,436 +1,37 @@
 ---
-title: "PHP 8.4 Property Hooks: Getters and Setters Reimagined"
-description: Master PHP 8.4 property hooks. Learn get/set hooks, asymmetric visibility, virtual properties, and how they replace traditional getters and setters.
+title: "PHP 8.4 Property Hooks and Asymmetric Visibility in a Laravel Codebase"
+description: How property hooks and private(set) change DTOs and value objects in Laravel apps, the rules that catch people out, and why you should not try to use them on Eloquent model attributes.
 tags:
   - PHP
   - PHP 8.4
+  - Laravel
   - Backend
-noImage: true
+image: /images/blog/php-84-property-hooks/cover.jpg
+banner: /images/blog/php-84-property-hooks/cover.jpg
 createdAt: 2025-05-15T10:00:00.000Z
-updatedAt: 2025-05-15T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# PHP 8.4 Property Hooks: Getters and Setters Reimagined
+## PHP 8.4 Property Hooks and Asymmetric Visibility in a Laravel Codebase
 
-**PHP 8.4** introduces property hooks, a game-changing feature that lets you define get and set logic directly on properties. Say goodbye to boilerplate getter and setter methods.
+For years the choice for a PHP class that holds data was between public properties, which anyone
+can overwrite, and private properties with a `getX()`/`setX()` pair for each one. `readonly` in
+8.1 helped, but it is all or nothing: once set, nobody can change it, including the class itself.
 
-## The Problem with Traditional Getters/Setters
+PHP 8.4 added two features that fill the gap. [Property hooks](https://www.php.net/manual/en/language.oop5.property-hooks.php)
+let a property run code when it is read or written. [Asymmetric visibility](https://www.php.net/manual/en/language.oop5.visibility.php)
+lets a property be public to read and private to write. Together they remove most of the getter
+and setter boilerplate that DTOs and value objects used to carry.
 
-```php
-// Before PHP 8.4: Verbose and boilerplate-heavy
-class User
-{
-    private string $firstName;
-    private string $lastName;
+This post is about where they fit in a Laravel app, and the one place they do not: Eloquent
+models.
 
-    public function getFirstName(): string
-    {
-        return $this->firstName;
-    }
+### The syntax in two minutes
 
-    public function setFirstName(string $value): void
-    {
-        $this->firstName = trim($value);
-    }
-
-    public function getLastName(): string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $value): void
-    {
-        $this->lastName = trim($value);
-    }
-
-    public function getFullName(): string
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-}
-```
-
-## Property Hooks Syntax
+A hooked property replaces the trailing semicolon with a block:
 
 ```php
-// PHP 8.4: Clean and expressive
-class User
-{
-    public string $firstName {
-        set => trim($value);
-    }
-
-    public string $lastName {
-        set => trim($value);
-    }
-
-    public string $fullName {
-        get => $this->firstName . ' ' . $this->lastName;
-    }
-}
-
-$user = new User();
-$user->firstName = '  John  ';  // Automatically trimmed
-$user->lastName = '  Doe  ';    // Automatically trimmed
-echo $user->fullName;            // "John Doe"
-```
-
-## Get Hooks
-
-### Basic Get Hook
-
-```php
-class Product
-{
-    public float $price;
-    public float $taxRate = 0.20;
-
-    public float $priceWithTax {
-        get => $this->price * (1 + $this->taxRate);
-    }
-}
-
-$product = new Product();
-$product->price = 100;
-echo $product->priceWithTax; // 120
-```
-
-### Multi-Line Get Hook
-
-```php
-class Order
-{
-    public array $items = [];
-
-    public float $total {
-        get {
-            $sum = 0;
-            foreach ($this->items as $item) {
-                $sum += $item['price'] * $item['quantity'];
-            }
-            return $sum;
-        }
-    }
-}
-```
-
-## Set Hooks
-
-### Basic Set Hook
-
-```php
-class Email
-{
-    public string $address {
-        set => strtolower(trim($value));
-    }
-}
-
-$email = new Email();
-$email->address = '  JOHN@EXAMPLE.COM  ';
-echo $email->address; // "john@example.com"
-```
-
-### Set Hook with Validation
-
-```php
-class User
-{
-    public int $age {
-        set {
-            if ($value < 0 || $value > 150) {
-                throw new InvalidArgumentException('Age must be between 0 and 150');
-            }
-            $this->age = $value;
-        }
-    }
-}
-
-$user = new User();
-$user->age = 25;  // Works
-$user->age = 200; // Throws exception
-```
-
-### Set Hook with Type Coercion
-
-```php
-class Config
-{
-    public string $value {
-        set(string|int|bool $value) {
-            $this->value = match(true) {
-                is_bool($value) => $value ? 'true' : 'false',
-                is_int($value) => (string) $value,
-                default => $value,
-            };
-        }
-    }
-}
-
-$config = new Config();
-$config->value = true;  // Stored as "true"
-$config->value = 42;    // Stored as "42"
-```
-
-## Combined Get and Set Hooks
-
-```php
-class Temperature
-{
-    private float $celsius;
-
-    public float $fahrenheit {
-        get => ($this->celsius * 9/5) + 32;
-        set {
-            $this->celsius = ($value - 32) * 5/9;
-        }
-    }
-
-    public float $celsius {
-        get => $this->celsius;
-        set {
-            if ($value < -273.15) {
-                throw new InvalidArgumentException('Temperature below absolute zero');
-            }
-            $this->celsius = $value;
-        }
-    }
-}
-
-$temp = new Temperature();
-$temp->celsius = 0;
-echo $temp->fahrenheit; // 32
-
-$temp->fahrenheit = 212;
-echo $temp->celsius;    // 100
-```
-
-## Virtual Properties
-
-Properties with only a get hook are virtual—they compute values without storing data:
-
-```php
-class Rectangle
-{
-    public function __construct(
-        public float $width,
-        public float $height,
-    ) {}
-
-    // Virtual property - no backing storage
-    public float $area {
-        get => $this->width * $this->height;
-    }
-
-    public float $perimeter {
-        get => 2 * ($this->width + $this->height);
-    }
-
-    public bool $isSquare {
-        get => $this->width === $this->height;
-    }
-}
-
-$rect = new Rectangle(10, 20);
-echo $rect->area;      // 200
-echo $rect->perimeter; // 60
-echo $rect->isSquare;  // false
-```
-
-## Asymmetric Visibility
-
-PHP 8.4 also introduces asymmetric visibility:
-
-```php
-class User
-{
-    // Public read, private write
-    public private(set) string $id;
-
-    // Public read, protected write
-    public protected(set) string $name;
-
-    public function __construct(string $name)
-    {
-        $this->id = uniqid();
-        $this->name = $name;
-    }
-}
-
-$user = new User('John');
-echo $user->id;   // Works (public read)
-$user->id = '123'; // Error! (private set)
-```
-
-### Combined with Hooks
-
-```php
-class Post
-{
-    public private(set) string $slug {
-        set => Str::slug($value);
-    }
-
-    public function __construct(
-        public string $title,
-    ) {
-        $this->slug = $title;
-    }
-}
-
-$post = new Post('Hello World');
-echo $post->slug;       // "hello-world"
-$post->slug = 'test';   // Error! Cannot set from outside
-```
-
-## Constructor Property Promotion with Hooks
-
-```php
-class Product
-{
-    public function __construct(
-        public string $name,
-        public float $price {
-            set {
-                if ($value < 0) {
-                    throw new InvalidArgumentException('Price cannot be negative');
-                }
-                $this->price = $value;
-            }
-        },
-    ) {}
-}
-```
-
-## Interface Compatibility
-
-```php
-interface HasFullName
-{
-    public string $fullName { get; }
-}
-
-class User implements HasFullName
-{
-    public function __construct(
-        public string $firstName,
-        public string $lastName,
-    ) {}
-
-    public string $fullName {
-        get => "$this->firstName $this->lastName";
-    }
-}
-```
-
-## Abstract Properties
-
-```php
-abstract class Model
-{
-    abstract public string $tableName { get; }
-}
-
-class User extends Model
-{
-    public string $tableName {
-        get => 'users';
-    }
-}
-```
-
-## Real-World Examples
-
-### Money Value Object
-
-```php
-class Money
-{
-    public function __construct(
-        private int $cents,
-    ) {}
-
-    public string $formatted {
-        get => '$' . number_format($this->cents / 100, 2);
-    }
-
-    public float $dollars {
-        get => $this->cents / 100;
-        set {
-            $this->cents = (int) ($value * 100);
-        }
-    }
-}
-
-$money = new Money(1999);
-echo $money->formatted; // "$19.99"
-echo $money->dollars;   // 19.99
-
-$money->dollars = 25.50;
-echo $money->formatted; // "$25.50"
-```
-
-### Entity with Timestamps
-
-```php
-class Entity
-{
-    public private(set) DateTimeImmutable $createdAt;
-    public private(set) DateTimeImmutable $updatedAt;
-
-    public function __construct()
-    {
-        $this->createdAt = new DateTimeImmutable();
-        $this->updatedAt = new DateTimeImmutable();
-    }
-
-    public string $createdAtFormatted {
-        get => $this->createdAt->format('M j, Y');
-    }
-
-    public function touch(): void
-    {
-        $this->updatedAt = new DateTimeImmutable();
-    }
-}
-```
-
-### Form Input
-
-```php
-class FormInput
-{
-    public string $value = '' {
-        set => htmlspecialchars(trim($value), ENT_QUOTES, 'UTF-8');
-    }
-
-    public bool $isEmpty {
-        get => $this->value === '';
-    }
-}
-```
-
-## Migration from Getters/Setters
-
-```php
-// Before
-class User
-{
-    private string $email;
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = strtolower(trim($email));
-    }
-}
-
-// After PHP 8.4
 class User
 {
     public string $email {
@@ -438,44 +39,251 @@ class User
     }
 }
 
-// Usage remains the same for property access
-$user->email = 'TEST@EXAMPLE.COM';
-echo $user->email; // "test@example.com"
+$user = new User();
+$user->email = '  Hoceine@Example.COM ';
+
+echo $user->email; // hoceine@example.com
 ```
 
-## Best Practices
-
-1. **Keep hooks simple** - Complex logic should be in methods
-2. **Use for computed values** - Virtual properties are perfect for derived data
-3. **Validate in setters** - Enforce invariants at the property level
-4. **Consider caching** - Expensive computations should cache results
+The short `set =>` form assigns the expression's result to the property. The long form gives you
+a body, and you assign to `$this->email` yourself:
 
 ```php
-class Report
-{
-    private ?array $cachedData = null;
-
-    public array $data {
-        get {
-            return $this->cachedData ??= $this->computeExpensiveData();
+public string $email {
+    set {
+        if (! filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            throw new InvalidArgumentException("Invalid email: {$value}");
         }
-    }
 
-    public function invalidateCache(): void
-    {
-        $this->cachedData = null;
+        $this->email = strtolower($value);
     }
 }
 ```
 
-## Conclusion
+A `get` hook works the same way. If none of the hooks refer to the property by its own name, the
+property is virtual: it has no storage, and it behaves like a computed value.
 
-PHP 8.4 property hooks eliminate boilerplate while making code more expressive. Combined with asymmetric visibility, you get fine-grained control over property access with minimal syntax.
+```php
+class Rectangle
+{
+    public function __construct(
+        public int $width,
+        public int $height,
+    ) {}
 
----
+    public int $area {
+        get => $this->width * $this->height;
+    }
+}
+```
 
-## Resources
+Writing to `$area` throws an `Error`, because it has no `set` hook.
 
-- [PHP 8.4 Release Notes](https://www.php.net/releases/8.4)
-- [Property Hooks RFC](https://wiki.php.net/rfc/property-hooks)
+Asymmetric visibility is a modifier on the property, not a hook:
 
+```php
+class Order
+{
+    public function __construct(
+        public private(set) string $status = 'pending',
+    ) {}
+
+    public function markPaid(): void
+    {
+        $this->status = 'paid';
+    }
+}
+
+$order = new Order();
+echo $order->status;      // pending
+$order->status = 'paid';  // Error: cannot modify private(set) property
+```
+
+### Rules that catch people out
+
+These come straight from the manual, and most of them show up as soon as you convert existing classes:
+
+- Hooks cannot be combined with `readonly`. If you want "set once, then frozen" plus custom
+  logic, use `private(set)` and a hook instead.
+- A separate set visibility needs a typed property. `public private(set) $status` without a type
+  is a compile error.
+- The set visibility can be narrower than the read visibility, never wider. `protected public(set)`
+  does not parse.
+- A `private(set)` property is implicitly `final`. A child class cannot redeclare it.
+- The `set` hook's parameter type must be the property type or wider. A `string` property can
+  accept `string|Stringable`, but not `array`.
+- With constructor promotion, the constructor parameter uses the property's declared type, not the
+  wider `set` type. The wider type only works when assigning after construction.
+- A backed array property with hooks only supports `&get`, so `$this->items[] = $x` from outside
+  will not go through a `set` hook. Replacing the whole array does.
+
+That last one matters for collection-like objects. If you want to guard every addition, expose a
+method such as `addItem()` and keep the array `private(set)`.
+
+### DTOs with `private(set)`
+
+Most DTOs are filled once from a request or an API response and then passed around. Before
+8.4 the honest options were `readonly` properties or a pile of getters. `readonly` is fine until
+the class needs to adjust its own value after construction, for example to normalise it.
+
+With asymmetric visibility the DTO stays a plain object to read, and only the class can write:
+
+```php
+namespace App\Data;
+
+use App\Http\Requests\StoreCustomerRequest;
+
+final class CustomerData
+{
+    public function __construct(
+        public private(set) string $name,
+        public private(set) string $email,
+        public private(set) ?string $phone = null,
+    ) {}
+
+    public static function fromRequest(StoreCustomerRequest $request): self
+    {
+        return new self(
+            name: $request->validated('name'),
+            email: $request->validated('email'),
+            phone: $request->validated('phone'),
+        );
+    }
+}
+```
+
+Code that receives a `CustomerData` reads `$data->email` directly. Nobody outside the class can
+assign to it. Compared with `readonly`, the class keeps the right to change its own state, which is
+the thing `readonly` never allowed.
+
+A good place for hooks in a DTO is normalisation that should happen no matter how the value arrives.
+Moved out of the constructor and into the class body, `$phone` looks like this:
+
+```php
+public private(set) ?string $phone = null {
+    set => $value === null ? null : preg_replace('/\D+/', '', $value);
+}
+```
+
+The constructor then assigns `$this->phone = $phone`. Every assignment, from there or from anywhere else inside the class, goes through that hook, so there
+is no way to end up with a formatted and an unformatted phone number in the same app.
+
+### Value objects with hooks
+
+Value objects are where virtual properties earn their keep. A money object stores minor units and
+exposes derived views of them:
+
+```php
+namespace App\Support;
+
+use InvalidArgumentException;
+
+final class Money
+{
+    public function __construct(
+        public private(set) int $amount {
+            set {
+                if ($value < 0) {
+                    throw new InvalidArgumentException('Amount cannot be negative.');
+                }
+
+                $this->amount = $value;
+            }
+        },
+        public private(set) string $currency = 'USD',
+    ) {}
+
+    public float $decimal {
+        get => $this->amount / 100;
+    }
+
+    public function add(Money $other): self
+    {
+        if ($other->currency !== $this->currency) {
+            throw new InvalidArgumentException('Currency mismatch.');
+        }
+
+        return new self($this->amount + $other->amount, $this->currency);
+    }
+}
+```
+
+`$money->decimal` reads like a property, costs no storage, and can never disagree with `$amount`.
+The constructor check runs through the hook, so an invalid object cannot be built. And
+`private(set)` means the object only changes through methods that return a new instance.
+
+Before 8.4 this class would have had `getAmount()`, `getCurrency()` and `getDecimal()`. The class is
+not much shorter now, but the call sites are cleaner: `$total->decimal` instead of
+`$total->getDecimal()`.
+
+### Interfaces can require properties
+
+Interfaces can declare properties with the hooks an implementer must support:
+
+```php
+interface HasLabel
+{
+    public string $label { get; }
+}
+
+final class PlanData implements HasLabel
+{
+    public function __construct(
+        public private(set) string $name,
+        public private(set) int $seats,
+    ) {}
+
+    public string $label {
+        get => "{$this->name} ({$this->seats} seats)";
+    }
+}
+```
+
+`{ get; }` means "readable". A plain public property satisfies it, and so does a virtual property
+with only a `get` hook. Before 8.4 this contract had to be a `getLabel()` method.
+
+### Why not on Eloquent models
+
+This is a common question, and the answer is short: do not put hooks or asymmetric visibility
+on properties that map to database columns.
+
+Eloquent stores attributes in an internal `$attributes` array and exposes them through `__get()` and
+`__set()`. PHP only calls those magic methods when the property does not exist on the class. The
+moment you declare `public string $email { ... }` on a model, it is a real property, and PHP uses
+it instead of the magic. `$user->email` now reads your property, not the column. `save()` will not
+see what you assigned, and `fill()` and `toArray()` work on `$attributes`, so they will not see it
+either. You have two copies of the field that do not know about each other.
+
+Laravel already has a hook mechanism for model attributes:
+[accessors and mutators](https://laravel.com/docs/12.x/eloquent-mutators) through
+`Attribute::make()`, plus casts. Keep using those:
+
+```php
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
+protected function email(): Attribute
+{
+    return Attribute::make(
+        set: fn (string $value) => strtolower(trim($value)),
+    );
+}
+```
+
+Where the two features meet is casting to a value object. A custom cast can turn an `amount`
+column into the `Money` class above, and from then on the rest of the app gets hooks and
+`private(set)` without the model needing either.
+
+Plain properties on a model that are not columns, like a cached flag on a service object, are a
+different story. But on models those are rare, so a simple rule works: hooks in
+DTOs, value objects, and services; Eloquent's own tools on models.
+
+### What not to convert
+
+Not every getter needs to become a hook. If reading a value runs a query, calls an API or does
+anything slow, leave it as a method. `$order->total` looks free to the reader; `$order->total()`
+at least hints that work happens. Hooks hide cost, and a property access that sends an HTTP request
+is a bug waiting for someone who loops over it.
+
+There is also little reason to rewrite stable classes just to use new syntax. Changing `getEmail()` to `$email`
+changes the public API, and every caller has to move with it. Hooks pay off in new code and when you are
+already refactoring a class for another reason.

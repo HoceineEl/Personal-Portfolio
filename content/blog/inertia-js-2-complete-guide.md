@@ -1,505 +1,258 @@
 ---
-title: "Inertia.js 2.0: Complete Guide to All New Features"
-description: Master Inertia.js 2.0's game-changing features - async requests, deferred props, polling, prefetching, infinite scroll, WhenVisible, and history encryption.
+title: "The Inertia 2 Features Worth Using: Deferred Props, Polling, Prefetching and Infinite Scroll"
+description: A practical tour of the Inertia 2 data-loading features that change how Laravel pages feel, with a worked dashboard example, the history encryption detail most posts get wrong, and a note on Inertia 3.
 tags:
   - Inertia.js
   - Laravel
   - Vue
   - React
   - SPA
-noImage: true
+image: /images/blog/inertia-2/cover.jpg
+banner: /images/blog/inertia-2/cover.jpg
 createdAt: 2025-05-28T10:00:00.000Z
-updatedAt: 2025-05-28T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Inertia.js 2.0: Complete Guide to All New Features
+## The Inertia 2 Features Worth Using
 
-**Inertia.js 2.0** brings a completely rewritten request handling layer that enables asynchronous operations, unlocking powerful new features while maintaining seamless Laravel integration with Vue, React, and Svelte.
+Inertia 1 had one way to get data onto a page: the controller returned every prop, and the page
+waited for all of them. If one query was slow, the whole navigation was slow. Inertia 2 rewrote the
+request layer so a page can ask for data in pieces, after it renders, when it scrolls into view, or
+before the user even clicks.
 
-## What's New in Inertia 2.0
+This post covers the features from that release that matter most in real Laravel apps, with Vue
+examples (React and Svelte have the same components and hooks).
 
-The headline features include:
-- Asynchronous requests
-- Deferred props
-- Prefetching
-- Polling
-- Infinite scrolling
-- WhenVisible component
-- History encryption
+A version note first. **Inertia 3 is out.** At the time of writing the latest release on
+[GitHub](https://github.com/inertiajs/inertia/releases) is v3.9.1, with v2.3.x still getting
+patches. Everything below works in v3 too; the [v3 upgrade guide](https://inertiajs.com/docs/v3/getting-started/upgrade-guide)
+lists what moved (more on that at the end).
 
-## 1. Asynchronous Requests
+### Deferred props: render first, query later
 
-Previously, all Inertia requests were synchronous—each new request would cancel the previous one. In 2.0, requests can run simultaneously without blocking the UI.
+This is the feature that pays for the upgrade. Wrap a prop in `Inertia::defer()` and Inertia leaves
+it out of the first response. Once the page has rendered, the client fires a follow-up request for
+the deferred props.
 
-### The Async Property
-
-```vue
-<script setup>
-import { Link } from '@inertiajs/vue3'
-</script>
-
-<template>
-    <!-- Async request - doesn't show loading indicator -->
-    <Link
-        method="put"
-        :href="`/settings/${id}`"
-        :data="{ enabled: !enabled }"
-        async
-    >
-        Toggle Setting
-    </Link>
-</template>
-```
-
-### Optimistic UI Updates
-
-Because async requests don't block, you can update the UI immediately:
-
-```vue
-<script setup>
-import { router } from '@inertiajs/vue3'
-import { ref } from 'vue'
-
-const isEnabled = ref(false)
-
-const toggle = () => {
-    // Update UI immediately (optimistic)
-    isEnabled.value = !isEnabled.value
-
-    // Send request in background
-    router.put('/settings/theme', {
-        enabled: isEnabled.value
-    }, {
-        async: true,
-        onError: () => {
-            // Revert on failure
-            isEnabled.value = !isEnabled.value
-        }
-    })
-}
-</script>
-
-<template>
-    <button @click="toggle">
-        {{ isEnabled ? 'Enabled' : 'Disabled' }}
-    </button>
-</template>
-```
-
-## 2. Deferred Props
-
-Load heavy data after the initial page render. Critical data appears immediately, while expensive queries load in the background.
-
-### Backend Setup
+Take a dashboard where the header is cheap and the stats are not:
 
 ```php
-// app/Http/Controllers/DashboardController.php
 use Inertia\Inertia;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response
     {
         return Inertia::render('Dashboard', [
-            // Loads immediately
-            'user' => auth()->user(),
-            'notifications' => auth()->user()->unreadNotifications()->limit(5)->get(),
-
-            // Deferred - loads after page renders
-            'stats' => Inertia::defer(fn () => $this->calculateStats()),
-            'recentOrders' => Inertia::defer(fn () => Order::with('customer')
-                ->latest()
-                ->limit(10)
-                ->get()
-            ),
-            'chartData' => Inertia::defer(fn () => $this->getChartData()),
+            'user' => auth()->user()->only('id', 'name'),
+            'stats' => Inertia::defer(fn () => $this->stats()),
+            'revenue' => Inertia::defer(fn () => $this->revenueChart(), 'charts'),
+            'signups' => Inertia::defer(fn () => $this->signupChart(), 'charts'),
         ]);
     }
 }
 ```
 
-### Frontend Handling
+The second argument is a group name. Props in the same group come back in one request; ungrouped
+deferred props are fetched in a separate one. Here `stats` loads in its own request and the two
+charts load together, so a slow chart query does not hold up the stat cards.
+
+On the page, `<Deferred>` waits for the props it names and shows a fallback until then:
 
 ```vue
 <script setup>
 import { Deferred } from '@inertiajs/vue3'
 
-defineProps({
-    user: Object,
-    notifications: Array,
-    stats: Object,
-    recentOrders: Array,
-    chartData: Object,
-})
+defineProps({ user: Object, stats: Object, revenue: Array, signups: Array })
 </script>
 
 <template>
-    <!-- Shows immediately -->
-    <header>
-        <h1>Welcome, {{ user.name }}</h1>
-        <NotificationBell :count="notifications.length" />
-    </header>
+  <h1>Welcome back, {{ user.name }}</h1>
 
-    <!-- Deferred content with loading state -->
-    <Deferred :data="['stats']">
-        <template #fallback>
-            <div class="animate-pulse">
-                <div class="h-24 bg-gray-200 rounded"></div>
-            </div>
-        </template>
+  <Deferred data="stats">
+    <template #fallback>
+      <StatCardsSkeleton />
+    </template>
+    <StatCards :stats="stats" />
+  </Deferred>
 
-        <StatsCards :stats="stats" />
-    </Deferred>
-
-    <Deferred :data="['recentOrders', 'chartData']">
-        <template #fallback>
-            <Skeleton />
-        </template>
-
-        <OrdersTable :orders="recentOrders" />
-        <RevenueChart :data="chartData" />
-    </Deferred>
+  <Deferred :data="['revenue', 'signups']">
+    <template #fallback>
+      <ChartSkeleton />
+    </template>
+    <RevenueChart :points="revenue" />
+    <SignupChart :points="signups" />
+  </Deferred>
 </template>
 ```
 
-### Grouped Deferred Props
+The trade-off is an extra round trip. For a prop that takes 20ms, deferring it makes the page
+slower overall, because you pay for a second request plus a skeleton flash. Only defer props that
+are slow enough that a user would notice the navigation hanging: aggregates, reports, anything
+that hits an external API.
 
-Load related props together:
+### Load when visible
+
+Deferred props load as soon as the page renders. Some data does not need to load at all unless the
+user scrolls to it, like comments under an article. For that, pair an optional prop on the server
+with `<WhenVisible>` on the client.
 
 ```php
-return Inertia::render('Analytics', [
-    // Group 1: Charts (load together)
-    'revenueChart' => Inertia::defer(fn () => $this->getRevenueData())->group('charts'),
-    'usersChart' => Inertia::defer(fn () => $this->getUsersData())->group('charts'),
-
-    // Group 2: Tables (load together)
-    'topProducts' => Inertia::defer(fn () => $this->getTopProducts())->group('tables'),
-    'topCustomers' => Inertia::defer(fn () => $this->getTopCustomers())->group('tables'),
-]);
-```
-
-## 3. Prefetching
-
-Load pages before the user navigates to them for instant transitions.
-
-### Link Prefetching
-
-```vue
-<template>
-    <!-- Prefetch on hover (default) -->
-    <Link href="/users" prefetch>Users</Link>
-
-    <!-- Prefetch immediately on mount -->
-    <Link href="/dashboard" prefetch="mount">Dashboard</Link>
-
-    <!-- Prefetch on hover with cache duration -->
-    <Link
-        href="/settings"
-        prefetch="hover"
-        :cacheFor="['5s', '1m']"
-    >
-        Settings
-    </Link>
-</template>
-```
-
-### Manual Prefetching
-
-```vue
-<script setup>
-import { router } from '@inertiajs/vue3'
-
-// Prefetch when component mounts
-onMounted(() => {
-    router.prefetch('/users', { method: 'get' })
-})
-
-// Or prefetch with specific props
-router.prefetch('/dashboard', {
-    method: 'get',
-    data: { period: 'week' }
-})
-</script>
-```
-
-### Cache Control
-
-```vue
-<Link
-    href="/reports"
-    prefetch="hover"
-    :cacheFor="['30s', '5m']"
->
-    <!-- First value: stale time (use cache) -->
-    <!-- Second value: cache time (keep in memory) -->
-    Reports
-</Link>
-```
-
-## 4. Polling
-
-Keep your UI in sync with server state automatically.
-
-### Basic Polling
-
-```vue
-<script setup>
-import { usePoll } from '@inertiajs/vue3'
-
-// Poll every 5 seconds, only refresh 'notifications'
-usePoll(5000, {
-    only: ['notifications'],
-})
-</script>
-```
-
-### Controlled Polling
-
-```vue
-<script setup>
-import { usePoll } from '@inertiajs/vue3'
-import { ref } from 'vue'
-
-const visitorCount = ref(0)
-
-const { start, stop } = usePoll(3000, {
-    only: ['visitorCount'],
-    onSuccess: (response) => {
-        visitorCount.value = response.props.visitorCount
-    }
-}, {
-    keepAlive: true,    // Continue polling when tab is hidden
-    autoStart: true,    // Start automatically
-})
-
-// Manual control
-const pausePolling = () => stop()
-const resumePolling = () => start()
-</script>
-
-<template>
-    <div>
-        <p>Live visitors: {{ visitorCount }}</p>
-        <button @click="pausePolling">Pause</button>
-        <button @click="resumePolling">Resume</button>
-    </div>
-</template>
-```
-
-### Real-World: Live Dashboard
-
-```vue
-<script setup>
-import { usePoll } from '@inertiajs/vue3'
-
-defineProps({
-    leaderboard: Array,
-    liveStats: Object,
-})
-
-// Update leaderboard every 10 seconds
-usePoll(10000, {
-    only: ['leaderboard', 'liveStats'],
-})
-</script>
-
-<template>
-    <LiveStatsBar :stats="liveStats" />
-    <Leaderboard :entries="leaderboard" />
-</template>
-```
-
-## 5. WhenVisible Component
-
-Load data only when elements scroll into view using the Intersection Observer API.
-
-### Basic Usage
-
-```php
-// Controller
 return Inertia::render('Posts/Show', [
     'post' => $post,
-    // Optional props - only loaded when requested
-    'comments' => Inertia::optional(fn () => $post->comments()->with('author')->get()),
-    'relatedPosts' => Inertia::optional(fn () => $post->related()->limit(5)->get()),
+    'comments' => Inertia::optional(fn () => $post->comments()->with('author')->latest()->get()),
 ]);
 ```
 
-```vue
-<script setup>
-import { WhenVisible } from '@inertiajs/vue3'
-
-defineProps({
-    post: Object,
-    comments: Array,
-    relatedPosts: Array,
-})
-</script>
-
-<template>
-    <article>
-        <h1>{{ post.title }}</h1>
-        <div v-html="post.content"></div>
-    </article>
-
-    <!-- Comments load when scrolled into view -->
-    <WhenVisible data="comments" :buffer="200">
-        <template #fallback>
-            <CommentsSkeleton />
-        </template>
-
-        <CommentsSection :comments="comments" />
-    </WhenVisible>
-
-    <!-- Related posts load when visible -->
-    <WhenVisible data="relatedPosts">
-        <template #fallback>
-            <div class="animate-pulse">Loading related posts...</div>
-        </template>
-
-        <RelatedPosts :posts="relatedPosts" />
-    </WhenVisible>
-</template>
-```
-
-### With Buffer
-
-Preload before element is visible:
+`Inertia::optional()` is never included in a normal visit, only when a partial reload asks for it
+by name. `<WhenVisible>` does exactly that, using an Intersection Observer:
 
 ```vue
-<!-- Start loading 200px before element is visible -->
-<WhenVisible data="heavyContent" :buffer="200">
-    <HeavyComponent :data="heavyContent" />
+<WhenVisible data="comments" :buffer="300">
+  <template #fallback>
+    <CommentsSkeleton />
+  </template>
+  <CommentList :comments="comments" />
 </WhenVisible>
 ```
 
-## 6. Infinite Scrolling
+`buffer` is in pixels, so the request starts 300px before the section reaches the viewport. By
+default it loads once. Add the `always` prop if you want it to reload every time the element comes
+back into view.
 
-Built on WhenVisible and the new `Inertia::merge()` helper.
+If you are coming from older code, `Inertia::lazy()` did the same job. It was deprecated in favour
+of `optional()` and removed in v3, so rename it now.
 
-### Backend Setup
+### Polling without writing an interval
 
-```php
-// app/Http/Controllers/PostController.php
-class PostController extends Controller
-{
-    public function index(Request $request)
-    {
-        return Inertia::render('Posts/Index', [
-            'posts' => Inertia::merge(fn () =>
-                Post::with('author')
-                    ->latest()
-                    ->paginate(15)
-                    ->through(fn ($post) => [
-                        'id' => $post->id,
-                        'title' => $post->title,
-                        'excerpt' => $post->excerpt,
-                        'author' => $post->author->name,
-                        'created_at' => $post->created_at->diffForHumans(),
-                    ])
-            ),
-        ]);
-    }
-}
-```
-
-### Frontend Implementation
+For data that changes on the server while the user watches, like a queue length or an import's
+progress, `usePoll` reloads the page's props on a timer:
 
 ```vue
 <script setup>
-import { WhenVisible } from '@inertiajs/vue3'
+import { usePoll } from '@inertiajs/vue3'
 
-defineProps({
-    posts: Object,
-})
+const { start, stop } = usePoll(5000, { only: ['importStatus'] }, { autoStart: true })
 </script>
-
-<template>
-    <div class="space-y-4">
-        <PostCard
-            v-for="post in posts.data"
-            :key="post.id"
-            :post="post"
-        />
-
-        <!-- Load more when scrolled to bottom -->
-        <WhenVisible
-            v-if="posts.next_page_url"
-            :data="{ posts: posts.next_page_url }"
-            :buffer="300"
-        >
-            <template #fallback>
-                <div class="flex justify-center py-4">
-                    <Spinner />
-                </div>
-            </template>
-        </WhenVisible>
-
-        <p v-else class="text-center text-gray-500 py-4">
-            No more posts to load
-        </p>
-    </div>
-</template>
 ```
 
-## 7. History Encryption
+The second argument is any `router.reload()` option, and `only` is the one that matters: without
+it, every poll re-runs every prop in the controller. The third argument takes `autoStart` and
+`keepAlive`. Polling stops on its own when the component unmounts. When the tab is in the
+background Inertia throttles requests by 90%; `keepAlive: true` turns that off, which is worth doing only
+for something the user is genuinely waiting on.
 
-Inertia 2.0 automatically encrypts browser history state to prevent seeing privileged information after logout.
+Polling is the simple option. If you already run Reverb or another broadcaster, pushing an event is
+cheaper than asking the server every five seconds. For an admin page with a handful of users,
+polling is fine and has no moving parts.
 
-### Enabled by Default
+### Prefetching links
+
+Add `prefetch` to a `<Link>` and Inertia fetches the next page when the user hovers over it for
+more than 75ms. By the time they click, the response is usually in memory.
+
+```vue
+<Link href="/orders" prefetch>Orders</Link>
+<Link href="/orders" prefetch="click">Orders</Link>
+<Link href="/dashboard" prefetch="mount">Dashboard</Link>
+<Link href="/reports" prefetch :cache-for="['30s', '1m']">Reports</Link>
+```
+
+`click` starts on `mousedown` instead of hover, which still saves the 100ms or so before `mouseup`.
+`mount` fetches as soon as the link renders, for the page the user is almost certainly going to
+next. You can also pass an array like `['mount', 'hover']`.
+
+The cache lasts 30 seconds by default. `cacheFor` accepts a duration string, milliseconds, or a
+two-value array for stale-while-revalidate: inside the first window the cached page is used as-is,
+between the two the cached page is shown while a fresh one is fetched in the background, and after
+the second value it is a normal request.
+
+Be careful with `mount` on links to expensive pages. Every render of a navigation menu with
+`prefetch="mount"` on five links is five controller calls the user may never need. Hover is the
+safe default.
+
+To prefetch from code, `router.prefetch()` takes the same arguments as `router.visit()` plus a
+third options object:
+
+```js
+router.prefetch('/users', { method: 'get', data: { page: 2 } }, { cacheFor: '1m' })
+```
+
+### Merge props and infinite scroll
+
+Partial reloads normally replace a prop. `Inertia::merge()` tells the client to append the new
+value to what it already has instead, which is the building block for "load more":
 
 ```php
-// No configuration needed - enabled automatically
+'posts' => Inertia::merge(fn () => Post::latest()->paginate(15))->append('data'),
 ```
 
-### Disable for Specific Pages
+`append('data')` targets the `data` key of the paginator and replaces everything else (links, page
+numbers), which is what you want. There is also `->prepend()`, and `matchOn: 'id'` to update items
+that are already on the page instead of duplicating them. Merging only applies to partial reloads; a
+full visit replaces the prop. To start over when a filter changes, pass `reset: ['posts']` to the
+visit.
+
+Later 2.x releases added a higher-level version of this, `Inertia::scroll()` with an
+`<InfiniteScroll>` component, and it is the better fit for a plain paginated list:
 
 ```php
-return Inertia::render('PublicPage', [
-    'publicData' => $data,
-])->withoutEncryptingHistory();
+return Inertia::render('Users/Index', [
+    'users' => Inertia::scroll(fn () => User::paginate()),
+]);
 ```
 
-### Why It Matters
-
-Without encryption, after logout a user could hit the back button and see previous page data. With history encryption, this data is unreadable.
-
-## Upgrading from 1.x
-
-The upgrade is smooth with minimal breaking changes:
-
-```bash
-# Update packages
-composer update inertiajs/inertia-laravel
-npm update @inertiajs/vue3  # or @inertiajs/react
+```vue
+<InfiniteScroll data="users" :buffer="400">
+  <UserRow v-for="user in users.data" :key="user.id" :user="user" />
+</InfiniteScroll>
 ```
 
-### Breaking Changes
+It works with `paginate()`, `simplePaginate()`, `cursorPaginate()` and API resource collections,
+keeps the `page` query string in sync (turn that off with `preserve-url`), and has a `reverse` mode
+for chat-style lists that load older items upward. If you need a button instead of scroll
+triggering, set `manual`, or `manual-after` to switch to a button after a few pages. The full prop
+list is in the [infinite scroll docs](https://inertiajs.com/docs/v2/data-props/infinite-scroll).
 
-1. **Vue 2 dropped** - Upgrade to Vue 3
-2. **Svelte 3 dropped** - Upgrade to Svelte 4+
-3. **Partial reloads are async** - May affect dependent logic
+### History encryption is opt-in
 
-## Performance Comparison
+A lot of Inertia 2 write-ups, including an earlier version of this one, say history encryption is
+on by default. It is not. The [docs](https://inertiajs.com/docs/v2/security/history-encryption)
+call it an opt-in feature.
 
-| Feature | Before | After |
-|---------|--------|-------|
-| Initial page load | All data loaded | Only critical data |
-| Heavy queries | Block navigation | Load in background |
-| Real-time data | Manual polling | Built-in usePoll |
-| Long lists | Load all at once | Infinite scroll |
-| Navigation | Load on click | Prefetch on hover |
+The problem it solves: Inertia stores each page's props in `history.state`, so after a user logs
+out, the back button can show the previous page's data from the browser's history. With encryption
+on, that state is encrypted with a key kept in session storage, and `clearHistory` rotates the key
+so old entries can no longer be read.
 
-## Conclusion
+You turn it on in one of three ways:
 
-Inertia.js 2.0 is a major leap forward. Async requests, deferred props, and prefetching create faster, more responsive applications. The new polling and WhenVisible features simplify real-time UIs, while history encryption improves security by default.
+```php
+// config/inertia.php: 'history' => ['encrypt' => true]
 
----
+Route::middleware(['inertia::encrypt'])->group(function () {
+    // pages with sensitive data
+});
 
-## Resources
+Inertia::encryptHistory();
+```
 
-- [Inertia.js Documentation](https://inertiajs.com)
-- [Inertia 2.0 Announcement](https://blog.laravel.com/announcing-inertia-20-redefining-frontend-development-for-laravel)
-- [Upgrade Guide](https://inertiajs.com/docs/v2/getting-started/upgrade-guide)
+The middleware alias maps to `Inertia\Middleware\EncryptHistory`. If you enable it globally,
+`Inertia::encryptHistory(false)` opts a single page back out. On logout, call
+`Inertia::clearHistory()` before returning the response, or `router.clearHistory()` on the client.
 
+For a back office or anything showing customer data, turn it on globally. For a public marketing
+site it does nothing useful.
+
+### Upgrading, and what changed in v3
+
+Going from 1.x to 2.x drops Vue 2 and Svelte 3, and partial reloads became async, so code that
+assumed a reload blocked other visits needs a look. The [v2 upgrade guide](https://inertiajs.com/docs/v2/getting-started/upgrade-guide)
+covers the rest.
+
+If you are starting fresh today, start on v3. The changes that matter most for the code above:
+`Inertia::lazy()` is gone (use `optional()`), Axios is no longer bundled, the packages are ESM
+only, React 19 and Svelte 5 are required, and PHP 8.2 with Laravel 11 is the floor. v3 also adds
+built-in optimistic updates and lets `optional`, `defer` and `merge` be nested inside arrays. None
+of the features in this post went away; they just got more places to live.

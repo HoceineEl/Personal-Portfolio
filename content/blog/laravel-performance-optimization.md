@@ -1,422 +1,283 @@
 ---
-title: "Laravel Performance Optimization: From Slow to Lightning Fast"
-description: Complete guide to optimizing Laravel applications. Cover database optimization, caching strategies, queue processing, asset optimization, and profiling tools.
+title: "Making a Laravel App Fast: N+1 Queries, Indexes, Caching, Queues and Octane"
+description: Where Laravel apps actually lose time, in the order I check it. Catching N+1 queries with preventLazyLoading, Laravel 12's opt-in automatic eager loading, indexes, caching, queues, and what Octane changes about how you write code.
 tags:
   - Laravel
   - Performance
-  - Optimization
-  - Database
+  - Eloquent
   - Caching
-noImage: true
+  - Octane
+image: /images/blog/laravel-performance/cover.jpg
+banner: /images/blog/laravel-performance/cover.jpg
 createdAt: 2025-03-25T10:00:00.000Z
-updatedAt: 2025-03-25T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Laravel Performance Optimization: From Slow to Lightning Fast
+## Making a Laravel App Fast
 
-A slow application loses users. This guide covers proven techniques to make your Laravel application blazingly fast, from database queries to frontend delivery.
+Most slow Laravel pages are slow for the same boring reason: the database was
+doing far more work than the page needed. A list that runs 200 queries, a filter on a column with
+no index, a report recalculated on every request. Swapping the application server will not fix
+any of that.
 
-## Database Optimization
+So this post goes in the order I actually check things. Queries first, then indexes, then
+caching, then moving work out of the request, and Octane last, because it changes how you have
+to write code and only pays off once the rest is in order.
 
-### Indexing Strategy
+### Find the N+1 before you fix anything
+
+The classic case is a list that touches a relationship inside a loop:
 
 ```php
-// Migration with proper indexes
-Schema::create('orders', function (Blueprint $table) {
-    $table->id();
-    $table->foreignId('user_id')->constrained();
-    $table->foreignId('product_id')->constrained();
-    $table->string('status');
-    $table->decimal('total', 10, 2);
-    $table->timestamps();
+$orders = Order::latest()->take(50)->get();
 
-    // Single column indexes
-    $table->index('status');
-    $table->index('created_at');
+foreach ($orders as $order) {
+    echo $order->customer->name;
+}
+```
 
-    // Composite index for common queries
-    $table->index(['user_id', 'status']);
+That is one query for the orders and one more per order for the customer. Fifty rows, fifty-one
+queries. In a Filament table or a Blade loop it is invisible until the page gets slow.
+
+The cheapest way to stop shipping these is to make Laravel refuse to lazy load outside
+production. In `AppServiceProvider::boot()`:
+
+```php
+use Illuminate\Database\Eloquent\Model;
+
+public function boot(): void
+{
+    Model::preventLazyLoading(! $this->app->isProduction());
+}
+```
+
+Now every lazy-loaded relationship throws `Illuminate\Database\LazyLoadingViolationException` in
+local and in tests, so the N+1 shows up as a failing test instead of a slow page. Production keeps
+working if one slips through. If throwing is too aggressive for an older codebase, log instead
+and clean up over time:
+
+```php
+Model::handleLazyLoadingViolationUsing(function (Model $model, string $relation) {
+    $class = $model::class;
+
+    info("Attempted to lazy load [{$relation}] on model [{$class}].");
+});
+```
+
+The fix is eager loading, plus aggregates when you only need a number:
+
+```php
+$orders = Order::query()
+    ->with('customer:id,name')
+    ->withCount('items')
+    ->latest()
+    ->take(50)
+    ->get();
+```
+
+`withCount('items')` adds an `items_count` attribute through a subquery, so you never load the
+items just to count them.
+
+### Automatic eager loading is opt-in
+
+Laravel 12 added automatic eager loading. It often gets described as "Laravel fixes N+1 for you
+now", which is wrong in a way that matters: it is off unless you turn it on, and the docs mark it
+as [beta](https://laravel.com/docs/12.x/eloquent-relationships#automatic-eager-loading), with
+behaviour that may change even in patch releases.
+
+You can enable it globally:
+
+```php
+public function boot(): void
+{
+    Model::automaticallyEagerLoadRelationships();
+}
+```
+
+Or for a single collection:
+
+```php
+$users = User::where('vip', true)->get();
+
+return $users->withRelationshipAutoloading();
+```
+
+When it is on and you access `$user->posts` on one model from a collection, Laravel lazy eager
+loads `posts` for every user in that collection in one query. Nested loops get the same treatment
+one level at a time.
+
+The per-collection form fits code where the relationships really depend on runtime data, like
+a polymorphic activity feed. Enabling it globally is a different matter. Explicit `with()` calls document what a
+page needs, and `preventLazyLoading` keeps them honest. A global switch hides the problem, and you
+still pay for loading relationships you did not plan for.
+
+### Indexes for the queries you actually run
+
+Eager loading cuts the number of queries. Indexes make each one cheap. The ones you end up adding
+most often are foreign keys used for filtering (`foreignId()->constrained()` adds a foreign key
+constraint, and MySQL indexes it) and the column pairs a list filters and sorts by.
+
+If an admin table filters orders by status and sorts by date, that is a composite index:
+
+```php
+Schema::table('orders', function (Blueprint $table) {
     $table->index(['status', 'created_at']);
 });
 ```
 
-### Query Optimization
+Column order matters. Put the column you filter with equality first and the one you sort or
+range on second. To confirm the database uses it, run the query through `->explain()`:
 
 ```php
-// Bad: N+1 problem
-$posts = Post::all();
-foreach ($posts as $post) {
-    echo $post->author->name; // Query for each post
-}
-
-// Good: Eager loading
-$posts = Post::with('author')->get();
-
-// Better: Select only needed columns
-$posts = Post::with('author:id,name')
-    ->select(['id', 'title', 'author_id'])
-    ->get();
-
-// Best: Use query-specific loading
-$posts = Post::query()
-    ->select(['id', 'title', 'author_id', 'created_at'])
-    ->with(['author:id,name,avatar'])
-    ->withCount('comments')
+Order::where('status', OrderStatus::Pending)
     ->latest()
-    ->limit(20)
-    ->get();
+    ->explain()
+    ->dd();
 ```
 
-### Chunk Processing
+If the plan shows a full table scan on a large table, the index is wrong or missing. Also watch
+for `whereDate()` or a `LIKE '%term%'` on an indexed column: wrapping a column in a function, or a
+leading wildcard, stops a normal B-tree index from being used.
+
+### Cache what is expensive and stable
+
+Caching is the right tool for data that is costly to compute and changes rarely: dashboard
+totals, settings, a navigation tree. It is the wrong tool for hiding a query that should have been
+fixed.
 
 ```php
-// Bad: Loading all records into memory
-$users = User::all();
-foreach ($users as $user) {
-    $user->sendNewsletter();
-}
+use Illuminate\Support\Facades\Cache;
 
-// Good: Chunked processing
-User::query()
-    ->where('subscribed', true)
-    ->chunkById(1000, function ($users) {
-        foreach ($users as $user) {
-            SendNewsletter::dispatch($user);
-        }
-    });
-
-// Better: Lazy collection for memory efficiency
-User::query()
-    ->where('subscribed', true)
-    ->lazy()
-    ->each(fn ($user) => SendNewsletter::dispatch($user));
+$stats = Cache::remember('dashboard.stats', now()->addMinutes(10), fn () => [
+    'revenue' => Order::paid()->sum('total'),
+    'pending' => Order::pending()->count(),
+]);
 ```
 
-### Query Caching
+The hard part is invalidation. For anything a user edits and expects to see right away, clear the
+key where the data changes, for example in a model observer, rather than waiting for the TTL. And
+keep keys specific: a key that ignores the current tenant or locale will happily serve one
+customer's numbers to another.
 
-```php
-// Cache expensive queries
-$categories = Cache::remember('categories', 3600, function () {
-    return Category::with('subcategories')
-        ->withCount('products')
-        ->get();
-});
-
-// Cache with tags for easy invalidation
-$products = Cache::tags(['products', 'category-' . $categoryId])
-    ->remember("products:{$categoryId}", 3600, function () use ($categoryId) {
-        return Product::where('category_id', $categoryId)->get();
-    });
-
-// Invalidate when category changes
-Cache::tags(['category-' . $categoryId])->flush();
-```
-
-## Caching Strategies
-
-### Config and Route Caching
+Before deploying, cache the framework itself:
 
 ```bash
-# Production optimization
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-php artisan event:cache
+php artisan optimize
 ```
 
-### Application-Level Caching
+That caches config, routes, events and views. One consequence: once config is cached, `env()`
+calls outside the `config/` files return `null`, so read settings through `config()`.
+
+### Move slow work out of the request
+
+Sending email, generating a PDF, calling a third-party API, resizing images: none of it needs to
+happen before the user gets a response. Put it on a queue.
 
 ```php
-// Cache full page responses
-Route::get('/pricing', [PricingController::class, 'index'])
-    ->middleware('cache.headers:public;max_age=3600');
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
 
-// Cache expensive computations
-public function getAnalytics(Team $team): array
+class GenerateInvoicePdf implements ShouldQueue
 {
-    return Cache::remember(
-        "analytics:{$team->id}:" . now()->format('Y-m-d'),
-        now()->addHours(6),
-        fn () => $this->computeAnalytics($team)
-    );
-}
-```
+    use Queueable;
 
-### Model Caching
+    public int $tries = 3;
 
-```php
-// In your model
-class Product extends Model
-{
-    protected static function booted()
+    public function __construct(public Order $order) {}
+
+    public function handle(): void
     {
-        static::saved(fn ($product) => Cache::forget("product:{$product->id}"));
-        static::deleted(fn ($product) => Cache::forget("product:{$product->id}"));
-    }
-
-    public static function findCached(int $id): ?self
-    {
-        return Cache::remember("product:{$id}", 3600, fn () => self::find($id));
+        // render and store the PDF
     }
 }
 ```
 
-## Queue Optimization
-
-### Move Heavy Tasks to Background
-
 ```php
-// Instead of synchronous processing
-public function store(Request $request)
-{
-    $order = Order::create($request->validated());
-
-    // These block the response
-    $this->generateInvoice($order);
-    $this->sendConfirmationEmail($order);
-    $this->updateInventory($order);
-    $this->notifyWarehouse($order);
-
-    return redirect()->route('orders.show', $order);
-}
-
-// Use jobs for background processing
-public function store(Request $request)
-{
-    $order = Order::create($request->validated());
-
-    // Dispatch jobs - response returns immediately
-    ProcessOrder::dispatch($order);
-
-    return redirect()->route('orders.show', $order);
-}
+GenerateInvoicePdf::dispatch($order);
 ```
 
-### Job Batching for Heavy Operations
+Queued notifications and mailables work the same way through `ShouldQueue`. Run a real queue
+driver (Redis or database) with a worker managed by Supervisor, and remember to restart workers
+on deploy with `php artisan queue:restart`, because they hold the old code in memory. That last
+point is a small preview of how Octane behaves.
 
-```php
-use Illuminate\Bus\Batch;
+### Octane, and the state it keeps
 
-public function processMonthlyReports()
-{
-    $jobs = Team::all()->map(fn ($team) => new GenerateReport($team));
+[Octane](https://laravel.com/docs/12.x/octane) serves your app through FrankenPHP, Swoole or
+RoadRunner. The app boots once per worker and stays in memory, so the framework bootstrap cost
+is gone from each request. That is the whole gain. Your slow queries are just as slow under
+Octane.
 
-    Bus::batch($jobs)
-        ->name('Monthly Reports')
-        ->allowFailures()
-        ->onQueue('reports')
-        ->dispatch();
-}
+```bash
+composer require laravel/octane
+php artisan octane:install
+php artisan octane:start --watch
 ```
 
-## Lazy Loading and Deferred
+The price is that code which was safe under PHP-FPM, where everything dies after each request,
+can now leak between requests. The pitfalls the docs list are the ones I would check in any
+existing app before switching:
 
-### Lazy Collections
+- **Singletons that capture the container, request or config.** A singleton built during boot
+  with `$app['request']` keeps the first request forever, with the wrong headers, input and
+  user. Pass request data into methods at call time instead, or resolve lazily with a closure:
 
 ```php
-// Process large CSV without memory issues
-LazyCollection::make(function () {
-    $handle = fopen('large-file.csv', 'r');
-    while ($line = fgetcsv($handle)) {
-        yield $line;
-    }
-    fclose($handle);
-})->chunk(1000)->each(function ($chunk) {
-    // Process 1000 rows at a time
-    DB::table('imports')->insert($chunk->toArray());
+$this->app->singleton(Service::class, function (Application $app) {
+    return new Service(fn () => $app['request']);
 });
 ```
 
-### Deferred Loading in Views
+  The `request()`, `config()` and `app()` helpers always return the current instance, so they are
+  safe to call inside methods.
+
+- **Static arrays that grow.** `Service::$data[] = ...` in a controller adds to the same array on
+  every request until the worker runs out of memory. Octane restarts each worker after 500
+  requests by default (`--max-requests`), which limits the damage but does not fix the bug.
+
+- **Deploys.** Workers hold the old code, so run `php artisan octane:reload` after deploying.
+
+Octane also ships tools that only exist because the process is long-lived. Both need Swoole. The
+Octane cache driver stores data in Swoole tables shared by all workers, and it is flushed when the
+server restarts:
 
 ```php
-// In controller - don't load everything upfront
-public function dashboard()
-{
-    return view('dashboard', [
-        'user' => auth()->user(),
-        // Heavy data loaded via Livewire components
-    ]);
-}
+use Illuminate\Support\Str;
+
+Cache::store('octane')->put('framework', 'Laravel', 30);
+
+Cache::store('octane')->interval('random', fn () => Str::random(10), seconds: 5);
 ```
 
-```blade
-{{-- In view - load heavy components separately --}}
-<div>
-    <livewire:dashboard.quick-stats />
+Tables are defined in `config/octane.php` and accessed through the facade:
 
-    <livewire:dashboard.revenue-chart lazy />
-    <livewire:dashboard.activity-feed lazy />
-</div>
-```
-
-## Asset Optimization
-
-### Vite Configuration
-
-```javascript
-// vite.config.js
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
+```php
+'tables' => [
+    'example:1000' => [
+        'name' => 'string:1000',
+        'votes' => 'int',
     ],
-    build: {
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    vendor: ['alpinejs', 'axios'],
-                },
-            },
-        },
-    },
-});
+],
 ```
-
-### Image Optimization
 
 ```php
-// Use responsive images
-<picture>
-    <source srcset="{{ $post->getMedia('images')->first()->getUrl('webp') }}" type="image/webp">
-    <img src="{{ $post->getMedia('images')->first()->getUrl('optimized') }}"
-         loading="lazy"
-         alt="{{ $post->title }}">
-</picture>
+use Laravel\Octane\Facades\Octane;
+
+Octane::table('example')->set('uuid', ['name' => 'Nuno Maduro', 'votes' => 1000]);
 ```
 
-## Profiling and Monitoring
+`Octane::concurrently([...])` runs closures in parallel on Swoole task workers, which is handy for
+a dashboard that runs several independent queries.
 
-### Laravel Debugbar
+My view: Octane is worth it for an API or app with high request volume and a codebase you
+control. For a typical admin panel where each page waits on the database, fixing the queries and
+staying on PHP-FPM is the better trade, because the bootstrap cost is a small share of that request and the state bugs
+are a real cost.
 
-```bash
-composer require barryvdh/laravel-debugbar --dev
-```
+### The order that pays off
 
-### Query Monitoring
-
-```php
-// In AppServiceProvider
-public function boot()
-{
-    if (app()->isLocal()) {
-        DB::listen(function ($query) {
-            if ($query->time > 100) {
-                Log::warning('Slow query detected', [
-                    'sql' => $query->sql,
-                    'time' => $query->time . 'ms',
-                    'bindings' => $query->bindings,
-                ]);
-            }
-        });
-    }
-}
-```
-
-### N+1 Detection
-
-```php
-// In AppServiceProvider
-public function boot()
-{
-    Model::preventLazyLoading(!app()->isProduction());
-}
-```
-
-## Server-Side Optimization
-
-### OPcache Configuration
-
-```ini
-; php.ini
-opcache.enable=1
-opcache.memory_consumption=256
-opcache.interned_strings_buffer=16
-opcache.max_accelerated_files=20000
-opcache.validate_timestamps=0  ; Disable in production
-opcache.jit=1255
-opcache.jit_buffer_size=128M
-```
-
-### PHP-FPM Tuning
-
-```ini
-; www.conf
-pm = dynamic
-pm.max_children = 50
-pm.start_servers = 10
-pm.min_spare_servers = 5
-pm.max_spare_servers = 20
-pm.max_requests = 500
-```
-
-## Response Optimization
-
-### Compression
-
-```php
-// In middleware or server config
-public function handle($request, Closure $next)
-{
-    $response = $next($request);
-
-    if ($this->shouldCompress($response)) {
-        $content = gzencode($response->getContent(), 9);
-        $response->setContent($content);
-        $response->headers->set('Content-Encoding', 'gzip');
-    }
-
-    return $response;
-}
-```
-
-### HTTP Caching Headers
-
-```php
-return response($content)
-    ->header('Cache-Control', 'public, max-age=3600')
-    ->header('ETag', md5($content));
-```
-
-## Quick Wins Checklist
-
-### Immediate Improvements
-
-- [ ] Enable OPcache with JIT
-- [ ] Run `php artisan optimize` in production
-- [ ] Use Redis for sessions and cache
-- [ ] Enable HTTP/2 on server
-- [ ] Use CDN for static assets
-- [ ] Compress responses (gzip/brotli)
-
-### Database Quick Fixes
-
-- [ ] Add indexes to foreign keys and frequently queried columns
-- [ ] Use `select()` to limit columns
-- [ ] Enable query caching
-- [ ] Use eager loading consistently
-
-### Application Quick Fixes
-
-- [ ] Move emails to queue
-- [ ] Cache expensive computations
-- [ ] Use lazy loading for large datasets
-- [ ] Implement response caching
-
-## Conclusion
-
-Performance optimization is an iterative process. Start by measuring, identify bottlenecks, fix them, and measure again. Focus on the biggest impact first—usually database queries and caching—before micro-optimizations.
-
----
-
-## Resources
-
-- [Laravel Performance Tips](https://laravel.com/docs/deployment#optimization)
-- [Debugbar](https://github.com/barryvdh/laravel-debugbar)
-
+Turn on `preventLazyLoading` today, because it is one line and it finds problems for you. Add
+indexes for the filters your users actually use. Cache the few expensive, stable things and
+invalidate them deliberately. Queue anything the user does not need to wait for. Then, if requests
+per second is genuinely the bottleneck, look at Octane with the list above in hand.

@@ -7,7 +7,8 @@ tags:
   - Laravel
   - FilamentPHP
   - TALL Stack
-noImage: true
+image: /images/blog/livewire-iframe-preview/cover.jpg
+banner: /images/blog/livewire-iframe-preview/cover.jpg
 createdAt: 2026-09-12T10:00:00.000Z
 updatedAt: 2026-09-12T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI

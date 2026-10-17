@@ -28,10 +28,12 @@ No caption. No link. Just Rust, typed in that monospace Unicode font people use 
 want a tweet to look like a terminal. It got [85k views and 680+ likes](https://x.com/taylorotwell/status/2107117389762515319)
 in a day, and the replies filled up with one word: **Omega**.
 
-I have been writing Laravel for years and I touch Rust about twice a year, usually when a
-CLI tool breaks. So I did what everyone did: I zoomed into those three lines like they were
-a crime scene photo. Then I went looking for anything solid. This post is what I found,
-sorted into "confirmed", "very likely" and "people are guessing".
+I write Laravel for a living. I have never written a line of Rust. So this post is a Laravel
+developer reading Rust for the first time, which is probably exactly who Omega is for. None of
+the Rust code below is mine: it is quoted from Taylor's post and from the public repo, with
+links. I zoomed into those three lines like everyone else, then went looking for anything
+solid. This post is what I found, sorted into "confirmed", "very likely" and "people are
+guessing".
 
 Short version: there is no Omega release, no docs, no landing page. But there *is* a public
 repository under the Inertia.js organisation, with Taylor's name on the commits, and it tells
@@ -245,15 +247,17 @@ projects do not.
 
 ### Why would anyone want this?
 
-My honest take, as someone who ships Laravel for a living:
+My take, as someone who ships Laravel and has not shipped Rust. Take the Rust side with that
+in mind:
 
 **What Rust would buy you.** One binary you `scp` to a server. No PHP-FPM, no OPcache tuning,
-no "which extension is missing on prod". Memory usage you can actually predict. Type errors at
-compile time instead of in Sentry at 2 a.m. Long-running processes that don't need Octane
-tricks to stay warm.
+no "which extension is missing on prod". Type errors at compile time instead of in Sentry at
+2 a.m. Long-running processes that don't need Octane tricks to stay warm. Those are the
+reasons Rust people give.
 
-**What it would cost you.** Compile times. The borrow checker on a Friday afternoon. A
-`dd()` that is not quite as fun. And the biggest one: Laravel's magic is mostly runtime
+**What it would cost you.** A new language for most of us, with compile times and a borrow
+checker that Rust developers themselves warn newcomers about. And the biggest one, which I can
+judge from the Laravel side: Laravel's magic is mostly runtime
 magic. Facades, the container, Eloquent's `__call`, macros. Rust doesn't do runtime magic. You
 get macros and traits instead. Looking at `props!` and the `Inertia` extractor, the team
 seems to be translating the *feel* rather than the *mechanism*, and I think that is the right

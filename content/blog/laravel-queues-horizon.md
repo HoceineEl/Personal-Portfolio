@@ -1,559 +1,449 @@
 ---
-title: "Laravel Queues and Horizon: Production-Ready Background Jobs"
-description: Master Laravel queues from basics to advanced patterns. Learn job design, retry strategies, batching, Horizon monitoring, and scaling for high-traffic applications.
+title: "Running Laravel Queues in Production with Horizon: Timeouts, Retries and Supervisors"
+description: The queue settings that decide whether jobs run once, twice or never, in Laravel 12 with Horizon. Timeouts versus retry_after, backoff, unique jobs, batches, failure handling, and a Horizon supervisor layout that keeps slow jobs from starving fast ones.
 tags:
   - Laravel
   - Queues
   - Horizon
-  - Performance
-  - Background Jobs
-noImage: true
+  - Redis
+image: /images/blog/laravel-queues-horizon/cover.jpg
+banner: /images/blog/laravel-queues-horizon/cover.jpg
 createdAt: 2025-05-20T10:00:00.000Z
-updatedAt: 2025-05-20T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Laravel Queues and Horizon: Production-Ready Background Jobs
+## Running Laravel Queues in Production with Horizon
 
-Background job processing is essential for building responsive, scalable applications. Laravel's queue system combined with Horizon provides enterprise-grade job management.
+Getting a job onto a queue takes five minutes. The trouble starts later: an import that runs
+twice because it took longer than `retry_after`, a webhook job that burns its three attempts on
+a rate limiter before doing any work, a queue of PDF renders that holds every worker while
+password reset emails wait behind it.
 
-## Queue Fundamentals
+None of these are exotic. They come from a handful of settings that interact with each other,
+spread across the job class, `config/queue.php` and `config/horizon.php`. This post goes through
+those settings with one running example, then lays out a Horizon config for production.
 
-### Creating Jobs
+The example: a job that syncs one product to an external marketplace API. It calls a
+rate-limited API, it can fail, and it should never run twice at the same time for the same
+product.
 
-```bash
-php artisan make:job ProcessPodcast
-```
+### The three timeouts that must line up
+
+There are three numbers, and their order matters more than their values:
+
+1. The **job timeout**: how long a single attempt may run before the worker kills it. Set with
+   `public $timeout` on the job, or `timeout` on the Horizon supervisor. The default is 60
+   seconds.
+2. **`retry_after`** in `config/queue.php`: how long the queue waits for a reserved job before
+   assuming the worker died and handing it to another worker. The Redis connection defaults to
+   90.
+3. Supervisor's **`stopwaitsecs`**: how long the process manager waits for Horizon to finish
+   current jobs during a restart before killing it.
+
+The rule from the [queue docs](https://laravel.com/docs/12.x/queues#job-expirations-and-timeouts):
+the timeout must be shorter than `retry_after`, by at least a few seconds. If a job can run for
+120 seconds and `retry_after` is 90, at second 90 Redis hands the same job to a second worker
+while the first is still running it. That is the classic "the import ran twice" bug, and no
+amount of retry logic fixes it.
+
+The [Horizon docs](https://laravel.com/docs/12.x/horizon#job-timeout) add one more: with `auto`
+balancing, Horizon force-kills workers that are still busy after the supervisor timeout when it
+scales down, so the supervisor `timeout` must be larger than any job-level `$timeout` running
+under it.
+
+So the order is: job `$timeout` < supervisor `timeout` < `retry_after`, and `stopwaitsecs`
+larger than your longest job. If one queue has jobs that legitimately run for ten minutes, give
+it its own Redis connection with a bigger `retry_after` and its own supervisor, instead of
+raising the numbers for every job.
+
+### Retries and backoff
+
+The job class:
 
 ```php
-// app/Jobs/ProcessPodcast.php
-class ProcessPodcast implements ShouldQueue
+namespace App\Jobs;
+
+use App\Models\Product;
+use App\Services\Marketplace\MarketplaceClient;
+use App\Services\Marketplace\RateLimitedException;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Queue\Queueable;
+use Throwable;
+
+class SyncProductToMarketplace implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Queueable;
+
+    public int $tries = 5;
+
+    public int $maxExceptions = 3;
+
+    public int $timeout = 30;
 
     public function __construct(
-        public Podcast $podcast,
-        public User $user
+        public Product $product,
     ) {}
 
-    public function handle(AudioProcessor $processor): void
+    /**
+     * @return array<int, int>
+     */
+    public function backoff(): array
     {
-        $processor->process($this->podcast);
-
-        $this->user->notify(new PodcastProcessed($this->podcast));
+        return [10, 60, 300];
     }
-}
-```
 
-### Dispatching Jobs
-
-```php
-// Basic dispatch
-ProcessPodcast::dispatch($podcast, $user);
-
-// With delay
-ProcessPodcast::dispatch($podcast, $user)
-    ->delay(now()->addMinutes(10));
-
-// To specific queue
-ProcessPodcast::dispatch($podcast, $user)
-    ->onQueue('processing');
-
-// To specific connection
-ProcessPodcast::dispatch($podcast, $user)
-    ->onConnection('redis');
-
-// Chain jobs
-ProcessPodcast::withChain([
-    new OptimizeAudio($podcast),
-    new GenerateTranscript($podcast),
-    new NotifySubscribers($podcast),
-])->dispatch($podcast, $user);
-```
-
-## Job Design Patterns
-
-### Idempotent Jobs
-
-Jobs should be safe to retry:
-
-```php
-class ChargeSubscription implements ShouldQueue
-{
-    public function __construct(
-        public Subscription $subscription,
-        public string $idempotencyKey
-    ) {}
-
-    public function handle(): void
+    public function handle(MarketplaceClient $client): void
     {
-        // Check if already processed
-        if (Payment::where('idempotency_key', $this->idempotencyKey)->exists()) {
-            return;
+        try {
+            $client->upsertProduct($this->product);
+        } catch (RateLimitedException $e) {
+            $this->release($e->retryAfterSeconds);
         }
+    }
 
-        // Process payment
-        $payment = Stripe::charges()->create([
-            'idempotency_key' => $this->idempotencyKey,
-            // ...
-        ]);
-
-        Payment::create([
-            'subscription_id' => $this->subscription->id,
-            'idempotency_key' => $this->idempotencyKey,
-            'amount' => $payment->amount,
-        ]);
+    public function failed(?Throwable $exception): void
+    {
+        $this->product->update(['marketplace_sync_failed_at' => now()]);
     }
 }
 ```
 
-### Job Middleware
+What each piece does:
+
+- `$tries = 5` is the total number of attempts, counting releases. A job that calls
+  `release()` uses up an attempt even though nothing threw.
+- `$maxExceptions = 3` fails the job after three unhandled exceptions, even if attempts remain.
+  That pairing lets the job be released a few times for rate limits without letting real errors
+  retry five times.
+- `backoff()` returning an array gives a growing delay: 10 seconds before the second attempt,
+  60 before the third, 300 for every attempt after that. A plain `$backoff = 60` property works
+  for a fixed delay. Without either, a failed job goes straight back on the queue, which against
+  a struggling API makes things worse.
+- `release($seconds)` puts the job back with a delay you choose. Here the API tells us how long
+  to wait, so we use its number instead of guessing.
+- `failed()` runs once, after the last attempt. It gets a nullable `Throwable` in Laravel 12.
+  Use it to record the failure somewhere a person will see it. Don't retry from inside it.
+
+If you would rather bound a job by time than by attempts, define `retryUntil()` returning a
+`DateTime`. When both exist, `retryUntil` wins.
+
+### Middleware that eats attempts
+
+The example releases manually on a rate limit. Laravel also ships job middleware for this:
+`RateLimited`, `WithoutOverlapping`, `ThrottlesExceptions`. They are good, with one catch
+that the Horizon docs call out: when they release a job, that counts as an attempt.
 
 ```php
-// app/Jobs/Middleware/RateLimited.php
-class RateLimited
-{
-    public function handle($job, $next)
-    {
-        Redis::throttle('api-calls')
-            ->block(0)
-            ->allow(60)
-            ->every(60)
-            ->then(function () use ($job, $next) {
-                $next($job);
-            }, function () use ($job) {
-                $job->release(30); // Try again in 30 seconds
-            });
-    }
-}
+use Illuminate\Queue\Middleware\WithoutOverlapping;
 
-// In job class
 public function middleware(): array
 {
     return [
-        new RateLimited(),
-        new WithoutOverlapping($this->podcast->id),
+        (new WithoutOverlapping($this->product->id))->releaseAfter(30)->expireAfter(120),
     ];
 }
 ```
 
-### Preventing Overlapping
+If ten syncs for the same product pile up, nine of them get released while the first one runs.
+With `$tries = 3` some of them fail without ever calling the API. When you use these
+middlewares, raise `$tries` (or set it to 0 for unlimited) and use `$maxExceptions` to cap real
+errors. `expireAfter` matters too: if a worker dies mid-job the lock would otherwise stay until
+it expires on its own, and every later attempt gets released until then.
+
+### Unique jobs versus no overlap
+
+`WithoutOverlapping` lets duplicates sit in the queue and stops them running at the same time.
+Often you don't want the duplicates at all. If a product is edited five times in a minute, one
+sync after the last edit is enough. That is `ShouldBeUnique`:
 
 ```php
-use Illuminate\Contracts\Queue\ShouldBeUnique;
+use Illuminate\Contracts\Queue\ShouldBeUniqueUntilProcessing;
 
-class GenerateReport implements ShouldQueue, ShouldBeUnique
+class SyncProductToMarketplace implements ShouldQueue, ShouldBeUniqueUntilProcessing
 {
-    public function __construct(
-        public Team $team
-    ) {}
+    use Queueable;
 
-    // Unique for 1 hour
-    public int $uniqueFor = 3600;
+    public int $uniqueFor = 600;
 
-    // Custom unique ID
     public function uniqueId(): string
     {
-        return $this->team->id;
+        return (string) $this->product->id;
     }
+
+    // ...
 }
 ```
 
-## Retry Strategies
+With `ShouldBeUnique`, a second dispatch is dropped while the first is queued or running. For syncs,
+`ShouldBeUniqueUntilProcessing` fits better: the lock is released when the job starts, so an edit
+made during the sync queues one more sync and the marketplace ends up with the latest data.
+`uniqueFor` is a safety net so a lost lock does not block the product forever.
 
-### Configuring Retries
+Uniqueness is implemented with cache locks, so the default cache store has to support locks.
+Redis does, and if you run Horizon you have Redis anyway.
+
+### Dispatching inside transactions
 
 ```php
-class ProcessPayment implements ShouldQueue
-{
-    public int $tries = 5;
-    public int $maxExceptions = 3;
-    public int $timeout = 120;
-    public int $backoff = 60; // Seconds between retries
+DB::transaction(function () use ($product, $data) {
+    $product->update($data);
 
-    // Or exponential backoff
-    public function backoff(): array
-    {
-        return [1, 5, 10, 30, 60]; // Seconds
-    }
-
-    public function retryUntil(): DateTime
-    {
-        return now()->addHours(24);
-    }
-}
+    SyncProductToMarketplace::dispatch($product)->afterCommit();
+});
 ```
 
-### Handling Failures
+Without `afterCommit()`, a fast worker can pick the job up before the transaction commits and
+sync the old data, or fail to find a product that was just created. You can set
+`'after_commit' => true` on the connection in `config/queue.php` to make it the default, which is
+worth doing on new projects.
+
+### Batches
+
+When the user clicks "sync all products", you want progress and a single "done" notification, not
+two thousand separate jobs with no relation. That is a batch. The job adds the `Batchable` trait
+and checks for cancellation first:
 
 ```php
-class ProcessPayment implements ShouldQueue
+use Illuminate\Bus\Batchable;
+
+class SyncProductToMarketplace implements ShouldQueue
 {
-    public function handle(): void
-    {
-        // Process payment
-    }
+    use Batchable, Queueable;
 
-    public function failed(\Throwable $exception): void
+    public function handle(MarketplaceClient $client): void
     {
-        // Notify admin
-        Notification::route('slack', config('services.slack.webhook'))
-            ->notify(new JobFailedNotification($this, $exception));
+        if ($this->batch()?->cancelled()) {
+            return;
+        }
 
-        // Log for debugging
-        Log::error('Payment processing failed', [
-            'exception' => $exception->getMessage(),
-            'trace' => $exception->getTraceAsString(),
-        ]);
+        // ...
     }
 }
 ```
-
-### Custom Retry Logic
-
-```php
-public function handle(): void
-{
-    try {
-        $this->processPayment();
-    } catch (TemporaryException $e) {
-        // Retry with backoff
-        $this->release(
-            $this->attempts() * 60 // Exponential delay
-        );
-    } catch (PermanentException $e) {
-        // Don't retry, mark as failed
-        $this->fail($e);
-    }
-}
-```
-
-## Job Batching
-
-### Creating Batches
 
 ```php
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
 
-$batch = Bus::batch([
-    new ProcessPodcast($podcast1),
-    new ProcessPodcast($podcast2),
-    new ProcessPodcast($podcast3),
-])
-    ->name('Process Podcasts')
+$batch = Bus::batch(
+    $store->products()->pluck('id')->map(
+        fn (int $id) => new SyncProductToMarketplace(Product::find($id))
+    )
+)
+    ->name("Marketplace sync for store {$store->id}")
     ->allowFailures()
-    ->then(function (Batch $batch) {
-        // All jobs completed
-        Notification::send($batch->name . ' completed');
-    })
-    ->catch(function (Batch $batch, Throwable $e) {
-        // First batch job failure
-        Log::error('Batch failed', ['batch' => $batch->id]);
-    })
-    ->finally(function (Batch $batch) {
-        // Batch finished (success or failure)
-        Cache::forget("batch:{$batch->id}");
-    })
-    ->onQueue('podcasts')
+    ->onQueue('sync')
+    ->then(fn (Batch $batch) => $store->update(['last_synced_at' => now()]))
+    ->finally(fn (Batch $batch) => $store->owner->notify(new MarketplaceSyncFinished($batch->id)))
     ->dispatch();
-
-// Store batch ID for tracking
-session(['batch_id' => $batch->id]);
 ```
 
-### Tracking Batch Progress
+That `Product::find` in a loop is fine for a sketch, but for a big store load the products in
+chunks and use `$batch->add()` to append jobs as you go, so you don't build two thousand
+models in one request.
+
+`allowFailures()` is the important line. Without it, the first failed job cancels the whole
+batch, which for a sync of independent products is the wrong behaviour. The `then` callback only
+runs when every job succeeded; `finally` runs either way, so the notification goes there.
+
+Batches need the `job_batches` table, and that table grows. Schedule
+`queue:prune-batches` daily; it removes finished batches older than 24 hours by default, and the
+`--unfinished` and `--cancelled` options clean up the rest.
+
+### Failures
+
+Failed jobs land in `failed_jobs`. The commands you will use:
+
+```shell
+# list them
+php artisan queue:failed
+
+# retry one, or all
+php artisan queue:retry 5
+php artisan queue:retry all
+
+# retry the failed jobs of one batch
+php artisan queue:retry-batch 32dbc76c-4f82-4749-b610-a639fe0099b5
+
+# drop records older than 48 hours
+php artisan queue:prune-failed --hours=48
+```
+
+Horizon shows failed jobs in its dashboard with the exception and lets you retry from there.
+`horizon:forget` deletes one failed job by ID, or all of them with `--all`.
+
+One more setting worth knowing: `public $deleteWhenMissingModels = true;` on a job makes Laravel
+discard it quietly if a serialized model was deleted before the job ran, instead of failing it
+with a `ModelNotFoundException`. For a sync job, a deleted product means there is nothing to
+sync, so that is the right call.
+
+### Horizon: supervisors by workload
+
+[Horizon](https://laravel.com/docs/12.x/horizon) replaces the `queue:work` processes with one
+`php artisan horizon` process that manages workers from `config/horizon.php`. It needs the Redis
+queue driver.
+
+A common mistake is one supervisor listening to every queue. With `auto` balancing,
+Horizon does not treat the order of queues in a supervisor as a priority. It shares workers by
+load, so a backlog of slow jobs on one queue can take most of the workers. Separate supervisors
+give each workload its own budget:
 
 ```php
-// In controller
-public function batchStatus(string $batchId)
-{
-    $batch = Bus::findBatch($batchId);
+'defaults' => [
+    'supervisor-default' => [
+        'connection' => 'redis',
+        'queue' => ['default', 'notifications'],
+        'balance' => 'auto',
+        'autoScalingStrategy' => 'time',
+        'minProcesses' => 1,
+        'maxProcesses' => 1,
+        'tries' => 3,
+        'timeout' => 60,
+        'memory' => 128,
+    ],
+    'supervisor-sync' => [
+        'connection' => 'redis',
+        'queue' => ['sync'],
+        'balance' => 'simple',
+        'processes' => 1,
+        'tries' => 5,
+        'timeout' => 45,
+    ],
+],
 
-    return response()->json([
-        'id' => $batch->id,
-        'name' => $batch->name,
-        'total_jobs' => $batch->totalJobs,
-        'pending_jobs' => $batch->pendingJobs,
-        'processed_jobs' => $batch->processedJobs(),
-        'progress' => $batch->progress(),
-        'failed_jobs' => $batch->failedJobs,
-        'finished' => $batch->finished(),
-    ]);
-}
-```
-
-### Adding Jobs to Batch
-
-```php
-$batch = Bus::findBatch($batchId);
-
-$batch->add([
-    new ProcessPodcast($newPodcast),
-]);
-```
-
-## Laravel Horizon
-
-### Installation
-
-```bash
-composer require laravel/horizon
-php artisan horizon:install
-php artisan migrate
-```
-
-### Configuration
-
-```php
-// config/horizon.php
 'environments' => [
     'production' => [
-        'supervisor-1' => [
-            'connection' => 'redis',
-            'queue' => ['default', 'high'],
-            'balance' => 'auto',
-            'minProcesses' => 1,
+        'supervisor-default' => [
             'maxProcesses' => 10,
             'balanceMaxShift' => 1,
             'balanceCooldown' => 3,
-            'tries' => 3,
-            'timeout' => 60,
         ],
-        'supervisor-emails' => [
-            'connection' => 'redis',
-            'queue' => ['emails'],
-            'balance' => 'simple',
+        'supervisor-sync' => [
             'processes' => 3,
-            'tries' => 2,
-            'timeout' => 30,
-        ],
-        'supervisor-billing' => [
-            'connection' => 'redis',
-            'queue' => ['billing'],
-            'balance' => 'false',
-            'processes' => 2,
-            'tries' => 5,
-            'timeout' => 120,
         ],
     ],
+
     'local' => [
-        'supervisor-1' => [
-            'connection' => 'redis',
-            'queue' => ['default', 'high', 'emails', 'billing'],
-            'balance' => 'simple',
-            'processes' => 3,
-            'tries' => 3,
+        'supervisor-default' => [
+            'maxProcesses' => 3,
         ],
     ],
 ],
 ```
 
-### Running Horizon
+How this reads:
 
-```bash
-# Development
-php artisan horizon
+- `defaults` holds the full supervisor definitions; each environment only overrides what
+  differs. Horizon merges them.
+- `supervisor-default` uses `auto` balancing between `default` and `notifications`, scaling up
+  to 10 workers in production. `autoScalingStrategy` is `time` (by estimated time to clear the
+  queue) or `size` (by job count). `balanceMaxShift` and `balanceCooldown` limit scaling to one
+  process every three seconds.
+- `supervisor-sync` uses `simple` balancing with a fixed three processes. The marketplace API
+  is rate-limited anyway, so more workers would only produce more releases. The cap is the
+  point.
+- The third option is `'balance' => false`, the boolean, not the string `'false'`. It processes
+  the listed queues strictly in order, like plain `queue:work --queue=high,default`, while still
+  scaling between `minProcesses` and `maxProcesses`.
+- Supervisor `tries` is the default for jobs without `$tries`. If you leave it out, Horizon
+  allows one attempt. A `$tries` property on the job overrides it.
+- `timeout` here follows the timeout rule above: larger than the job-level `$timeout` of the
+  jobs on that queue, a few seconds under `retry_after`.
 
-# Production (with supervisor)
-php artisan horizon:terminate # Graceful restart after deploy
+The local environment does not mention `supervisor-sync`, so locally the sync queue has no
+workers. Add it there, or use the `*` wildcard environment, if you want it running in
+development.
+
+### The rest of horizon.php that matters
+
+```php
+'waits' => [
+    'redis:default' => 60,
+    'redis:notifications' => 30,
+    'redis:sync' => 300,
+],
+
+'silenced' => [
+    App\Jobs\RecordPageView::class,
+],
 ```
 
-### Supervisor Configuration
+`waits` sets, per connection and queue, how many seconds of waiting counts as a long wait,
+which is what triggers Horizon's notifications. Undefined queues default to 60, and 0 disables
+the alert for that queue. Notifications go wherever you route them in
+`HorizonServiceProvider::boot()`:
+
+```php
+Horizon::routeMailNotificationsTo('ops@example.com');
+Horizon::routeSlackNotificationsTo(config('services.slack.horizon_webhook'), '#queues');
+```
+
+`silenced` hides noisy, high-volume jobs from the completed jobs list. You can also silence by
+tag with `silenced_tags`, or implement `Laravel\Horizon\Contracts\Silenced` on the job.
+
+The metrics graphs stay empty until you schedule snapshots, which is easy to forget:
+
+```php
+// routes/console.php
+Schedule::command('horizon:snapshot')->everyFiveMinutes();
+```
+
+The dashboard at `/horizon` is open only in the `local` environment. Everywhere else, the
+`viewHorizon` gate in `app/Providers/HorizonServiceProvider.php` decides who gets in. Change the
+default email list to something real before you deploy, such as a role check.
+
+### Tags
+
+Horizon tags jobs automatically with the Eloquent models in their properties, so our job is
+tagged `App\Models\Product:42` and you can search the dashboard for every sync of product 42.
+For anything else, add a `tags()` method:
+
+```php
+public function tags(): array
+{
+    return ['marketplace', 'store:'.$this->product->store_id];
+}
+```
+
+A store tag is the one I'd add first, because "why didn't my products sync" is always asked per
+store.
+
+### Deploying
+
+Horizon is a long-running process, so it keeps running old code until it restarts. Every deploy
+ends with:
+
+```shell
+php artisan horizon:terminate
+```
+
+It finishes the jobs in progress and exits, and the process monitor starts it again with the new
+code. The Supervisor program from the docs:
 
 ```ini
 [program:horizon]
 process_name=%(program_name)s
-command=php /var/www/app/artisan horizon
+command=php /home/forge/example.com/artisan horizon
 autostart=true
 autorestart=true
-user=www-data
+user=forge
 redirect_stderr=true
-stdout_logfile=/var/www/app/storage/logs/horizon.log
+stdout_logfile=/home/forge/example.com/horizon.log
 stopwaitsecs=3600
 ```
 
-## Queue Priority
+`stopwaitsecs` is the third timeout from the start of this post: longer than your longest job,
+or Supervisor kills it halfway through a deploy. On Forge you get this as a daemon, and Laravel
+Cloud manages the process for you.
 
-### Defining Priorities
+For maintenance windows, `php artisan horizon:pause` stops processing without killing workers,
+and `horizon:continue` resumes. `horizon:status` tells you whether it is running at all, which
+is a cheap check to put in a health endpoint or a deploy script.
 
-```php
-// High priority jobs
-HighPriorityJob::dispatch()->onQueue('high');
+### What to check first when queues misbehave
 
-// Low priority jobs
-LowPriorityJob::dispatch()->onQueue('low');
-```
-
-### Processing Order
-
-```php
-// config/horizon.php
-'supervisor-1' => [
-    'queue' => ['high', 'default', 'low'], // Priority order
-    'balance' => 'auto',
-],
-```
-
-## Monitoring and Metrics
-
-### Job Metrics in Horizon
-
-```php
-// Tag jobs for filtering
-class ProcessOrder implements ShouldQueue
-{
-    public function tags(): array
-    {
-        return [
-            'order:' . $this->order->id,
-            'customer:' . $this->order->customer_id,
-            'type:' . $this->order->type,
-        ];
-    }
-}
-```
-
-### Custom Metrics
-
-```php
-// In AppServiceProvider
-use Laravel\Horizon\Horizon;
-
-Horizon::routeMailNotificationsTo('admin@example.com');
-Horizon::routeSlackNotificationsTo('webhook-url', '#alerts');
-
-Horizon::night(); // Dark mode
-
-// Authorization
-Horizon::auth(function ($request) {
-    return $request->user()?->isAdmin();
-});
-```
-
-## Performance Optimization
-
-### Job Chunking
-
-```php
-class ProcessLargeDataset implements ShouldQueue
-{
-    public function handle(): void
-    {
-        User::query()
-            ->where('needs_processing', true)
-            ->chunkById(100, function ($users) {
-                foreach ($users as $user) {
-                    ProcessUser::dispatch($user);
-                }
-            });
-    }
-}
-```
-
-### Memory Management
-
-```php
-class MemoryIntensiveJob implements ShouldQueue
-{
-    public function handle(): void
-    {
-        // Process in batches to manage memory
-        $items = $this->getItems();
-
-        foreach (array_chunk($items, 100) as $chunk) {
-            $this->processChunk($chunk);
-
-            // Clear memory
-            gc_collect_cycles();
-        }
-    }
-}
-```
-
-### Connection Pooling
-
-```php
-// config/database.php
-'redis' => [
-    'client' => 'phpredis', // More efficient than predis
-
-    'default' => [
-        'url' => env('REDIS_URL'),
-        'host' => env('REDIS_HOST', '127.0.0.1'),
-        'port' => env('REDIS_PORT', 6379),
-        'persistent' => true, // Persistent connections
-    ],
-],
-```
-
-## Best Practices
-
-### 1. Keep Jobs Small
-
-```php
-// Bad: One massive job
-class ProcessEverything implements ShouldQueue
-{
-    public function handle()
-    {
-        $this->processOrders();
-        $this->sendEmails();
-        $this->generateReports();
-        $this->syncInventory();
-    }
-}
-
-// Good: Separate focused jobs
-ProcessOrders::dispatch();
-SendOrderEmails::dispatch();
-GenerateReports::dispatch();
-SyncInventory::dispatch();
-```
-
-### 2. Use Specific Queues
-
-```php
-// Separate by criticality and resource needs
-SendWelcomeEmail::dispatch($user)->onQueue('emails');
-GenerateInvoice::dispatch($order)->onQueue('billing');
-ProcessVideo::dispatch($video)->onQueue('media');
-```
-
-### 3. Handle Serialization Carefully
-
-```php
-class ProcessReport implements ShouldQueue
-{
-    // Don't serialize large data
-    public function __construct(
-        public int $reportId, // Just the ID
-        public array $options
-    ) {}
-
-    public function handle(): void
-    {
-        // Load fresh data in handler
-        $report = Report::find($this->reportId);
-
-        if (!$report) {
-            // Handle deleted record
-            return;
-        }
-    }
-}
-```
-
-## Conclusion
-
-Laravel's queue system with Horizon provides everything needed for production job processing. The key is thoughtful job design—idempotent operations, appropriate retry strategies, and proper monitoring.
-
-Start simple, measure performance, and scale horizontally as needed.
-
----
-
-## Resources
-
-- [Laravel Queues Documentation](https://laravel.com/docs/queues)
-- [Laravel Horizon Documentation](https://laravel.com/docs/horizon)
-
+When a job runs twice, compare its runtime to `retry_after`. When jobs fail with "attempted too
+many times" without an exception, look for middleware or `release()` calls eating attempts.
+When one queue is slow, check whether it shares a supervisor with something heavy. Those three
+cover most queue problems.

@@ -1,374 +1,257 @@
 ---
-title: "FilamentPHP Built-in Multi-Tenancy: Complete Implementation Guide"
-description: Learn how to implement multi-tenancy in FilamentPHP v4 using built-in panel tenancy features including tenant registration, switching, resource scoping, and billing integration.
+title: "Filament 4 Multi-Tenancy: The Setup, and Where It Leaks"
+description: How Filament 4's built-in panel tenancy works (HasTenants, canAccessTenant, ownership relationships, tenant middleware) and the places it stops protecting you, queries outside the panel, queued jobs, unique validation and models without a resource.
 tags:
   - FilamentPHP
+  - Filament v4
   - Multi-tenancy
   - Laravel
   - SaaS
-  - TALL Stack
-noImage: true
+image: /images/blog/filament-multi-tenancy/cover.jpg
+banner: /images/blog/filament-multi-tenancy/cover.jpg
 createdAt: 2025-08-25T10:00:00.000Z
-updatedAt: 2025-08-25T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# FilamentPHP Built-in Multi-Tenancy: Complete Implementation Guide
+## Filament 4 Multi-Tenancy
 
-FilamentPHP v4 includes powerful **built-in multi-tenancy** features that make building SaaS applications straightforward. Unlike external packages, Filament's native tenancy integrates seamlessly with panels, resources, and the authorization system.
+Filament's built-in tenancy gets a team-based SaaS panel running in an afternoon: a tenant switcher,
+the tenant in the URL, and resource queries scoped to the current team. The trouble is that it feels
+complete, so it is easy to assume every query in the app is scoped. It isn't. Filament scopes what
+happens inside the panel, through Eloquent, after the tenant is known. Everything else is your job.
 
-## Understanding Filament's Tenancy Model
+This post covers the setup briefly and then spends most of its time on the leaks. Everything is
+checked against the [tenancy docs](https://filamentphp.com/docs/4.x/users/tenancy), which are worth
+reading in full, especially the security section.
 
-Filament's tenancy assumes users can belong to **multiple tenants** (teams, organizations, companies) and switch between them. This many-to-many relationship is common in SaaS applications:
+### The model
 
-- A user can be a member of multiple teams
-- A user can have different roles per team
-- A user can switch between teams without logging out
-
-## Setting Up Multi-Tenancy
-
-### Step 1: Create the Tenant Model
+Filament's tenancy is "many users, many tenants". A user belongs to one or more teams and switches
+between them. The tenant is a normal Eloquent model, and every tenant-owned model points back to it.
 
 ```php
-// app/Models/Team.php
 class Team extends Model
 {
-    protected $fillable = ['name', 'slug', 'owner_id'];
-
-    public function users()
+    public function members(): BelongsToMany
     {
-        return $this->belongsToMany(User::class)
-            ->withPivot('role')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class);
     }
 
-    public function owner()
+    public function projects(): HasMany
     {
-        return $this->belongsTo(User::class, 'owner_id');
+        return $this->hasMany(Project::class);
     }
 }
 
-// app/Models/User.php
-class User extends Authenticatable
+class Project extends Model
 {
-    public function teams()
+    public function team(): BelongsTo
     {
-        return $this->belongsToMany(Team::class)
-            ->withPivot('role')
-            ->withTimestamps();
-    }
-
-    public function ownedTeams()
-    {
-        return $this->hasMany(Team::class, 'owner_id');
+        return $this->belongsTo(Team::class);
     }
 }
 ```
 
-### Step 2: Configure Panel Tenancy
+### Telling Filament which tenants a user has
+
+The user model implements `HasTenants`. Two methods matter: `getTenants()` lists the teams for the
+switcher, and `canAccessTenant()` is the security check that stops someone from typing another
+team's ID into the URL.
 
 ```php
-// app/Providers/Filament/AdminPanelProvider.php
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+
+class User extends Authenticatable implements FilamentUser, HasTenants
+{
+    public function teams(): BelongsToMany
+    {
+        return $this->belongsToMany(Team::class);
+    }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->teams;
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->teams()->whereKey($tenant)->exists();
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true;
+    }
+}
+```
+
+Do not shortcut `canAccessTenant()` to `true` while prototyping and forget it. It is the only thing
+between the URL and another customer's data.
+
+### The panel
+
+```php
 use App\Models\Team;
-use App\Filament\Pages\Tenancy\RegisterTeam;
-use App\Filament\Pages\Tenancy\EditTeamProfile;
 
 public function panel(Panel $panel): Panel
 {
     return $panel
-        ->default()
-        ->id('admin')
-        ->path('admin')
-        ->login()
-        ->registration()
-
-        // Enable tenancy
-        ->tenant(Team::class, slugAttribute: 'slug')
-        ->tenantRegistration(RegisterTeam::class)
-        ->tenantProfile(EditTeamProfile::class)
-        ->tenantMenu(true);
+        // ...
+        ->tenant(Team::class, ownershipRelationship: 'team');
 }
 ```
 
-### Step 3: Create Tenant Registration Page
+`ownershipRelationship` is the relationship name on your tenant-owned models, here `team`. Filament
+uses it to scope resource queries and to attach new records to the current tenant on create. If one
+resource uses a different name, override it there with
+`protected static ?string $tenantOwnershipRelationshipName = 'owner';`.
+
+Inside the panel, `Filament::getTenant()` returns the current team.
+
+### How the scoping actually works
+
+This is the sentence from the docs that the rest of the post hangs on: Filament applies a tenant
+global scope to models that have a tenant-aware resource registered in the current panel, and only
+while that panel is current and a tenant has been identified.
+
+Three conditions. Break any one and the scope is not there.
+
+### Leak 1: queries outside the panel
+
+Your API routes, your public site, your Artisan commands and your scheduled tasks never enter the
+panel. `Filament::getTenant()` is `null` there and no tenant scope is applied. The docs say it
+plainly: queries made outside the tenant-aware panel or before tenant identification need their own
+tenant constraints.
+
+So the controller behind a public project page must scope by hand:
 
 ```php
-// app/Filament/Pages/Tenancy/RegisterTeam.php
-use Filament\Forms\Components\TextInput;
-use Filament\Pages\Tenancy\RegisterTenant;
-
-class RegisterTeam extends RegisterTenant
+public function show(Team $team, Project $project): View
 {
-    public static function getLabel(): string
+    abort_unless($project->team()->is($team), 404);
+
+    return view('projects.show', compact('project'));
+}
+```
+
+The same applies inside the panel to anything that uses the query builder directly.
+`DB::table('projects')` does not go through Eloquent, so it never sees a global scope.
+
+### Leak 2: queued jobs
+
+A job runs in a worker process, long after the request that dispatched it. No panel is current and
+there is no tenant, so by the rules above nothing is scoped. A job that does `Project::where(...)`
+sees every team's projects.
+
+Pass the tenant into the job and scope explicitly:
+
+```php
+class RecalculateProjectStats implements ShouldQueue
+{
+    use Queueable;
+
+    public function __construct(public Team $team) {}
+
+    public function handle(): void
     {
-        return 'Register Team';
+        $this->team->projects()->each(function (Project $project): void {
+            // ...
+        });
     }
+}
 
-    public function form(Form $form): Form
+RecalculateProjectStats::dispatch(Filament::getTenant());
+```
+
+Going through `$this->team->projects()` means the constraint is part of the query itself rather than
+something that has to be present in the environment.
+
+### Leak 3: unique and exists validation
+
+Laravel's `unique` and `exists` rules query the database without Eloquent, so the tenant scope does
+not apply to them. A project slug that should be unique per team ends up unique across all teams,
+and worse, the error message tells a user that some other team already has that slug.
+
+Filament has scoped versions for form fields:
+
+```php
+TextInput::make('slug')
+    ->scopedUnique(),
+
+Select::make('client_id')
+    ->scopedExists(),
+```
+
+Back the rule with a composite index, `unique(['team_id', 'slug'])`, so the database agrees with the
+form. Validation outside Filament, in a form request for the API for example, needs
+`Rule::unique('projects')->where('team_id', $team->id)` written out.
+
+### Leak 4: models without a resource
+
+The global scope only goes on models that have a tenant-aware resource in the panel. A `Comment`
+model that only appears inside a widget or a custom page has no resource, so it is not scoped. The
+docs suggest adding your own global scopes through tenant middleware:
+
+```php
+class ApplyTenantScopes
+{
+    public function handle(Request $request, Closure $next): Response
     {
-        return $form->schema([
-            TextInput::make('name')
-                ->required()
-                ->maxLength(255),
-            TextInput::make('slug')
-                ->required()
-                ->unique(Team::class, 'slug')
-                ->maxLength(255),
-        ]);
-    }
+        Comment::addGlobalScope(
+            fn (Builder $query) => $query->whereBelongsTo(Filament::getTenant()),
+        );
 
-    protected function handleRegistration(array $data): Team
-    {
-        $team = Team::create([
-            ...$data,
-            'owner_id' => auth()->id(),
-        ]);
-
-        $team->users()->attach(auth()->id(), ['role' => 'owner']);
-
-        return $team;
+        return $next($request);
     }
 }
 ```
 
-### Step 4: Create Tenant Profile Page
+```php
+$panel->tenantMiddleware([
+    ApplyTenantScopes::class,
+], isPersistent: true);
+```
+
+`isPersistent: true` matters. By default tenant middleware runs on the first page load only, not on
+the Livewire requests that follow. Without it, the scope exists when the page renders and is gone
+when the user clicks "next page" in a table.
+
+### Leak 5: removing global scopes
+
+`withoutGlobalScopes()` with no arguments removes the tenant scope along with soft deletes and
+everything else. This shows up in resources that call `getEloquentQuery()` to include trashed
+records. Pass the specific scopes you want removed instead:
 
 ```php
-// app/Filament/Pages/Tenancy/EditTeamProfile.php
-use Filament\Pages\Tenancy\EditTenantProfile;
-
-class EditTeamProfile extends EditTenantProfile
+public static function getEloquentQuery(): Builder
 {
-    public static function getLabel(): string
-    {
-        return 'Team Settings';
-    }
-
-    public function form(Form $form): Form
-    {
-        return $form->schema([
-            TextInput::make('name')
-                ->required(),
-            TextInput::make('slug')
-                ->required()
-                ->unique(Team::class, 'slug', ignoreRecord: true),
-        ]);
-    }
+    return parent::getEloquentQuery()
+        ->withoutGlobalScopes([SoftDeletingScope::class]);
 }
 ```
 
-## Automatic Resource Scoping
+### Leak 6: Livewire components that aren't resource pages
 
-Filament automatically scopes all resources to the current tenant:
+On resource pages, Filament re-resolves the record through the resource query on every Livewire
+request, so the tenant scope applies. The docs note this does not extend to relation managers,
+widgets or modal table selects, which restore models through Livewire without global scopes by
+default. If a widget accepts a record ID, check it belongs to the current tenant.
 
-```php
-// app/Filament/Resources/ProjectResource.php
-class ProjectResource extends Resource
-{
-    protected static ?string $model = Project::class;
+### Tenancy is not authorization
 
-    // Resources are automatically scoped - no extra code needed!
-    // The base query includes: WHERE team_id = {current_tenant_id}
-}
-```
+Last point, and the docs make it too: being in the right team does not mean a user may do something.
+`canAccessTenant()` answers "can this user enter this team". Whether a member can delete a project is
+a policy. And a table does not filter rows through your `view()` policy, so records a member should
+not see need to be excluded in the query, not hidden by a policy check.
 
-### How Scoping Works
+### A day-one checklist
 
-When a user visits `/admin/acme-corp/projects`:
-1. Filament identifies `acme-corp` as the current tenant
-2. All queries are automatically filtered by `team_id`
-3. New records get `team_id` set automatically
-4. Accessing another tenant's records returns 404
-
-### Excluding Resources from Tenancy
-
-For shared/global resources:
-
-```php
-class SettingResource extends Resource
-{
-    protected static bool $isScopedToTenant = false;
-
-    // This resource shows all records, regardless of tenant
-}
-```
-
-## Tenant Switching
-
-Filament provides a built-in tenant switcher in the user menu:
-
-```php
-->tenantMenu(true)
-// or customize:
-->tenantMenuItems([
-    'settings' => MenuItem::make()
-        ->label('Team Settings')
-        ->url(fn () => EditTeamProfile::getUrl()),
-])
-```
-
-## Customizing Tenant Resolution
-
-### By Subdomain
-
-```php
-->tenant(Team::class, slugAttribute: 'slug')
-->tenantDomain(fn (Team $tenant) => "{$tenant->slug}.yourapp.com")
-```
-
-### By Path (Default)
-
-```
-/admin/{tenant}/resources
-```
-
-### Custom Middleware
-
-```php
-->tenantMiddleware([
-    EnsureValidTenant::class,
-    SetTenantTimezone::class,
-])
-```
-
-## Authorization Per Tenant
-
-Implement tenant-specific roles:
-
-```php
-// app/Models/Team.php
-class Team extends Model
-{
-    public function hasRole(User $user, string $role): bool
-    {
-        return $this->users()
-            ->where('user_id', $user->id)
-            ->where('role', $role)
-            ->exists();
-    }
-}
-
-// In a Resource
-public static function canCreate(): bool
-{
-    return Filament::getTenant()
-        ->hasRole(auth()->user(), 'admin');
-}
-```
-
-## Billing Integration
-
-Integrate with subscription systems:
-
-```php
-->tenant(Team::class)
-->tenantBillingProvider(new SparkBillingProvider())
-->requiresTenantSubscription()
-->tenantBillingRouteSlug('billing')
-```
-
-### Custom Billing Page
-
-```php
-class TeamBilling extends Page
-{
-    protected static string $view = 'filament.pages.team-billing';
-
-    public static function getUrl(array $parameters = [], bool $isAbsolute = true, ?string $panel = null, ?Model $tenant = null): string
-    {
-        return route('billing.portal', [
-            'team' => Filament::getTenant(),
-        ]);
-    }
-}
-```
-
-## Best Practices
-
-### 1. Always Verify Tenant Ownership
-
-```php
-// In Form or Action
-public function save()
-{
-    // Double-check tenant ownership for sensitive operations
-    abort_unless(
-        $this->record->team_id === Filament::getTenant()->id,
-        403
-    );
-
-    // Proceed with save
-}
-```
-
-### 2. Use Tenant-Aware Observers
-
-```php
-class ProjectObserver
-{
-    public function creating(Project $project)
-    {
-        if (Filament::getTenant()) {
-            $project->team_id = Filament::getTenant()->id;
-        }
-    }
-}
-```
-
-### 3. Test Tenant Isolation
-
-```php
-public function test_user_cannot_access_other_tenant_project()
-{
-    $team1 = Team::factory()->create();
-    $team2 = Team::factory()->create();
-
-    $project = Project::factory()->for($team1)->create();
-
-    $this->actingAs($team2->users->first())
-        ->get("/admin/{$team2->slug}/projects/{$project->id}")
-        ->assertNotFound();
-}
-```
-
-### 4. Handle Tenant Selection on First Login
-
-```php
-// In custom Login class
-protected function afterLogin(): void
-{
-    $user = auth()->user();
-
-    if ($user->teams->count() === 1) {
-        // Auto-select single tenant
-        session(['current_team_id' => $user->teams->first()->id]);
-    }
-    // Otherwise, user will see tenant selection
-}
-```
-
-## Conclusion
-
-FilamentPHP's built-in multi-tenancy eliminates the complexity of building SaaS applications. With automatic resource scoping, tenant switching, and billing integration, you can focus on your application's unique features rather than infrastructure.
-
-The key is understanding that Filament handles the heavy lifting—you just need to configure your tenant model and let the framework do the rest.
-
----
-
-## Resources
-
-- [Filament Multi-Tenancy Documentation](https://filamentphp.com/docs/4.x/users/tenancy)
-- [Filament Tenancy Panels](https://filamentphp.com/docs/4.x/panels/tenancy)
-
-
----
-
-## Going further: letting each tenant build its own website
-
-Panel tenancy scopes your admin. The question that usually follows is whether each tenant can also have its own public site — and that part Filament leaves to you.
-
-That gap is why I built **[FilamentCraft](https://filamentcraft.dev?ref=blog-multi-tenancy)**, a commercial plugin that adds a Shopify-style drag-and-drop website builder to a Filament panel. Sites belong to any owner model through a polymorphic morph, so it sits on top of the tenancy you already configured above — Filament's own, stancl/tenancy, spatie/multitenancy, or none at all. Your tenants build and publish their pages themselves; you keep shipping the application.
-
-It runs this way in two of my own products: each shop on [Dukanos](/projects/dukanos) gets its storefront from it, and each academy on [Mediano](/projects/mediano) builds its own website with it.
-
-There is a [live demo](https://demo.filamentcraft.dev/launch/admin?ref=blog-multi-tenancy) with no signup if you want to see what that feels like from the tenant's side.
+On a panel with tenancy, three things are worth doing on day one: write `canAccessTenant()` properly, add the
+`ApplyTenantScopes` middleware with `isPersistent: true` for every tenant-owned model without a
+resource, and replace `unique()` with `scopedUnique()` everywhere. Then grep for `DB::table`,
+`withoutGlobalScopes(` and `dispatch(` and read each hit with the question "which team is this for?".

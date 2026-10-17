@@ -1,422 +1,353 @@
 ---
-title: "Laravel Actions Pattern: Single Responsibility Classes"
-description: Master the Actions pattern in Laravel. Learn single-action classes, dependency injection, queued actions, testing strategies, and when to use actions vs services.
+title: "Action Classes in Laravel: One Class Per Operation, Called From Anywhere"
+description: How I write action classes in Laravel 12, why I keep them as plain classes with one handle method, and how the same action gets called from a controller, a Filament action, a Livewire component and a queued job.
 tags:
   - Laravel
-  - Design Patterns
+  - FilamentPHP
+  - Livewire
   - Architecture
-noImage: true
+image: /images/blog/laravel-actions/cover.jpg
+banner: /images/blog/laravel-actions/cover.jpg
 createdAt: 2025-04-20T10:00:00.000Z
-updatedAt: 2025-04-20T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Laravel Actions Pattern: Single Responsibility Classes
+## Action Classes in Laravel
 
-**Actions** are single-purpose classes that encapsulate business logic. One class, one job. They keep controllers thin and make your code highly testable and reusable.
+A lot of business logic gets triggered from more than one place. A refund starts
+from a button in the Filament panel, but it also has to run from an API endpoint, from a
+support tool built in Livewire, and sometimes from an Artisan command when a payment provider
+sends a batch of disputes. If the refund logic lives in a controller method, every other entry
+point either copies it or calls the controller, and both are bad.
 
-## The Problem with Fat Controllers
+An action class fixes that. It is a class that does one operation, takes its inputs as
+arguments, and gets its dependencies from the container. Every entry point becomes a thin
+adapter that collects input and calls it.
 
-```php
-// Fat controller - too many responsibilities
-class OrderController extends Controller
-{
-    public function store(Request $request)
-    {
-        $validated = $request->validate([...]);
+This post is my take on how to write them. It is opinionated, and some of it disagrees with
+how actions are usually shown.
 
-        // Create order
-        $order = Order::create([...]);
+### What an action is, and what it is not
 
-        // Process payment
-        $payment = Stripe::charge($order->total, $request->payment_method);
+An action is one business operation, named as a verb: `RefundOrder`, `InviteTeamMember`,
+`PublishPage`. It is not a wrapper around a single Eloquent call. `UpdateUserName` that runs
+`$user->update(['name' => $name])` is a class for the sake of a class. If the operation is a
+model update with validation and nothing else, the Filament resource or the form request
+already handles it fine.
 
-        // Update inventory
-        foreach ($order->items as $item) {
-            $item->product->decrement('stock', $item->quantity);
-        }
+The test I use: does this operation touch more than one model, call an outside service, fire
+side effects, or need to run from more than one entry point? If yes, it gets an action. If no,
+it stays where it is.
 
-        // Send notifications
-        Mail::to($order->user)->send(new OrderConfirmation($order));
-        $order->user->notify(new OrderPlaced($order));
+### The shape I use
 
-        // Log analytics
-        Analytics::track('order_placed', [...]);
-
-        return redirect()->route('orders.show', $order);
-    }
-}
-```
-
-## Actions Solution
-
-### Basic Action Structure
+No package, no base class, no interface. One public method called `handle`:
 
 ```php
-// app/Actions/CreateOrderAction.php
-namespace App\Actions;
+namespace App\Actions\Orders;
 
+use App\Enums\OrderStatus;
+use App\Events\OrderRefunded;
+use App\Exceptions\OrderNotRefundable;
 use App\Models\Order;
+use App\Models\Refund;
 use App\Models\User;
+use App\Services\Payments\PaymentGateway;
+use Illuminate\Support\Facades\DB;
 
-class CreateOrderAction
-{
-    public function execute(User $user, array $items): Order
-    {
-        return Order::create([
-            'user_id' => $user->id,
-            'items' => $items,
-            'total' => collect($items)->sum('subtotal'),
-            'status' => 'pending',
-        ]);
-    }
-}
-```
-
-### Using in Controller
-
-```php
-class OrderController extends Controller
-{
-    public function store(
-        OrderRequest $request,
-        CreateOrderAction $createOrder,
-        ProcessPaymentAction $processPayment,
-        UpdateInventoryAction $updateInventory,
-        SendOrderNotificationsAction $sendNotifications,
-    ) {
-        $order = $createOrder->execute(
-            $request->user(),
-            $request->validated('items')
-        );
-
-        $processPayment->execute($order, $request->validated('payment_method'));
-        $updateInventory->execute($order);
-        $sendNotifications->execute($order);
-
-        return redirect()->route('orders.show', $order);
-    }
-}
-```
-
-## Dependency Injection
-
-```php
-namespace App\Actions;
-
-use App\Services\PaymentGateway;
-use App\Repositories\OrderRepository;
-
-class ProcessPaymentAction
+final class RefundOrder
 {
     public function __construct(
         private PaymentGateway $gateway,
-        private OrderRepository $orders,
     ) {}
 
-    public function execute(Order $order, string $paymentMethod): Payment
+    public function handle(Order $order, User $by, ?string $reason = null): Refund
     {
-        $payment = $this->gateway->charge(
-            amount: $order->total,
-            method: $paymentMethod,
-            metadata: ['order_id' => $order->id],
-        );
-
-        $this->orders->markAsPaid($order, $payment);
-
-        return $payment;
-    }
-}
-```
-
-## Composing Actions
-
-Actions can call other actions:
-
-```php
-class PlaceOrderAction
-{
-    public function __construct(
-        private CreateOrderAction $createOrder,
-        private ProcessPaymentAction $processPayment,
-        private UpdateInventoryAction $updateInventory,
-        private SendOrderNotificationsAction $sendNotifications,
-    ) {}
-
-    public function execute(User $user, array $data): Order
-    {
-        $order = $this->createOrder->execute($user, $data['items']);
-
-        try {
-            $this->processPayment->execute($order, $data['payment_method']);
-            $this->updateInventory->execute($order);
-            $this->sendNotifications->execute($order);
-        } catch (PaymentFailedException $e) {
-            $order->markAsFailed();
-            throw $e;
+        if (! $order->status->isRefundable()) {
+            throw OrderNotRefundable::for($order);
         }
 
-        return $order;
+        $providerRefund = $this->gateway->refund($order->payment_reference, $order->total);
+
+        $refund = DB::transaction(function () use ($order, $by, $reason, $providerRefund) {
+            $refund = $order->refunds()->create([
+                'amount' => $order->total,
+                'provider_id' => $providerRefund->id,
+                'reason' => $reason,
+                'refunded_by' => $by->id,
+            ]);
+
+            $order->update(['status' => OrderStatus::Refunded]);
+
+            return $refund;
+        });
+
+        OrderRefunded::dispatch($order, $refund);
+
+        return $refund;
     }
 }
 ```
 
-## Invokable Actions
+A few choices in there that I hold to:
 
-For simpler syntax:
+- **`handle`, not `__invoke` or `execute`.** It reads the same as jobs and listeners, and
+  `$refund->handle(...)` is clearer at the call site than `($refund)(...)`. The name itself
+  matters less than using one name across the whole codebase.
+- **Explicit arguments, not an array.** `handle(Order $order, User $by, ?string $reason)` tells
+  you what the operation needs. `handle(array $data)` tells you nothing, and static analysis
+  can't help you. When the argument list gets long, I pass a small readonly data object instead.
+- **The acting user is an argument.** The action does not call `auth()->user()`. When this
+  runs from a queued job or a console command there is no authenticated user, and an action
+  that reads the session quietly breaks there.
+- **Authorization stays outside.** The controller or the Filament action checks the policy.
+  The action enforces business rules ("this order is not refundable") and throws a domain
+  exception when they fail. A console command run by an admin should not need to fake a
+  logged-in user to pass a policy check.
+- **The external call happens before the transaction.** Holding a database transaction open
+  while you wait on a payment provider is how you get lock timeouts. Call the provider, then
+  write everything in one short transaction.
+
+### Calling it from a controller
+
+The controller does HTTP things: authorize, validate, call, respond.
 
 ```php
-class CreateOrderAction
+public function store(RefundRequest $request, Order $order, RefundOrder $refundOrder)
 {
-    public function __invoke(User $user, array $items): Order
-    {
-        return Order::create([
-            'user_id' => $user->id,
-            'items' => $items,
-            'total' => collect($items)->sum('subtotal'),
-        ]);
-    }
-}
+    $this->authorize('refund', $order);
 
-// Usage
-$order = app(CreateOrderAction::class)($user, $items);
-```
+    $refund = $refundOrder->handle($order, $request->user(), $request->validated('reason'));
 
-## Actions with DTOs
-
-```php
-// app/DTOs/CreateOrderData.php
-readonly class CreateOrderData
-{
-    public function __construct(
-        public User $user,
-        public array $items,
-        public string $shippingMethod,
-        public ?string $couponCode = null,
-    ) {}
-
-    public static function fromRequest(Request $request): self
-    {
-        return new self(
-            user: $request->user(),
-            items: $request->validated('items'),
-            shippingMethod: $request->validated('shipping_method'),
-            couponCode: $request->validated('coupon_code'),
-        );
-    }
-}
-
-// app/Actions/CreateOrderAction.php
-class CreateOrderAction
-{
-    public function execute(CreateOrderData $data): Order
-    {
-        return Order::create([
-            'user_id' => $data->user->id,
-            'items' => $data->items,
-            'shipping_method' => $data->shippingMethod,
-            'coupon_code' => $data->couponCode,
-        ]);
-    }
-}
-
-// Controller
-public function store(OrderRequest $request, CreateOrderAction $action)
-{
-    $order = $action->execute(CreateOrderData::fromRequest($request));
-    return redirect()->route('orders.show', $order);
+    return new RefundResource($refund);
 }
 ```
 
-## Queueable Actions
+Laravel resolves `RefundOrder` from the container, which builds the `PaymentGateway` for it.
+
+### Calling it from a Filament action
+
+This is where actions earn their keep for me, because most of my work is Filament panels. A
+Filament table or page action is already a small adapter: it renders a button, maybe a modal
+form, and runs a closure. The closure is the right place to call the action and nothing more.
+
+In Filament 4 actions live under `Filament\Actions\Action`, and the closure gets `$record` and
+the modal form `$data` injected by name:
 
 ```php
-namespace App\Actions;
+use App\Actions\Orders\RefundOrder;
+use App\Exceptions\OrderNotRefundable;
+use App\Models\Order;
+use Filament\Actions\Action;
+use Filament\Forms\Components\Textarea;
+use Filament\Notifications\Notification;
 
+Action::make('refund')
+    ->requiresConfirmation()
+    ->schema([
+        Textarea::make('reason')->maxLength(500),
+    ])
+    ->visible(fn (Order $record): bool => auth()->user()->can('refund', $record))
+    ->action(function (Order $record, array $data): void {
+        try {
+            resolve(RefundOrder::class)->handle($record, auth()->user(), $data['reason']);
+        } catch (OrderNotRefundable $e) {
+            Notification::make()->title($e->getMessage())->danger()->send();
+
+            return;
+        }
+
+        Notification::make()->title('Order refunded')->success()->send();
+    });
+```
+
+Two things I like about this split. The Filament code only deals with Filament concerns:
+visibility, the modal, the notification. And when the same refund button is needed as a bulk
+action, the bulk action loops over the records and calls the same `handle`. Nothing gets
+copied into a second closure.
+
+The version I see often, and avoid, puts thirty lines of refund logic directly in the
+`->action()` closure. It works until someone needs the refund from an API, and then that logic
+is trapped inside a resource class.
+
+### Calling it from a Livewire component
+
+Livewire 3 resolves type-hinted dependencies on action methods, so a component method can take
+the action as a parameter the same way a controller does:
+
+```php
+use App\Actions\Orders\RefundOrder;
+use App\Exceptions\OrderNotRefundable;
+use App\Models\Order;
+use Livewire\Attributes\Validate;
+use Livewire\Component;
+
+class OrderSupportPanel extends Component
+{
+    public Order $order;
+
+    #[Validate('nullable|string|max:500')]
+    public string $reason = '';
+
+    public function refund(RefundOrder $refundOrder): void
+    {
+        $this->authorize('refund', $this->order);
+        $this->validate();
+
+        try {
+            $refundOrder->handle($this->order, auth()->user(), $this->reason ?: null);
+        } catch (OrderNotRefundable $e) {
+            $this->addError('reason', $e->getMessage());
+
+            return;
+        }
+
+        $this->dispatch('order-refunded');
+    }
+}
+```
+
+Same pattern again: the component owns state, validation, and what the UI shows on failure. The
+action owns the operation.
+
+### Queueing: wrap the action in a job
+
+A pattern I have seen in tutorials is to mark the action itself `ShouldQueue` and call it
+directly. That does nothing. `ShouldQueue` only matters when a class is dispatched through the
+bus as a job, or registered as an event listener. Calling `->handle()` on an object runs it
+right there, queue marker or not.
+
+When the operation needs to run in the background, write a job that calls the action:
+
+```php
+namespace App\Jobs;
+
+use App\Actions\Orders\RefundOrder;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class GenerateInvoicePdfAction implements ShouldQueue
+class RefundOrderJob implements ShouldQueue
 {
     use Queueable;
 
-    public function execute(Order $order): void
+    public int $tries = 3;
+
+    public function __construct(
+        public Order $order,
+        public User $by,
+        public ?string $reason = null,
+    ) {}
+
+    public function handle(RefundOrder $refundOrder): void
     {
-        $pdf = PDF::loadView('invoices.pdf', ['order' => $order]);
-        $path = "invoices/{$order->number}.pdf";
-
-        Storage::put($path, $pdf->output());
-
-        $order->update(['invoice_path' => $path]);
+        $refundOrder->handle($this->order, $this->by, $this->reason);
     }
 }
-
-// Dispatch to queue
-app(GenerateInvoicePdfAction::class)
-    ->onQueue('invoices')
-    ->execute($order);
 ```
 
-## Testing Actions
+Job `handle` methods get dependencies injected by the container, so the action comes in as a
+parameter. The job owns queue concerns (tries, backoff, uniqueness), the action owns the
+business rule. This is also where passing the user explicitly pays off: the job has no session,
+and the action never needed one.
 
-### Unit Testing
+If you would rather have one class that can be a controller, a job, a listener and a command,
+[lorisleiva/laravel-actions](https://www.laravelactions.com) does that. I've chosen not to use it,
+because I find two small explicit classes easier to read than one class that changes role
+depending on how it was called. That is a preference, not a flaw in the package.
 
-```php
-use App\Actions\CreateOrderAction;
+### Composing actions
 
-test('creates order with correct total', function () {
-    $user = User::factory()->create();
-    $items = [
-        ['product_id' => 1, 'quantity' => 2, 'price' => 10.00, 'subtotal' => 20.00],
-        ['product_id' => 2, 'quantity' => 1, 'price' => 15.00, 'subtotal' => 15.00],
-    ];
-
-    $action = new CreateOrderAction();
-    $order = $action->execute($user, $items);
-
-    expect($order->total)->toBe(35.00);
-    expect($order->user_id)->toBe($user->id);
-});
-```
-
-### Mocking Dependencies
+Actions can call other actions through the constructor:
 
 ```php
-test('processes payment through gateway', function () {
-    $gateway = Mockery::mock(PaymentGateway::class);
-    $gateway->shouldReceive('charge')
-        ->once()
-        ->with(100.00, 'pm_123', Mockery::any())
-        ->andReturn(new Payment(['id' => 'pay_123']));
-
-    $action = new ProcessPaymentAction($gateway, new OrderRepository());
-
-    $order = Order::factory()->create(['total' => 100.00]);
-    $payment = $action->execute($order, 'pm_123');
-
-    expect($payment->id)->toBe('pay_123');
-});
-```
-
-### Integration Testing
-
-```php
-test('complete order flow', function () {
-    $user = User::factory()->create();
-    $product = Product::factory()->create(['stock' => 10]);
-
-    $action = app(PlaceOrderAction::class);
-
-    $order = $action->execute($user, [
-        'items' => [
-            ['product_id' => $product->id, 'quantity' => 2],
-        ],
-        'payment_method' => 'pm_test',
-    ]);
-
-    expect($order->status)->toBe('paid');
-    expect($product->fresh()->stock)->toBe(8);
-});
-```
-
-## Actions vs Services
-
-### Use Actions When:
-- Single responsibility (one thing)
-- Called from multiple places
-- Needs to be testable in isolation
-- Logic is complete and atomic
-
-### Use Services When:
-- Grouping related operations
-- Stateful across multiple calls
-- Wrapping external APIs
-- Complex orchestration
-
-```php
-// Service: Groups related payment operations
-class PaymentService
+final class CancelSubscription
 {
-    public function charge(Order $order): Payment { }
-    public function refund(Payment $payment): void { }
-    public function getBalance(User $user): float { }
+    public function __construct(
+        private RefundOrder $refundOrder,
+        private RevokeAccess $revokeAccess,
+    ) {}
+
+    public function handle(Subscription $subscription, User $by): void
+    {
+        if ($subscription->latestOrder->isWithinRefundWindow()) {
+            $this->refundOrder->handle($subscription->latestOrder, $by, 'Cancelled in refund window');
+        }
+
+        $this->revokeAccess->handle($subscription->team);
+
+        $subscription->markCancelled();
+    }
 }
-
-// Action: Single operation
-class ChargeOrderAction
-{
-    public function execute(Order $order): Payment { }
-}
 ```
 
-## Directory Structure
+I keep this to one level. When an action calls an action that calls an action, it becomes hard
+to see where a transaction starts and which events fire, and it usually means the top-level
+action is really a workflow that wants to be a job chain or a batch.
 
-```
-app/
-├── Actions/
-│   ├── Orders/
-│   │   ├── CreateOrderAction.php
-│   │   ├── CancelOrderAction.php
-│   │   └── RefundOrderAction.php
-│   ├── Payments/
-│   │   ├── ProcessPaymentAction.php
-│   │   └── RefundPaymentAction.php
-│   └── Users/
-│       ├── CreateUserAction.php
-│       └── UpdateProfileAction.php
-```
+### Testing
 
-## Laravel Actions Package
-
-For more features, consider the `lorisleiva/laravel-actions` package:
-
-```bash
-composer require lorisleiva/laravel-actions
-```
+Actions are easy to test because they are plain classes. With Pest, I resolve the action from
+the container and swap the external dependency:
 
 ```php
-use Lorisleiva\Actions\Concerns\AsAction;
+use App\Actions\Orders\RefundOrder;
+use App\Enums\OrderStatus;
+use App\Events\OrderRefunded;
+use App\Exceptions\OrderNotRefundable;
+use App\Models\Order;
+use App\Models\User;
+use App\Services\Payments\FakePaymentGateway;
+use App\Services\Payments\PaymentGateway;
+use Illuminate\Support\Facades\Event;
 
-class CreateOrder
-{
-    use AsAction;
+beforeEach(function () {
+    $this->app->instance(PaymentGateway::class, new FakePaymentGateway);
+});
 
-    public function handle(User $user, array $items): Order
-    {
-        return Order::create([...]);
-    }
+it('refunds a paid order', function () {
+    Event::fake([OrderRefunded::class]);
+    $order = Order::factory()->paid()->create();
 
-    // Use as controller
-    public function asController(Request $request): RedirectResponse
-    {
-        $order = $this->handle($request->user(), $request->items);
-        return redirect()->route('orders.show', $order);
-    }
+    $refund = resolve(RefundOrder::class)->handle($order, User::factory()->create());
 
-    // Use as job
-    public function asJob(User $user, array $items): void
-    {
-        $this->handle($user, $items);
-    }
-}
+    expect($order->fresh()->status)->toBe(OrderStatus::Refunded)
+        ->and($refund->amount)->toEqual($order->total);
+
+    Event::assertDispatched(OrderRefunded::class);
+});
+
+it('refuses an order that is already refunded', function () {
+    $order = Order::factory()->refunded()->create();
+
+    resolve(RefundOrder::class)->handle($order, User::factory()->create());
+})->throws(OrderNotRefundable::class);
 ```
 
-## Best Practices
+The business rules get tested once, here. The Filament and Livewire tests then only need to
+check that the button calls the action and shows the right notification, which keeps them short.
 
-1. **Keep actions focused** - One action, one purpose
-2. **Use descriptive names** - `CreateOrderAction`, not `OrderAction`
-3. **Return values, don't redirect** - Let controllers handle HTTP responses
-4. **Inject dependencies** - Makes testing easier
-5. **Use DTOs for complex input** - Keeps method signatures clean
+### Where they live
 
-## Conclusion
+`app/Actions`, grouped by domain: `app/Actions/Orders`, `app/Actions/Teams`. I don't add an
+`Action` suffix, because the folder already says it, and `RefundOrder` reads better at the call
+site than `RefundOrderAction`. Pick one convention and keep it.
 
-Actions bring clarity to your Laravel applications by enforcing single responsibility. They're easier to test, easier to understand, and easier to reuse than fat controllers or services.
+### Where actions go wrong
 
----
+The pattern has failure modes, and they are easy to fall into:
 
-## Resources
+- **A hundred tiny actions.** If every model update gets a class, navigation gets worse and
+  nothing is reused. Only extract operations that have real rules or several callers.
+- **Actions that read global state.** `auth()`, `request()` and `session()` inside an action
+  tie it to HTTP. Pass the values in.
+- **Actions that return HTTP things.** An action that returns a `RedirectResponse` or calls
+  `Notification::make()` can only be used from one place. Return the domain result and let the
+  caller decide what to show.
+- **Actions used as a namespace for helpers.** If a class has `handle`, `handleForAdmin` and
+  `handleSilently`, it is a service. That is fine, but call it a service.
 
-- [Laravel Actions Package](https://laravelactions.com)
-- [Refactoring to Actions](https://stitcher.io/blog/laravel-beyond-crud-03-actions)
-
+Kept to those rules, actions are the most boring part of a codebase, which is the point. When the
+same operation is needed from a new place, such as an API or a bulk action, the answer is a new adapter of ten lines that calls code which is already tested.

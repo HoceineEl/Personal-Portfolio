@@ -1,507 +1,198 @@
 ---
-title: "Pest 4 Testing: Browser Testing and Modern Laravel Testing"
-description: Master Pest 4's revolutionary features including Playwright-powered browser testing, parallel execution, mutation testing, and architectural testing for Laravel applications.
+title: "Testing Laravel With Pest 4: Browser Tests, Mutation Testing and Architecture Rules"
+description: Testing Laravel apps with Pest 4. Feature tests as the base, Playwright-backed browser tests for the flows that need a real browser, mutation testing to check the tests themselves, and arch() presets to keep the codebase in shape.
 tags:
   - Laravel
   - Testing
   - Pest
   - Browser Testing
-  - Playwright
-noImage: true
+  - Mutation Testing
+image: /images/blog/pest-4-testing/cover.jpg
+banner: /images/blog/pest-4-testing/cover.jpg
 createdAt: 2025-04-01T10:00:00.000Z
-updatedAt: 2025-04-01T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Pest 4 Testing: Browser Testing and Modern Laravel Testing
+## Testing Laravel With Pest 4
 
-**Pest 4** is the biggest update yet, introducing Playwright-powered browser testing that feels as good as writing unit tests. Combined with parallel execution and Laravel integration, it's the complete testing solution.
+A green test suite tells you the tests passed. It does not tell you the tests would fail if the
+code broke, that the page works in a real browser, or that someone did not leave a `dd()` in a
+controller. Pest 4 has a tool for each of those gaps, and all three sit on top of ordinary
+feature tests.
 
-## Installing Pest 4
+This post covers how they fit together in a Laravel 12 app: what each layer catches, what it
+costs to run, and where to stop.
 
-```bash
-composer require pestphp/pest --dev
-./vendor/bin/pest --init
+### Feature tests are still the base
+
+Most tests in a Laravel app should be HTTP and Livewire feature tests. They boot the app, hit a route or a
+component, and check the database. They are fast and they catch most regressions.
+
+```php
+use App\Enums\OrderStatus;
+use App\Models\Order;
+use App\Models\User;
+
+it('lets a customer cancel a pending order', function () {
+    $user = User::factory()->create();
+    $order = Order::factory()->for($user)->pending()->create();
+
+    $this->actingAs($user)
+        ->post(route('orders.cancel', $order))
+        ->assertRedirect(route('orders.index'));
+
+    expect($order->fresh()->status)->toBe(OrderStatus::Cancelled);
+});
 ```
 
-### Installing Browser Testing Plugin
+Two habits keep these useful. Assert on the outcome (the database row, the dispatched job), not
+on implementation details. And keep `Model::preventLazyLoading()` enabled outside production, so
+an N+1 in the code under test fails the test instead of passing quietly.
+
+Run the suite in parallel. It is the cheapest speed-up there is:
+
+```bash
+./vendor/bin/pest --parallel
+```
+
+### Browser tests for what needs a browser
+
+Feature tests never run JavaScript. If a flow depends on Alpine, a Livewire interaction, a modal
+or a client-side validation message, a feature test can pass while the page is broken. Pest 4's
+[browser plugin](https://pestphp.com/docs/browser-testing) runs those flows in a real browser
+through Playwright.
 
 ```bash
 composer require pestphp/pest-plugin-browser --dev
-./vendor/bin/pest browser:install
+npm install playwright@latest
+npx playwright install
 ```
 
-This installs Playwright and the necessary browser binaries.
-
-## Browser Testing Basics
-
-### Your First Browser Test
+A browser test reads like any other Pest test. `visit()` is a top-level function that returns a
+page you chain actions and assertions on:
 
 ```php
-use function Pest\Browser\visit;
-
-test('homepage loads correctly', function () {
-    visit('/')
-        ->assertSee('Welcome')
-        ->assertTitle('My App');
-});
-
-test('user can login', function () {
-    visit('/login')
-        ->type('#email', 'user@example.com')
-        ->type('#password', 'password')
-        ->click('button[type="submit"]')
-        ->waitForNavigation()
-        ->assertPath('/dashboard')
-        ->assertSee('Welcome back');
-});
-```
-
-### Form Interactions
-
-```php
-test('user can submit contact form', function () {
-    visit('/contact')
-        ->type('input[name="name"]', 'John Doe')
-        ->type('input[name="email"]', 'john@example.com')
-        ->type('textarea[name="message"]', 'Hello, this is a test message')
-        ->select('select[name="subject"]', 'support')
-        ->check('input[name="newsletter"]')
-        ->click('button[type="submit"]')
-        ->waitForText('Thank you')
-        ->assertSee('Message sent successfully');
-});
-```
-
-### Navigation and Waiting
-
-```php
-test('dashboard loads data', function () {
-    visit('/dashboard')
-        ->waitForSelector('.data-table')
-        ->waitForText('Loading complete')
-        ->assertVisible('.chart-container')
-        ->assertElementCount('.table-row', 10);
-});
-
-test('navigation works correctly', function () {
-    visit('/')
-        ->click('a[href="/about"]')
-        ->waitForNavigation()
-        ->assertPath('/about')
-        ->back()
-        ->assertPath('/')
-        ->forward()
-        ->assertPath('/about');
-});
-```
-
-## Visual Regression Testing
-
-Pest 4 includes built-in screenshot comparison:
-
-```php
-test('homepage matches baseline', function () {
-    visit('/')
-        ->assertScreenshotMatches('homepage');
-});
-
-test('dashboard layout is consistent', function () {
-    login(User::factory()->create());
-
-    visit('/dashboard')
-        ->waitForSelector('.loaded')
-        ->assertScreenshotMatches('dashboard', [
-            'fullPage' => true,
-            'threshold' => 0.1, // 10% tolerance
-        ]);
-});
-```
-
-### Updating Baselines
-
-```bash
-# Update all baseline screenshots
-./vendor/bin/pest --update-snapshots
-
-# Update specific test
-./vendor/bin/pest --filter="homepage matches baseline" --update-snapshots
-```
-
-## Mobile and Viewport Testing
-
-```php
-test('mobile menu works', function () {
-    visit('/')
-        ->onMobile()
-        ->assertNotVisible('.desktop-nav')
-        ->assertVisible('.mobile-menu-button')
-        ->click('.mobile-menu-button')
-        ->assertVisible('.mobile-nav');
-});
-
-test('responsive layout adapts', function () {
-    visit('/products')
-        ->resize(1920, 1080) // Desktop
-        ->assertElementCount('.product-grid > *', 4) // 4 columns
-
-        ->resize(768, 1024) // Tablet
-        ->assertElementCount('.product-grid > *', 2) // 2 columns
-
-        ->resize(375, 667) // Mobile
-        ->assertElementCount('.product-grid > *', 1); // 1 column
-});
-```
-
-## Authentication in Browser Tests
-
-```php
-test('authenticated user sees dashboard', function () {
-    $user = User::factory()->create();
-
-    login($user);
-
-    visit('/dashboard')
-        ->assertSee("Welcome, {$user->name}")
-        ->assertPath('/dashboard');
-});
-
-test('guest is redirected to login', function () {
-    visit('/dashboard')
-        ->assertPath('/login');
-});
-```
-
-## JavaScript and Console Testing
-
-```php
-test('page has no JavaScript errors', function () {
-    visit('/')
-        ->assertNoConsoleErrors();
-});
-
-test('analytics script loads', function () {
-    visit('/')
-        ->assertConsoleLogContains('Analytics initialized');
-});
-
-test('JavaScript interaction works', function () {
-    visit('/interactive-page')
-        ->click('#toggle-button')
-        ->waitForText('Panel is open')
-        ->assertVisible('.panel-content')
-        ->evaluate('window.appState.isOpen')
-        ->toBe(true);
-});
-```
-
-## iFrame Testing
-
-```php
-test('embedded content loads', function () {
-    visit('/embed-page')
-        ->withinFrame('#payment-iframe', function () {
-            $this->type('#card-number', '4242424242424242')
-                 ->type('#expiry', '12/25')
-                 ->type('#cvc', '123')
-                 ->click('#pay-button');
-        })
-        ->assertSee('Payment successful');
-});
-```
-
-## Parallel Browser Testing
-
-Pest 4 supports parallel execution for browser tests:
-
-```bash
-# Run browser tests in parallel
-./vendor/bin/pest --parallel
-
-# With specific number of processes
-./vendor/bin/pest --parallel --processes=4
-```
-
-### Test Sharding for CI
-
-Split tests across multiple CI jobs:
-
-```yaml
-# GitHub Actions example
-jobs:
-  browser-tests:
-    strategy:
-      matrix:
-        shard: [1, 2, 3, 4]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run tests
-        run: ./vendor/bin/pest --shard=${{ matrix.shard }}/4
-```
-
-## Unit and Feature Tests
-
-### Basic Test Structure
-
-```php
-test('can create post', function () {
-    $user = User::factory()->create();
-
-    $response = $this->actingAs($user)
-        ->post('/posts', [
-            'title' => 'My Post',
-            'content' => 'Content here',
-        ]);
-
-    $response->assertRedirect('/posts');
-    $this->assertDatabaseHas('posts', ['title' => 'My Post']);
-});
-```
-
-### Expectations and Assertions
-
-```php
-test('user model works correctly', function () {
-    $user = User::factory()->create([
-        'name' => 'John Doe',
-        'email' => 'john@example.com',
+it('signs a user in', function () {
+    User::factory()->create([
+        'email' => 'nuno@laravel.com',
+        'password' => 'password',
     ]);
 
-    expect($user)
-        ->name->toBe('John Doe')
-        ->email->toBe('john@example.com')
-        ->email_verified_at->toBeNull()
-        ->created_at->toBeInstanceOf(Carbon::class);
-});
-
-test('collection operations', function () {
-    $items = collect([1, 2, 3, 4, 5]);
-
-    expect($items)
-        ->toHaveCount(5)
-        ->first()->toBe(1)
-        ->last()->toBe(5)
-        ->sum()->toBe(15);
+    visit('/login')
+        ->fill('email', 'nuno@laravel.com')
+        ->fill('password', 'password')
+        ->press('Log in')
+        ->assertSee('Dashboard')
+        ->assertNoJavaScriptErrors();
 });
 ```
 
-### Higher Order Tests
+The test shares the app and the database with the browser, so factories and `RefreshDatabase`
+work the same way they do in feature tests. Other useful calls:
+
+- `click('Save')` and `type('email', '...')` for interaction.
+- `visit('/')->on()->mobile()` to run the same flow at a phone viewport.
+- `visit(['/', '/about'])` with `assertNoSmoke()`, which checks there are no console logs or
+  JavaScript errors on any of them. That one line is a cheap smoke test for every public page.
+- `screenshot()`, which names the file after the test when you do not pass one.
+
+When a test fails and the reason is not obvious, two flags help: `--headed` opens a visible browser, and
+`--debug` pauses at the end of the failing test so you can look at the page.
+
+Browser tests are slower than feature tests and more sensitive to markup changes, so keep them
+to the flows where JavaScript is the point: sign-in, checkout, anything with drag and drop, and a
+smoke test over the main pages. Business rules stay in feature tests.
+
+### Mutation testing checks the tests
+
+Coverage tells you a line ran during a test. It does not tell you a test would notice if that
+line were wrong. Mutation testing answers the second question: Pest changes your code in small
+ways (flips a `>` to `>=`, returns a different value, removes a call), runs the tests, and reports
+every change that no test caught.
+
+You tell Pest which code a test file targets with `covers()` or `mutates()` at the top of the
+file. For mutation testing they behave the same; `covers()` also filters the coverage report.
 
 ```php
-test('user')
-    ->expect(User::class)
-    ->toHaveMethod('posts')
-    ->toHaveMethod('teams');
+use App\Actions\CalculateOrderTotal;
 
-it('has correct fillable fields')
-    ->expect(fn () => (new Post)->getFillable())
-    ->toBe(['title', 'content', 'user_id']);
+mutates(CalculateOrderTotal::class);
+
+it('applies the discount before tax', function () {
+    // ...
+});
 ```
 
-## Architectural Testing
+Then run with `--mutate`, ideally in parallel:
 
-```php
-arch('controllers use dependency injection')
-    ->expect('App\Http\Controllers')
-    ->toUseStrictTypes()
-    ->not->toUse(['request', 'session']);
-
-arch('models extend base model')
-    ->expect('App\Models')
-    ->toExtend('Illuminate\Database\Eloquent\Model');
-
-arch('no debugging statements')
-    ->expect(['dd', 'dump', 'ray', 'var_dump'])
-    ->not->toBeUsed();
-
-arch('services are final')
-    ->expect('App\Services')
-    ->toBeFinal();
+```bash
+./vendor/bin/pest --mutate --parallel
 ```
 
-### Preset Rules
+The output lists surviving mutations with a line number and a diff:
+
+```text
+UNTESTED  app/Http/TodoController.php > Line 44: ReturnValue - ID: 76d17ad63bb7c307
+```
+
+Each one is either a missing assertion or dead code. Both are worth knowing about. To enforce a
+floor in CI, add `--min`:
+
+```bash
+./vendor/bin/pest --mutate --min=40
+```
+
+A score below the threshold fails the run. Mutation testing needs a coverage driver (Xdebug 3+ or
+PCOV), and it is slow, because it runs the tests once per mutation. Run it on the classes where
+a silent bug costs money, like pricing, permissions and scheduling rules, not on the whole app.
+`--covered-only` restricts mutations to lines your tests already execute, and
+`// @pest-mutate-ignore` skips a line you have decided not to care about.
+
+### Architecture tests keep the shape
+
+Some rules are not about behaviour: no debug helpers in `app/`, models extend `Model`, controllers
+end in `Controller`. [Architecture tests](https://pestphp.com/docs/arch-testing) turn those
+conventions into failing tests.
+
+The presets cover the common ground:
 
 ```php
 arch()->preset()->php();
-arch()->preset()->laravel();
 arch()->preset()->security();
-arch()->preset()->strict();
+arch()->preset()->laravel();
 ```
 
-## Mutation Testing
+`php` bans `die`, `var_dump` and similar. `security` flags things like `eval` and `md5`. `laravel`
+checks Laravel's conventions. There is also `strict` (strict types and final classes) and
+`relaxed`, its opposite. A sensible start is `php`, `security` and `laravel`, adding `strict` only on
+packages you control end to end, since it fights with code that must be extended.
 
-Find untested code paths:
-
-```bash
-./vendor/bin/pest --mutate
-```
+Then add the project-specific rules:
 
 ```php
-test('price calculation is correct', function () {
-    $order = new Order(['quantity' => 3, 'unit_price' => 10]);
+arch()
+    ->expect('App')
+    ->toUseStrictTypes()
+    ->not->toUse(['die', 'dd', 'dump']);
 
-    expect($order->total())->toBe(30.0);
-});
+arch()
+    ->expect('App\Models')
+    ->toExtend('Illuminate\Database\Eloquent\Model');
 
-// Pest will mutate operators: 3 * 10 → 3 + 10, 3 - 10, etc.
-// And verify your tests catch the mutations
+arch()
+    ->expect('App\Http\Controllers')
+    ->toHaveSuffix('Controller');
 ```
 
-### Coverage Thresholds
+When a rule has a legitimate exception, use `->ignoring()` rather than deleting the rule.
 
-```php
-// pest.php
-pest()
-    ->mutate()
-    ->min(90); // Require 90% mutation score
-```
+These tests run in milliseconds, so they belong in every run.
 
-## Test Organization
+### Putting it together
 
-### Grouping with Describe
-
-```php
-describe('PostController', function () {
-    describe('index', function () {
-        test('lists published posts', function () {
-            $posts = Post::factory()->published()->count(3)->create();
-
-            $this->get('/posts')
-                ->assertOk()
-                ->assertViewHas('posts');
-        });
-
-        test('paginates results', function () {
-            Post::factory()->published()->count(30)->create();
-
-            $this->get('/posts')
-                ->assertOk()
-                ->assertViewHas('posts', fn ($posts) => $posts->count() === 15);
-        });
-    });
-
-    describe('store', function () {
-        test('creates post', function () { });
-        test('validates input', function () { });
-    });
-});
-```
-
-### Shared Setup
-
-```php
-beforeEach(function () {
-    $this->user = User::factory()->create();
-    $this->actingAs($this->user);
-});
-
-afterEach(function () {
-    // Cleanup
-});
-
-test('first test', function () {
-    // $this->user is available
-});
-```
-
-### Datasets
-
-```php
-dataset('invalid emails', [
-    'missing @' => ['invalidemail.com'],
-    'missing domain' => ['test@'],
-    'spaces' => ['test @example.com'],
-]);
-
-test('rejects invalid email', function (string $email) {
-    $response = $this->post('/register', [
-        'email' => $email,
-        'password' => 'password123',
-    ]);
-
-    $response->assertSessionHasErrors('email');
-})->with('invalid emails');
-```
-
-## Mocking and Faking
-
-```php
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Queue;
-
-test('sends notification to external service', function () {
-    Http::fake([
-        'api.notification.com/*' => Http::response(['status' => 'sent']),
-    ]);
-
-    Queue::fake();
-
-    $user = User::factory()->create();
-    $user->notify(new WelcomeNotification());
-
-    Queue::assertPushed(SendNotification::class);
-    Http::assertSent(fn ($request) =>
-        $request->url() === 'https://api.notification.com/send'
-    );
-});
-```
-
-## Configuration
-
-```php
-// pest.php
-pest()
-    ->extend(Tests\TestCase::class)
-    ->in('Feature', 'Unit')
-    ->mutate()
-    ->parallel();
-
-// Browser test configuration
-pest()
-    ->browser()
-    ->timeout(10000) // 10 seconds
-    ->headless()
-    ->screenshot('failures');
-```
-
-## CI Integration
-
-```yaml
-# .github/workflows/tests.yml
-name: Tests
-
-on: [push, pull_request]
-
-jobs:
-  tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-
-      - name: Install dependencies
-        run: composer install
-
-      - name: Install browsers
-        run: ./vendor/bin/pest browser:install
-
-      - name: Run tests
-        run: ./vendor/bin/pest --parallel --coverage
-```
-
-## Conclusion
-
-Pest 4 brings browser testing into the same elegant testing experience we love. With Playwright under the hood, parallel execution, and seamless Laravel integration, it's the complete testing solution for modern PHP applications.
-
----
-
-## Resources
-
-- [Pest Documentation](https://pestphp.com)
-- [Pest Browser Testing](https://pestphp.com/docs/browser-testing)
-- [Pest v4 Announcement](https://pestphp.com/docs/pest-v4-is-here-now-with-browser-testing)
-
+A workable split: run feature and arch tests locally on every change with `--parallel`. CI runs the full suite,
+browser tests included. Mutation testing runs on the critical classes with a `--min` threshold,
+so a pull request that adds code without tests that would catch a mistake in it fails review on
+its own. Each layer answers a different question, and none of them replaces the feature tests
+underneath.

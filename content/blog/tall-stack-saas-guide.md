@@ -1,438 +1,251 @@
 ---
-title: "Building SaaS Applications with the TALL Stack in 2025"
-description: A comprehensive guide to building modern SaaS applications using Tailwind CSS, Alpine.js, Laravel, and Livewire. Cover architecture, subscriptions, multi-tenancy, and deployment.
+title: "Building a SaaS on Laravel, Livewire and Filament: What I Learned from FilamentCraft and Dukanos"
+description: Tenancy, billing, dashboards and testing for a SaaS on the TALL stack with Filament 4, based on what I ran into building FilamentCraft and the Dukanos shop platform.
 tags:
   - TALL Stack
   - Laravel
   - Livewire
   - SaaS
   - FilamentPHP
-noImage: true
+image: /images/blog/tall-saas/cover.jpg
+banner: /images/blog/tall-saas/cover.jpg
 createdAt: 2025-07-15T10:00:00.000Z
-updatedAt: 2025-07-15T10:00:00.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: Hoceine EL IDRISSI
 ---
 
-# Building SaaS Applications with the TALL Stack in 2025
+## Building a SaaS on Laravel, Livewire and Filament
 
-The **TALL Stack** (Tailwind CSS, Alpine.js, Laravel, Livewire) has become the go-to choice for building SaaS applications in 2025. Combined with FilamentPHP for admin panels, it offers rapid development without sacrificing quality or scalability.
+Most "how to build a SaaS" posts are a list of packages. The packages are the easy part. What
+decides whether a SaaS on this stack stays pleasant to work on is a handful of design choices made
+early: what a tenant is, where tenant scoping is enforced, how billing state reaches the UI, and
+what you test.
 
-## Why TALL Stack for SaaS?
+I have made those choices twice recently. [FilamentCraft](/projects/filamentcraft) is a commercial
+Filament plugin that other people install into their own multi-tenant apps, so it has to work with
+whatever tenancy they chose. [Dukanos](/projects/dukanos) is my own SaaS for shops, one platform with
+a separate store per shop, with Filament for the dashboard and the point of sale, and FilamentCraft
+for the storefronts. This post is what I would tell myself before starting either.
 
-### Developer Velocity
+### Why this stack for a solo or small team
 
-- **Single Language** - PHP everywhere, no JavaScript framework overhead
-- **Reactive UI** - Livewire 4 provides SPA-like experience
-- **Beautiful Defaults** - Tailwind v4 makes styling effortless
-- **Admin Ready** - FilamentPHP v4 eliminates admin panel development time
+The argument for Laravel, Livewire and Filament is not speed of the first demo. It is that one
+person can own the whole thing. The dashboard, the billing pages, the admin tools and the public
+pages are PHP and Blade, tested with the same test runner, deployed as one app. There is no API
+layer between a frontend and a backend to version, because there is no separate frontend.
 
-### Production Ready
+Filament covers most of what a SaaS back office needs: CRUD resources, tables with filters, forms,
+notifications, and multi-tenancy at the panel level. Livewire handles the screens Filament does not
+fit, and Alpine handles the small client-side bits. Where that stops working is heavy client-side
+interaction. The FilamentCraft editor canvas is TypeScript for that reason, talking to Livewire
+through an iframe bridge. I wrote about that part in
+[the live preview post](/blog/livewire-iframe-live-preview).
 
-- **Battle-Tested** - Laravel powers millions of applications
-- **Scalable** - Queue workers, caching, horizontal scaling
-- **Secure** - Built-in CSRF, XSS, SQL injection protection
+### Decide what a tenant is
 
-## SaaS Architecture Overview
+Before any code, decide what owns data. In Dukanos it is the shop. In a B2B tool it is usually a
+team or a company. The tenant is almost never the user, because sooner or later a customer wants a
+second person on the account.
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      TALL Stack SaaS                        │
-├─────────────────────────────────────────────────────────────┤
-│  Frontend Layer                                             │
-│  ├── Tailwind CSS v4 (Styling)                             │
-│  ├── Alpine.js (Client Interactions)                        │
-│  └── Livewire 4 (Reactive Components)                      │
-├─────────────────────────────────────────────────────────────┤
-│  Application Layer                                          │
-│  ├── Laravel 12 (Framework)                                │
-│  ├── FilamentPHP v4 (Admin Panel)                          │
-│  └── Laravel Cashier (Subscriptions)                       │
-├─────────────────────────────────────────────────────────────┤
-│  Data Layer                                                 │
-│  ├── MySQL/PostgreSQL (Primary Database)                   │
-│  ├── Redis (Cache & Sessions)                              │
-│  └── S3/Storage (File Storage)                             │
-├─────────────────────────────────────────────────────────────┤
-│  Infrastructure                                             │
-│  ├── Laravel Cloud / Forge                                 │
-│  ├── Queue Workers (Horizon)                               │
-│  └── Background Jobs                                        │
-└─────────────────────────────────────────────────────────────┘
-```
-
-## Project Setup
-
-### 1. Create New Laravel Project
-
-```bash
-laravel new my-saas --kit=livewire
-
-cd my-saas
-```
-
-### 2. Install FilamentPHP
-
-```bash
-composer require filament/filament:"^4.0"
-php artisan filament:install --panels
-```
-
-### 3. Install Laravel Cashier
-
-```bash
-composer require laravel/cashier
-php artisan migrate
-```
-
-### 4. Configure Multi-Tenancy
+Filament's [tenancy](https://filamentphp.com/docs/4.x/users/tenancy) is configured on the panel:
 
 ```php
-// app/Providers/Filament/AdminPanelProvider.php
-return $panel
-    ->tenant(Team::class, slugAttribute: 'slug')
-    ->tenantRegistration(RegisterTeam::class)
-    ->tenantProfile(EditTeamProfile::class);
-```
+use App\Filament\Pages\Tenancy\EditTeamProfile;
+use App\Filament\Pages\Tenancy\RegisterTeam;
+use App\Models\Team;
 
-## Subscription Management
-
-### Setting Up Plans
-
-```php
-// database/seeders/PlanSeeder.php
-class PlanSeeder extends Seeder
+public function panel(Panel $panel): Panel
 {
-    public function run()
+    return $panel
+        ->tenant(Team::class, slugAttribute: 'slug')
+        ->tenantRegistration(RegisterTeam::class)
+        ->tenantProfile(EditTeamProfile::class);
+}
+```
+
+The user model implements `HasTenants`, which tells Filament which tenants a user belongs to and
+whether they may open a given one:
+
+```php
+use Filament\Models\Contracts\HasTenants;
+use Filament\Panel;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
+
+class User extends Authenticatable implements HasTenants
+{
+    public function teams(): BelongsToMany
     {
-        Plan::create([
-            'name' => 'Starter',
-            'stripe_price_id' => 'price_starter_monthly',
-            'price' => 29,
-            'features' => [
-                'projects' => 5,
-                'team_members' => 3,
-                'storage_gb' => 10,
-            ],
-        ]);
+        return $this->belongsToMany(Team::class);
+    }
 
-        Plan::create([
-            'name' => 'Professional',
-            'stripe_price_id' => 'price_pro_monthly',
-            'price' => 79,
-            'features' => [
-                'projects' => 50,
-                'team_members' => 10,
-                'storage_gb' => 100,
-            ],
-        ]);
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->teams;
+    }
 
-        Plan::create([
-            'name' => 'Enterprise',
-            'stripe_price_id' => 'price_enterprise_monthly',
-            'price' => 199,
-            'features' => [
-                'projects' => -1, // Unlimited
-                'team_members' => -1,
-                'storage_gb' => 1000,
-            ],
-        ]);
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->teams()->whereKey($tenant)->exists();
     }
 }
 ```
 
-### Subscription Component
+`canAccessTenant()` is the line that stops someone from typing another team's slug into the URL.
+Do not leave it returning `true` while prototyping and forget it.
+
+### Know where Filament's scoping stops
+
+This is the part that bites. Filament scopes resource queries to the current tenant, and it is
+easy to assume that means the whole app is tenant-safe. The docs are explicit that it is not:
+
+- Queries made outside the tenant-aware panel, or before the tenant is identified, need their own
+  constraints. That covers queued jobs, scheduled commands, public storefront routes and API
+  endpoints.
+- The protection does not extend to records passed into relation managers, widgets, or modal table
+  selects.
+- Tenant scoping is not record authorization. Policies still matter.
+
+Tenant middleware has a trap of its own. By default it runs on the first page load, not on the
+Livewire requests that follow. If your middleware sets something every request depends on, like a
+locale or a database connection, register it as persistent:
 
 ```php
-// app/Livewire/Billing/SubscriptionManager.php
-class SubscriptionManager extends Component
+$panel->tenantMiddleware([
+    ApplyTenantSettings::class,
+], isPersistent: true);
+```
+
+In Dukanos the storefront is a public site on the shop's own domain, so it never goes through the
+panel at all. The shop has to be resolved from the request, and every query that serves a page has to be
+scoped by that, with no panel doing it for you. "Is this scoped?" is worth asking as a review question on every query
+outside the panel.
+
+### Make features tenant-agnostic when you can
+
+FilamentCraft taught me something that also applies inside a single app. Because it ships into other
+people's projects, it cannot assume a tenancy package. Sites belong to any owner model, so the same
+plugin runs under stancl/tenancy, spatie/multitenancy, Filament's own tenancy, or a single-site
+app.
+
+The general shape of that, inside your own app, is a polymorphic owner instead of a hard `team_id`:
+
+```php
+Schema::create('sites', function (Blueprint $table) {
+    $table->id();
+    $table->morphs('owner');
+    $table->string('name');
+    $table->timestamps();
+});
+```
+
+Inside one SaaS this is useful for any module you might reuse or move: content, files, settings.
+The module asks "who owns this?" and does not care whether the answer is a team, a shop or a user.
+The cost is that you cannot put a foreign key constraint on a morph column, so cleanup on delete is
+your job.
+
+### Billing state belongs to the tenant
+
+Put the billing trait on the tenant model, not the user. [Cashier](https://laravel.com/docs/12.x/billing)
+supports any billable model, and if the team pays, the team should be the customer:
+
+```php
+use Laravel\Cashier\Billable;
+
+class Team extends Model
 {
-    public Team $team;
-    public ?string $selectedPlan = null;
-
-    public function mount()
-    {
-        $this->team = Filament::getTenant();
-    }
-
-    public function subscribe(string $planId)
-    {
-        $plan = Plan::findOrFail($planId);
-
-        if ($this->team->subscribed('default')) {
-            $this->team->subscription('default')->swap($plan->stripe_price_id);
-        } else {
-            $this->team->newSubscription('default', $plan->stripe_price_id)
-                ->create($this->team->defaultPaymentMethod()->id);
-        }
-
-        $this->dispatch('subscription-updated');
-        Notification::make()->success()->title('Subscription updated!')->send();
-    }
-
-    public function render()
-    {
-        return view('livewire.billing.subscription-manager', [
-            'plans' => Plan::all(),
-            'currentPlan' => $this->team->subscription('default')?->stripe_price,
-        ]);
-    }
+    use Billable;
 }
 ```
 
-### Feature Gating
+For starting a subscription, Stripe Checkout is a good default over building a card form, because it keeps
+card handling and tax collection off your pages:
 
 ```php
-// app/Services/FeatureGate.php
-class FeatureGate
+public function subscribe(string $price)
 {
-    public function __construct(protected Team $team) {}
-
-    public function check(string $feature, int $current = 0): bool
-    {
-        $limit = $this->getLimit($feature);
-
-        // -1 means unlimited
-        if ($limit === -1) return true;
-
-        return $current < $limit;
-    }
-
-    public function getLimit(string $feature): int
-    {
-        $plan = Plan::where('stripe_price_id', $this->team->subscription('default')?->stripe_price)->first();
-
-        return $plan?->features[$feature] ?? 0;
-    }
-
-    public function canCreateProject(): bool
-    {
-        return $this->check('projects', $this->team->projects()->count());
-    }
-
-    public function canAddTeamMember(): bool
-    {
-        return $this->check('team_members', $this->team->users()->count());
-    }
-}
-
-// Usage in controller
-public function store(Request $request)
-{
-    $gate = new FeatureGate(Filament::getTenant());
-
-    if (!$gate->canCreateProject()) {
-        return back()->with('error', 'Project limit reached. Please upgrade your plan.');
-    }
-
-    Project::create($request->validated());
+    return Filament::getTenant()
+        ->newSubscription('default', $price)
+        ->checkout([
+            'success_url' => route('billing.success'),
+            'cancel_url' => route('billing'),
+        ]);
 }
 ```
 
-## User Onboarding Flow
+Filament can also gate the whole panel on an active subscription with
+`->requiresTenantSubscription()` and a billing provider. That is a good fit when there is no free
+tier. When there is one, such as a free trial, gating individual features fits better.
 
-### Welcome Wizard Component
+For FilamentCraft itself I did not use a subscription library at all. It is sold through Paddle as
+merchant of record, which handles sales tax across countries, and paid customers get access to a
+self-hosted private Composer registry. Selling a package is a different problem from running a SaaS,
+and treating it like one would have added a lot of code for nothing.
 
-```php
-// app/Livewire/Onboarding/WelcomeWizard.php
-class WelcomeWizard extends Component
-{
-    public int $step = 1;
-    public string $teamName = '';
-    public string $projectName = '';
-    public array $inviteEmails = [];
+### Dashboards with Livewire 4 islands
 
-    public function nextStep()
-    {
-        $this->validate($this->rulesForStep($this->step));
-        $this->step++;
-    }
-
-    public function previousStep()
-    {
-        $this->step--;
-    }
-
-    public function complete()
-    {
-        // Create team
-        $team = Team::create([
-            'name' => $this->teamName,
-            'owner_id' => auth()->id(),
-        ]);
-
-        // Create first project
-        $team->projects()->create([
-            'name' => $this->projectName,
-        ]);
-
-        // Send invitations
-        foreach ($this->inviteEmails as $email) {
-            TeamInvitation::create([
-                'team_id' => $team->id,
-                'email' => $email,
-            ]);
-            Mail::to($email)->queue(new TeamInvitationMail($team));
-        }
-
-        auth()->user()->update(['current_team_id' => $team->id]);
-
-        return redirect()->route('filament.admin.pages.dashboard');
-    }
-
-    protected function rulesForStep(int $step): array
-    {
-        return match($step) {
-            1 => ['teamName' => 'required|min:2|max:255'],
-            2 => ['projectName' => 'required|min:2|max:255'],
-            3 => ['inviteEmails.*' => 'nullable|email'],
-            default => [],
-        };
-    }
-}
-```
-
-## Real-Time Dashboard
-
-### Dashboard with Livewire Islands
+A SaaS dashboard is a page of independent cards, and the slow ones should not hold up the fast
+ones. Livewire 4 added [islands](https://livewire.laravel.com/docs/islands): regions of a component
+that render and refresh on their own.
 
 ```blade
-{{-- resources/views/filament/pages/dashboard.blade.php --}}
-<x-filament-panels::page>
-    {{-- Quick Stats - Load immediately --}}
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <livewire:dashboard.quick-stats />
-    </div>
+<div>
+    <livewire:dashboard.quick-stats />
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
-        {{-- Revenue Chart - Load lazily --}}
-        @island(lazy: true)
-            <livewire:dashboard.revenue-chart />
-            <x-slot:placeholder>
-                <div class="h-80 bg-gray-100 animate-pulse rounded-xl"></div>
-            </x-slot:placeholder>
-        @endisland
-
-        {{-- Activity Feed - Poll every 30s --}}
-        @island(poll: '30s')
-            <livewire:dashboard.activity-feed />
-        @endisland
-    </div>
-
-    {{-- Recent Projects Table --}}
-    @island(lazy: true)
-        <livewire:dashboard.recent-projects />
+    @island(name: 'revenue', lazy: true)
+        @include('dashboard.revenue-chart', ['data' => $this->revenue])
     @endisland
-</x-filament-panels::page>
+
+    @island(defer: true)
+        <div wire:poll.30s>
+            @foreach ($this->recentOrders as $order)
+                @include('dashboard.order-row', ['order' => $order])
+            @endforeach
+        </div>
+    @endisland
+</div>
 ```
 
-## Background Jobs Architecture
+`lazy: true` waits until the island is visible, and `defer: true` loads it right after the page.
+There is no polling option on `@island` itself; you put `wire:poll` on an element inside the
+island, and only that island refreshes. A button elsewhere can refresh a named island with
+`wire:click="$refresh" wire:island="revenue"`.
 
-### Job Classes
+An earlier version of this post showed an `@island(poll: '30s')` syntax. That does not exist, and
+copying it would not work.
+
+Inside a Filament panel, Filament widgets are the natural first choice, since they come with lazy
+loading and polling of their own. Islands are for custom Livewire pages outside the widget grid.
+
+### Test the boundaries, not the framework
+
+FilamentCraft has over 1,700 Pest tests gating releases, alongside PHPStan at level 6 and Pint. Most
+of those tests are about its own behaviour, but the ones I would write first in any SaaS are the
+boundary tests:
 
 ```php
-// app/Jobs/ProcessSubscription.php
-class ProcessSubscription implements ShouldQueue
-{
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+it('does not show another team\'s orders', function () {
+    $mine = Team::factory()->create();
+    $theirs = Team::factory()->create();
+    $order = Order::factory()->for($theirs)->create();
 
-    public function __construct(
-        public Team $team,
-        public string $action
-    ) {}
+    $user = User::factory()->hasAttached($mine)->create();
 
-    public function handle()
-    {
-        match ($this->action) {
-            'activated' => $this->handleActivation(),
-            'cancelled' => $this->handleCancellation(),
-            'upgraded' => $this->handleUpgrade(),
-        };
-    }
-
-    protected function handleActivation()
-    {
-        // Send welcome email
-        Mail::to($this->team->owner)->queue(new SubscriptionActivated($this->team));
-
-        // Provision resources
-        $this->team->update(['status' => 'active']);
-
-        // Log event
-        Activity::log('subscription.activated', $this->team);
-    }
-}
+    $this->actingAs($user)
+        ->get(OrderResource::getUrl('index', tenant: $mine))
+        ->assertDontSee($order->number);
+});
 ```
 
-### Queue Configuration
+Write one of these for every place data leaves the panel: exports, jobs, notifications, public
+routes. They are boring, and they are the tests that catch the bug that costs you a customer.
 
-```php
-// config/horizon.php
-'defaults' => [
-    'supervisor-1' => [
-        'connection' => 'redis',
-        'queue' => ['default', 'high'],
-        'balance' => 'auto',
-        'processes' => 10,
-        'tries' => 3,
-    ],
-],
+### What I would do the same way again
 
-'environments' => [
-    'production' => [
-        'supervisor-1' => [
-            'queue' => ['high', 'default', 'low'],
-            'processes' => 20,
-        ],
-        'supervisor-billing' => [
-            'queue' => ['billing'],
-            'processes' => 5,
-        ],
-    ],
-],
-```
-
-## Deployment Checklist
-
-### Pre-Deployment
-
-- [ ] Run `php artisan optimize`
-- [ ] Compile assets: `npm run build`
-- [ ] Run tests: `php artisan test`
-- [ ] Check `.env` configuration
-- [ ] Set up database backups
-- [ ] Configure error tracking (Sentry/Flare)
-
-### Infrastructure
-
-- [ ] Laravel Cloud or Forge setup
-- [ ] Redis for cache and queues
-- [ ] S3 for file storage
-- [ ] CDN for assets
-- [ ] SSL certificate
-- [ ] Horizon for queue monitoring
-
-### Post-Deployment
-
-- [ ] Run migrations: `php artisan migrate`
-- [ ] Clear caches: `php artisan optimize:clear`
-- [ ] Restart queue workers
-- [ ] Verify webhook endpoints
-- [ ] Test critical user flows
-
-## Conclusion
-
-The TALL Stack in 2025 is a powerhouse for SaaS development. With Laravel 12's automatic eager loading, Livewire 4's Islands architecture, and FilamentPHP v4's multi-tenancy, you can build production-ready SaaS applications faster than ever.
-
-The key is to leverage each technology's strengths: Livewire for reactivity, Filament for admin UIs, and Laravel for the robust backend foundation.
-
----
-
-## Resources
-
-- [Laravel Documentation](https://laravel.com/docs)
-- [Livewire Documentation](https://livewire.laravel.com)
-- [FilamentPHP Documentation](https://filamentphp.com/docs)
-- [Tailwind CSS v4](https://tailwindcss.com/docs)
+One app, Filament for every internal screen, a tenant model decided on day one, billing on the
+tenant, and scoping treated as something to review on every query outside the panel. The rest,
+including the choice between Stripe and Paddle or between Filament's tenancy and a package, can
+change later without a rewrite.
 
 
 ---

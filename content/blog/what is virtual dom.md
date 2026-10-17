@@ -1,80 +1,73 @@
 ---
-title: What is the Virtual DOM , A Comprehensive Guide with Examples
-description: Exploring the concept of the Virtual DOM in Vue.js and providing practical examples for better understanding.
+title: What Is the Virtual DOM? A Short Explanation with Vue Examples
+description: What the Virtual DOM is, how Vue uses it to render, diff and patch, and where the idea fits next to other frameworks.
 tags: [Vue.js, Virtual DOM, Web Development, JavaScript]
-image: /images/blog/vdom/thumbnail.svg
-banner: /images/blog/vdom/banner.svg
+image: /images/blog/virtual-dom/cover.jpg
+banner: /images/blog/virtual-dom/cover.jpg
 createdAt: 2023-11-24T15:15:53.000Z
-updatedAt: 2023-11-24T15:15:53.000Z
+updatedAt: 2026-10-17T10:00:00.000Z
 createdBy: "Hoceine EL IDRISSI"
 ---
 
+## What Is the Virtual DOM?
 
+Salam Alaikom. If you write Vue, you use the Virtual DOM every day, usually without thinking about
+it. Knowing what it does helps when you debug a list that re-renders oddly or wonder why `key`
+matters. This post explains the idea and how Vue applies it.
 
-## The Importance of Understanding the Virtual DOM
+### A lightweight copy of the page
 
-Salam Alaikom, In the dynamic world of web development, there's a crucial concept that's central to many modern frameworks and libraries: the Virtual DOM. In the realm of Vue.js, a JavaScript framework known for its simplicity and efficiency in creating user interfaces, the Virtual DOM plays a pivotal role.
+The Virtual DOM (VDOM) is a representation of the page's DOM as plain JavaScript objects. Instead
+of touching the real DOM every time state changes, a framework like Vue describes what the UI
+should look like as a tree of these objects, called virtual nodes or vnodes:
 
-This article is dedicated to highlighting why it's essential to grasp the importance of the Virtual DOM within Vue.js. Whether you're an experienced developer or just beginning your web development journey, understanding this concept can unlock a higher level of proficiency in web application development.
+```js
+const vnode = {
+  type: 'div',
+  props: { id: 'hello' },
+  children: [/* more vnodes */],
+}
+```
 
-### Why is the Virtual DOM Important?
+Creating and comparing these objects is cheap compared with reading and writing real DOM nodes,
+which can trigger style recalculation and layout.
 
-In this section, we'll explore the significance of the Virtual DOM and how it contributes to the overall development process. Understanding its importance sets the foundation for leveraging its benefits effectively.
+### Diffing and patching
 
-### Vue.js and the Virtual DOM
+When state changes, the framework builds a new vnode tree and compares it with the previous one.
+That comparison is the diff. It then applies only the differences to the real DOM, which is the
+patch. If one list item's text changed, only that text node is updated; the rest of the page is
+left alone.
 
-Moving forward, we'll delve into the specific ways Vue.js harnesses the power of the Virtual DOM to simplify and optimize web development. Through practical examples and clear explanations, you'll gain insights into how Vue.js uniquely implements and utilizes the Virtual DOM.
-
-So, let's dive into it.
-
-## What is the Virtual DOM? - Definition and Purpose
-
-The Virtual DOM (VDOM) is a crucial concept widely adopted in modern web development frameworks. In technical terms, it operates as an intermediary representation of the actual Document Object Model (DOM) of a web page.
-
-### A Lightweight Replica
-
-
-Imagine the real DOM as a complex and resource-intensive structure. When changes are required, frameworks like Vue.js don't manipulate the real DOM directly. Instead, they create a lightweight, virtual copy known as the Virtual DOM.
-
-### The Technical Process
-
-Here's the technical bit: any modifications to the web page are applied to this Virtual DOM, which acts as a staging area. Once the changes are implemented on the Virtual DOM, it's compared to the previous state of the Virtual DOM to determine the differences or "diffs."
-
-### Precise and Efficient Updates
-
-After identifying the diffs, only the necessary updates are made to the real DOM. This approach is akin to a precise surgical procedure, targeting and altering only the specific parts that require changes. It's a highly efficient process that significantly enhances web application performance.
-
-### Represented as a JavaScript Object
-
-In the end, the VDOM can be represented as a JavaScript object, simplifying web development and enhancing performance.
+This is also why Vue asks for a `key` on `v-for` items: keys let the diff match old and new items
+correctly when a list is reordered, instead of rewriting each item in place.
 
 <MdImage text="/images/blog/vdom/vdom1.png"></MdImage>
 
-## How Does Vue.js Virtual DOM Work?
+### How Vue does it
 
-Vue.js Virtual DOM operates in three key steps:
+Vue's rendering works in three steps:
 
-1. **Create a Virtual DOM representation of the real DOM:**
-   When a Vue component renders, it creates a lightweight JavaScript object tree that represents the structure of the actual DOM.
+1. **Render.** Vue compiles your template into a render function. Running it returns a vnode tree
+   that describes the component.
+2. **Diff.** When reactive state the component depends on changes, Vue re-runs the render function
+   to get a new tree and compares it with the old one.
+3. **Patch.** Vue applies the minimal set of changes to the real DOM.
 
-2. **Diffing:**
-   When the state of a Vue component changes, a new Virtual DOM tree is created. Vue.js then compares the new and old Virtual DOM trees to identify the differences (this process is called "diffing").
-
-3. **Patching:**
-   After identifying the differences, Vue.js updates the actual DOM by applying the minimal set of changes required, a process called "patching."
-
-This systematic process minimizes the number of DOM manipulations, leading to significant performance improvements in Vue.js applications.
-
-### Visual Representation
-
-Now, let's take a holistic look at this process through a single image:
+Vue adds something on top. Because it compiles templates, the compiler knows which parts are static
+and which can change. It hoists static content and marks dynamic nodes with patch flags, so at
+runtime Vue skips the parts that can never change instead of diffing the whole tree. The
+[Rendering Mechanism](https://vuejs.org/guide/extras/rendering-mechanism.html) page in the Vue
+docs calls this a compiler-informed Virtual DOM.
 
 <MdImage text="/images/blog/vdom/vdom2.jpg"></MdImage>
 
-## Conclusion
+### Beyond Vue
 
-In wrapping up this guide on the Virtual DOM, it's important to note that the principles discussed extend beyond Vue.js. The Virtual DOM is a universal concept widely employed in various web development frameworks.
+React uses a Virtual DOM too, with the same render, diff and patch idea. Not every framework does:
+Angular updates the DOM through its own change detection, and Svelte and Solid compile components
+to code that updates the DOM directly, with no virtual tree. The VDOM is one good answer to "how
+do we update the page efficiently", and it is the one Vue and React chose.
 
-Whether you're diving into React, Angular, or exploring other modern frameworks, understanding the Virtual DOM can be a game-changer. It's a tool that transcends specific technologies, offering a more efficient way to handle updates in web applications.
-
-So, whether you're a seasoned developer or just starting your coding journey, consider the Virtual DOM as a valuable addition to your toolkit. Its benefits go beyond a single framework, making it a fundamental concept for enhancing the performance of web applications across the board. Happy coding! 🌐💻
+Once you see your components as functions that return a description of the UI, a lot of Vue's
+behaviour, from `key` to why direct DOM edits get overwritten, starts to make sense. Happy coding.
