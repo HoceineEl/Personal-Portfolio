@@ -185,6 +185,27 @@ export const projects = [
         featured: true,
     },
     {
+        name: "fsprécompta",
+        tagline: "Pre-accounting for Moroccan firms, connected to FS COMPTA",
+        description:
+            "The web companion of FS COMPTA. An accounting firm's clients send invoices from an app with the firm's own name and logo. Each document is read, checked for ICE, VAT and duplicates, and prepared as a journal entry that FS COMPTA picks up. I built it on my own, as a partner of Facile Solution, the company behind FS COMPTA.",
+        year: 2026,
+        role: "Partner, sole developer",
+        platforms: "Web, PWA",
+        stack: ["Laravel", "PWA", "Multi-tenant", "Document reading"],
+        cover: "table",
+        image: "/images/my_projects/fsprecompta/cover.webp",
+        screenshot: true,
+        url: "/projects/fsprecompta",
+        demo: "https://fsprecompta.ma?ref=portfolio",
+        highlights: [
+            "A branded client app per firm, in French and Arabic",
+            "ICE, VAT and duplicate checks before anything is posted",
+            "Two-way sync with FS COMPTA, plus FEC and CSV export",
+        ],
+        featured: true,
+    },
+    {
         name: "Mediano",
         tagline: "Sports academy management",
         description:
