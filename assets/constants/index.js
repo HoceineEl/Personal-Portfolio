@@ -206,6 +206,27 @@ export const projects = [
         featured: true,
     },
     {
+        name: "Crosslisty",
+        tagline: "Crosslisting extension for resellers",
+        description:
+            "My own browser extension for resellers. It imports a listing from eBay, Poshmark, Mercari, Depop, Etsy, Vinted or Facebook in one click and fills in the listing form on the other six marketplaces, photos included. When an item sells, it comes down everywhere else. Listings stay in the reseller's browser.",
+        year: 2026,
+        role: "Founder",
+        platforms: "Chrome, Brave, Edge",
+        stack: ["Browser extension", "Paddle"],
+        cover: "panels",
+        image: "/images/my_projects/crosslisty/cover.webp",
+        screenshot: true,
+        url: "/projects/crosslisty",
+        demo: "https://crosslisty.com?ref=portfolio",
+        highlights: [
+            "One listing filled on seven marketplaces, photos included",
+            "Sold items removed from the other marketplaces",
+            "No passwords handed over, listings stay in the browser",
+        ],
+        featured: true,
+    },
+    {
         name: "Mediano",
         tagline: "Sports academy management",
         description:
