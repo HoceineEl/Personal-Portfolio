@@ -46,14 +46,13 @@ useJsonLd([
       </p>
     </header>
 
-    <div class="mt-16 grid gap-x-8 gap-y-16 md:grid-cols-2 md:gap-y-24">
+    <div class="mt-16 grid gap-x-8 gap-y-14 md:grid-cols-2 md:gap-y-16">
       <ProjectFeature
         v-for="(project, index) in featured"
         :key="project.url"
         :project="project"
         :eager="index < 2"
         class="reveal"
-        :class="index % 2 === 1 && 'md:mt-24'"
       />
     </div>
 

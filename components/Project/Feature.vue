@@ -11,42 +11,30 @@ defineProps({
 </script>
 
 <template>
-  <article class="group relative" :class="large && 'grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10'">
-    <ProjectCover :project="project" :eager="eager" :class="large && 'lg:col-span-8'" />
-    <div :class="large && 'lg:col-span-4 lg:pb-2'">
-      <div class="flex items-start justify-between gap-6" :class="large ? '' : 'mt-5'">
-        <div>
-          <h3 class="wide break-words font-extrabold tracking-tight" :class="large ? 'text-display-md lg:text-[2.75rem]' : small ? 'text-xl' : 'text-display-sm'">
-            <NuxtLink :to="localePath(project.url)" class="after:absolute after:inset-0 after:content-['']">
-              {{ project.name }}
-            </NuxtLink>
-          </h3>
-          <p class="mt-2 text-muted" :class="large ? 'text-lg' : small && 'text-[0.95rem]'">{{ project.tagline }}</p>
-        </div>
-        <span
-          v-if="!large"
-          :class="small ? 'h-9 w-9 text-base' : 'h-11 w-11 text-lg'"
-          class="mt-1 grid shrink-0 place-items-center rounded-full ring-1 ring-inset ring-line/15 transition-colors duration-300 group-hover:bg-sun group-hover:text-on-sun group-hover:ring-sun"
-          aria-hidden="true"
-        >
-          <UiIcon name="arrow-up-right" class="flip-rtl" />
-        </span>
+  <article class="group relative" :class="large && 'grid gap-8 lg:grid-cols-12 lg:items-center lg:gap-12'">
+    <ProjectCover
+      :project="project"
+      :eager="eager"
+      class="ring-1 ring-line/10 transition-shadow duration-300 group-hover:ring-sun"
+      :class="large && 'lg:col-span-8'"
+    />
+    <div :class="large ? 'lg:col-span-4' : 'mt-5'">
+      <div class="flex items-baseline justify-between gap-4">
+        <h3 class="font-semibold tracking-tight transition-colors group-hover:text-sun-ink" :class="large ? 'wide text-display-sm' : small ? 'text-lg' : 'text-2xl'">
+          <NuxtLink :to="localePath(project.url)" class="after:absolute after:inset-0 after:content-['']">
+            {{ project.name }}
+          </NuxtLink>
+        </h3>
+        <span class="shrink-0 font-mono text-sm tabular-nums text-muted">{{ project.year }}</span>
       </div>
-      <p v-if="large" class="mt-5 leading-relaxed text-muted">{{ project.description }}</p>
-      <ul v-if="project.highlights" class="mt-5 space-y-1.5 text-[0.95rem]" :class="large ? 'text-ink' : 'text-ink/85'">
-        <li v-for="item in project.highlights" :key="item" class="flex gap-3">
-          <span class="mt-[0.6em] h-1.5 w-1.5 shrink-0 rounded-full bg-sun" aria-hidden="true" />
-          {{ item }}
-        </li>
-      </ul>
-      <p v-if="large" class="mt-6 inline-flex items-center gap-2 font-semibold text-sun-ink">
-        {{ t("work.view") }}
-        <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
-      </p>
-      <ul class="flex flex-wrap gap-2" :class="small ? 'mt-4' : 'mt-5'" :aria-label="t('work.stack')">
-        <li class="chip font-mono tabular-nums">{{ project.year }}</li>
-        <li v-for="item in project.stack" :key="item" class="chip">{{ item }}</li>
-      </ul>
+      <p class="mt-1.5 text-muted" :class="small && 'text-[0.95rem]'">{{ project.tagline }}</p>
+      <template v-if="large">
+        <p class="mt-5 leading-relaxed text-muted">{{ project.description }}</p>
+        <p class="mt-6 inline-flex items-center gap-2 font-semibold text-sun-ink">
+          {{ t("work.view") }}
+          <UiIcon name="arrow-right" class="flip-rtl transition-transform duration-300 group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+        </p>
+      </template>
     </div>
   </article>
 </template>

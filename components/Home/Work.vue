@@ -6,10 +6,8 @@ const { projects } = useSiteData();
 const featured = computed(() => projects.value.filter((project) => project.featured && !project.plugin));
 const plugins = computed(() => projects.value.filter((project) => project.plugin));
 const lead = computed(() => featured.value[0]);
-const pairs = computed(() => featured.value.slice(1, 8));
-const others = computed(() => [...featured.value.slice(8), ...projects.value.filter((project) => !project.featured && !project.plugin).slice(0, 3)]);
-const isLoneLast = (index) => pairs.value.length % 2 === 1 && index === pairs.value.length - 1;
-const layout = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:col-span-7 md:mt-16"];
+const grid = computed(() => featured.value.slice(1, 7));
+const others = computed(() => [...featured.value.slice(7), ...projects.value.filter((project) => !project.featured && !project.plugin).slice(0, 3)]);
 </script>
 
 <template>
@@ -25,15 +23,8 @@ const layout = ["md:col-span-7", "md:col-span-5 md:mt-28", "md:col-span-5", "md:
       <ProjectFeature :project="lead" large eager class="reveal" />
     </div>
 
-    <div class="mt-20 grid gap-x-8 gap-y-20 md:grid-cols-12 md:gap-y-28">
-      <ProjectFeature
-        v-for="(project, index) in pairs"
-        :key="project.url"
-        :project="project"
-        :large="isLoneLast(index)"
-        class="reveal"
-        :class="isLoneLast(index) ? 'md:col-span-12' : layout[index % 4]"
-      />
+    <div class="mt-20 grid gap-x-8 gap-y-14 md:grid-cols-2 md:gap-y-16">
+      <ProjectFeature v-for="project in grid" :key="project.url" :project="project" class="reveal" />
     </div>
 
     <div class="mt-24 md:mt-32">
