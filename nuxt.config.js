@@ -119,6 +119,12 @@ export default defineNuxtConfig({
     '/blog/livewire-islands-architecture': { redirect: { to: '/blog', statusCode: 301 } },
     '/blog/php-85-complete-guide': { redirect: { to: '/blog', statusCode: 301 } },
     '/blog/tailwind-css-v4-guide': { redirect: { to: '/blog', statusCode: 301 } },
+    '/projects/enhancing-video-delivery-in-lms': { redirect: { to: '/projects', statusCode: 301 } },
+    '/ar/projects/enhancing-video-delivery-in-lms': { redirect: { to: '/ar/projects', statusCode: 301 } },
+    '/projects/sosipo': { redirect: { to: '/projects', statusCode: 301 } },
+    '/ar/projects/sosipo': { redirect: { to: '/ar/projects', statusCode: 301 } },
+    '/projects/eisar-reserve': { redirect: { to: '/projects', statusCode: 301 } },
+    '/ar/projects/eisar-reserve': { redirect: { to: '/ar/projects', statusCode: 301 } },
     '/blog/**': { robots: true },
     '/': {
       robots: true,
