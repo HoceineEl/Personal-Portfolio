@@ -6,8 +6,8 @@ const { projects } = useSiteData();
 const featured = computed(() => projects.value.filter((project) => project.featured && !project.plugin));
 const plugins = computed(() => projects.value.filter((project) => project.plugin));
 const lead = computed(() => featured.value[0]);
-const grid = computed(() => featured.value.slice(1, 7));
-const others = computed(() => [...featured.value.slice(7), ...projects.value.filter((project) => !project.featured && !project.plugin).slice(0, 3)]);
+const grid = computed(() => featured.value.slice(1));
+const others = computed(() => projects.value.filter((project) => !project.featured && !project.plugin));
 </script>
 
 <template>

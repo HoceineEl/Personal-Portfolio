@@ -120,6 +120,26 @@ export const experiences = [
 
 export const projects = [
     {
+        name: "Mediano",
+        tagline: "Sports academy management",
+        description:
+            "One platform, many sports academies, each with its own branding, subscription and data. Training sessions, attendance, events, tournaments and merchandise sales in one place, evolving continuously since 2024. Each academy builds its own website with FilamentCraft.",
+        year: 2024,
+        role: "Full stack",
+        platforms: "Web",
+        stack: ["Laravel", "Livewire", "Filament", "FilamentCraft", "Multi-tenant"],
+        cover: "calendar",
+        image: "/images/my_projects/mediano/cover.webp",
+        screenshot: true,
+        url: "/projects/mediano",
+        highlights: [
+            "A branded space per academy",
+            "3,400+ commits since mid-2024",
+            "Kept current up to Laravel 13 and Filament 5",
+        ],
+        featured: true,
+    },
+    {
         name: "Ala Khutah",
         tagline: "Saudi national project on the Hijra trail",
         description:
@@ -137,26 +157,6 @@ export const projects = [
             "2M+ visitors at launch, 1M+ registrations",
             "100,000 shortlisted, 30,000 hired",
             "Backed by the Royal Commission for Makkah City and Holy Sites",
-        ],
-        featured: true,
-    },
-    {
-        name: "Mediano",
-        tagline: "Sports academy management",
-        description:
-            "One platform, many sports academies, each with its own branding, subscription and data. Training sessions, attendance, events, tournaments and merchandise sales in one place, evolving continuously since 2024. Each academy builds its own website with FilamentCraft.",
-        year: 2024,
-        role: "Full stack",
-        platforms: "Web",
-        stack: ["Laravel", "Livewire", "Filament", "FilamentCraft", "Multi-tenant"],
-        cover: "calendar",
-        image: "/images/my_projects/mediano/cover.webp",
-        screenshot: true,
-        url: "/projects/mediano",
-        highlights: [
-            "A branded space per academy",
-            "3,400+ commits since mid-2024",
-            "Kept current up to Laravel 13 and Filament 5",
         ],
         featured: true,
     },
@@ -412,6 +412,8 @@ export const projects = [
         platforms: "Web",
         stack: ["Laravel", "Filament", "WhatsApp API"],
         cover: "calendar",
+        image: "/images/my_projects/abi-zaid/cover.webp",
+        screenshot: true,
         url: "/projects/quran-association",
         demo: "https://abi-zaid.com",
         featured: true,
@@ -491,9 +493,11 @@ export const projects = [
         description: "24/7 emergency plumbing site with seven service pages, built for local search.",
         year: 2023,
         stack: ["Nuxt", "Nuxt Content", "Tailwind CSS"],
-        image: "/images/my_projects/rep/mockup.png",
+        image: "/images/my_projects/rep/cover.webp",
+        screenshot: true,
         url: "/projects/radiant-emergency-plumber",
         demo: "https://radiantemergencyplumber.co.uk/",
+        featured: true,
     },
     {
         name: "Nur Net",
