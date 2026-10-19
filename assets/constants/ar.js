@@ -106,6 +106,13 @@ export const projectsAr = {
         role: "شريك، والمطوّر الوحيد",
         highlights: ["تطبيق لعملاء كل مكتب باسمه، بالفرنسية والعربية", "تدقيق الـ ICE والضريبة والتكرار قبل أي ترحيل", "مزامنة في الاتجاهين مع FS COMPTA، وتصدير FEC و CSV"],
     },
+    "/projects/sendoff": {
+        name: "Sendoff",
+        tagline: "تواقيع البريد الإلكتروني للأفراد والفرق",
+        description: "منصتي الخاصة لتواقيع البريد الإلكتروني. مولّد مجاني فيه 62 قالبًا تعمل في Gmail و Outlook و Apple Mail، وباقة للفرق تنشر توقيع كل موظف عبر Google Workspace و Microsoft 365. بست لغات، والعربية من اليمين إلى اليسار.",
+        role: "المؤسس",
+        highlights: ["مولّد مجاني دون تسجيل", "تواقيع الفريق تُنشر عبر Google Workspace و Microsoft 365", "62 قالبًا تصمد في Outlook، مع العربية من اليمين إلى اليسار"],
+    },
     "/projects/crosslisty": {
         name: "Crosslisty",
         tagline: "إضافة متصفح للنشر على عدة منصات بيع",

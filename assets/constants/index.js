@@ -286,6 +286,27 @@ export const projects = [
         plugin: true,
     },
     {
+        name: "Sendoff",
+        tagline: "Email signatures for people and teams",
+        description:
+            "My own SaaS for email signatures. A free generator with 62 inbox-safe templates for Gmail, Outlook and Apple Mail, and a team plan that deploys everyone's signature through Google Workspace and Microsoft 365. Six languages, with Arabic right to left.",
+        year: 2026,
+        role: "Founder",
+        platforms: "Web",
+        stack: ["Laravel", "Inertia", "Google Workspace", "Microsoft 365"],
+        cover: "panels",
+        image: "/images/my_projects/sendoff/cover.webp",
+        screenshot: true,
+        url: "/projects/sendoff",
+        demo: "https://usesendoff.com?ref=portfolio",
+        highlights: [
+            "Free generator, no sign-up needed",
+            "Team signatures deployed through Google Workspace and Microsoft 365",
+            "62 templates that hold up in Outlook, with Arabic right to left",
+        ],
+        featured: true,
+    },
+    {
         name: "Crosslisty",
         tagline: "Crosslisting extension for resellers",
         description:
